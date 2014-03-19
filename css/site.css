@@ -1,0 +1,12 @@
+body {
+	font-family: 'Bigelow Rules', cursive;
+	font-size: 2em;
+}
+.site-thumbnail {
+	margin-bottom:25px;
+}
+.site-thumbnail img {
+	-webkit-box-shadow: 2px 2px 10px rgba(50, 50, 50, 0.57);
+	-moz-box-shadow:    2px 2px 10px rgba(50, 50, 50, 0.57);
+	box-shadow:         2px 2px 10px rgba(50, 50, 50, 0.57);
+}

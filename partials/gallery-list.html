@@ -1,0 +1,13 @@
+ <div>
+  <ul>
+    <li ng-repeat="gallery in data">
+  		{{gallery.name}} ({{gallery.contents.length}})
+  		<!--<ul ng-if="gallery.contents.length>0">
+  			<li ng-repeat="content in gallery.contents">
+  				{{content.name}}<br />
+  				<img src="{{content.image_url}}" height="120" class="img-rounded">
+  			</li>
+  		</ul>-->
+    </li>
+  </ul>
+</div>

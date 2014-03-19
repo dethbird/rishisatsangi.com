@@ -1,0 +1,12 @@
+ <div ng-repeat="gallery in data">
+    <h3 class="col-md-6">{{gallery.name}}</h3>
+    
+    <div class="clearfix"></div>
+
+		<div class="row" ng-if="gallery.contents.length>0">
+			<div ng-repeat="content in gallery.contents" class="site-thumbnail col-md-3">
+				{{content.name}}<br />
+				<img src="{{content.thumbnail_url}}" class="img-rounded">
+			</div>
+		</div>
+</div>

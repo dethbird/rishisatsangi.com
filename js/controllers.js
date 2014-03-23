@@ -8,14 +8,13 @@ siteControllers.controller('NavController', function ($scope, $http) {
 	});
 });
 
-siteControllers.controller('GalleriesController', function ($scope, $http) {
-	$http.get(api_url + '/galleries/?api_key=' + api_key).success(function(data) {
-		$scope.data = data;
-	});
+siteControllers.controller('HomeController', function ($scope, $http, $rootScope) {
+	$rootScope.title = site_name;
 });
 
-siteControllers.controller('GalleryDetailsController', function ($scope, $http, $routeParams) {
-	console.log(window);
+
+siteControllers.controller('GalleryDetailsController', function ($scope, $http, $routeParams, $rootScope) {
+	//console.log($rootScope);
 	$http.get(api_url + '/galleries/?api_key=' + api_key + "&id=" + $routeParams.galleryId).success(function(data) {
 		$(data[0].contents).each(function(i,content){
 			//console.log(content.image_url);
@@ -30,6 +29,8 @@ siteControllers.controller('GalleryDetailsController', function ($scope, $http, 
 			data[0].contents[i].thumbnail_url = thumbnail_url;
 		});
 		$scope.data = data;
+		$rootScope.title = site_name + " | Galleries / " + data[0].name;
+
 	});
 });
 

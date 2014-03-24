@@ -9,13 +9,35 @@ siteApp = angular.module('siteApp', [
   'ngRoute',
   'siteControllers'
 ]);
- 
+
+siteApp.filter('resizeImage', function(){
+    return function(url,width,height) {
+        return $.url('protocol', url) + 
+              "://" +
+              $.url('sub', url) + 
+              "." + 
+              $.url('domain', url) + 
+              "/w" + width + "-h" + height + 
+              $.url('path', url);
+    }
+});
+
+siteApp.filter('unsafe', ['$sce', function ($sce) {
+    return function (val) {
+        return $sce.trustAsHtml(val);
+    };
+}]);
+
 siteApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/galleries/:galleryId', {
         templateUrl: 'partials/gallery-details.html',
         controller: 'GalleryDetailsController'
+      }).
+      when('/comics/:titleId', {
+        templateUrl: 'partials/title-details.html',
+        controller: 'TitleDetailsController'
       }).
       otherwise({
         redirectTo: '/home',

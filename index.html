@@ -1,4 +1,5 @@
 <html ng-app="siteApp">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title ng-bind="title">RishiSatsangi.com</title>
 <head>
 
@@ -51,7 +52,7 @@
        <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown">Comics <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li ng-repeat="title in data.titles"><a href="#/titles/{{title.id}}" >{{title.name}}  </a></li>
+          <li ng-repeat="title in data.titles"><a href="#/comics/{{title.id}}" >{{title.name}}  </a></li>
         </ul>
       </li>
        <li class="dropdown">

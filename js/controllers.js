@@ -34,8 +34,9 @@ siteControllers.controller('GalleryDetailsController', function ($scope, $http, 
 	});
 });
 
-siteControllers.controller('TitlesController', function ($scope, $http) {
-	$http.get(api_url + '/titles/?api_key=' + api_key).success(function(data) {
+siteControllers.controller('TitleDetailsController', function ($scope, $http, $routeParams, $rootScope) {
+	$http.get(api_url + '/titles/?api_key=' + api_key + "&id=" + $routeParams.titleId).success(function(data) {
+		//console.log(data);
 		$scope.data = data;
 	});
 });

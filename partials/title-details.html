@@ -7,7 +7,7 @@
     <div class="clearfix"></div>
 
 		<div class="row" ng-if="title.issues.length>0">
-			<div ng-repeat="issue in title.issues" class="site-thumbnail col-md-3">
+			<div ng-repeat="issue in title.issues" class="site-thumbnail col-md-4">
 				{{issue.name}}<br />
 				<img src="{{issue.page_one_image_url|resizeImage:180:180}}" class="img-rounded">
 			</div>

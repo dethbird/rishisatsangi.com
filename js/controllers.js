@@ -36,7 +36,8 @@ siteControllers.controller('GalleryDetailsController', function ($scope, $http, 
 
 siteControllers.controller('TitleDetailsController', function ($scope, $http, $routeParams, $rootScope) {
 	$http.get(api_url + '/titles/?api_key=' + api_key + "&id=" + $routeParams.titleId).success(function(data) {
-		//console.log(data);
+		console.log(data);
 		$scope.data = data;
+		$rootScope.title = site_name + " | Comics / " + data[0].name;
 	});
 });

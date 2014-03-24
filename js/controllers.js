@@ -44,26 +44,7 @@ siteControllers.controller('TitleDetailsController', function ($scope, $http, $r
 
 siteControllers.controller('FeedDetailsController', function ($scope, $http, $routeParams, $rootScope) {
 	$http.get(api_url + '/feeds/?api_key=' + api_key + "&id=" + $routeParams.feedId + "&").success(function(data) {
-		
 		$scope.data = data;
-
-		$.ajax({
-		  url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(data[0].rss_url),
-		  dataType : 'json',
-		  success  : function (data) {
-		  	$scope.entries = data;
-		    /*if (data.responseData.feed && data.responseData.feed.entries) {
-		      $.each(data.responseData.feed.entries, function (i, e) {
-		        console.log("------------------------");
-		        console.log("title      : " + e.title);
-		        console.log("author     : " + e.author);
-		        console.log("description: " + e.description);
-		      });
-		    }*/
-		  }
-		});
-
-
 		$rootScope.title = site_name + " | Blogs / " + data[0].name;
 	});
 });

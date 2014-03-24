@@ -1,7 +1,7 @@
 body {
 	font-family: 'PT Sans Narrow', cursive;
 	font-size: 1.4em;
-	color:#999;
+	color:#888;
 }
 h1,h2,h3,h4,h5,h6,.navbar-brand {
 	font-family: 'Oleo Script', cursive;
@@ -15,5 +15,5 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 	box-shadow:         2px 2px 10px rgba(50, 50, 50, 0.57);
 }
 .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a, .dropdown-menu>li>a {
-	color: #999;
+	color: #888;
 }

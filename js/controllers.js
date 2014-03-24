@@ -10,24 +10,14 @@ siteControllers.controller('NavController', function ($scope, $http) {
 
 siteControllers.controller('HomeController', function ($scope, $http, $rootScope) {
 	$rootScope.title = site_name;
+	$http.get('http://hipsterjesus.com/api/?type=hipster-centric&paras=2').success(function(data) {
+		$scope.statement = data.text;
+	});
 });
 
 
 siteControllers.controller('GalleryDetailsController', function ($scope, $http, $routeParams, $rootScope) {
-	//console.log($rootScope);
 	$http.get(api_url + '/galleries/?api_key=' + api_key + "&id=" + $routeParams.galleryId).success(function(data) {
-		$(data[0].contents).each(function(i,content){
-			//console.log(content.image_url);
-			thumbnail_url = $.url('protocol', content.image_url) + 
-							"://" +
-							$.url('sub', content.image_url) + 
-							"." + 
-							$.url('domain', content.image_url) + 
-							"/w160-h160" + 
-							$.url('path', content.image_url);
-			//console.log(thumbnail_url);
-			data[0].contents[i].thumbnail_url = thumbnail_url;
-		});
 		$scope.data = data;
 		$rootScope.title = site_name + " | Galleries / " + data[0].name;
 

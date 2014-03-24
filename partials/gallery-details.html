@@ -6,7 +6,7 @@
 		<div class="row" ng-if="gallery.contents.length>0">
 			<div ng-repeat="content in gallery.contents" class="site-thumbnail col-md-3">
 				{{content.name}}<br />
-				<img src="{{content.thumbnail_url}}" class="img-rounded">
+				<img src="{{content.image_url|resizeImage:180:180}}" class="img-rounded">
 			</div>
 		</div>
 </div>

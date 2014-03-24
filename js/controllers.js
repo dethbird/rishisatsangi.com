@@ -10,6 +10,7 @@ siteControllers.controller('NavController', function ($scope, $http) {
 
 siteControllers.controller('HomeController', function ($scope, $http, $rootScope) {
 	$rootScope.title = site_name;
+	$scope.statement = "Oh shit, writing one now... ";
 	$http.get('http://hipsterjesus.com/api/?type=hipster-centric&paras=2').success(function(data) {
 		$scope.statement = data.text;
 	});

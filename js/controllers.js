@@ -21,7 +21,6 @@ siteControllers.controller('GalleryDetailsController', function ($scope, $http, 
 	$http.get(api_url + '/galleries/?api_key=' + api_key + "&id=" + $routeParams.galleryId).success(function(data) {
 		$scope.data = data;
 		$rootScope.title = site_name + " | Galleries / " + data[0].name;
-
 	});
 });
 

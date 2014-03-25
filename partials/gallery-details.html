@@ -1,12 +1,11 @@
  <div ng-repeat="gallery in data">
-    <h3 class="col-md-6">{{gallery.name}}</h3>
-    
+    <h2>{{gallery.name}}</h2>
     <div class="clearfix"></div>
 
 		<div class="row" ng-if="gallery.contents.length>0">
 			<div ng-repeat="content in gallery.contents" class="site-thumbnail col-md-3">
 				{{content.name}}<br />
-				<img src="{{content.image_url|resizeImage:180:180}}" class="img-rounded">
+				<img src="{{content.image_url|resizeImage:180:180}}" class="img-rounded acb-thumb" ng-click="overlaySlideshow">
 			</div>
 		</div>
 </div>

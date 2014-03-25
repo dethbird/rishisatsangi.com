@@ -33,6 +33,7 @@
         $('#myModalLabel').html($(this).attr('data-title'));
         $('#myModalContent').html("<img src='" + $(this).attr('data-image-url') + "' class='acb-full-image' id='modal-media' />");
         $('#myModal .modal-dialog').css('width', $(window).width());
+        $('#myModal .modal-dialog').css('height', $(window).height());
         /*var img = $('#modal-media');
         $("<img/>").attr("src", $(img).attr("src")).load(function() {
             $('#modal-media').css('margin-left', 

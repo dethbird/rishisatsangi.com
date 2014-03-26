@@ -29,21 +29,22 @@
   <link href='http://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
   <script>
     $(document).ready(function(){
+      $('#myModal').on('hidden.bs.modal', function () {
+          $('#myModalContent').html('');
+      });
       $(document).on('click', '.acb-thumb', function(){
         $('#myModalLabel').html($(this).attr('data-title'));
         $('#myModalContent').html("<img src='" + $(this).attr('data-image-url') + "' class='acb-full-image' id='modal-media' />");
         $('#myModal .modal-dialog').css('width', $(window).width());
         $('#myModal .modal-dialog').css('height', $(window).height());
-        /*var img = $('#modal-media');
-        $("<img/>").attr("src", $(img).attr("src")).load(function() {
-            $('#modal-media').css('margin-left', 
-              Math.floor( (parseInt($('#myModal .modal-dialog').css('width')) - parseInt(this.width))/2 )
-            );
-            
-        });*/
-        //var margin = Math.floor(($('#myModal .modal-dialog').css('width') - width)/2);
-        //$('#modal-media').css('margin-left', margin + 'px');
-        
+        $('#myModal').modal();
+      });
+      $(document).on('click', '.acb-youtube-thumb', function(){
+        $('#myModalLabel').html($(this).attr('data-title'));
+        var youtube_id = $.url('?v',$(this).attr('data-youtube-link'));
+        $('#myModalContent').html('<iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/' + youtube_id + '" frameborder="0" allowfullscreen>');
+        $('#myModal .modal-dialog').css('width', $(window).width());
+        $('#myModal .modal-dialog').css('height', $(window).height());
         $('#myModal').modal();
       });
     });

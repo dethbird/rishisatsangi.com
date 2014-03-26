@@ -1,0 +1,14 @@
+ <div ng-repeat="issue in data">
+    <h2>Issue #{{issue.issue_number}}: {{issue.name}}</h2>
+    <div class="clearfix"></div>
+    <div class="col-md-6 clearfix" ng-if="issue.description!==''">
+    <blockquote ng-bind-html="issue.description|unsafe"></blockquote>
+    <div>
+    <div class="clearfix"></div>
+		<div class="row" ng-if="issue.pages.length>0">
+			<div ng-repeat="page in issue.pages" class="site-thumbnail col-md-4">
+				Page {{$index + 1}}<br />
+				<img src="{{page.image_url|resizeImage:180:180}}" class="img-rounded acb-thumb" data-image-url="{{page.image_url}}" data-title="Page {{$index + 1}}">
+			</div>
+		</div>
+</div>

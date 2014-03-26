@@ -9,7 +9,7 @@
 		<div class="row" ng-if="title.issues.length>0">
 			<div ng-repeat="issue in title.issues" class="site-thumbnail col-md-4">
 				<strong>Issue #{{$index + 1}}:</strong> {{issue.name}}<br />
-				<img src="{{issue.page_one_image_url|resizeImage:180:180}}" class="img-rounded acb-thumb">
+				<a href="#/issues/{{issue.id}}"><img src="{{issue.page_one_image_url|resizeImage:180:180}}" class="img-rounded"></a>
 				<br /><small>{{issue.page_count}} pages</small>
 			</div>
 		</div>

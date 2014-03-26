@@ -31,6 +31,14 @@ siteControllers.controller('TitleDetailsController', function ($scope, $http, $r
 	});
 });
 
+siteControllers.controller('IssueDetailsController', function ($scope, $http, $routeParams, $rootScope) {
+	$http.get(api_url + '/issues/?api_key=' + api_key + "&id=" + $routeParams.issueId).success(function(data) {
+		$scope.data = data;
+		console.log(data);
+		$rootScope.title = site_name + " | Comics / " + data[0].title_name + " / Issue #" + data[0].issue_number + ": " + data[0].name;
+	});
+});
+
 
 siteControllers.controller('FeedDetailsController', function ($scope, $http, $routeParams, $rootScope) {
 	$http.get(api_url + '/feeds/?api_key=' + api_key + "&id=" + $routeParams.feedId + "&").success(function(data) {

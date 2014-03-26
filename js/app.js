@@ -40,6 +40,10 @@ siteApp.config(['$routeProvider',
         templateUrl: 'partials/title-details.html',
         controller: 'TitleDetailsController'
       }).
+      when('/issues/:issueId', {
+        templateUrl: 'partials/issue-details.html',
+        controller: 'IssueDetailsController'
+      }).
       when('/blogs/:feedId', {
         templateUrl: 'partials/feed-details.html',
         controller: 'FeedDetailsController'

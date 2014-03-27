@@ -1,6 +1,9 @@
  <div ng-repeat="gallery in data">
     <h2>{{gallery.name}}</h2>
     <div class="clearfix"></div>
+    <div class="clearfix" ng-if="gallery.description!=''">
+    <blockquote ng-bind-html="gallery.description|unsafe"></blockquote>
+    <div>
 
 		<div class="row" ng-if="gallery.contents.length>0">
 			<div ng-repeat="content in gallery.contents" class="site-thumbnail col-md-3">

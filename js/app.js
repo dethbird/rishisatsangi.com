@@ -48,6 +48,10 @@ siteApp.config(['$routeProvider',
         templateUrl: 'partials/feed-details.html',
         controller: 'FeedDetailsController'
       }).
+      when('/contents/:contentId', {
+        templateUrl: 'partials/content-details.html',
+        controller: 'ContentDetailsController'
+      }).
       otherwise({
         redirectTo: '/home',
         templateUrl: 'partials/home.html',

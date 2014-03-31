@@ -1,0 +1,5 @@
+ <div ng-repeat="content in data">
+	<h2>{{content.name}}</h2>
+	<img ng-if="content.type=='image'" src="{{content.image_url}}" data-image-url="{{content.image_url}}" data-title="{{content.name}}" >
+	<img ng-if="content.type=='youtube'" src="{{content.image_url|resizeImage:180:180}}" class="img-rounded acb-youtube-thumb" data-youtube-link="{{content.youtube_link}}" data-title="{{content.name}}" >
+</div>

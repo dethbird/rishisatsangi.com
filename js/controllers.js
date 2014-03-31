@@ -39,10 +39,17 @@ siteControllers.controller('IssueDetailsController', function ($scope, $http, $r
 	});
 });
 
-
 siteControllers.controller('FeedDetailsController', function ($scope, $http, $routeParams, $rootScope) {
 	$http.get(api_url + '/feeds/?api_key=' + api_key + "&id=" + $routeParams.feedId + "&").success(function(data) {
 		$scope.data = data;
 		$rootScope.title = site_name + " | Blogs / " + data[0].name;
+	});
+});
+
+
+siteControllers.controller('ContentDetailsController', function ($scope, $http, $routeParams, $rootScope) {
+	$http.get(api_url + '/contents/?api_key=' + api_key + "&id=" + $routeParams.contentId + "&").success(function(data) {
+		$scope.data = data;
+		$rootScope.title = site_name + " | Content / " + data[0].name;
 	});
 });

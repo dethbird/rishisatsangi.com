@@ -20,7 +20,7 @@
 	    __DIR__ . '/src',
 	    get_include_path(),
 	)));
-
+	global $api_key, $api_url;
 	$api_key = "c4ca4238a0b923820dcc509a6f75849b";
 	$api_url = "http://artistcontrolbox.com/api";
 	$siteData = null;
@@ -48,6 +48,16 @@
  	$siteData = json_decode(curl_exec($ch)); 
  	curl_close($ch);
 
+ 	function fetchData($endpoint, $id){
+ 		global $api_key, $api_url;
+ 		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $api_url."/".$endpoint."?id=".$id."&api_key=".$api_key);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	 	$data = json_decode(curl_exec($ch)); 
+	 	curl_close($ch);
+	 	return $data[0];
+ 	}
+
 
 	/**
 	* __________               __  .__                
@@ -62,8 +72,8 @@
 	    $app->render('partials/home.html.twig', array('siteData' => $siteData));
 	});
 
-	$app->get('/galleries/:id', function () use ($app, $siteData) {
-	    $app->render('partials/home.html.twig', array('siteData' => $siteData));
+	$app->get('/galleries/:id', function ($id) use ($app, $siteData) {
+	    $app->render('partials/gallery.html.twig', array('siteData' => $siteData, 'data'=>fetchData("galleries", $id)));
 	});
 
 

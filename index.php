@@ -62,6 +62,10 @@
 	    $app->render('partials/home.html.twig', array('siteData' => $siteData));
 	});
 
+	$app->get('/galleries/:id', function () use ($app, $siteData) {
+	    $app->render('partials/home.html.twig', array('siteData' => $siteData));
+	});
+
 
 	/**
 	* __________            ._._._.

@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block headscript %}
+<script>
+	$(document).ready(function(){
+		$.get( "http://hipsterjesus.com/api/?type=hipster-centric&paras=2", function( data ) {
+	  		$('#statement').html(data.text);
+		});
+	});
+</script>
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+	<h2>Artist Statement</h2>
+	<div class="col-md-8" id="statement">oh shit, writing one now... </div>
+{% endblock %}
+

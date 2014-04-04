@@ -108,24 +108,25 @@
 	});
 
 	$app->get('/galleries/:id', function ($id) use ($app, $siteData) {
-	    $app->render('partials/gallery.html.twig', array('siteData' => $siteData, 'data'=>fetchData("galleries", $id)));
-	});
-
-	$app->get('/comics/:id', function ($id) use ($app, $siteData) {
-	    $app->render('partials/title.html.twig', array('siteData' => $siteData, 'data'=>fetchData("titles", $id)));
-	});
-
-	$app->get('/issues/:id', function ($id) use ($app, $siteData) {
-	    $app->render('partials/issue.html.twig', array('siteData' => $siteData, 'data'=>fetchData("issues", $id)));
-	});
-
-	$app->get('/blogs/:id', function ($id) use ($app, $siteData) {
-	    $app->render('partials/feed.html.twig', array('siteData' => $siteData, 'data'=>fetchData("feeds", $id)));
+	    $app->render('partials/gallery.html.twig', array('siteData' => $siteData, 'data'=>fetchData("galleries", $id), 'section'=>'art'));
 	});
 
 	$app->get('/contents/:id', function ($id) use ($app, $siteData) {
-	    $app->render('partials/content.html.twig', array('siteData' => $siteData, 'data'=>fetchData("contents", $id)));
+	    $app->render('partials/content.html.twig', array('siteData' => $siteData, 'data'=>fetchData("contents", $id), 'section'=>'art'));
 	});
+
+	$app->get('/comics/:id', function ($id) use ($app, $siteData) {
+	    $app->render('partials/title.html.twig', array('siteData' => $siteData, 'data'=>fetchData("titles", $id), 'section'=>'comics'));
+	});
+
+	$app->get('/issues/:id', function ($id) use ($app, $siteData) {
+	    $app->render('partials/issue.html.twig', array('siteData' => $siteData, 'data'=>fetchData("issues", $id), 'section'=>'comics'));
+	});
+
+	$app->get('/blogs/:id', function ($id) use ($app, $siteData) {
+	    $app->render('partials/feed.html.twig', array('siteData' => $siteData, 'data'=>fetchData("feeds", $id), 'section'=>'blogs'));
+	});
+
 
 
 	/**

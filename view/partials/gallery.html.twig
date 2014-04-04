@@ -4,17 +4,25 @@
 	{{ parent() }}
     <h2>{{data.name}}</h2>
     <div class="clearfix"></div>
-    <blockquote>{{data.description}}</blockquote>
+    <blockquote>{{data.description|raw}}</blockquote>
     <div class="clearfix"></div>
 
 		<div class="row" >
-			<div class="site-thumbnail col-md-3">
 				{% for content in data.contents %}
-				{{content.name}}<br />
-				<img ng-if="content.type=='image'" src="{{content.image_url|resizeImage:180:180}}" class="img-rounded acb-thumb" data-image-url="{{content.image_url}}" data-title="{{content.name}}" >
-				<img ng-if="content.type=='youtube'" src="{{content.image_url|resizeImage:180:180}}" class="img-rounded acb-youtube-thumb" data-youtube-link="{{content.youtube_link}}" data-title="{{content.name}}" >
+
+					<div class="site-thumbnail col-md-3">
+						{{content.name}}<br />
+						
+						{% if content.type=='image' %}
+						<img src="{{content.image_url|resizeImage(180,180)}}" class="img-rounded acb-thumb" data-image-url="{{content.image_url}}" data-title="{{content.name}}" >
+						{% endif %}
+
+						{% if content.type=='youtube' %}
+						<img src="{{content.image_url|resizeImage(180,180)}}" class="img-rounded acb-youtube-thumb" data-youtube-link="{{content.youtube_link}}" data-title="{{content.name}}" >
+						{% endif %}
+
+					</div>
 				{% endfor %}
-			</div>
 		</div>
 {% endblock %}
 

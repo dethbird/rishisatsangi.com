@@ -36,16 +36,45 @@
 	
 	require 'vendor/autoload.php';
 
+	class AcmeExtension extends \Twig_Extension
+	{
+	    public function getFilters()
+	    {
+	        return array(
+	            new \Twig_SimpleFilter('resizeImage', array($this, 'resizeImage')),
+	        );
+	    }
+
+	    public function resizeImage($url, $width, $height)
+	    {
+	        $url = parse_url($url);
+
+	        return $url['scheme'] . "://" . $url['host'] . "/w". $width . "-h" . $height . $url['path'];
+	    }
+
+	    public function getName()
+	    {
+	        return 'acme_extension';
+	    }
+	}
+
 	$app = new \Slim\Slim(array(
-    	'view' => new \Slim\Views\Twig(),
+    	'view' => new Slim\Views\Twig(),
     	'templates.path' => __DIR__ . '/view',
 	));
+	$view = $app->view();
+	$view->parserExtensions = array(
+	    new \Slim\Views\TwigExtension(),
+	    new AcmeExtension()
+	);
+
+
 
 	// load site date for the menu
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $api_url."?api_key=".$api_key); 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
- 	$siteData = json_decode(curl_exec($ch)); 
+ 	$siteData = json_decode(curl_exec($ch), true);
  	curl_close($ch);
 
  	function fetchData($endpoint, $id){
@@ -53,7 +82,7 @@
  		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $api_url."/".$endpoint."?id=".$id."&api_key=".$api_key);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-	 	$data = json_decode(curl_exec($ch)); 
+	 	$data = json_decode(curl_exec($ch), true); 
 	 	curl_close($ch);
 	 	return $data[0];
  	}

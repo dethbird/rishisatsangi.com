@@ -113,6 +113,10 @@
 	    $app->render('partials/issue.html.twig', array('siteData' => $siteData, 'data'=>fetchData("issues", $id)));
 	});
 
+	$app->get('/blogs/:id', function ($id) use ($app, $siteData) {
+	    $app->render('partials/feed.html.twig', array('siteData' => $siteData, 'data'=>fetchData("feeds", $id)));
+	});
+
 
 	/**
 	* __________            ._._._.

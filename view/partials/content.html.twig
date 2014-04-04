@@ -11,12 +11,31 @@
     <h2>{{data.name}}</h2>
 
     {% if data.type=='image' %}
-	<img src="{{data.image_url}}" data-image-url="{{data.image_url}}" data-title="{{data.name}}" >
+	<img src="{{data.image_url}}" class="img-responsive" >
 	{% endif %}
 
     {% if data.type=='youtube' %}
 	<img src="{{data.image_url|resizeImage(180,180)}}" class="img-rounded acb-youtube-thumb" data-youtube-link="{{data.youtube_link}}" data-title="{{data.name}}" >
 	{% endif %}
+
+	<div class="clearfix"></div>
+	<br />
+	<div class="row">
+	  <div class="col-md-3 pull-left left  site-thumbnail">
+	  	{% if data.prev %}
+	  		<a href="/contents/{{data.prev.id}}" title="{{data.prev.name}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-arrow-left"></span> prev</a>
+	  		<br />
+	  		<a href="/contents/{{data.prev.id}}" title="{{data.prev.name}}"><img src="{{data.prev.image_url|resizeImage(90,90)}}" class="img-rounded" ></a>
+	  	{% endif %}
+	  </div>
+	  <div class="col-md-3 pull-right right  site-thumbnail">
+	  	{% if data.next %}
+	  		<a href="/contents/{{data.next.id}}" title="{{data.next.name}}" class="btn btn-default btn-xs"> next <span class="glyphicon glyphicon-arrow-right"></span></a>
+	  		<br />
+	  		<a href="/contents/{{data.next.id}}" title="{{data.next.name}}"><img src="{{data.next.image_url|resizeImage(90,90)}}" class="img-rounded" ></a>
+	  	{% endif %}
+	  </div>
+	</div>
 
 {% endblock %}
 

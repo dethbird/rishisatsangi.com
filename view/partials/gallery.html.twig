@@ -16,11 +16,11 @@
 						{{content.name}}<br />
 						
 						{% if content.type=='image' %}
-						<img src="{{content.image_url|resizeImage(180,180)}}" class="img-rounded acb-thumb" data-image-url="{{content.image_url}}" data-title="{{content.name}}" >
+						<a href='{{siteUrl("/contents/")}}{{content.id}}' title="{{content.name}}"><img src="{{content.image_url|resizeImage(180,180)}}" class="img-rounded" ></a>
 						{% endif %}
 
 						{% if content.type=='youtube' %}
-						<img src="{{content.image_url|resizeImage(180,180)}}" class="img-rounded acb-youtube-thumb" data-youtube-link="{{content.youtube_link}}" data-title="{{content.name}}" >
+						<a href='{{siteUrl("/contents/")}}{{content.id}}' title="{{content.name}}"><img src="{{content.image_url|resizeImage(180,180)}}" class="img-rounded" data-youtube-link="{{content.youtube_link}}" data-title="{{content.name}}" ></a>
 						{% endif %}
 
 					</div>

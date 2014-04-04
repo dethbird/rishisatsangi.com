@@ -10,6 +10,7 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 	margin-bottom:25px;
 }
 .site-thumbnail img {
+	margin-top:5px;
 	-webkit-box-shadow: 2px 2px 10px rgba(50, 50, 50, 0.57);
 	-moz-box-shadow:    2px 2px 10px rgba(50, 50, 50, 0.57);
 	box-shadow:         2px 2px 10px rgba(50, 50, 50, 0.57);
@@ -30,4 +31,10 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 }
 .modal-body {
 	text-align: center;
+}
+.left {
+	text-align: left;
+}
+.right {
+	text-align: right;
 }

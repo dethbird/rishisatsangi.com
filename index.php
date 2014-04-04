@@ -105,6 +105,10 @@
 	    $app->render('partials/gallery.html.twig', array('siteData' => $siteData, 'data'=>fetchData("galleries", $id)));
 	});
 
+	$app->get('/comics/:id', function ($id) use ($app, $siteData) {
+	    $app->render('partials/title.html.twig', array('siteData' => $siteData, 'data'=>fetchData("titles", $id)));
+	});
+
 
 	/**
 	* __________            ._._._.

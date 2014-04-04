@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+    <h2>{{data.name}}</h2>
+    <div class="clearfix"></div>
+    <blockquote>{{data.description|raw}}</blockquote>
+    <div class="clearfix"></div>
+
+		<div class="row" >
+				{% for issue in data.issues %}
+
+					<div class="site-thumbnail col-md-3">
+						<strong>Issue #{{index + 1}}:</strong> {{issue.name}}<br />
+
+						<a href="/issues/{{issue.id}}"><img src="{{issue.page_one_image_url|resizeImage(180,180)}}" class="img-rounded"></a>
+						<br /><small>{{issue.page_count}} pages</small>
+
+					</div>
+				{% endfor %}
+		</div>
+{% endblock %}
+

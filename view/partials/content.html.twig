@@ -2,6 +2,13 @@
 
 {% block title %}{{parent()}} / Art / {{data.gallery_name}} / {{data.name}}{% endblock %}
 
+ {% block opengraph_meta %}
+  		{{parent()}}
+		<meta property="og:title" content="RishiSatsangi.com / Art / {{data.gallery_name}} / {{data.name}}">
+		<meta property="og:description" content="{{data.name}}">
+		<meta property="og:image" content="{{data.image_url}}">
+  {% endblock %} 
+
 {% block body %}
 	{{ parent() }}
 	<ol class="breadcrumb">

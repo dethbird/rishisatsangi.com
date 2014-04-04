@@ -2,6 +2,13 @@
 
 {% block title %}{{parent()}} / Comics / {{data.title_name}} / {{data.name}}{% endblock %}
 
+ {% block opengraph_meta %}
+  		{{parent()}}
+		<meta property="og:title" content="RishiSatsangi.com / Comics / {{data.title_name}} / {{data.name}}">
+		<meta property="og:description" content="{{data.name}} | {{data.page_count}} page(s)">
+		<meta property="og:image" content="{{data.page_one_image_url}}">
+  {% endblock %} 
+
 {% block body %}
 	{{ parent() }}
 	<ol class="breadcrumb">

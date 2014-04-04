@@ -2,6 +2,12 @@
 
 {% block title %}{{parent()}} / Blogs / {{data.name}}{% endblock %}
 
+ {% block opengraph_meta %}
+  		{{parent()}}
+		<meta property="og:title" content="RishiSatsangi.com / Blogs / {{data.name}}">
+		<meta property="og:description" content="{{data.description|striptags}} | {{data.site_url}}">
+  {% endblock %} 
+
 {% block body %}
 	{{ parent() }}
     <h2>{{data.name}}</h2>

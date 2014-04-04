@@ -2,6 +2,12 @@
 
 {% block title %}{{parent()}} / Comics / {{data.name}}{% endblock %}
 
+ {% block opengraph_meta %}
+  		{{parent()}}
+		<meta property="og:title" content="RishiSatsangi.com / Comics / {{data.name}}">
+		<meta property="og:description" content="{{data.description|striptags}} | {{data.issues|length}} issues(s)">
+  {% endblock %} 
+
 {% block body %}
 	{{ parent() }}
     <h2>{{data.name}}</h2>

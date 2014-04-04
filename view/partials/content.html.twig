@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} / Art / {{data.gallery_name}} / {{data.name}}{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+	<ol class="breadcrumb">
+	  <li>Art</li>
+	  <li class="active"><a href="/galleries/{{data.gallery_id}}">{{data.gallery_name}}</a></li>
+	</ol>
+    <h2>{{data.name}}</h2>
+
+    {% if data.type=='image' %}
+	<img src="{{data.image_url}}" data-image-url="{{data.image_url}}" data-title="{{data.name}}" >
+	{% endif %}
+
+    {% if data.type=='youtube' %}
+	<img src="{{data.image_url|resizeImage(180,180)}}" class="img-rounded acb-youtube-thumb" data-youtube-link="{{data.youtube_link}}" data-title="{{data.name}}" >
+	{% endif %}
+
+{% endblock %}
+

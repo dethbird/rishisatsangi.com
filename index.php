@@ -42,6 +42,7 @@
 	    {
 	        return array(
 	            new \Twig_SimpleFilter('resizeImage', array($this, 'resizeImage')),
+	            new \Twig_SimpleFilter('print_r', array($this, 'print_r')),
 	        );
 	    }
 
@@ -50,6 +51,11 @@
 	        $url = parse_url($url);
 
 	        return $url['scheme'] . "://" . $url['host'] . "/w". $width . "-h" . $height . $url['path'];
+	    }
+
+	    public function print_r($output)
+	    {
+	        return print_r($output,1);
 	    }
 
 	    public function getName()
@@ -115,6 +121,10 @@
 
 	$app->get('/blogs/:id', function ($id) use ($app, $siteData) {
 	    $app->render('partials/feed.html.twig', array('siteData' => $siteData, 'data'=>fetchData("feeds", $id)));
+	});
+
+	$app->get('/contents/:id', function ($id) use ($app, $siteData) {
+	    $app->render('partials/content.html.twig', array('siteData' => $siteData, 'data'=>fetchData("contents", $id)));
 	});
 
 

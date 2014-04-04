@@ -1,5 +1,7 @@
 {% extends 'layout.html.twig' %}
 
+{% block title %}{{parent()}} / Blogs / {{data.name}}{% endblock %}
+
 {% block body %}
 	{{ parent() }}
     <h2>{{data.name}}</h2>

@@ -1,7 +1,13 @@
 {% extends 'layout.html.twig' %}
 
+{% block title %}{{parent()}} / Comics / {{data.title_name}} / {{data.name}}{% endblock %}
+
 {% block body %}
 	{{ parent() }}
+	<ol class="breadcrumb">
+	  <li>Comics</li>
+	  <li class="active"><a href="/comics/{{data.title_id}}">{{data.title_name}}</a></li>
+	</ol>
     <h2>Issue #{{data.issue_number}}: {{data.name}}</h2>
     <div class="clearfix"></div>
     <blockquote>{{data.description|raw}}</blockquote>

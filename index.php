@@ -109,6 +109,10 @@
 	    $app->render('partials/title.html.twig', array('siteData' => $siteData, 'data'=>fetchData("titles", $id)));
 	});
 
+	$app->get('/issues/:id', function ($id) use ($app, $siteData) {
+	    $app->render('partials/issue.html.twig', array('siteData' => $siteData, 'data'=>fetchData("issues", $id)));
+	});
+
 
 	/**
 	* __________            ._._._.

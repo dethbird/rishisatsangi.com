@@ -13,7 +13,7 @@
 <script>
 	$(document).ready(function(){
 		$.get( "http://hipsterjesus.com/api/?type=hipster-centric&paras=2", function( data ) {
-	  		$('#statement').html(data.text);
+	  		$('#statement').html('<img src="/img/laserface.jpg" style="width:150px; float:left; margin:0px 5px 5px 0px;" />' +  data.text);
 		});
 	});
 </script>

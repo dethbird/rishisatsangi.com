@@ -18,7 +18,7 @@
     <h2>{{data.name}}</h2>
 
     {% if data.type=='image' %}
-	<img src="{{data.image_url}}" class="img-responsive" >
+	<img src="{{data.image_url}}" class="img-responsive" > <button type="button" class="btn btn-info" id="fullSize">full size</button>
 	{% endif %}
 
     {% if data.type=='youtube' %}
@@ -52,6 +52,24 @@
 	</div>
 
 	<div class="fb-comments" data-href="{{siteUrl('/contents/')}}{{data.id}}" data-numposts="10" data-colorscheme="light" ></div>
+
+	<script>
+		$(document).ready(function(){
+			var src = $('img.img-responsive').attr('src');
+			$("<img/>").attr("src", src).load(function(){
+		    	s = {w:this.width, h:this.height};
+			    if(s.w > $(window).outerWidth() || s.h > $(window).outerHeight()){
+					$('#fullSize').click(function(){
+						$('img.img-responsive').removeClass('img-responsive');
+						$('#fullSize').hide();
+					});
+				} else {
+					$('#fullSize').hide();
+				}
+			    
+			});
+		});
+	</script>
 
 {% endblock %}
 

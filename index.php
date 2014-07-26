@@ -9,7 +9,8 @@
 	* \____|__  /   __/|   __/  /____  >\___  >__| |____/|   __/ 
 	*         \/|__|   |__|          \/     \/           |__|    
 	*/
-	ini_set('error_reporting', E_ALL);
+	// ini_set('error_reporting', E_ALL);
+	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 	define("APPLICATION_PATH", __DIR__);
 	date_default_timezone_set('America/Los_Angeles');
@@ -20,7 +21,7 @@
 	    __DIR__ . '/src',
 	    get_include_path(),
 	)));
-	global $api_key, $api_url;
+	global $api_key, $api_url, $configs;
 	$api_key = "c4ca4238a0b923820dcc509a6f75849b";
 	$api_url = "http://artistcontrolbox.com/api";
 	$siteData = null;
@@ -35,6 +36,14 @@
 	*/
 	
 	require 'vendor/autoload.php';
+	use Symfony\Component\Yaml\Yaml;
+
+	$configs = Yaml::parse(file_get_contents("configs/config.yml"));
+
+	// echo "<pre>";
+	// print_r($yaml);
+	// echo "</pre>";
+	// die();
 
 	class AcmeExtension extends \Twig_Extension
 	{
@@ -43,6 +52,7 @@
 	        return array(
 	            new \Twig_SimpleFilter('resizeImage', array($this, 'resizeImage')),
 	            new \Twig_SimpleFilter('print_r', array($this, 'print_r')),
+	            new \Twig_SimpleFilter('json_encode', array($this, 'json_encode')),
 	        );
 	    }
 
@@ -56,6 +66,11 @@
 	    public function print_r($output)
 	    {
 	        return print_r($output,1);
+	    }
+
+	    public function json_encode($output)
+	    {
+	        return json_encode($output);
 	    }
 
 	    public function getName()
@@ -113,6 +128,27 @@
 
 	$app->get('/contents/:id', function ($id) use ($app, $siteData) {
 	    $app->render('partials/content.html.twig', array('siteData' => $siteData, 'data'=>fetchData("contents", $id), 'section'=>'art'));
+	});
+
+	$app->get('/comic/:title/:series/:slug', function ($title, $series, $slug) use ($app, $siteData, $configs) {
+
+		if (!isset($configs['comics'][$title][$series][$slug])) {
+			$app->notFound();
+		}
+
+		$comic = $configs['comics'][$title][$series][$slug];
+
+	    $app->render(
+	    	'partials/comic.html.twig',
+	    	array(
+	    		'siteData' => $siteData,
+	    		'comic' => $comic,
+	    		'data'=>fetchData(
+	    			"contents",
+	    			$comic['contentId']),
+	    		'section'=>'comics'
+    		)
+    	);
 	});
 
 	$app->get('/comics/:id', function ($id) use ($app, $siteData) {

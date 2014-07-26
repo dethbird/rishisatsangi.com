@@ -11,7 +11,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- jquery -->
-	<script src="//assets.artistcontrolbox.com/js/jquery-1.10.2.min.js"></script>
+  <script src="//assets.artistcontrolbox.com/js/jquery-1.10.2.min.js"></script>
+	<script src="//assets.artistcontrolbox.com/js/jquery-ui.min.js"></script>
   <script src="//assets.artistcontrolbox.com/js/url.min.js"></script>
 
 	<!-- bootstrap -->
@@ -83,14 +84,12 @@
           {% endfor %}
         </ul>
       </li>
-      <!--  <li class="dropdown{%if section=='comics'%} active{%endif%}">
+      <li class="dropdown{%if section=='comics'%} active{%endif%}">
         <a class="dropdown-toggle" data-toggle="dropdown">Comics <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          {% for title in siteData.titles %}
-          	<li><a href="/comics/{{title.id}}" >{{title.name}}</a></li>
-          {% endfor %}
+          	<li><a href="comic/head-off-ville/annoyed-batman/revelation" >Annoyed Batman in: Revelation</a></li>
         </ul>
-      </li> -->
+      </li>
        <li class="dropdown{%if section=='blogs'%} active{%endif%}">
         <a class="dropdown-toggle" data-toggle="dropdown">Blogs <b class="caret"></b></a>
         <ul class="dropdown-menu">

@@ -1,0 +1,11 @@
+comics:
+    head-off-ville:
+            annoyed-batman:
+                titleImage: "http://image.com/annoyed-batman-title-image"
+                revelation: 
+                    contentId: 110
+                    title: "Annoyed Batman in: Revelation"
+                    viewerImage: "http://imgsrc.artistcontrolbox.com/images/contents/110.jpg"
+                    viewerFrames: [[480,0],[640,-470],[740,-890],[740,-1390],[620,-2090],[800,-2680],[870,-3380]]
+                    thumbnailImage: "http://image.com/image-thumbnail"
+

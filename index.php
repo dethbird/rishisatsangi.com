@@ -130,13 +130,13 @@
 	    $app->render('partials/content.html.twig', array('siteData' => $siteData, 'data'=>fetchData("contents", $id), 'section'=>'art'));
 	});
 
-	$app->get('/comic/:title/:series/:slug', function ($title, $series, $slug) use ($app, $siteData, $configs) {
+	$app->get('/comic/:series/:slug', function ($series, $slug) use ($app, $siteData, $configs) {
 
-		if (!isset($configs['comics'][$title][$series][$slug])) {
+		if (!isset($configs['comics'][$series][$slug])) {
 			$app->notFound();
 		}
 
-		$comic = $configs['comics'][$title][$series][$slug];
+		$comic = $configs['comics'][$series][$slug];
 
 	    $app->render(
 	    	'partials/comic.html.twig',

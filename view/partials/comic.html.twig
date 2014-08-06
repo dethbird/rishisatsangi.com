@@ -22,6 +22,8 @@
     	<div class="viewer">
 			<img src="{{data.image_url}}" class="hidden" />
 		</div>
+		<div class="viewer-page"></div>
+		<div class="viewer-thumbs"></div>
 	{% endif %}
 
     {% if data.type=='youtube' %}
@@ -58,50 +60,126 @@
 
 	<script>
 		$(document).ready(function(){
-			
+
+
 			// buildup comic viewer
 			var comic = JSON.parse('{{comic|json_encode|raw}}');
-			var frame_index = comic.viewerFrames.length-1;
-			// console.log(comic.viewerFrames[frame_index]);
-			// console.log("here");
+			var frame_index;
+			$('.viewer').css('cursor', 'pointer');
+			$('.viewer').css('overflow', 'hidden');
 
-			var nextFrame = function() {
-				frame_index++;	
-				if (frame_index == comic.viewerFrames.length) {
-					frame_index = 0;
+			if(comic.viewerType == "frames") {
+			
+				frame_index = comic.viewerFrames.length-1;
+
+				var nextFrame = function() {
+					frame_index++;	
+					if (frame_index == comic.viewerFrames.length) {
+						frame_index = 0;
+					}
+
+					$('.viewer').animate(
+						{
+							'width' : comic.viewerFrames[frame_index][0]
+						}, 
+						1600,
+						"easeOutElastic"
+					);
+
+					// $('.viewer img').css('margin-left', comic.viewerFrames[frame_index][1] + "px");
+					
+					$('.viewer img').animate(
+						{
+							'margin-left' : comic.viewerFrames[frame_index][1]
+						}, 
+						400,
+						"easeInOutCirc"
+					);
+
+				};
+
+				$('.viewer').css('width', '0px');
+				$('.viewer img').removeClass('hidden');
+
+				nextFrame();
+				$('.viewer').click(nextFrame);
+
+			} else if(comic.viewerType == "slides") {
+				// console.log(comic.count);
+				frame_index = comic.count;	
+
+				$('.viewer').empty();
+				$('.viewer').css("width", "600px");
+				$('.viewer').css("height", "600px");
+				$('.viewer').css("border", "1px solid lightgray");
+				$('.viewer').css('position', 'relative');
+
+				var slides = [];
+
+				for(i=1; i<=comic.count; i++) {
+
+					var file = String(i).length == 2 ? i : "0" + i;
+					file+=".jpg";
+					file = comic.slidePrefix + file;
+
+					var img = $('<img />');
+					img.attr('src', file);
+					img.css('display', 'block');
+					img.addClass("responsive");
+					img.css("width", "600px");
+					img.css("height", "600px");
+					// img.css('position', 'relative');
+					img.css('z-index', 100 + 100 * i);
+					// img.addClass('hidden');
+
+					slides.push(img);
+					// img.appendTo('.viewer');
+
+				}
+				// console.log(slides);
+
+				// console.log($('.viewer img')[3]);
+
+				var renderFrame = function() {
+					$('.viewer').empty();
+					var next = slides[frame_index-1];
+					$(next).appendTo('.viewer');
+
+					// console.log($('.viewer-page'));
+					$('.viewer-page').html(frame_index + " of " + comic.count);
 				}
 
-				$('.viewer').animate(
-					{
-						'width' : comic.viewerFrames[frame_index][0]
-					}, 
-					1600,
-					"easeOutElastic"
-				);
+				var nextFrame = function() {
 
-				// $('.viewer img').css('margin-left', comic.viewerFrames[frame_index][1] + "px");
-				
-				console.log(frame_index);
+					if (frame_index == comic.count) {
+						frame_index = 0;
+					}
+					frame_index++;
+					renderFrame();
 
-				$('.viewer img').animate(
-					{
-						'margin-left' : comic.viewerFrames[frame_index][1]
-					}, 
-					400,
-					"easeInOutCirc"
-				);
+				};
 
-			};
+				var prevFrame = function() {
+					if (frame_index == 1) {
+						frame_index = comic.count+1;
+					}
+					frame_index--;
+					renderFrame();
+				}
 
-			console.log($('.viewer'));
+				nextFrame();
+				$('.viewer').click(nextFrame);
 
-			$('.viewer').css('overflow', 'hidden');
-			$('.viewer').css('width', '0px');
-			$('.viewer').css('cursor', 'pointer');
-			$('.viewer img').removeClass('hidden');
+				$(document).on('keydown', function (e){
+					if(e.keyCode==39){
+						nextFrame();
+					} else if(e.keyCode==37){
+						prevFrame();
+					}
+				});
 
-			nextFrame();
-			$('.viewer').click(nextFrame);
+			}
+
 
 		});
 	</script>

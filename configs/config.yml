@@ -1,10 +1,19 @@
 comics:
     annoyed-batman:
-        titleImage: "http://image.com/annoyed-batman-title-image"
         revelation: 
             contentId: 110
             title: "Annoyed Batman in: Revelation"
+            viewerType: "frames"
             viewerImage: "http://imgsrc.artistcontrolbox.com/images/contents/110.jpg"
             viewerFrames: [[480,0],[640,-470],[740,-890],[740,-1390],[620,-2090],[800,-2680],[870,-3380]]
             thumbnailImage: "http://image.com/image-thumbnail"
 
+    tweetstream-and-zeitgeist:
+        titleImage:
+        on-the-scene:
+            contentId: 110
+            title: "Tweetstream and Zeitgeist: On the Scene"
+            viewerType: "slides"
+            slidePrefix: "http://images.rishisatsangi.com/comics/tweetstream-and-zeitgeist/on-the-scene/"
+            count: 22
+            thumbnailImage: "http://image.com/image-thumbnail"

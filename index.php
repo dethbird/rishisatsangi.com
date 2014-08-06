@@ -132,11 +132,21 @@
 
 	$app->get('/comic/:series/:slug', function ($series, $slug) use ($app, $siteData, $configs) {
 
+		// echo "<pre>";
+		// print_r($configs['comics']); 
+		// echo "</pre>";
+		// die();
+
 		if (!isset($configs['comics'][$series][$slug])) {
 			$app->notFound();
 		}
 
 		$comic = $configs['comics'][$series][$slug];
+
+		// echo "<pre>";
+		// print_r($comic); 
+		// echo "</pre>";
+		// die();
 
 	    $app->render(
 	    	'partials/comic.html.twig',

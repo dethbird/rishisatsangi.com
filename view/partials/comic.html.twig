@@ -11,43 +11,19 @@
 
 {% block body %}
 	{{ parent() }}
-	<!-- <ol class="breadcrumb">
-	  <li>Art</li>
-	  <li class="active"><a href="/galleries/{{data.gallery_id}}">{{data.gallery_name}}</a></li>
-	</ol> -->
     <h2>{{comic.title}}</h2>
 
-    {% if data.type=='image' %}
-    	<!-- <pre>{{comic|print_r}}</pre> -->
-    	<div class="viewer">
-			<img src="{{data.image_url}}" class="hidden" />
-		</div>
-		<div class="viewer-page"></div>
-		<div class="viewer-thumbs"></div>
-	{% endif %}
-
-    {% if data.type=='youtube' %}
-		<img src="{{data.image_url|resizeImage(180,180)}}" class="img-rounded acb-youtube-thumb" data-youtube-link="{{data.youtube_link}}" data-title="{{data.name}}" >
-	{% endif %}
+	<!-- <pre>{{comic|print_r}}</pre> -->
+	<div class="viewer">
+		<img src="{{data.image_url}}" class="hidden" />
+	</div>
+	<div class="viewer-page"></div>
+	<div class="viewer-thumbs"></div>
+	<div class="viewer-instructions"></div>
 
 	<div class="clearfix"></div>
 	<br />
-	<div class="row">
-	  <div class="col-md-3 pull-left left  site-thumbnail">
-	  	{% if data.prev %}
-	  		<a href="/contents/{{data.prev.id}}" title="{{data.prev.name}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-arrow-left"></span> prev</a>
-	  		<br />
-	  		<a href="/contents/{{data.prev.id}}" title="{{data.prev.name}}"><img src="{{data.prev.image_url|resizeImage(90,90)}}" class="img-rounded" ></a>
-	  	{% endif %}
-	  </div>
-	  <div class="col-md-3 pull-right right  site-thumbnail">
-	  	{% if data.next %}
-	  		<a href="/contents/{{data.next.id}}" title="{{data.next.name}}" class="btn btn-default btn-xs"> next <span class="glyphicon glyphicon-arrow-right"></span></a>
-	  		<br />
-	  		<a href="/contents/{{data.next.id}}" title="{{data.next.name}}"><img src="{{data.next.image_url|resizeImage(90,90)}}" class="img-rounded" ></a>
-	  	{% endif %}
-	  </div>
-	</div>
+	
 
 	<div class="well well-sm">
 		<div class="fb-like" data-href="{{siteUrl('/contents/')}}{{data.id}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
@@ -57,10 +33,18 @@
 	</div>
 
 	<div class="fb-comments" data-href="{{siteUrl('/contents/')}}{{data.id}}" data-numposts="10" data-colorscheme="light" ></div>
-
+	<style>
+		.viewer {
+			position: relative;
+			height:100%;
+		}
+		.viewer img {
+			display: block;
+			position: absolute;
+		}
+	</style>
 	<script>
 		$(document).ready(function(){
-
 
 			// buildup comic viewer
 			var comic = JSON.parse('{{comic|json_encode|raw}}');
@@ -77,7 +61,18 @@
 					if (frame_index == comic.viewerFrames.length) {
 						frame_index = 0;
 					}
+					renderFrame();
+				};
 
+				var prevFrame = function() {
+					frame_index--;	
+					if (frame_index < 0) {
+						frame_index = comic.viewerFrames.length-1;
+					}
+					renderFrame();
+				}
+
+				var renderFrame = function() {
 					$('.viewer').animate(
 						{
 							'width' : comic.viewerFrames[frame_index][0]
@@ -86,8 +81,6 @@
 						"easeOutElastic"
 					);
 
-					// $('.viewer img').css('margin-left', comic.viewerFrames[frame_index][1] + "px");
-					
 					$('.viewer img').animate(
 						{
 							'margin-left' : comic.viewerFrames[frame_index][1]
@@ -96,16 +89,14 @@
 						"easeInOutCirc"
 					);
 
-				};
+					$('.viewer-page').html((frame_index + 1) + " of " + comic.viewerFrames.length);
+				}
 
 				$('.viewer').css('width', '0px');
 				$('.viewer img').removeClass('hidden');
 
-				nextFrame();
-				$('.viewer').click(nextFrame);
 
 			} else if(comic.viewerType == "slides") {
-				// console.log(comic.count);
 				frame_index = comic.count;	
 
 				$('.viewer').empty();
@@ -124,62 +115,69 @@
 
 					var img = $('<img />');
 					img.attr('src', file);
-					img.css('display', 'block');
 					img.addClass("responsive");
 					img.css("width", "600px");
 					img.css("height", "600px");
-					// img.css('position', 'relative');
+					img.css("margin-left", "600px");
 					img.css('z-index', 100 + 100 * i);
-					// img.addClass('hidden');
 
-					slides.push(img);
-					// img.appendTo('.viewer');
+					img.appendTo('.viewer');
 
 				}
-				// console.log(slides);
 
-				// console.log($('.viewer img')[3]);
+				var renderFrameOut = function() {
 
-				var renderFrame = function() {
-					$('.viewer').empty();
-					var next = slides[frame_index-1];
-					$(next).appendTo('.viewer');
+					var slide = $($('.viewer img')[frame_index-1]);
+					slide.css("margin-left", "600px");
 
-					// console.log($('.viewer-page'));
+				}
+
+				var renderFrameIn = function() {
+
+					var slide = $($('.viewer img')[frame_index-1]);
+					slide.animate(
+						{
+							"margin-left" : "0"
+						},
+						800,
+						"easeOutElastic"
+					);
 					$('.viewer-page').html(frame_index + " of " + comic.count);
 				}
 
 				var nextFrame = function() {
-
+					renderFrameOut();
 					if (frame_index == comic.count) {
 						frame_index = 0;
 					}
 					frame_index++;
-					renderFrame();
+					renderFrameIn();
 
 				};
 
 				var prevFrame = function() {
+					renderFrameOut();
 					if (frame_index == 1) {
 						frame_index = comic.count+1;
 					}
 					frame_index--;
-					renderFrame();
+					renderFrameIn();
 				}
 
-				nextFrame();
-				$('.viewer').click(nextFrame);
 
-				$(document).on('keydown', function (e){
-					if(e.keyCode==39){
-						nextFrame();
-					} else if(e.keyCode==37){
-						prevFrame();
-					}
-				});
 
 			}
 
+			nextFrame();
+			$('.viewer').click(nextFrame);
+
+			$(document).on('keydown', function (e){
+				if(e.keyCode==39){
+					nextFrame();
+				} else if(e.keyCode==37){
+					prevFrame();
+				}
+			});
 
 		});
 	</script>

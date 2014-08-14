@@ -100,7 +100,8 @@
 
 
 			} else if(comic.viewerType == "slides") {
-				frame_index = comic.count;	
+				
+				frame_index = comic.count + 1;	
 
 				$('.viewer').empty();
 				$('.viewer').css("width", "600px");
@@ -127,6 +128,19 @@
 					img.appendTo('.viewer');
 
 				}
+
+				// console.log(comic);
+				var img = $('<img />');
+				img.attr('src', comic.theEndSlide);
+				img.addClass("responsive");
+				img.css("width", "600px");
+				img.css("height", "600px");
+				img.css("margin-left", "600px");
+				img.css('z-index', 100 + 100 * (i+1));
+
+				img.appendTo('.viewer');
+
+				comic.count++;
 
 				var renderFrameOut = function() {
 

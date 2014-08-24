@@ -60,8 +60,7 @@
  			<img src="https://farm{{log.json_decoded.photo.attributes.farm}}.staticflickr.com/{{log.json_decoded.photo.attributes.server}}/{{log.json_decoded.photo.attributes.id}}_{{log.json_decoded.photo.attributes.secret}}.jpg" class="img-thumbnail"/>
  			<br />
  			<div class="recent-activity-body">
-	 			{{log.json_decoded.photo.description|print_r|raw}}<br />
-	 			{% for tag in log.json_decoded.photo.tags.tag %} #{{tag}}{% endfor %}
+	 			{{log.note}}<br />
  			</div>
  		{% elseif log.name=="Instagram" %}
 
@@ -84,6 +83,6 @@
 	{% endfor %}
 	</div>
 
-	<div class="row"><pre>{{recentActivity|print_r}}</pre></div>
+	<!-- <div class="row"><pre>{{recentActivity|print_r}}</pre></div> -->
 {% endblock %}
 

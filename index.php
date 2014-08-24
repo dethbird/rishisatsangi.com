@@ -21,9 +21,7 @@
 	    __DIR__ . '/src',
 	    get_include_path(),
 	)));
-	global $api_key, $api_url, $configs;
-	$api_key = "c4ca4238a0b923820dcc509a6f75849b";
-	$api_url = "http://artistcontrolbox.com/api";
+	global $httpClient, $configs;
 	$siteData = null;
 
 	/**
@@ -37,11 +35,14 @@
 	
 	require 'vendor/autoload.php';
 	use Symfony\Component\Yaml\Yaml;
+	use Guzzle\Http\Client;
 
 	$configs = Yaml::parse(file_get_contents("configs/config.yml"));
+	$httpClient = new Client;
+
 
 	// echo "<pre>";
-	// print_r($yaml);
+	// print_r($configs);
 	// echo "</pre>";
 	// die();
 
@@ -51,9 +52,16 @@
 	    {
 	        return array(
 	            new \Twig_SimpleFilter('resizeImage', array($this, 'resizeImage')),
+	            new \Twig_SimpleFilter('date_format', array($this, 'date_format')),
 	            new \Twig_SimpleFilter('print_r', array($this, 'print_r')),
 	            new \Twig_SimpleFilter('json_encode', array($this, 'json_encode')),
 	        );
+	    }
+
+	    public function date_format($date, $format = "F j, Y g:i:a")
+	    {
+	    	// echo $date; die();
+	        return date($format, strtotime($date));
 	    }
 
 	    public function resizeImage($url, $width, $height)
@@ -90,22 +98,22 @@
 	);
 
 
-
-	// load site date for the menu
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $api_url."?api_key=".$api_key); 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
- 	$siteData = json_decode(curl_exec($ch), true);
- 	curl_close($ch);
+ 	$response = $httpClient->createRequest(
+                    "GET",
+                    $configs['app']['api_url']."?api_key=".$configs['app']['api_key']
+                )->send();
+ 	$siteData = json_decode($response->getBody(true));
 
  	function fetchData($endpoint, $id){
- 		global $api_key, $api_url;
- 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $api_url."/".$endpoint."?id=".$id."&api_key=".$api_key);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-	 	$data = json_decode(curl_exec($ch), true); 
-	 	curl_close($ch);
-	 	return $data[0];
+ 		global $configs, $httpClient;
+
+	 	$response = $httpClient->createRequest(
+                    "GET",
+                    $configs['app']['api_url']."/".$endpoint."?id=".$id."&api_key=".$configs['app']['api_key']
+                )->send();
+ 		$data = json_decode($response->getBody(true));
+ 		return $data[0];
+
  	}
 
 
@@ -118,8 +126,21 @@
 	*         \/                           \//_____/  	
 	*/
 
-	$app->get('/', function () use ($app, $siteData) {
-	    $app->render('partials/home.html.twig', array('siteData' => $siteData));
+	$app->get('/', function () use ($app, $siteData, $configs, $httpClient) {
+		
+		//get recent activity
+		$response = $httpClient->createRequest(
+            "GET",
+            $configs['app']['recent_activity_url']
+    	)->send();
+ 		$recentActivity = json_decode($response->getBody(true));
+
+	    $app->render('partials/home.html.twig', array(
+		    	'siteData' => $siteData,
+		    	'section'=>'index',
+		    	'recentActivity' => $recentActivity->data
+    		)
+	    );
 	});
 
 	$app->get('/galleries/:id', function ($id) use ($app, $siteData) {
@@ -132,21 +153,11 @@
 
 	$app->get('/comic/:series/:slug', function ($series, $slug) use ($app, $siteData, $configs) {
 
-		// echo "<pre>";
-		// print_r($configs['comics']); 
-		// echo "</pre>";
-		// die();
-
 		if (!isset($configs['comics'][$series][$slug])) {
 			$app->notFound();
 		}
 
 		$comic = $configs['comics'][$series][$slug];
-
-		// echo "<pre>";
-		// print_r($comic); 
-		// echo "</pre>";
-		// die();
 
 	    $app->render(
 	    	'partials/comic.html.twig',

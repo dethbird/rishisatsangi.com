@@ -1,3 +1,7 @@
+app:
+    api_key: "c4ca4238a0b923820dcc509a6f75849b"
+    api_url: "http://artistcontrolbox.com/api"
+    recent_activity_url: "http://tracker-api.rishisatsangi.com/feeds/users/dethbird"
 comics:
     annoyed-batman:
         revelation: 

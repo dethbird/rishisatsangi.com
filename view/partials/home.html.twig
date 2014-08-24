@@ -12,8 +12,30 @@
 {% block headscript %}
 <script>
 	$(document).ready(function(){
-		$.get( "http://hipsterjesus.com/api/?type=hipster-centric&paras=2", function( data ) {
-	  		$('#statement').html('<img src="/img/laserface.jpg" style="width:150px; float:left; margin:0px 5px 5px 0px;" />' +  data.text);
+		
+		var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|(www\\.)?){1}([0-9A-Za-z-\\.@:%_\‌​+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+
+		$('div.row.recent-activity').each(function(){
+			
+			var that = $(this);
+			
+			var hashtag_regexp = /@([a-zA-Z0-9]+)/g;
+			that.html(
+				that.html().replace(
+			        hashtag_regexp,
+			        '<a class="mention" target="_blank">@$1</a>'
+		        )
+		    );
+
+		    var hashtag_regexp = /#([a-zA-Z0-9]+)/g;
+			that.html(
+				that.html().replace(
+			        hashtag_regexp,
+			        '<a class="hashtag" target="_blank">#$1</a>'
+		        )
+		    );
+
+		    that.html(that.html().autoLink());
 		});
 	});
 </script>
@@ -21,7 +43,47 @@
 
 {% block body %}
 	{{ parent() }}
-	<h2>Artist Statement</h2>
-	<div class="col-md-8" id="statement">oh shit, writing one now... </div>
+	<div class="container recent-activity">
+		
+	<h2>Latest</h2>
+	{% for log in recentActivity %}
+		<div class="row recent-activity">
+		{% if log.name=="Flickr" %}
+ 			
+ 			<div class="activity-stamp well">
+	 			<span class="activity-icon photo"></span> 
+	 			<span class="date">{{log.date_added.date|date_format}}</span><br />
+	 			via cameral roll
+	 			<br />
+ 			</div>
+
+ 			<img src="https://farm{{log.json_decoded.photo.attributes.farm}}.staticflickr.com/{{log.json_decoded.photo.attributes.server}}/{{log.json_decoded.photo.attributes.id}}_{{log.json_decoded.photo.attributes.secret}}.jpg" class="img-thumbnail"/>
+ 			<br />
+ 			<div class="recent-activity-body">
+	 			{{log.json_decoded.photo.description|raw	}}<br />
+	 			{% for tag in log.json_decoded.photo.tags.tag %} #{{tag}}{% endfor %}
+ 			</div>
+ 		{% elseif log.name=="Instagram" %}
+
+ 			<div class="activity-stamp well">
+	 			<span class="activity-icon instagram"></span>
+	 			<span class="date">{{log.date_added.date|date_format}}</span><br />
+	 			<span class="user"><a href="http://instagram.com/{{log.json_decoded.user.username}}" target="_blank">@{{log.json_decoded.user.username}}</a></span>
+	 		</div>
+
+ 			<a href="{{log.json_decoded.link}}" target="_blank"><img src="{{log.json_decoded.images.low_resolution.url}}" class="img-thumbnail" /></a>
+ 			<br />
+
+ 			<div class="recent-activity-body">
+	 			{{log.json_decoded.caption.text}}
+	 			<br />
+	 			{% for tag in log.json_decoded.tags %} #{{tag}}{% endfor %}
+ 			</div>
+ 		{% endif %}
+ 		</div>
+	{% endfor %}
+	</div>
+
+	<!-- <div class="row"><pre>{{recentActivity|print_r}}</pre></div> -->
 {% endblock %}
 

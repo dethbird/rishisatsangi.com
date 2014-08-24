@@ -38,3 +38,54 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 .right {
 	text-align: right;
 }
+
+.recent-activity {
+	width:350px;
+	position:relative;
+	padding:10px;
+	text-align:center;
+}
+.recent-activity-body {
+	text-align:left;
+}
+
+.recent-activity .date {
+	font-size: 0.8em;
+}
+.recent-activity .user {
+	font-size: 0.8em;
+	font-weight: bold;
+}
+.recent-activity .img-thumbnail {
+	max-width: 300px;
+	max-height: 300px;
+	left:50%;
+}
+
+.recent-activity .activity-stamp {
+	/* margin:5px 0px 15px 15px; */
+	text-align:left;
+	margin:0px 0px 5px 0px;
+	padding:5px;
+}
+
+.recent-activity .activity-icon {
+	display: block;
+	/* background-color:green; */
+	width: 32px;
+	height: 32px;
+	float:left;
+	margin-right: 5px;
+	/* position: absolute;
+	left:-16px;
+	top:-16px; */
+}
+.recent-activity .activity-icon.flickr {
+	background-image:url('http://images.rishisatsangi.com/social-media-icons/flickr-32-32.png');
+}
+.recent-activity .activity-icon.instagram {
+	background-image:url('http://images.rishisatsangi.com/social-media-icons/instagram-32-32.png');
+}
+.recent-activity .activity-icon.photo {
+	background-image:url('http://images.rishisatsangi.com/social-media-icons/photo-32-32.png');
+}

@@ -15,7 +15,7 @@
 		
 		var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|(www\\.)?){1}([0-9A-Za-z-\\.@:%_\‌​+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
 
-		$('div.row.recent-activity').each(function(){
+		$('div.row.recent-activity .recent-activity-body').each(function(){
 			
 			var that = $(this);
 			
@@ -23,7 +23,7 @@
 			that.html(
 				that.html().replace(
 			        hashtag_regexp,
-			        '<a class="mention" target="_blank">@$1</a>'
+			        '<a class="mention" target="_blank" href="https://twitter.com/$1">@$1</a>'
 		        )
 		    );
 
@@ -60,7 +60,7 @@
  			<img src="https://farm{{log.json_decoded.photo.attributes.farm}}.staticflickr.com/{{log.json_decoded.photo.attributes.server}}/{{log.json_decoded.photo.attributes.id}}_{{log.json_decoded.photo.attributes.secret}}.jpg" class="img-thumbnail"/>
  			<br />
  			<div class="recent-activity-body">
-	 			{{log.json_decoded.photo.description|raw	}}<br />
+	 			{{log.json_decoded.photo.description|print_r|raw}}<br />
 	 			{% for tag in log.json_decoded.photo.tags.tag %} #{{tag}}{% endfor %}
  			</div>
  		{% elseif log.name=="Instagram" %}
@@ -84,6 +84,6 @@
 	{% endfor %}
 	</div>
 
-	<!-- <div class="row"><pre>{{recentActivity|print_r}}</pre></div> -->
+	<div class="row"><pre>{{recentActivity|print_r}}</pre></div>
 {% endblock %}
 

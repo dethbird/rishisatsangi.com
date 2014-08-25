@@ -10,7 +10,7 @@
 
 {% block body %}
 	{{ parent() }}
-    <h2>{{data.name}}</h2>
+    <h1>{{data.name}}</h1>
     <div class="clearfix"></div>
     <a href="{{data.site_url}}" target="_blank">{{data.site_url}}</a><br />
     <blockquote>{{data.description|raw}}</blockquote>

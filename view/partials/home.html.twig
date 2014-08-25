@@ -69,8 +69,8 @@
 	 			<span class="date">{{log.date_added.date|date_format}}</span><br />
 	 			<span class="user"><a href="http://instagram.com/{{log.json_decoded.user.username}}" target="_blank">@{{log.json_decoded.user.username}}</a></span>
 	 		</div>
-
- 			<a href="{{log.json_decoded.link}}" target="_blank"><img src="{{log.json_decoded.images.low_resolution.url}}" class="img-thumbnail" /></a>
+	 		<!-- <pre>{{log.json_decoded.images|print_r}}</pre> -->
+ 			<a href="{{log.json_decoded.link}}" target="_blank"><img src="{{log.json_decoded.images.standard_resolution.url}}" class="img-thumbnail" /></a>
  			<br />
 
  			<div class="recent-activity-body">

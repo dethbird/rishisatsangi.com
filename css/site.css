@@ -4,7 +4,7 @@ body {
 	color:#888;
 }
 h1,h2,h3,h4,h5,h6,.navbar-brand {
-	font-family: 'Oleo Script', cursive;
+	font-family: 'Permanent Marker', cursive;
 }
 .site-thumbnail {
 	margin-bottom:25px;
@@ -40,7 +40,7 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 }
 
 .recent-activity {
-	width:350px;
+	width:600px;
 	position:relative;
 	padding:10px;
 	text-align:center;
@@ -57,8 +57,8 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 	font-weight: bold;
 }
 .recent-activity .img-thumbnail {
-	max-width: 300px;
-	max-height: 300px;
+	max-width: 500px;
+	max-height: 500px;
 	left:50%;
 }
 
@@ -88,4 +88,9 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 }
 .recent-activity .activity-icon.photo {
 	background-image:url('http://images.rishisatsangi.com/social-media-icons/photo-32-32.png');
+}
+
+div.container.recent-activity {
+	float:left;
+	text-align:left;
 }

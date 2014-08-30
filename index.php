@@ -143,6 +143,16 @@
 	    );
 	});
 
+	$app->get('/contact', function () use ($app, $siteData) {
+
+	    $app->render('partials/contact.html.twig', array(
+		    	'siteData' => $siteData,
+		    	'section'=>'contact'
+    		)
+	    );
+	});
+
+
 	$app->get('/galleries/:id', function ($id) use ($app, $siteData) {
 	    $app->render('partials/gallery.html.twig', array('siteData' => $siteData, 'data'=>fetchData("galleries", $id), 'section'=>'art'));
 	});

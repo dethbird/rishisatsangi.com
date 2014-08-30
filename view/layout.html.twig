@@ -25,7 +25,7 @@
 
   <!-- google font -->
   <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Rosario:400,700' rel='stylesheet' type='text/css'>
   <script>
     $(document).ready(function(){
       $('#myModal').on('hidden.bs.modal', function () {
@@ -100,14 +100,8 @@
           {% endfor %}
         </ul>
       </li>
-       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Contact <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a>Twitter: @dethbird</a></li>
-          <li><a>Facebook: brownestartist</a></li>
-          <li><a>Instagram: @dethbird</a></li>
-        </ul>
-      </li>
+       <li class="dropdown{%if section=='contact'%} active{%endif%}">
+        <a href="/contact">Contact </a></li>
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>

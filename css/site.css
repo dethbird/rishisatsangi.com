@@ -1,11 +1,11 @@
 body {
-	font-family: 'PT Sans Narrow', cursive;
+	font-family: 'Rosario', sans-serif;
 	font-size: 1.4em;
 	color:#666;
 }
 h1,h2,h3,h4,h5,h6,.navbar-brand {
 	font-family: 'Permanent Marker', cursive;
-	text-shadow:3px 3px 5px #333;
+	text-shadow:2px 2px 4px #999;
 }
 .site-thumbnail {
 	margin-bottom:25px;
@@ -45,7 +45,7 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 }
 
 .recent-activity {
-	width:600px;
+	width:500px;
 	position:relative;
 	padding:10px;
 	text-align:center;
@@ -63,8 +63,8 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 	font-weight: bold;
 }
 .recent-activity .img-thumbnail {
-	max-width: 500px;
-	max-height: 500px;
+	max-width: 450px;
+	max-height: 450px;
 	left:50%;
 }
 
@@ -75,6 +75,7 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 	padding:5px;
 }
 
+.social-icon,
 .recent-activity .activity-icon {
 	display: block;
 	/* background-color:green; */
@@ -86,17 +87,59 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 	left:-16px;
 	top:-16px; */
 }
+.social-icon {
+	margin-right:3px;
+}
+
+.social-icon.flickr,
 .recent-activity .activity-icon.flickr {
 	background-image:url('http://images.rishisatsangi.com/social-media-icons/flickr-32-32.png');
 }
+.social-icon.instagram,
 .recent-activity .activity-icon.instagram {
 	background-image:url('http://images.rishisatsangi.com/social-media-icons/instagram-32-32.png');
 }
+.social-icon.photo,
 .recent-activity .activity-icon.photo {
 	background-image:url('http://images.rishisatsangi.com/social-media-icons/photo-32-32.png');
 }
+.social-icon.twitter,
+.recent-activity .activity-icon.twitter {
+	background-image:url('http://images.rishisatsangi.com/social-media-icons/twitter-32-32.png');
+}
+.social-icon.email,
+.recent-activity .activity-icon.email {
+	background-image:url('http://images.rishisatsangi.com/social-media-icons/email-32-32.png');
+}
+.social-icon.deviantart,
+.recent-activity .activity-icon.deviantart {
+	background-image:url('http://images.rishisatsangi.com/social-media-icons/deviantart-32-32.png');
+}
+.social-icon.tumblr,
+.recent-activity .activity-icon.tumblr {
+	background-image:url('http://images.rishisatsangi.com/social-media-icons/tumblr-32-32.png');
+}
+
 
 div.container.recent-activity {
 	float:left;
 	text-align:left;
+}
+
+span.title {
+	font-size:1em;
+	text-shadow:-1px -1px 2px #CCC;
+}
+
+ul.contact {
+	list-style-type: none;
+}
+ul.contact > li {
+	display: block;
+	clear:both;
+	margin:0px 0px 15px 0px;
+}
+ul.contact a {
+	float:left;
+	margin-top:7px;
 }

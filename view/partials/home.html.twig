@@ -69,12 +69,57 @@
 	 			<span class="date">{{log.date_added.date|date_format}}</span><br />
 	 			<span class="user"><a href="http://instagram.com/{{log.json_decoded.user.username}}" target="_blank">@{{log.json_decoded.user.username}}</a></span>
 	 		</div>
-	 		<!-- <pre>{{log.json_decoded.images|print_r}}</pre> -->
+	 		<!--<pre>{{log|print_r}}</pre> -->
  			<a href="{{log.json_decoded.link}}" target="_blank"><img src="{{log.json_decoded.images.standard_resolution.url}}" class="img-thumbnail" /></a>
  			<br />
 
  			<div class="recent-activity-body">
 	 			{{log.json_decoded.caption.text}}
+	 			<br />
+	 			<br />
+ 			</div>
+ 		{% elseif log.name=="Foursquare" %}
+
+ 			<div class="activity-stamp well">
+	 			<span class="activity-icon foursquare"></span>
+	 			<span class="date">{{log.date_added.date|date_format}}</span><br />
+	 			<span class="user"><a href="https://foursquare.com/u/{{log.json_decoded.checkin.user.id}}" target="_blank">@{{log.json_decoded.checkin.user.firstName}} {{log.json_decoded.checkin.user.lastName}}</a></span>
+	 		</div>
+ 			
+
+ 			<div class="recent-activity-body">
+	 			<img src="http://maps.googleapis.com/maps/api/staticmap?center={% for addr in log.json_decoded.checkin.venue.location.formattedAddress %}{{addr}}{% endfor %}&zoom=15&size=450x250&maptype=roadmap
+	&markers=color:red%7Clabel:A%7C{{log.json_decoded.checkin.venue.location.lat}},{{log.json_decoded.checkin.venue.location.lng}}" />
+				<br />
+	 			<a href="https://foursquare.com/v/{{log.json_decoded.checkin.venue.id}}" target="_blank">{{log.json_decoded.checkin.venue.name}}</a><br />
+	 			{% for addr in log.json_decoded.checkin.venue.location.formattedAddress %}
+	 				<small>{{addr}}</small><br />
+	 			{% endfor %}
+	 			{% for category in log.json_decoded.checkin.venue.categories %}
+	 				<img src="{{category.icon.prefix}}bg_32{{category.icon.suffix}}" valign="middle" class="category"/> <small>{{category.name}}</small><br />
+	 			{% endfor %}
+	 			<br />
+	 			{{log.json_decoded.checkin.venue.url}}<br />
+	 			<a href="{{log.json_decoded.checkin.venue.menu.url}}" target="_blank">{{log.json_decoded.checkin.venue.menu.anchor}}</a><br />
+	 			{{log.note}}<br />
+
+	 			<!-- <pre>{{log|print_r}}</pre> -->
+ 			</div>
+
+
+
+
+ 			
+		{% elseif log.name=="Thought" %}
+
+ 			<div class="activity-stamp well">
+	 			<span class="activity-icon comment"></span>
+	 			<span class="date">{{log.date_added.date|date_format}}</span><br />
+	 			- Rishi
+	 		</div>
+
+ 			<div class="recent-activity-body">
+	 			{{log.note}}
 	 			<br />
 	 			<br />
  			</div>

@@ -119,6 +119,16 @@ h1,h2,h3,h4,h5,h6,.navbar-brand {
 .recent-activity .activity-icon.tumblr {
 	background-image:url('http://images.rishisatsangi.com/social-media-icons/tumblr-32-32.png');
 }
+.social-icon.comment,
+.recent-activity .activity-icon.comment {
+	background-image:url('http://images.rishisatsangi.com/social-media-icons/comment-32-32.png');
+}
+.social-icon.foursquare,
+.recent-activity .activity-icon.foursquare {
+	background-image:url('http://images.rishisatsangi.com/social-media-icons/foursquare-32-32.png');
+}
+
+
 
 
 div.container.recent-activity {

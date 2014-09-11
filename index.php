@@ -159,6 +159,16 @@
 	    );
 	});
 
+	$app->get('/services', function () use ($app, $siteData) {
+
+	    $app->render('partials/services.html.twig', array(
+		    	'siteData' => $siteData,
+		    	'section'=>'services'
+    		)
+	    );
+	});
+
+
 
 	$app->get('/galleries/:id', function ($id) use ($app, $siteData) {
 	    $app->render('partials/gallery.html.twig', array('siteData' => $siteData, 'data'=>fetchData("galleries", $id), 'section'=>'art'));

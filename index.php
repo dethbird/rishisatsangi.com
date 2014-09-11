@@ -55,6 +55,7 @@
 	            new \Twig_SimpleFilter('date_format', array($this, 'date_format')),
 	            new \Twig_SimpleFilter('print_r', array($this, 'print_r')),
 	            new \Twig_SimpleFilter('json_encode', array($this, 'json_encode')),
+	            new \Twig_SimpleFilter('strip_tags', array($this, 'strip_tags'))
 	        );
 	    }
 
@@ -75,6 +76,12 @@
 	    {
 	        return print_r($output,1);
 	    }
+
+
+	    public function strip_tags($html)
+	    {
+	        return strip_tags($html);
+	    }	
 
 	    public function json_encode($output)
 	    {

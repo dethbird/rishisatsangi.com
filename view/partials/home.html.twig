@@ -123,6 +123,29 @@
 	 			<br />
 	 			<br />
  			</div>
+ 		{% elseif log.name=="Twitter" %}
+
+ 			<div class="activity-stamp well">
+	 			<span class="activity-icon twitter"></span>
+	 			<span class="date">{{log.date_added.date|date_format}}</span><br />
+	 			<span class="user"><a href="http://twitter.com/{{log.json_decoded.user.name}}" target="_blank">@{{log.json_decoded.user.name}}</a></span>
+	 		</div>
+
+ 			<div class="recent-activity-body">
+	 			{{log.json_decoded.text|raw}}
+	 			{% for url in log.json_decoded.entities.urls %}
+	 				<br />
+ 					[ <a href="{{url.expanded_url}}" />{{url.expanded_url}}</a> ]
+	 			{% endfor %}
+	 			{% for media in log.json_decoded.entities.media %}
+	 				<br />
+	 				{% if media.type=="photo" %}
+	 					<img src="{{ media.media_url|strip_tags }}" class="img-thumbnail" />
+	 				{% endif %}
+	 			{% endfor %}
+	 			<br />
+ 			</div>
+ 			
  		{% endif %}
  		</div>
 	{% endfor %}

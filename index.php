@@ -150,11 +150,11 @@
 	    );
 	});
 
-	$app->get('/contact', function () use ($app, $siteData) {
+	$app->get('/connect', function () use ($app, $siteData) {
 
-	    $app->render('partials/contact.html.twig', array(
+	    $app->render('partials/connect.html.twig', array(
 		    	'siteData' => $siteData,
-		    	'section'=>'contact'
+		    	'section'=>'connect'
     		)
 	    );
 	});

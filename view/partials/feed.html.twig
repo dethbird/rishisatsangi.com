@@ -10,24 +10,29 @@
 
 {% block body %}
 	{{ parent() }}
-    <h1>{{data.name}}</h1>
-    <div class="clearfix"></div>
-    <a href="{{data.site_url}}" target="_blank">{{data.site_url}}</a><br />
-    <blockquote>{{data.description|raw}}</blockquote>
-    <div class="clearfix"></div>
 
-		<div class="row" >
+    <div class="container recent-activity" />
+	    <h1>{{data.name}}</h1>
+	    <div class="clearfix"></div>
+	    <a href="{{data.site_url}}" target="_blank">{{data.site_url}}</a><br />
+	    <blockquote>{{data.description|raw}}</blockquote>
+	    <div class="clearfix"></div>
 				{% for item in data.items %}
+    			<div class="row recent-activity" >
 
-					<div class="site-thumbnail col-md-9">
-						<strong>{{item.title}}</strong><br />
-						<small>{{item.date_modified}}</small>
-						<br />
+
+    				<div class="activity-stamp well">
+	 					<span class="activity-icon comment"></span>
+			 			<span class="date">{{item.date_modified}}</span><br />
+			 			<span class="title"><a href="{{item.url}}" target="_blank">{{item.title}}</a></span>
+			 		</div>
+
+			 		<div class="recent-activity-body">
 						<div>{{item.content|raw}}</div>
-						<div class="clearfix"></div>
-
-					</div>
+		 			</div>
+				</div>
 				{% endfor %}
 		</div>
+	</div>
 {% endblock %}
 

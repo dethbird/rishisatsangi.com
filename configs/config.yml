@@ -12,6 +12,36 @@ comics:
             viewerFrames: [[480,0],[640,-470],[740,-890],[740,-1390],[620,-2090],[800,-2680],[870,-3380]]
             thumbnailImage: "http://image.com/image-thumbnail"
 
+    life-in-the-cloud:
+        on-the-scene-part-1:
+            contentId: 111
+            title: "Tweetstream and Zeitgeist in: On the Scene (part 1/3)"
+            viewerType: "slides"
+            slidePrefix: "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/"
+            count: 8
+            thumbnailImage: "http://image.com/image-thumbnail"
+            theEndSlide: "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/the_end.jpg"
+            nextUrl: "/comic/life-in-the-cloud/on-the-scene-part-2"
+
+        on-the-scene-part-2:
+            contentId: 135
+            title: "Tweetstream and Zeitgeist in: On the Scene (part 2/3)"
+            viewerType: "slides"
+            slidePrefix: "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/"
+            count: 9
+            thumbnailImage: "http://image.com/image-thumbnail"
+            theEndSlide: "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/the_end2.jpg"
+            nextUrl: "/comic/life-in-the-cloud/on-the-scene-part-3"
+
+        on-the-scene-part-3:
+            contentId: 136
+            title: "Tweetstream and Zeitgeist in: On the Scene (part 3/3)"
+            viewerType: "slides"
+            slidePrefix: "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-3/"
+            count: 5
+            thumbnailImage: "http://image.com/image-thumbnail"
+            theEndSlide: "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-3/the_end3.jpg"
+
     tweetstream-and-zeitgeist:
         titleImage:
         on-the-scene:

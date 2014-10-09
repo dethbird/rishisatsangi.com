@@ -184,6 +184,10 @@
 			$app->notFound();
 		}
 
+		// echo "<pre>";
+		// print_r($configs); die();
+		// echo "</pre>";
+
 		$comic = $configs['comics'][$series][$slug];
 
 	    $app->render(

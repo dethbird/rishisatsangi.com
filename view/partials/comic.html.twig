@@ -11,19 +11,23 @@
 
 {% block body %}
 	{{ parent() }}
-    <h1>{{comic.title}}</h1>
+	<h1>{{data.gallery_name}}</h1>
+    <h4>{{comic.title}}</h4>
 
 	<!-- <pre>{{comic|print_r}}</pre> -->
 	<div class="viewer">
 		<img src="{{data.image_url}}" class="hidden" />
 	</div>
+	<div class="viewer-next-page hidden"><a href="#" class="btn btn-success">Go to the next one -&gt;</a></div>
 	<div class="viewer-instructions"><small>Click, or use <- and -> to navigate</small></div>
 	<div class="viewer-page"></div>
 	<div class="viewer-thumbs"></div>
 	<br />
-	<div class="description panel panel-default">
-		 <div class="panel-body">{{data.description|raw}}</div>
-	</div>
+	{% if data.description!= ""%}
+		<div class="description panel panel-default">
+			 <div class="panel-body">{{data.description|raw}}</div>
+		</div>
+	{% endif %}
 	<div class="clearfix"></div>
 	<br />
 	
@@ -51,6 +55,7 @@
 
 			// buildup comic viewer
 			var comic = JSON.parse('{{comic|json_encode|raw}}');
+			// console.log(comic);
 			var frame_index;
 			$('.viewer').css('cursor', 'pointer');
 			$('.viewer').css('overflow', 'hidden');
@@ -108,6 +113,10 @@
 				$('.viewer').css("height", "600px");
 				$('.viewer').css("border", "1px solid lightgray");
 				$('.viewer').css('position', 'relative');
+				// console.log(comic.nextUrl);
+				if(comic.nextUrl!=undefined){
+					$('.viewer-next-page a').attr('href', comic.nextUrl);
+				}
 
 				var slides = [];
 
@@ -160,6 +169,15 @@
 						"easeOutElastic"
 					);
 					$('.viewer-page').html(frame_index + " of " + comic.count);
+					if(frame_index==(comic.count)){
+						//show next button
+						if(comic.nextUrl!=undefined){
+							$('.viewer-next-page').removeClass('hidden');
+						}
+					} else {
+						//hide next button
+						$('.viewer-next-page').addClass('hidden');
+					}
 				}
 
 				var nextFrame = function() {

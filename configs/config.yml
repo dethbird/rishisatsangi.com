@@ -2,9 +2,11 @@ app:
     api_key: "c4ca4238a0b923820dcc509a6f75849b"
     api_url: "http://artistcontrolbox.com/api"
     recent_activity_url: "http://tracker-api.rishisatsangi.com/feeds/users/dethbird"
+
 comics:
-    annoyed-batman:
-        revelation: 
+
+    life-in-the-cloud:
+        annoyed-batman-revelation: 
             contentId: 110
             title: "Annoyed Batman in: Revelation"
             viewerType: "frames"
@@ -12,7 +14,6 @@ comics:
             viewerFrames: [[480,0],[640,-470],[740,-890],[740,-1390],[620,-2090],[800,-2680],[870,-3380]]
             thumbnailImage: "http://image.com/image-thumbnail"
 
-    life-in-the-cloud:
         on-the-scene-part-1:
             contentId: 111
             title: "Tweetstream and Zeitgeist in: On the Scene (part 1/3)"
@@ -52,3 +53,35 @@ comics:
             count: 22
             thumbnailImage: "http://image.com/image-thumbnail"
             theEndSlide: "http://images.rishisatsangi.com/comics/tweetstream-and-zeitgeist/on-the-scene/the_end3.jpg"
+
+galleries:
+    personal:
+        illustration:
+            title: "Illustration (2007 - Recent)"
+            galleryId: 1        
+        sketchbook-recent:
+            title: "Sketchbook"
+            galleryId: 2
+    client:
+        print-design:
+            title: "Print Design"
+            galleryId: 5    
+    school:
+        life-drawing:
+            title: "Life / Figure Drawing"
+            galleryId: 4
+archive:            
+    personal:
+        sketchbook-old:
+            title: "Sketchbook (Olden Thyme)"
+            galleryId: 13
+        illustration-1998-2006:
+            title: "Illustration (1998 - 2006)"
+            galleryId: 12  
+        illustration-1993-1997:
+            title: "Illustration (ancient)"
+            galleryId: 11
+    experimental:
+        animation:
+            title: "Animation"
+            galleryId: 3

@@ -174,6 +174,48 @@
 	    $app->render('partials/gallery.html.twig', array('siteData' => $siteData, 'data'=>fetchData("galleries", $id), 'section'=>'art'));
 	});
 
+	$app->get('/gallery/:section/:name', function ($section, $name) use ($app, $siteData, $configs) {
+
+		if (!isset($configs['galleries'][$section][$name])) {
+			$app->notFound();
+		}
+
+		$gallery = $configs['galleries'][$section][$name];
+
+	    $app->render(
+	    	'partials/gallery_decorated.html.twig',
+	    	array(
+	    		'siteData' => $siteData,
+	    		'gallery' => $gallery,
+	    		'data'=>fetchData(
+	    			"galleries",
+	    			$gallery['galleryId']),
+	    		'section'=>'art'
+    		)
+    	);
+	});
+
+	$app->get('/archive/:section/:name', function ($section, $name) use ($app, $siteData, $configs) {
+
+		if (!isset($configs['archive'][$section][$name])) {
+			$app->notFound();
+		}
+
+		$gallery = $configs['archive'][$section][$name];
+
+	    $app->render(
+	    	'partials/gallery_decorated.html.twig',
+	    	array(
+	    		'siteData' => $siteData,
+	    		'gallery' => $gallery,
+	    		'data'=>fetchData(
+	    			"galleries",
+	    			$gallery['galleryId']),
+	    		'section'=>'archive'
+    		)
+    	);
+	});
+
 	$app->get('/contents/:id', function ($id) use ($app, $siteData) {
 	    $app->render('partials/content.html.twig', array('siteData' => $siteData, 'data'=>fetchData("contents", $id), 'section'=>'art'));
 	});
@@ -183,10 +225,6 @@
 		if (!isset($configs['comics'][$series][$slug])) {
 			$app->notFound();
 		}
-
-		// echo "<pre>";
-		// print_r($configs); die();
-		// echo "</pre>";
 
 		$comic = $configs['comics'][$series][$slug];
 

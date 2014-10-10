@@ -61,7 +61,10 @@ galleries:
             galleryId: 1        
         sketchbook-recent:
             title: "Sketchbook"
-            galleryId: 2
+            galleryId: 2        
+        instagram-hi-res:
+            title: "Instagram Hi-Res"
+            galleryId: 16
     client:
         print-design:
             title: "Print Design"
@@ -84,4 +87,9 @@ archive:
     experimental:
         animation:
             title: "Animation"
-            galleryId: 3
+            galleryId: 3        
+        ancient-animation:
+            title: "Ancient Animation"
+            galleryId: 15
+
+

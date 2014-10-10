@@ -46,6 +46,14 @@
         $('#myModal .modal-dialog').css('height', $(window).height());
         $('#myModal').modal();
       });
+
+      var archiveCode = 0;
+      $(document).on('keydown', function(e){
+        archiveCode += e.keyCode;
+        if (archiveCode==130) {
+          $('#archive-menu').removeClass('hidden');
+        }
+      });
     });
   </script>
   
@@ -83,6 +91,7 @@
           <li role="presentation" class="dropdown-header">Personal</li>
             <li><a href="/gallery/personal/illustration" >Illustration</a></li>
             <li><a href="/gallery/personal/sketchbook-recent" >Sketchbook</a></li>
+            <li><a href="/gallery/personal/instagram-hi-res" >Instagram Hi-Res</a></li>
           <li role="presentation" class="divider"></li>
           <li role="presentation" class="dropdown-header">Client Work</li>
             <li><a href="/gallery/client/print-design" >Print Design</a></li>
@@ -115,7 +124,7 @@
       <li class="dropdown{%if section=='services'%} active{%endif%}">
         <a href="/services">Services </a>
       </li>
-      <li class="dropdown{%if section=='archive'%} active{%endif%}">
+      <li class="dropdown{%if section=='archive'%} active{%endif%} hidden" id="archive-menu">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="http://images.rishisatsangi.com/social-media-icons/skull-16.png" valign="middle"/> Archive <b class="caret"></b></a>
           <ul class="dropdown-menu">
           <li role="presentation" class="dropdown-header">Personal (old)</li>
@@ -125,6 +134,7 @@
           <li role="presentation" class="divider"></li>
           <li role="presentation" class="dropdown-header">Experiments</li>
             <li><a href="/archive/experimental/animation" >Animation</a></li>
+            <li><a href="/archive/experimental/ancient-animation" >Ancient Animation</a></li>
           
         </ul>
       </li>

@@ -11,10 +11,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- jquery -->
-  <script src="//assets.artistcontrolbox.com/js/jquery-1.10.2.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="//assets.artistcontrolbox.com/js/jquery-ui.min.js"></script>
   <script src="//assets.artistcontrolbox.com/js/url.min.js"></script>
   <script src="//assets.artistcontrolbox.com/js/autolink-min.js"></script>
+  <script src="//imagesloaded.desandro.com/imagesloaded.pkgd.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
+
 
 	<!-- bootstrap -->
 	<link rel="stylesheet" href="//assets.artistcontrolbox.com/bootstrap-3.0.2/css/bootstrap.min.css">
@@ -54,6 +57,15 @@
           $('#archive-menu').removeClass('hidden');
         }
       });
+      $('#copyright-container').on('click', function(){
+          $('#archive-menu').removeClass('hidden');
+      });
+      imagesLoaded( '#content-container', function() {
+        var msnry = new Masonry( '#content-container', {
+          itemSelector: '.site-thumbnail'
+        });
+      });
+
     });
   </script>
   
@@ -163,7 +175,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="copyright-container">
 <center>&copy; 2014 RishiSatsangi.com</center>
 </div>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

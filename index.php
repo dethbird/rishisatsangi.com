@@ -105,11 +105,13 @@
 	);
 
 
- 	$response = $httpClient->createRequest(
-                    "GET",
-                    $configs['app']['api_url']."?api_key=".$configs['app']['api_key']
-                )->send();
- 	$siteData = json_decode($response->getBody(true));
+ 	// $response = $httpClient->createRequest(
+  //                   "GET",
+  //                   $configs['app']['api_url']."?api_key=".$configs['app']['api_key']
+  //               )->send();
+ 	// $siteData = json_decode($response->getBody(true));
+ 	// echo ($response->getBody(true));
+ 	// die();
 
  	function fetchData($endpoint, $id){
  		global $configs, $httpClient;
@@ -160,7 +162,7 @@
 	});
 
 	$app->get('/services', function () use ($app, $siteData) {
-
+// var_dump($siteData); die();
 	    $app->render('partials/services.html.twig', array(
 		    	'siteData' => $siteData,
 		    	'section'=>'services'

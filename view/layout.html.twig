@@ -122,19 +122,21 @@
             <li><a href="/comic/life-in-the-cloud/on-the-scene-part-3" ><img src="http://images.rishisatsangi.com/social-media-icons/icon_new.png" valign="middle"/> Tweetstream and Zeitgeist in: On the Scene Part 3</a></li>
         </ul>
       </li>
-       <li class="dropdown{%if section=='blogs'%} active{%endif%}">
+      <li class="dropdown{%if section=='blogs'%} active{%endif%}">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Blogs <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          {% for feed in siteData.feeds %}
-          	<li><a href="/blogs/{{feed.id}}" >{{feed.name}}</a></li>
-          {% endfor %}
+            <li><a href="/blogs/2" >Sneh</a></li>
+          	<li><a href="/blogs/3" >Thirsty for Designsperation</a></li>
         </ul>
       </li>
-      <li class="dropdown{%if section=='connect'%} active{%endif%}">
+      <li class="{%if section=='connect'%} active{%endif%}">
         <a href="/connect">Connect </a>
       </li>
-      <li class="dropdown{%if section=='services'%} active{%endif%}">
+      <li class="{%if section=='services'%} active{%endif%}">
         <a href="/services">Services </a>
+      </li>
+      <li class="{%if section=='store'%} active{%endif%}">
+        <a href="http://society6.com/dethbird/prints" target="_blank">Store </a>
       </li>
       <li class="dropdown{%if section=='archive'%} active{%endif%}" id="archive-menu">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="http://images.rishisatsangi.com/social-media-icons/skull-16.png" valign="middle"/> Archive <b class="caret"></b></a>
@@ -147,8 +149,7 @@
           <li role="presentation" class="dropdown-header">Experiments</li>
             <li class="hidden"><a href="/archive/experimental/animation" >Animation</a></li>
             <li><a href="/archive/experimental/ancient-animation" >Ancient Animation</a></li>
-          
-        </ul>
+          </ul>
       </li>
     </ul>
   </div><!-- /.navbar-collapse -->

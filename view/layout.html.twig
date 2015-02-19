@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="/css/site.css">
 
   <!-- google font -->
-  <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Rosario:400,700' rel='stylesheet' type='text/css'>
   <script>
     $(document).ready(function(){
@@ -50,16 +50,17 @@
         $('#myModal').modal();
       });
 
-      var archiveCode = 0;
-      $(document).on('keydown', function(e){
-        archiveCode += e.keyCode;
-        if (archiveCode==130) {          
-          $('#archive-menu > ul > li').removeClass('hidden');
-        }
-      });
-      $('#copyright-container').on('click', function(){
-          $('#archive-menu > ul > li').removeClass('hidden');
-      });
+      // var archiveCode = 0;
+      // $(document).on('keydown', function(e){
+      //   archiveCode += e.keyCode;
+      //   if (archiveCode==130) {          
+      //     $('#archive-menu > ul > li').removeClass('hidden');
+      //   }
+      // });
+      // $('#copyright-container').on('click', function(){
+      //     $('#archive-menu > ul > li').removeClass('hidden');
+      // });
+      $('#archive-menu > ul > li').removeClass('hidden');
       imagesLoaded( '#content-container', function() {
         var msnry = new Masonry( '#content-container', {
           itemSelector: '.site-thumbnail'
@@ -122,22 +123,6 @@
             <li><a href="/comic/life-in-the-cloud/on-the-scene-part-3" ><img src="http://images.rishisatsangi.com/social-media-icons/icon_new.png" valign="middle"/> Tweetstream and Zeitgeist in: On the Scene Part 3</a></li>
         </ul>
       </li>
-      <li class="dropdown{%if section=='blogs'%} active{%endif%}">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Blogs <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li><a href="/blogs/2" >Sneh</a></li>
-          	<li><a href="/blogs/3" >Thirsty for Designsperation</a></li>
-        </ul>
-      </li>
-      <li class="{%if section=='connect'%} active{%endif%}">
-        <a href="/connect">Connect </a>
-      </li>
-      <li class="{%if section=='services'%} active{%endif%}">
-        <a href="/services">Services </a>
-      </li>
-      <li class="{%if section=='store'%} active{%endif%}">
-        <a href="http://society6.com/dethbird/prints" target="_blank">Store </a>
-      </li>
       <li class="dropdown{%if section=='archive'%} active{%endif%}" id="archive-menu">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="http://images.rishisatsangi.com/social-media-icons/skull-16.png" valign="middle"/> Archive <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -150,6 +135,26 @@
             <li class="hidden"><a href="/archive/experimental/animation" >Animation</a></li>
             <li><a href="/archive/experimental/ancient-animation" >Ancient Animation</a></li>
           </ul>
+      </li>
+      <li class="{%if section=='store'%} active{%endif%}">
+        <a href="http://society6.com/dethbird/prints" target="_blank">Store </a>
+      </li>
+      <li class="{%if section=='services'%} active{%endif%}">
+        <a href="/services">Services </a>
+      </li>
+      <li class="{%if section=='connect'%} active{%endif%}">
+        <a href="/connect">Connect </a>
+      </li>
+      <li class="{%if section=='blog'%} active{%endif%}">
+        <a href="http://blog.rishisatsangi.com" target="_blank">Blog </a>
+      </li>
+      <li class="nav-divider"></li>
+      <li class="dropdown{%if section=='blogs'%} active{%endif%}">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tumblrs <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a href="/blogs/2" >Sneh</a></li>
+          	<li><a href="/blogs/3" >Thirsty for Designsperation</a></li>
+        </ul>
       </li>
     </ul>
   </div><!-- /.navbar-collapse -->

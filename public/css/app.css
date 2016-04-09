@@ -1,0 +1,62 @@
+.navbar {
+  background-color: #200e5a;
+}
+.card-title, .site-name {
+  font-family: 'Alegreya', serif;
+  font-weight: bold;
+}
+.display-4 {
+  font-family: 'Alegreya', serif;
+  font-weight: bold;
+  /*color: #009C40;*/
+  color: #2702A0;
+  font-size: 3.1rem;
+  text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.5);
+}
+.card img {
+     width: 100%;
+}
+.card-block button {
+     float: right;
+     clear: both;
+}
+.card-block .btn-social-icon {
+  margin-bottom: 3px;
+}
+.card-link img {
+  max-width: 40px;
+  height: auto;
+}
+
+.card-text {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}
+.list-group-item i {
+  margin-right: 5px;
+  color: #200e5a;
+}
+.btn-wordpress {
+  color: #fff;
+  background-color: #21759b;
+  border-color: rgba(0,0,0,0.2);
+}
+.btn-spotify {
+  color: #fff;
+  background-color: #1ed760;
+  border-color: rgba(0,0,0,0.2);
+}

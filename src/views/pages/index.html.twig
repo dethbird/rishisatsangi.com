@@ -1,0 +1,170 @@
+{% extends 'layout.html.twig' %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+  <div class="expanded row">
+  <div class="col-xs-12 col-md-3">
+      <div class="card">
+          <img class="card-img-top" src="https://c2.staticflickr.com/2/1563/25199611796_df1f03070e.jpg" alt="Card image cap" >
+          <div class="card-block">
+              <p class="card-text">Outta my way, kid. Ya' bother me. I got cartoons to make.</p>
+              <a class="btn btn-social-icon btn-instagram"><span class="fa fa-instagram"></span></a>
+              <a class="btn btn-social-icon btn-tumblr"><span class="fa fa-tumblr"></span></a>
+              <a class="btn btn-social-icon btn-spotify"><span class="fa fa-spotify"></span></a>
+              <a class="btn btn-social-icon btn-wordpress"><span class="fa fa-wordpress"></span></a>
+              <a class="btn btn-social-icon btn-pinterest"><span class="fa fa-pinterest"></span></a>
+              <a class="btn btn-social-icon btn-twitter"><span class="fa fa-twitter"></span></a>
+          </div>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="fa fa-map"></i> NYC</li>
+              <li class="list-group-item"><i class="fa fa-briefcase"></i> The Orchard</li>
+              <li class="list-group-item"><i class="fa fa-paint-brush"></i> http://dethbird.com</li>
+          </ul>
+      </div>
+      <h4 class="display-4">Instagram:</h4>
+      {% for post in instagram_posts %}
+      <!-- <pre>{{post|print_r}}</pre> -->
+
+      <div class="card{% if loop.index > 6%} hidden-sm-down{% endif %}" >
+          <a href="{{post.link}}" target="_blank"><img class="card-img-top" src="{{post.images.low_resolution.url}}"/></a>
+          <div class="card-block">
+            <p class="card-text">
+              {{post.caption.text}}
+              {% if post.likes.count > 0 %}
+              <small class="label label-info"><i class="fa fa-heart"></i> {{post.likes.count}}</small>
+              {% endif %}
+              {% if post.comments.count > 0 %}
+              <small class="label label-info"><i class="fa fa-comment"></i> {{post.comments.count}}</small>
+              {% endif %}
+            </p>
+
+          </div>
+      </div>
+      {% endfor %}
+
+  </div>
+  <div class="col-xs-12 col-md-6">
+      <div class="jumbotron hidden-sm-down">
+        <div class="container">
+          <h1 class="display-3">Fluid jumby</h1>
+          <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        </div>
+      </div>
+
+      <h4 class="display-4">Current Projects:</h4>
+      <div class="card">
+          <div class="card-block">
+              <h2 class="card-title">North by Midwest</h2>
+          </div>
+          <img src="https://c2.staticflickr.com/2/1550/25935956231_4293e7ae47.jpg" />
+          <div class="card-block clearfix">
+              <h6 class="card-subtitle text-muted">A story about a jackass, family, the blues, and the lord almighty.</h6>
+              <span class="label label-info">Character Design</span>
+              <span class="label label-info">Illustration</span>
+              <br />
+              <br />
+              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
+          </div>
+      </div>
+      <div class="card">
+          <div class="card-block">
+              <h2 class="card-title">World of Beepo Beeparelli</h2>
+          </div>
+          <img src="https://c1.staticflickr.com/3/2439/3663515635_1c89de110c.jpg" />
+          <div class="card-block clearfix">
+              <h6 class="card-subtitle text-muted">A story about a japanese created italian robot who had the profession "plumber" uploaded into his main memory.</h6>
+              <span class="label label-info">Character Design</span>
+              <span class="label label-info">Illustration</span>
+              <span class="label label-info">Story</span>
+              <br />
+              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
+          </div>
+      </div>
+      <div class="card">
+          <div class="card-block">
+              <h2 class="card-title">Marquee Shade</h2>
+          </div>
+          <img src="https://c1.staticflickr.com/1/624/23108862960_b5cdce3674.jpg" />
+          <div class="card-block clearfix">
+              <h6 class="card-subtitle text-muted">A ragtag group of misfits has to protect their comedy club from ComedyMegaCorp and the Mob (with the help of the ghost of Shecky Green) </h6>
+              <span class="label label-info">Character Design</span>
+              <span class="label label-info">Illustration</span>
+              <span class="label label-info">Story</span>
+              <br />
+              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
+          </div>
+      </div>
+  </div>
+  <div class="col-xs-12 col-md-3">
+      <h4 class="display-4">Bloggings:</h4>
+      {% for post in wordpress_posts %}
+      <div class="card">
+          {% if post.featured_image %}
+          <img class="card-img-top" src="{{post.featured_image.media_details.sizes.medium.source_url}}"/>
+          {% endif %}
+          <div class="card-block">
+              <h2 class="card-title">{{post.title.rendered|raw}}</h2>
+          </div>
+          <div class="card-block">
+            {{post.excerpt.rendered|raw}}
+          </div>
+      </div>
+      {% endfor %}
+      <!-- <h4 class="display-4">Current Projects:</h4>
+      <div class="card">
+          <div class="card-block">
+              <h4 class="card-title">North by Midwest</h4>
+          </div>
+          <img src="https://c2.staticflickr.com/2/1550/25935956231_4293e7ae47.jpg" />
+          <div class="card-block clearfix">
+              <h6 class="card-subtitle text-muted">A story about a jackass, family, the blues, and the lord almighty.</h6>
+              <span class="label label-info">Character Design</span>
+              <span class="label label-info">Illustration</span>
+              <br />
+              <br />
+              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
+          </div>
+      </div>
+      <div class="card">
+          <div class="card-block">
+              <h4 class="card-title">World of Beepo Beeparelli</h4>
+          </div>
+          <img src="https://c1.staticflickr.com/3/2439/3663515635_1c89de110c.jpg" />
+          <div class="card-block clearfix">
+              <h6 class="card-subtitle text-muted">A story about a japanese created italian robot who had the profession "plumber" uploaded into his main memory.</h6>
+              <span class="label label-info">Character Design</span>
+              <span class="label label-info">Illustration</span>
+              <span class="label label-info">Story</span>
+              <br />
+              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
+          </div>
+      </div>
+      <div class="card">
+          <div class="card-block">
+              <h4 class="card-title">Marquee Shade</h4>
+          </div>
+          <img src="https://c1.staticflickr.com/1/624/23108862960_b5cdce3674.jpg" />
+          <div class="card-block clearfix">
+              <h6 class="card-subtitle text-muted">A ragtag group of misfits has to protect their comedy club from ComedyMegaCorp and the Mob (with the help of the ghost of Shecky Green) </h6>
+              <span class="label label-info">Character Design</span>
+              <span class="label label-info">Illustration</span>
+              <span class="label label-info">Story</span>
+              <br />
+              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
+          </div>
+      </div> -->
+      <div class="card bg-inverse">
+          <div class="card-block">
+              <p class="card-text">&copy; 2016 RishiSatsangi.com and all it's constituaries from Asia to Eurasia.</p>
+          </div>
+      </div>
+  </div>
+  {% endblock %}
+
+
+{% block includes %}
+  <!-- js includes -->
+  <script type="text/javascript" src="js/pages/index.js"></script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'layout-projects.html.twig' %}
+{% block head %}
+    {{parent()}}
+    <style type="text/css">
+
+     .form-signin {
+       max-width: 300px;
+       padding: 19px 29px 29px;
+       margin: 50px auto 20px;
+       background-color: #222;
+       border: 1px solid #444;
+       -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+               border-radius: 5px;
+       -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+          -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+               box-shadow: 0 1px 2px rgba(0,0,0,.05);
+     }
+     .form-signin .form-signin-heading,
+     .form-signin .checkbox {
+       margin-bottom: 10px;
+     }
+     .form-signin input[type="text"],
+     .form-signin input[type="password"] {
+       font-size: 16px;
+       height: auto;
+       margin-bottom: 15px;
+       padding: 7px 9px;
+     }
+
+   </style>
+{% endblock %}
+{% block body %}
+	{{ parent() }}
+  <div id="loginForm">
+    <form class="form-signin" data-redirect-to="{{redirectTo}}">
+      <h2 class="form-signin-heading">Sign in, honcho</h2>
+      <input type="text" class="input-block-level" id="username" placeholder="username">
+      <input type="password" class="input-block-level" id="password" placeholder="password">
+      <button class="btn btn-large btn-primary" type="submit">Sign In</button>
+    </form>
+  </div>
+{% endblock %}
+
+{% block includes %}
+  <script type="text/javascript" src="http://assets.dethbird.com/js/greensock/TweenMax.min.js"></script>
+  <script type="text/javascript" src="http://assets.dethbird.com/js/greensock/plugins/Physics2DPlugin.min.js"></script>
+  <script type="text/javascript" src="js/pages/login.js"></script>
+{% endblock %}

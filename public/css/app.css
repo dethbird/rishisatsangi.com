@@ -2,16 +2,27 @@
   background-color: #200e5a;
 }
 .card-title, .site-name {
-  font-family: 'Alegreya', serif;
+  font-family: 'Special Elite', cursive;
   font-weight: bold;
 }
 .display-4 {
-  font-family: 'Alegreya', serif;
+  font-family: 'Special Elite', cursive;
   font-weight: bold;
   /*color: #009C40;*/
-  color: #2702A0;
+  color: #2B0E8A;
   font-size: 3.1rem;
   text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.5);
+}
+.section-title {
+  color: white;
+  /*background-color: #222;*/
+  font-size: 2.6rem;
+  padding: 10px;
+  margin: 0px 0px 15px 0px;
+  width: auto;
+  border-radius: 5px;
+  background: #200e5a;
+
 }
 .card img {
      width: 100%;
@@ -45,6 +56,9 @@
   -webkit-hyphens: auto;
   hyphens: auto;
 
+}
+.card-img-overlay .display-4 {
+  color: #FCFCF9;
 }
 .list-group-item i {
   margin-right: 5px;

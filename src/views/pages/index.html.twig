@@ -10,20 +10,20 @@
           <img class="card-img-top" src="https://c2.staticflickr.com/2/1563/25199611796_df1f03070e.jpg" alt="Card image cap" >
           <div class="card-block">
               <p class="card-text">Outta my way, kid. Ya' bother me. I got cartoons to make.</p>
-              <a class="btn btn-social-icon btn-instagram"><span class="fa fa-instagram"></span></a>
-              <a class="btn btn-social-icon btn-tumblr"><span class="fa fa-tumblr"></span></a>
-              <a class="btn btn-social-icon btn-spotify"><span class="fa fa-spotify"></span></a>
-              <a class="btn btn-social-icon btn-wordpress"><span class="fa fa-wordpress"></span></a>
-              <a class="btn btn-social-icon btn-pinterest"><span class="fa fa-pinterest"></span></a>
-              <a class="btn btn-social-icon btn-twitter"><span class="fa fa-twitter"></span></a>
+              <a class="btn btn-social-icon btn-instagram" href="http://www.instagram.com/dethbird" target="_blank"><span class="fa fa-instagram"></span></a>
+              <a class="btn btn-social-icon btn-tumblr" href="http://sneh.tumblr.com" target="_blank"><span class="fa fa-tumblr"></span></a>
+              <a class="btn btn-social-icon btn-spotify" href="https://open.spotify.com/user/1267654234" target="_blank"><span class="fa fa-spotify"></span></a>
+              <a class="btn btn-social-icon btn-wordpress" href="http://blog.rishisatsangi.com/" target="_blank"><span class="fa fa-wordpress"></span></a>
+              <a class="btn btn-social-icon btn-pinterest" href="https://www.pinterest.com/dethbird/" target="_blank"><span class="fa fa-pinterest"></span></a>
+              <a class="btn btn-social-icon btn-twitter" href="https://twitter.com/dethbird" target="_blank">><span class="fa fa-twitter"></span></a>
           </div>
           <ul class="list-group list-group-flush">
-              <li class="list-group-item"><i class="fa fa-map"></i> NYC</li>
-              <li class="list-group-item"><i class="fa fa-briefcase"></i> The Orchard</li>
-              <li class="list-group-item"><i class="fa fa-paint-brush"></i> http://dethbird.com</li>
+              <li class="list-group-item"><i class="fa fa-map"></i> East Village, NYC</li>
+              <li class="list-group-item"><i class="fa fa-briefcase"></i> <a href="http://theorchard.com" target="_blank">The Orchard</a></li>
+              <li class="list-group-item"><i class="fa fa-paint-brush"></i> <a href="http://dethbird.com" target="_blank">http://dethbird.com</a></li>
           </ul>
       </div>
-      <h4 class="display-4">Instagram:</h4>
+      <h4 class="display-4 section-title">Instagram:</h4>
       {% for post in instagram_posts %}
       <!-- <pre>{{post|print_r}}</pre> -->
 
@@ -46,14 +46,22 @@
 
   </div>
   <div class="col-xs-12 col-md-6">
-      <div class="jumbotron hidden-sm-down">
+      <!-- <div class="jumbotron hidden-sm-down bg-inverse">
         <div class="container">
-          <h1 class="display-3">Fluid jumby</h1>
-          <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+          <h1 class="display-3">Howdy!</h1>
+          <p class="lead">Below is the very latest:</p>
         </div>
+      </div> -->
+      <div class="card  hidden-sm-down bg-inverse">
+          <img class="card-img" src="https://c1.staticflickr.com/3/2651/4195888027_2977562c88_b.jpg" />
+          <!-- <img class="card-img" src="https://c1.staticflickr.com/5/4012/4195889061_df74fb2e3b_b.jpg" /> -->
+          <div class="card-img-overlay">
+              <h4 class="display-4">Howdy.</h4>
+              <p class="lead">Below is the very latest:</p>
+          </div>
       </div>
 
-      <h4 class="display-4">Current Projects:</h4>
+      <h4 class="display-4 section-title">Current Projects:</h4>
       <div class="card">
           <div class="card-block">
               <h2 class="card-title">North by Midwest</h2>
@@ -96,9 +104,21 @@
               <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
           </div>
       </div>
+      <h4 class="display-4 section-title">Latest Comics:</h4>
+      <div class="card">
+          <div class="card-block">
+              <h2 class="card-title">Tweetstream and Zeitgeist in: On the Scene!</h2>
+          </div>
+          <img src="https://c2.staticflickr.com/2/1695/26353066916_2651cca279_b.jpg" />
+          <div class="card-block clearfix">
+              <h6 class="card-subtitle text-muted">Twitter and Google's very own superheroes use social media to help them in their crusading for justice. </h6>
+              <br />
+              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
+          </div>
+      </div>
   </div>
   <div class="col-xs-12 col-md-3">
-      <h4 class="display-4">Bloggings:</h4>
+      <h4 class="display-4 section-title">Bloggings:</h4>
       {% for post in wordpress_posts %}
       <div class="card">
           {% if post.featured_image %}

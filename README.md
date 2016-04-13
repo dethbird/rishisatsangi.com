@@ -4,6 +4,16 @@
 #### Command line PHP deploy
 
 ```bash
+# browserify
+sudo node install -g browserify
+# uglify
+sudo node install -g uglify
+```
+
+
+#### Command line PHP deploy
+
+```bash
 # build all
 php build.php js=1 php=1 cache=1
 # build dev (don't uglify js)

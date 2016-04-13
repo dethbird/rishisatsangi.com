@@ -129,7 +129,7 @@ $app->get("/", function () use ($app) {
 
     $configs = $app->container->get('configs');
     $instagramData = new InstagramData($configs['instagram']['client_id']);
-    $wordpressData = new WordpressData($configs['wordpress']['url']);
+    // $wordpressData = new WordpressData($configs['wordpress']['url']);
 
     $templateVars = array(
         "configs" => $configs,
@@ -139,7 +139,8 @@ $app->get("/", function () use ($app) {
             "sketchbook",
             "characterdesign"
         )),
-        "wordpress_posts" => $wordpressData->getPosts($configs['wordpress']['posts']),
+        // "wordpress_posts" => $wordpressData->getPosts($configs['wordpress']['posts']),
+        "wordpress_posts" => array()
     );
     $app->render(
         'pages/index.html.twig',

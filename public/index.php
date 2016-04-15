@@ -126,10 +126,10 @@ $app->get("/logout", function () use ($app) {
 });
 
 $app->get("/", function () use ($app) {
-
     $configs = $app->container->get('configs');
     $instagramData = new InstagramData($configs['instagram']['client_id']);
     // $wordpressData = new WordpressData($configs['wordpress']['url']);
+    $projects = Yaml::parse(file_get_contents("../configs/projects.yml"));
 
     $templateVars = array(
         "configs" => $configs,
@@ -140,7 +140,8 @@ $app->get("/", function () use ($app) {
             "characterdesign"
         )),
         // "wordpress_posts" => $wordpressData->getPosts($configs['wordpress']['posts']),
-        "wordpress_posts" => array()
+        "wordpress_posts" => array(),
+        "projects" => $projects
     );
     $app->render(
         'pages/index.html.twig',

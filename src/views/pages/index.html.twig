@@ -3,7 +3,7 @@
     {{parent()}}
 {% endblock %}
 {% block content %}
-	{{ parent() }}
+    {{ parent() }}
   <div class="expanded row">
   <div class="col-xs-12 col-md-3">
       <div class="card">
@@ -46,12 +46,6 @@
 
   </div>
   <div class="col-xs-12 col-md-6">
-      <!-- <div class="jumbotron hidden-sm-down bg-inverse">
-        <div class="container">
-          <h1 class="display-3">Howdy!</h1>
-          <p class="lead">Below is the very latest:</p>
-        </div>
-      </div> -->
       <div class="card  hidden-sm-down bg-inverse">
           <img class="card-img" src="https://c1.staticflickr.com/3/2651/4195888027_2977562c88_b.jpg" />
           <!-- <img class="card-img" src="https://c1.staticflickr.com/5/4012/4195889061_df74fb2e3b_b.jpg" /> -->
@@ -62,48 +56,24 @@
       </div>
 
       <h4 class="display-4 section-title">Current Projects:</h4>
-      <div class="card">
-          <div class="card-block">
-              <h2 class="card-title">North by Midwest</h2>
-          </div>
-          <img src="https://c2.staticflickr.com/2/1550/25935956231_4293e7ae47.jpg" />
-          <div class="card-block clearfix">
-              <h6 class="card-subtitle text-muted">A story about a jackass, family, the blues, and the lord almighty.</h6>
-              <span class="label label-info">Character Design</span>
-              <span class="label label-info">Illustration</span>
-              <br />
-              <br />
-              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
-          </div>
-      </div>
-      <div class="card">
-          <div class="card-block">
-              <h2 class="card-title">World of Beepo Beeparelli</h2>
-          </div>
-          <img src="https://c1.staticflickr.com/3/2439/3663515635_1c89de110c.jpg" />
-          <div class="card-block clearfix">
-              <h6 class="card-subtitle text-muted">A story about a japanese created italian robot who had the profession "plumber" uploaded into his main memory.</h6>
-              <span class="label label-info">Character Design</span>
-              <span class="label label-info">Illustration</span>
-              <span class="label label-info">Story</span>
-              <br />
-              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
-          </div>
-      </div>
-      <div class="card">
-          <div class="card-block">
-              <h2 class="card-title">Marquee Shade</h2>
-          </div>
-          <img src="https://c1.staticflickr.com/1/624/23108862960_b5cdce3674.jpg" />
-          <div class="card-block clearfix">
-              <h6 class="card-subtitle text-muted">A ragtag group of misfits has to protect their comedy club from ComedyMegaCorp and the Mob (with the help of the ghost of Shecky Green) </h6>
-              <span class="label label-info">Character Design</span>
-              <span class="label label-info">Illustration</span>
-              <span class="label label-info">Story</span>
-              <br />
-              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
-          </div>
-      </div>
+      {% for project in projects %}
+        <!-- {{project|print_r}} -->
+        <div class="card">
+            <div class="card-block">
+                <h2 class="card-title">{{project.title}}</h2>
+            </div>
+            <img src="{{project.image}}" />
+            <div class="card-block clearfix">
+                <p class="card-subtitle text-muted">{{project.blurb|markdown}}</p>
+                {% for tag in project.tags %}
+                <span class="label label-info">{{tag}}</span>
+                {% endfor %}
+                <br />
+                <br />
+                <a href="{{project.url}}" type="button" class="btn btn-success-outline btn-sm">More ...</a>
+            </div>
+        </div>
+      {% endfor %}
       <h4 class="display-4 section-title">Latest Comics:</h4>
       <div class="card">
           <div class="card-block">
@@ -132,49 +102,6 @@
           </div>
       </div>
       {% endfor %}
-      <!-- <h4 class="display-4">Current Projects:</h4>
-      <div class="card">
-          <div class="card-block">
-              <h4 class="card-title">North by Midwest</h4>
-          </div>
-          <img src="https://c2.staticflickr.com/2/1550/25935956231_4293e7ae47.jpg" />
-          <div class="card-block clearfix">
-              <h6 class="card-subtitle text-muted">A story about a jackass, family, the blues, and the lord almighty.</h6>
-              <span class="label label-info">Character Design</span>
-              <span class="label label-info">Illustration</span>
-              <br />
-              <br />
-              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
-          </div>
-      </div>
-      <div class="card">
-          <div class="card-block">
-              <h4 class="card-title">World of Beepo Beeparelli</h4>
-          </div>
-          <img src="https://c1.staticflickr.com/3/2439/3663515635_1c89de110c.jpg" />
-          <div class="card-block clearfix">
-              <h6 class="card-subtitle text-muted">A story about a japanese created italian robot who had the profession "plumber" uploaded into his main memory.</h6>
-              <span class="label label-info">Character Design</span>
-              <span class="label label-info">Illustration</span>
-              <span class="label label-info">Story</span>
-              <br />
-              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
-          </div>
-      </div>
-      <div class="card">
-          <div class="card-block">
-              <h4 class="card-title">Marquee Shade</h4>
-          </div>
-          <img src="https://c1.staticflickr.com/1/624/23108862960_b5cdce3674.jpg" />
-          <div class="card-block clearfix">
-              <h6 class="card-subtitle text-muted">A ragtag group of misfits has to protect their comedy club from ComedyMegaCorp and the Mob (with the help of the ghost of Shecky Green) </h6>
-              <span class="label label-info">Character Design</span>
-              <span class="label label-info">Illustration</span>
-              <span class="label label-info">Story</span>
-              <br />
-              <button type="button" class="btn btn-success-outline btn-sm">More ...</button>
-          </div>
-      </div> -->
       <div class="card bg-inverse">
           <div class="card-block">
               <p class="card-text">&copy; 2016 RishiSatsangi.com and all it's constituaries from Asia to Eurasia.</p>

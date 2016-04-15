@@ -5,9 +5,9 @@
 
 ```bash
 # browserify
-sudo node install -g browserify
+sudo npm install -g browserify
 # uglify
-sudo node install -g uglify
+sudo npm install -g uglify
 ```
 
 

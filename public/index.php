@@ -130,6 +130,7 @@ $app->get("/", function () use ($app) {
     $instagramData = new InstagramData($configs['instagram']['client_id']);
     // $wordpressData = new WordpressData($configs['wordpress']['url']);
     $projects = Yaml::parse(file_get_contents("../configs/projects.yml"));
+    $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
 
     $templateVars = array(
         "configs" => $configs,
@@ -141,7 +142,8 @@ $app->get("/", function () use ($app) {
         )),
         // "wordpress_posts" => $wordpressData->getPosts($configs['wordpress']['posts']),
         "wordpress_posts" => array(),
-        "projects" => $projects
+        "projects" => $projects,
+        "comics" => $comics
     );
     $app->render(
         'pages/index.html.twig',

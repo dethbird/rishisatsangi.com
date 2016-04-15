@@ -3,44 +3,6 @@ security:
 instagram:
   client_id: "a6c4e37cd91b4020a09a74a40cf836d6"
   user_id: 31264453
-comics:
-  tweetstream-and-zeitgeist:
-    title: "Tweetstream and Zeitgeist in: On the Scene!"
-    parts:
-      -
-        title: "Part 1/3"
-        panels:
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/01.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/02.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/03.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/04.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/05.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/06.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/07.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/08.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-1/the_end.jpg"
-      -
-        title: "Part 2/3"
-        panels:
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/01.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/02.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/03.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/04.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/05.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/06.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/07.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/08.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/09.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-2/the_end2.jpg"
-      -
-        title: "Part 3/3"
-        panels:
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-3/01.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-3/02.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-3/03.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-3/04.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-3/05.jpg"
-          - "http://images.rishisatsangi.com/comics/life-in-the-cloud/on-the-scene-part-3/the_end3.jpg"
 portfolio:
     category:
         -

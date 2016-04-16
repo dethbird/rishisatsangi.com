@@ -128,8 +128,6 @@ $app->get("/logout", function () use ($app) {
 });
 
 $app->get("/", function () use ($app) {
-    var_dump($_SERVER); die();
-
     $configs = $app->container->get('configs');
     $instagramData = new InstagramData($configs['instagram']['client_id']);
     $pocketData = new PocketData($configs['pocket']['consumer_key'], $configs['pocket']['access_token']);

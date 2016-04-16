@@ -90,21 +90,13 @@
 
   </div>
   <div class="col-xs-12 col-md-3">
-      <h4 class="display-4 section-title">Gallery:</h4>
+      <h4 class="display-4 section-title">Artworks:</h4>
       {% for content in gallery.content %}
       {% if content.featured=="true" %}
       <div class="card">
           <img class="card-img-top" src="{{content.thumbnail}}"/>
           <div class="card-block">
               <h2 class="card-title">{{content.title}}</h2>
-              <p class="card-subtitle text-muted">{{content.description|raw}}</p>
-              {% for category in gallery.category %}
-                {% if category.id==content.category_id %}
-                    <br /><span class="label label-info">{{category.name}}</span>
-                {% endif %}
-              {% endfor %}
-
-              {{gallery.category[content.category_id]}}
           </div>
       </div>
       {% endif %}

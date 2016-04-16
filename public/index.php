@@ -25,6 +25,7 @@ require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php'
 use Aptoma\Twig\Extension\MarkdownExtension;
 use Aptoma\Twig\Extension\MarkdownEngine;
 use Symfony\Component\Yaml\Yaml;
+use Guzzle\Http\Client;
 
 // Load configs and add to the app container
 $configs = Yaml::parse(file_get_contents("../configs/configs.yml"));
@@ -154,5 +155,38 @@ $app->get("/", function () use ($app) {
     );
 });
 
+$app->get("/authorize/pocket", function () use ($app) {
+    $configs = $app->container->get('configs');
+    $client = new Client('https://getpocket.com');
+    $response = $client->post(
+      '/v3/oauth/request',
+      array(
+        'X-Accept' => 'application/json'
+      ),
+      array(
+        'consumer_key' => $configs['pocket']['consumer_key'],
+        'redirect_uri' => 'http://52.36.7.207/redirect/pocket'
+      )
+    )->send();
+    $resp = json_decode($response->getBody(true));
+    $_SESSION['pocket_request_code'] = $resp->code;
+    $app->redirect('https://getpocket.com/auth/authorize?request_token='.$resp->code.'&redirect_uri=http://52.36.7.207/redirect/pocket');
+});
+$app->get("/redirect/pocket", function () use ($app) {
+  $configs = $app->container->get('configs');
+  $client = new Client('https://getpocket.com');
+  $response = $client->post(
+    '/v3/oauth/authorize',
+    array(
+      'X-Accept' => 'application/json'
+    ),
+    array(
+      'consumer_key' => $configs['pocket']['consumer_key'],
+      'code' => $_SESSION['pocket_request_code']
+    )
+  )->send();
+  $app->response->headers->set('Content-Type', 'application/json');
+  echo $response->getBody(true); die();
+});
 
 $app->run();

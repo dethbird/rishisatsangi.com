@@ -131,6 +131,7 @@ $app->get("/", function () use ($app) {
     // $wordpressData = new WordpressData($configs['wordpress']['url']);
     $projects = Yaml::parse(file_get_contents("../configs/projects.yml"));
     $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
+    $gallery = Yaml::parse(file_get_contents("../configs/gallery.yml"));
 
     $templateVars = array(
         "configs" => $configs,
@@ -143,7 +144,8 @@ $app->get("/", function () use ($app) {
         // "wordpress_posts" => $wordpressData->getPosts($configs['wordpress']['posts']),
         "wordpress_posts" => array(),
         "projects" => $projects,
-        "comics" => $comics
+        "comics" => $comics,
+        "gallery" => $gallery
     );
     $app->render(
         'pages/index.html.twig',

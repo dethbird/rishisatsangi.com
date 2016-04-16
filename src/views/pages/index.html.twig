@@ -90,19 +90,24 @@
 
   </div>
   <div class="col-xs-12 col-md-3">
-      <h4 class="display-4 section-title">Bloggings:</h4>
-      {% for post in wordpress_posts %}
+      <h4 class="display-4 section-title">Gallery:</h4>
+      {% for content in gallery.content %}
+      {% if content.featured=="true" %}
       <div class="card">
-          {% if post.featured_image %}
-          <img class="card-img-top" src="{{post.featured_image.media_details.sizes.medium.source_url}}"/>
-          {% endif %}
+          <img class="card-img-top" src="{{content.thumbnail}}"/>
           <div class="card-block">
-              <h2 class="card-title">{{post.title.rendered|raw}}</h2>
-          </div>
-          <div class="card-block">
-            {{post.excerpt.rendered|raw}}
+              <h2 class="card-title">{{content.title}}</h2>
+              <p class="card-subtitle text-muted">{{content.description|raw}}</p>
+              {% for category in gallery.category %}
+                {% if category.id==content.category_id %}
+                    <br /><span class="label label-info">{{category.name}}</span>
+                {% endif %}
+              {% endfor %}
+
+              {{gallery.category[content.category_id]}}
           </div>
       </div>
+      {% endif %}
       {% endfor %}
       <div class="card bg-inverse">
           <div class="card-block">

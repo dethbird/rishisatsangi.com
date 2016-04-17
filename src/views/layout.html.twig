@@ -54,15 +54,15 @@
             <div class="collapse navbar-toggleable-xs" id="app-main-nav">
               <nav class="nav navbar-nav">
                     <a class="nav-item nav-link hidden-sm-down site-name">RishiSatsangi.com</a>
-                    <a class="nav-item nav-link active">Latest</a>
-                    <a class="nav-item nav-link" href="/projects">Projects</a>
+                    <a href="/" class="nav-item nav-link{% if section=="index" %} active{% endif %}">Latest</a>
+                    <a href="/projects" class="nav-item nav-link{% if section=="projects" %} active{% endif %}">Projects</a>
+                    <a href="/comics" class="nav-item nav-link{% if section=="comics" %} active{% endif %}">Comics</a>
                     <a class="nav-item nav-link " href="/gallery">Gallery</a>
                     <a class="nav-item nav-link" href="/about">About</a>
               </nav>
             </div>
         </header>
       </div>
-      <br />
       <div class="container">{% block content %}{% endblock %}</div>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
       <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>

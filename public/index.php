@@ -138,6 +138,7 @@ $app->get("/", function () use ($app) {
 
     $templateVars = array(
         "configs" => $configs,
+        "section" => "index",
         "instagram_posts" => $instagramData->getRecentMedia($configs['instagram']['user_id'], 12, array(
             "art",
             "drawing",
@@ -153,6 +154,21 @@ $app->get("/", function () use ($app) {
     );
     $app->render(
         'pages/index.html.twig',
+        $templateVars,
+        200
+    );
+});
+
+$app->get("/comics/:comic_name", function ($comic_name) use ($app) {
+    $configs = $app->container->get('configs');
+    $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "comics",
+        "comic" => $comics[$comic_name]
+    );
+    $app->render(
+        'pages/comic.html.twig',
         $templateVars,
         200
     );

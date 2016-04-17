@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+    <br />
+      <div class="row">
+        <div class="col-xl-12">
+            <h2 class="card-title">Articles</h2>
+        </div>
+      </div>
+      <div class="row card-columns">
+        {% for article in pocket_articles %}
+          <div class="card col-lg-4">
+              <div class="card-block">
+                  <h2 class="card-title">{{article.resolved_title}}</h2>
+              </div>
+              {% if article.has_image == 1 %}
+                <img src="{{article.image.src}}" />
+              {% endif %}
+              <div class="card-block clearfix">
+                  <small class="card-subtitle text-muted">{{article.excerpt}}</small>
+                  <br /><br />
+                  <a href="{{article.resolved_url}}" target="_blank" class="btn btn-success-outline btn-sm pull-right" ><i class="fa fa-external-link"></i> {{article.resolved_url|url_hostname}}</a>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="row">
+        <div class="card bg-inverse col-lg-12">
+            <div class="card-block">
+                <p class="card-text">&copy; 2016 RishiSatsangi.com and all it's constituaries from Asia to Eurasia.</p>
+            </div>
+        </div>
+      </div>
+{% endblock %}

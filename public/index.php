@@ -159,6 +159,21 @@ $app->get("/", function () use ($app) {
     );
 });
 
+$app->get("/articles", function () use ($app) {
+    $configs = $app->container->get('configs');
+    $pocketData = new PocketData($configs['pocket']['consumer_key'], $configs['pocket']['access_token']);
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "articles",
+        "pocket_articles" => $pocketData->getArticles(40, 10)
+    );
+    $app->render(
+        'pages/articles.html.twig',
+        $templateVars,
+        200
+    );
+});
+
 $app->get("/comics/:comic_name", function ($comic_name) use ($app) {
     $configs = $app->container->get('configs');
     $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));

@@ -145,7 +145,7 @@ $app->get("/", function () use ($app) {
             "sketchbook",
             "characterdesign"
         )),
-        "pocket_articles" => $pocketData->getArticles(10),
+        "pocket_articles" => $pocketData->getArticles(10, 3600),
         // "wordpress_posts" => $wordpressData->getPosts($configs['wordpress']['posts']),
         "wordpress_posts" => array(),
         "projects" => $projects,
@@ -165,7 +165,7 @@ $app->get("/articles", function () use ($app) {
     $templateVars = array(
         "configs" => $configs,
         "section" => "articles",
-        "pocket_articles" => $pocketData->getArticles(40, 10)
+        "pocket_articles" => $pocketData->getArticles(40, 3600)
     );
     $app->render(
         'pages/articles.html.twig',

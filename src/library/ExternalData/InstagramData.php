@@ -40,10 +40,10 @@ class InstagramData extends DataBase {
      * @param  $count Instagram user id
      * @return array() a collection of recent instagram posts by user id
      */
-    public function getRecentMedia($userId, $count = 6, $tags = array())
+    public function getRecentMedia($userId, $count = 6, $tags = array(), $cacheTime = 3600)
     {
         $cacheKey = md5("instagramRecent:".$userId.$count,implode(",", $tags));
-        $cache = $this->retrieveCache($cacheKey, 86400);
+        $cache = $this->retrieveCache($cacheKey, $cacheTime);
         if(!$cache) {
 
             $data = array();

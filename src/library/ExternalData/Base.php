@@ -16,9 +16,9 @@ class DataBase {
         $this->httpClient = new Guzzle\Http\Client();
     }
 
-    protected function retrieveCache($key)
+    protected function retrieveCache($key, $cacheTime = null)
     {
-        return $this->cacheManager->retrieve($key);
+        return $this->cacheManager->retrieve($key, $cacheTime);
     }
 
     protected function storeCache($key, $data)

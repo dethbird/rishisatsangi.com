@@ -44,7 +44,13 @@
           </div>
       </div>
       {% endfor %}
-
+      <div class="row">
+        <div class="col-lg-12">
+          <a href="https://www.instagram.com/dethbird" target="_blank" title="Instagram..." class="btn btn-success-outline btn-lg btn-block"><i class="fa fa-external-link"></i> More...</a>
+        </div>
+      </div>
+      <br />
+      <br />
   </div>
   <div class="col-xs-12 col-md-6">
       <div class="card  hidden-sm-down bg-inverse">
@@ -70,10 +76,17 @@
                 {% endfor %}
                 <br />
                 <br />
-                <a href="projects/{{slug}}" type="button" class="btn btn-success-outline btn-sm">More ...</a>
+                <a href="projects/{{slug}}" type="button" class="btn btn-success-outline btn-sm pull-right">View</a>
             </div>
         </div>
       {% endfor %}
+      <div class="row">
+        <div class="col-lg-12">
+          <a href="/projects" title="More projects..." class="btn btn-success-outline btn-lg btn-block">More...</a>
+        </div>
+      </div>
+      <br />
+      <br />
       <h4 class="display-4 section-title">Latest Comics:</h4>
       {% for slug, comic in comics %}
       <div class="card">
@@ -84,10 +97,17 @@
           <div class="card-block clearfix">
               <p class="card-subtitle text-muted">{{comic.blurb|markdown}}</p>
               <br />
-              <a href="comics/{{slug}}" type="button" class="btn btn-success-outline btn-sm">More ...</a>
+              <a href="comics/{{slug}}" type="button" class="btn btn-success-outline btn-sm pull-right">View</a>
           </div>
       </div>
       {% endfor %}
+      <div class="row">
+        <div class="col-lg-12">
+          <a href="/comics" title="More comics..." class="btn btn-success-outline btn-lg btn-block">More...</a>
+        </div>
+      </div>
+      <br />
+      <br />
       <h4 class="display-4 section-title">Artworks:</h4>
       {% for content in gallery.content %}
       {% if content.featured=="true" %}
@@ -99,9 +119,16 @@
       </div>
       {% endif %}
       {% endfor %}
+      <div class="row">
+        <div class="col-lg-12">
+          <a href="/gallery" title="More artworks..." class="btn btn-success-outline btn-lg btn-block">More...</a>
+        </div>
+      </div>
+      <br />
+      <br />
   </div>
   <div class="col-xs-12 col-md-3">
-      <h4 class="display-4 section-title">Pocket:</h4>
+      <h4 class="display-4 section-title">Articles:</h4>
       {% for article in pocket_articles %}
         <div class="card">
             <div class="card-block">
@@ -113,10 +140,17 @@
             <div class="card-block clearfix">
                 <small class="card-subtitle text-muted">{{article.excerpt}}</small>
                 <br /><br />
-                <a href="{{article.resolved_url}}" target="_blank" class="btn btn-success-outline btn-sm" ><i class="fa fa-external-link"></i> {{article.resolved_url|url_hostname}}</a>
+                <a href="{{article.resolved_url}}" target="_blank" class="btn btn-success-outline btn-sm pull-right" ><i class="fa fa-external-link"></i> {{article.resolved_url|url_hostname}}</a>
             </div>
         </div>
       {% endfor %}
+      <div class="row">
+        <div class="col-lg-12">
+          <a href="/articles" title="More articles..." class="btn btn-success-outline btn-lg btn-block">More...</a>
+        </div>
+      </div>
+      <br />
+      <br />
       <div class="card bg-inverse">
           <div class="card-block">
               <p class="card-text">&copy; 2016 RishiSatsangi.com and all it's constituaries from Asia to Eurasia.</p>

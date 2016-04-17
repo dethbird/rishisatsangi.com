@@ -145,7 +145,7 @@ $app->get("/", function () use ($app) {
             "sketchbook",
             "characterdesign"
         )),
-        "pocket_articles" => $pocketData->getArticles(),
+        "pocket_articles" => $pocketData->getArticles(10),
         // "wordpress_posts" => $wordpressData->getPosts($configs['wordpress']['posts']),
         "wordpress_posts" => array(),
         "projects" => $projects,

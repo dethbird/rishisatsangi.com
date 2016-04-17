@@ -7,9 +7,14 @@ class CacheManager {
         return APPLICATION_PATH . "cache/" . md5($key);
     }
 
-    public function retrieve($key)
+    public function retrieve($key, $cacheTime = null)
     {
         if(file_exists($this->filepath($key))) {
+            if (!is_null($cacheTime)) {
+              if (time() - filectime($this->filepath($key)) > $cacheTime){
+                  return false;
+              }
+            }
             return unserialize(file_get_contents($this->filepath($key)));
         } else {
             return false;

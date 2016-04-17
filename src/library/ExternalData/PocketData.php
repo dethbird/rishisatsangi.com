@@ -18,10 +18,10 @@ class PocketData extends DataBase {
      *
      * @return array() a collection of articles from the pocket api response
      */
-    public function getArticles()
+    public function getArticles($count = 15, $cacheTime = 3600)
     {
-        $cacheKey = md5("pocket");
-        $cache = $this->retrieveCache($cacheKey);
+        $cacheKey = md5("pocket:".$count);
+        $cache = $this->retrieveCache($cacheKey, $cacheTime);
 
         if(!$cache) {
             $response = $this->httpClient->post(
@@ -36,7 +36,7 @@ class PocketData extends DataBase {
                 'favorite' => 1,
                 'sort' => 'newest',
                 'detailType' => 'complete',
-                'count' => 15
+                'count' => $count
             ))->send();
             $response = json_decode($response->getBody());
             $data = [];

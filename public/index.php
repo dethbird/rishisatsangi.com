@@ -139,7 +139,7 @@ $app->get("/", function () use ($app) {
     $templateVars = array(
         "configs" => $configs,
         "section" => "index",
-        "instagram_posts" => $instagramData->getRecentMedia($configs['instagram']['user_id'], 12, array(
+        "instagram_posts" => $instagramData->getRecentMedia($configs['instagram']['user_id'], 16, array(
             "art",
             "drawing",
             "sketchbook",

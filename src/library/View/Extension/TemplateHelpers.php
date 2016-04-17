@@ -11,6 +11,7 @@ class TemplateHelpers extends \Twig_Extension
             new \Twig_SimpleFilter('json_encode', array($this, 'json_encode')),
             new \Twig_SimpleFilter('strip_tags', array($this, 'strip_tags')),
             new \Twig_SimpleFilter('fountain', array($this, 'fountain')),
+            new \Twig_SimpleFilter('to_array', array($this, 'to_array')),
             new \Twig_SimpleFilter('url_hostname', array($this, 'url_hostname')),
             new \Twig_SimpleFilter('md5', array($this, 'md5'))
         );
@@ -44,6 +45,9 @@ class TemplateHelpers extends \Twig_Extension
     public function url_hostname($url)
     {
         return parse_url($url, PHP_URL_HOST);
+    }
+    public function to_array($stdClassObject) {
+        return json_decode(json_encode($stdClassObject), true);
     }
     public function getName()
     {

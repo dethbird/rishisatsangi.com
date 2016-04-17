@@ -72,6 +72,17 @@
   margin-right: 5px;
   color: #200e5a;
 }
+.btn-great-outline {
+    color: #ec287b;
+    background-color: transparent;
+    background-image: none;
+    border-color: #ec287b;
+}
+.btn-great-outline:hover {
+    color: #fff;
+    background-color: #ec287b;
+    border-color: #ec287b;
+}
 .btn-wordpress {
   color: #fff;
   background-color: #21759b;

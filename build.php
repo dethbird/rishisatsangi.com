@@ -14,7 +14,7 @@ if(count($argv)>1) {
 print_r($options);
 
 // cache
-if($options['cache']!="") {
+if(isset($options['cache'])) {
   echo "cache:".$options['cache']."\n";
   shell_exec("rm -rf cache");
   shell_exec("mkdir cache");
@@ -22,7 +22,7 @@ if($options['cache']!="") {
 }
 
 // php and composer
-if($options['php']!="") {
+if(isset($options['php'])) {
   echo "php:".$options['php']."\n";
   shell_exec("rm -rf vendor");
   shell_exec("rm -rf composer.lock");
@@ -32,7 +32,7 @@ if($options['php']!="") {
 }
 
 // javascript
-if($options['js']!="") {
+if(isset($options['js'])) {
   echo "js:".$options['js']."\n";
   $frontendFiles = explode("\n", shell_exec("find src/frontend/js/pages/ -name '*.js'"));
   foreach($frontendFiles as $file){

@@ -43,7 +43,7 @@ var ButtonAnimationView = Backbone.View.extend({
             {
                 physics2D: {
                     gravity: 5000,
-                    velocity: 400,
+                    velocity: 600,
                     angle: -90
                 }
             },
@@ -53,7 +53,7 @@ var ButtonAnimationView = Backbone.View.extend({
         $(this.el).on('click', function(){
             that.timeline.play(0);
         });
-    }
+    },
 });
 
 module.exports = ButtonAnimationView;

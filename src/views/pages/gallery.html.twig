@@ -3,16 +3,16 @@
     {{parent()}}
 {% endblock %}
 {% block content %}
-	{{ parent() }}
+    {{ parent() }}
     <br />
       <div class="row">
         <div class="col-xl-12">
-            <h2 class="card-title">Articles</h2>
+            <h2 class="card-title">Gallery</h2>
         </div>
       </div>
       <div class="row card-columns">
-        {% for article in pocket_articles %}
-          {% include "partials/article_thumbnail.html.twig" with {'columns':4} %}
+        {% for content in gallery.content %}
+          {% include "partials/gallery_content_thumbnail.html.twig" %}
         {% endfor %}
       </div>
 {% endblock %}

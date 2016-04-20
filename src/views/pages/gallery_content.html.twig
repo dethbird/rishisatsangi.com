@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+    <br />
+        <div class="row">
+          <div class="col-xl-12">
+            <ol class="breadcrumb">
+              <li><a href="/gallery">Gallery</a></li>
+              <li><a href="#">&nbsp;</a></li>
+            </ol>
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-xl-12">
+            <h2 class="card-title">{{content.title}}</h2>
+        </div>
+      </div>
+        <div class="card gallery-content col-lg-12">
+          {% if content.type=="image" %}
+            <img class="card-img-top" src="{{content.content}}"/>
+          {% elseif content.type=="embed" %}
+            <div class="iframe-display">{{content.content|raw}}</div>
+          {% endif %}
+        </div>
+{% endblock %}

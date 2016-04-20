@@ -42,26 +42,26 @@
   </head>
   <body>
       <div class="container">
-        <header class="navbar navbar-dark bg-inverse navbar-static-top bd-navbar" role="banner">
-            <div class="clearfix">
-                <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#app-main-nav">
-                &#9776;
-                </button>
-                <a href="/" title="See the latest..." class="navbar-brand hidden-sm-up site-name">
-                RishiSatsangi.com
-                </a>
-            </div>
-            <div class="collapse navbar-toggleable-xs" id="app-main-nav">
-              <nav class="nav navbar-nav">
-                    <a href="/" class="nav-item nav-link hidden-sm-down site-name" title="See the latest...">RishiSatsangi.com</a>
-                    <!-- <a href="/" class="nav-item nav-link{% if section=="index" %} active{% endif %}">Latest</a> -->
-                    <a href="/projects" class="nav-item nav-link{% if section=="projects" %} active{% endif %}">Projects</a>
-                    <a href="/comics" class="nav-item nav-link{% if section=="comics" %} active{% endif %}">Comics</a>
-                    <a class="nav-item nav-link " href="/gallery">Gallery</a>
-                    <a class="nav-item nav-link" href="/about">About</a>
-              </nav>
-            </div>
-        </header>
+          <header class="navbar navbar-dark bg-inverse navbar-static-top bd-navbar" role="banner">
+              <div class="clearfix">
+                  <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#app-main-nav">
+                  &#9776;
+                  </button>
+                  <a href="/" title="See the latest..." class="navbar-brand hidden-sm-up site-name">
+                  RishiSatsangi.com
+                  </a>
+              </div>
+              <div class="collapse navbar-toggleable-xs" id="app-main-nav">
+                <nav class="nav navbar-nav">
+                      <a href="/" class="nav-item nav-link hidden-sm-down site-name{% if section=="index" %} active{% endif %}" title="See the latest...">RishiSatsangi.com</a>
+                      <!-- <a href="/" class="nav-item nav-link{% if section=="index" %} active{% endif %}">Latest</a> -->
+                      <a href="/projects" class="nav-item nav-link{% if section=="projects" %} active{% endif %}">Projects</a>
+                      <a href="/comics" class="nav-item nav-link{% if section=="comics" %} active{% endif %}">Comics</a>
+                      <a class="nav-item nav-link{% if section=="gallery" %} active{% endif %}" href="/gallery">Gallery</a>
+                      <a class="nav-item nav-link{% if section=="about" %} active{% endif %}" href="/about">About</a>
+                </nav>
+              </div>
+          </header>
       </div>
       <div class="container">{% block content %}{% endblock %}</div>
       <div class="container">

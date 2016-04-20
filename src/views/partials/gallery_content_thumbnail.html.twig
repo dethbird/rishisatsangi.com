@@ -1,0 +1,13 @@
+<div class="card col-lg-6 gallery-content-thumbnail">
+      <a href="/gallery/{{content.title|slugify}}" title="View"><img class="card-img-top" src="{{content.thumbnail}}"/></a>
+    <div class="card-block clearfix">
+        <a href="/gallery/{{content.title|slugify}}" title="View"><h2 class="card-title">{{content.title}}</h2></a>
+        <!-- <a href="/gallery/{{content.title|slugify}}" type="button" class="btn btn-success-outline btn-sm pull-right">
+          {% if content.type=="image" %}
+            <span class="fa fa-image"></span>
+          {% elseif content.type=="embed" %}
+            <span class="fa fa-video-camera"></span>
+          {% endif %}
+          </a> -->
+    </div>
+</div>

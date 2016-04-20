@@ -32,15 +32,28 @@
   background: #200e5a;
 
 }
+a .card-title, a:hover {
+  color: #373a3c
+}
+.card.gallery-content {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 .card img {
      width: 100%;
 }
+
 .card-block button {
      float: right;
      clear: both;
 }
 .card-block .btn-social-icon {
   margin-bottom: 3px;
+}
+.card-columns .card, .gallery-content-thumbnail {
+    display: inline-block;
+    width: 100%;
+    padding-top: 15px;
 }
 .card-link img {
   max-width: 40px;
@@ -92,4 +105,8 @@
   color: #fff;
   background-color: #1ed760;
   border-color: rgba(0,0,0,0.2);
+}
+.iframe-display iframe {
+  min-height: 640px;
+  width: 100%;
 }

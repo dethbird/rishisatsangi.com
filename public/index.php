@@ -25,6 +25,7 @@ require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php'
 
 use Aptoma\Twig\Extension\MarkdownExtension;
 use Aptoma\Twig\Extension\MarkdownEngine;
+use Cocur\Slugify\Slugify;
 use Symfony\Component\Yaml\Yaml;
 use Guzzle\Http\Client;
 
@@ -189,6 +190,46 @@ $app->get("/comics/:comic_name", function ($comic_name) use ($app) {
     );
 });
 
+
+$app->get("/gallery", function () use ($app) {
+    $configs = $app->container->get('configs');
+    $gallery = Yaml::parse(file_get_contents("../configs/gallery.yml"));
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "gallery",
+        "gallery" => $gallery
+    );
+    $app->render(
+        'pages/gallery.html.twig',
+        $templateVars,
+        200
+    );
+});
+
+
+$app->get("/gallery/:slug", function ($slug) use ($app) {
+    $configs = $app->container->get('configs');
+    $gallery = Yaml::parse(file_get_contents("../configs/gallery.yml"));
+    $slugify = new Slugify();
+    $content = null;
+    foreach ($gallery['content'] as $content) {
+        if ($slugify->slugify($content['title']) == $slug) {
+            break;
+        }
+    }
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "gallery",
+        "content" => $content
+    );
+    $app->render(
+        'pages/gallery_content.html.twig',
+        $templateVars,
+        200
+    );
+});
+
+/** OAUTH */
 $app->get("/authorize/pocket", function () use ($app) {
     $configs = $app->container->get('configs');
     $client = new Client('https://getpocket.com');

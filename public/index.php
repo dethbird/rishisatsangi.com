@@ -229,6 +229,21 @@ $app->get("/gallery/:slug", function ($slug) use ($app) {
     );
 });
 
+$app->get("/projects", function () use ($app) {
+    $configs = $app->container->get('configs');
+    $projects = Yaml::parse(file_get_contents("../configs/projects.yml"));
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "projects",
+        "projects" => $projects
+    );
+    $app->render(
+        'pages/projects.html.twig',
+        $templateVars,
+        200
+    );
+});
+
 /** OAUTH */
 $app->get("/authorize/pocket", function () use ($app) {
     $configs = $app->container->get('configs');

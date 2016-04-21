@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+    <br />
+      <div class="row">
+        <div class="col-xl-12">
+            <h2 class="card-title">Projects</h2>
+        </div>
+      </div>
+      <div class="row">
+        {% for slug, project in projects %}
+          {% include "partials/project_card.html.twig" with {'columns':6} %}
+        {% endfor %}
+      </div>
+{% endblock %}

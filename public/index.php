@@ -136,6 +136,7 @@ $app->get("/", function () use ($app) {
     $projects = Yaml::parse(file_get_contents("../configs/projects.yml"));
     $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
     $gallery = Yaml::parse(file_get_contents("../configs/gallery.yml"));
+    $profile_photos = Yaml::parse(file_get_contents("../configs/profile_photos.yml"));
 
     $templateVars = array(
         "configs" => $configs,
@@ -151,7 +152,8 @@ $app->get("/", function () use ($app) {
         "wordpress_posts" => array(),
         "projects" => $projects,
         "comics" => $comics,
-        "gallery" => $gallery
+        "gallery" => $gallery,
+        "profile_photo" => $profile_photos[rand(0,sizeof($profile_photos)-1)]
     );
     $app->render(
         'pages/index.html.twig',

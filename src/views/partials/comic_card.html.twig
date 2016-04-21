@@ -1,0 +1,10 @@
+<div class="card col-lg-{{columns}}">
+    <div class="card-block">
+        <a href="comics/{{slug}}" title="View"><h2 class="card-title">{{comic.title}}</h2></a>
+    </div>
+    <a href="comics/{{slug}}" title="View"><img src="{{comic.image}}" /></a>
+    <div class="card-block clearfix">
+        <p class="card-subtitle text-muted">{{comic.blurb|markdown}}</p>
+        <br />
+    </div>
+</div>

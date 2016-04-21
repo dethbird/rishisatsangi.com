@@ -175,6 +175,21 @@ $app->get("/articles", function () use ($app) {
     );
 });
 
+$app->get("/comics", function () use ($app) {
+    $configs = $app->container->get('configs');
+    $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "comics",
+        "comics" => $comics
+    );
+    $app->render(
+        'pages/comics.html.twig',
+        $templateVars,
+        200
+    );
+});
+
 $app->get("/comics/:comic_name", function ($comic_name) use ($app) {
     $configs = $app->container->get('configs');
     $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));

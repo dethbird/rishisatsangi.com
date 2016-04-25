@@ -409,26 +409,26 @@ content:
     #     thumbnail: "https://c2.staticflickr.com/4/3270/3001946047_44f95f0499.jpg"
     #     description: "head study"
     #     orientation: portrait
-    -
-        title: "clothing wraparound"
-        year: "2008"
-        medium: "Pencil"
-        category_id: drawing
-        type: "image"
-        content: "https://c2.staticflickr.com/4/3104/2903395072_72998ff075_b.jpg"
-        thumbnail: "https://c2.staticflickr.com/4/3104/2903395072_72998ff075.jpg"
-        description: "clothing study"
-        orientation: portrait
-    -
-        title: "hands and feet"
-        year: "2008"
-        medium: "Pencil"
-        category_id: drawing
-        type: "image"
-        content: "https://c1.staticflickr.com/3/2417/2447616073_faec8c4e17_o.jpg"
-        thumbnail: "https://c1.staticflickr.com/3/2417/2447616073_c30a1488f0.jpg"
-        description: "hands and feet study"
-        orientation: portrait
+    # -
+    #     title: "clothing wraparound"
+    #     year: "2008"
+    #     medium: "Pencil"
+    #     category_id: drawing
+    #     type: "image"
+    #     content: "https://c2.staticflickr.com/4/3104/2903395072_72998ff075_b.jpg"
+    #     thumbnail: "https://c2.staticflickr.com/4/3104/2903395072_72998ff075.jpg"
+    #     description: "clothing study"
+    #     orientation: portrait
+    # -
+    #     title: "hands and feet"
+    #     year: "2008"
+    #     medium: "Pencil"
+    #     category_id: drawing
+    #     type: "image"
+    #     content: "https://c1.staticflickr.com/3/2417/2447616073_faec8c4e17_o.jpg"
+    #     thumbnail: "https://c1.staticflickr.com/3/2417/2447616073_c30a1488f0.jpg"
+    #     description: "hands and feet study"
+    #     orientation: portrait
     # -
     #     title: "figure drawing (melike konur)"
     #     year: "2009"

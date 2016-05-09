@@ -1,0 +1,112 @@
+.breadcrumb {
+  padding: .25rem 1rem;
+  margin-top: 5px;
+}
+.navbar {
+  background-color: #200e5a;
+}
+.card-inverse {
+  background-color: #333;
+  border-color: #333;
+}
+.card-title, .site-name {
+  font-family: 'Special Elite', cursive;
+  font-weight: bold;
+}
+.display-4 {
+  font-family: 'Special Elite', cursive;
+  font-weight: bold;
+  /*color: #009C40;*/
+  color: #2B0E8A;
+  font-size: 3.1rem;
+  text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.5);
+}
+.section-title {
+  color: white;
+  /*background-color: #222;*/
+  font-size: 2.6rem;
+  padding: 10px;
+  margin: 0px 0px 15px 0px;
+  width: auto;
+  border-radius: 5px;
+  background: #200e5a;
+
+}
+a .card-title, a:hover {
+  color: #373a3c
+}
+.card.gallery-content {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.card img {
+     width: 100%;
+}
+
+.card-block button {
+     float: right;
+     clear: both;
+}
+.card-block .btn-social-icon {
+  margin-bottom: 3px;
+}
+.card-columns .card, .gallery-content-thumbnail {
+    display: inline-block;
+    width: 100%;
+    padding-top: 15px;
+}
+.card-link img {
+  max-width: 40px;
+  height: auto;
+}
+
+.card-text {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}
+.card-img-overlay .display-4 {
+  color: #FCFCF9;
+}
+.list-group-item i {
+  margin-right: 5px;
+  color: #200e5a;
+}
+.btn-great-outline {
+    color: #ec287b;
+    background-color: transparent;
+    background-image: none;
+    border-color: #ec287b;
+}
+.btn-great-outline:hover {
+    color: #fff;
+    background-color: #ec287b;
+    border-color: #ec287b;
+}
+.btn-wordpress {
+  color: #fff;
+  background-color: #21759b;
+  border-color: rgba(0,0,0,0.2);
+}
+.btn-spotify {
+  color: #fff;
+  background-color: #1ed760;
+  border-color: rgba(0,0,0,0.2);
+}
+.iframe-display iframe {
+  min-height: 640px;
+  width: 100%;
+}

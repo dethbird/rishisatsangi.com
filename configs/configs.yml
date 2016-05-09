@@ -1,0 +1,28 @@
+security:
+  secret: P1zzaP4rty!!!
+instagram:
+  client_id: "a6c4e37cd91b4020a09a74a40cf836d6"
+  user_id: 31264453
+twitter:
+  tweets:
+    - "175800300060409856"
+    - "180488009832079361"
+    - "178887690022952960"
+    - "125270555170582529"
+    - "484708370805313536"
+    - "449610572758515712"
+    - "336235368468856832"
+    - "517053689144430593"
+    - "240906118694596608"
+    - "201170247078772737"
+    - "317507453195542528"
+wordpress:
+  url: "http://blog.rishisatsangi.com"
+  posts:
+    - 47
+    - 116
+    - 1
+pocket:
+  consumer_key: 53654-96b8c6b4457644ed3b2f25ff
+  username: dethbird
+  access_token: 7b51fe1a-20b7-2751-22a3-fb86ec  

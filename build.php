@@ -41,7 +41,7 @@ if(isset($options['js'])) {
       echo $outputFile."\n";
       $output = shell_exec("browserify ".$file." -o ".$outputFile);
       if($options['js']!="dev"){
-        $output = shell_exec("uglify ".$outputFile." -o ".$outputFile);
+        $output = shell_exec("uglifyjs ".$outputFile." -o ".$outputFile);
       }
     }
   }

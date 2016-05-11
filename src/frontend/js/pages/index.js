@@ -1,5 +1,6 @@
-var ButtonAnimationView = require('../library/views/animations/ButtonAnimationView');
+var HorizontalPanelView = require('../library/views/HorizontalPanelView');
 
-var buttonAnimationView = new ButtonAnimationView({
-    el: '#intro-great-button'
+var horizontalPanelView = new HorizontalPanelView({
+    el: '#container',
+    layout: layout
 });

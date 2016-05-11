@@ -1,3 +1,7 @@
+body {
+  padding: 0px;
+  margin: 0px;
+}
 #container {
   display: block;
   height: 980px;
@@ -10,28 +14,3 @@
 .clickable {
   cursor: pointer;
 }
-@media screen and (min-height: 980px) {
-    #flat_image {
-        height: 980px;
-        width: auto;
-    }
-    #container {
-        height: 980px;
-        width: 6279px;
-        position: relative;
-    }
-}
-
-
-
-/*@media screen and (min-height: 720px) {
-    #flat_image {
-        height: 80%;
-        width: auto;
-    }
-    #container {
-        height: 80%;
-        width: 80%;
-        position: relative;
-    }
-}*/

@@ -1,3 +1,6 @@
+panel:
+  width: 1920
+  height: 1080
 objects:
   -
     id: "menu_name"
@@ -7,6 +10,9 @@ objects:
     end_location:
       top: 364
       left: 32
+    dimensions:
+      width: 309
+      height: 35
   -
     id: "menu_bio"
     image_url: "/img/menu_bio.png"
@@ -15,6 +21,9 @@ objects:
     end_location:
       top: 411
       left: 32
+    dimensions:
+      width: 37
+      height: 24
   -
     id: "menu_gigs"
     image_url: "/img/menu_gigs.png"
@@ -23,6 +32,9 @@ objects:
     end_location:
       top: 453
       left: 32
+    dimensions:
+      width: 53
+      height: 25
   -
     id: "menu_projects"
     image_url: "/img/menu_projects.png"
@@ -31,6 +43,9 @@ objects:
     end_location:
       top: 491
       left: 32
+    dimensions:
+      width: 120
+      height: 25
   -
     id: "menu_publications"
     image_url: "/img/menu_publications.png"
@@ -39,6 +54,9 @@ objects:
     end_location:
       top: 532
       left: 32
+    dimensions:
+      width: 164
+      height: 25
   -
     id: "menu_contact"
     image_url: "/img/menu_contact.png"
@@ -47,21 +65,123 @@ objects:
     end_location:
       top: 569
       left: 32
+    dimensions:
+      width: 106
+      height: 26
   -
     id: "mickey001"
     image_url: "/img/mickey.png"
     end_location:
       top: 282
       left: 528
+    dimensions:
+      width: 162
+      height: 545
   -
     id: "mickey002"
     image_url: "/img/mickey.png"
     end_location:
       top: 321
       left: 398
+    dimensions:
+      width: 162
+      height: 545
   -
     id: "mickey003"
     image_url: "/img/mickey.png"
     end_location:
       top: 321
       left: 659
+    dimensions:
+      width: 162
+      height: 545
+  -
+    id: "header_bio"
+    image_url: "/img/header_bio.png"
+    end_location:
+      top: 301
+      left: 888
+    dimensions:
+      width: 50
+      height: 32
+  -
+    id: "face_deer"
+    image_url: "/img/face_deer.png"
+    end_location:
+      top: 430
+      left: 1515
+    dimensions:
+      width: 357
+      height: 262
+  -
+    id: "black_structure"
+    image_url: "/img/black_structure.png"
+    end_location:
+      top: -5
+      left: 1872
+    dimensions:
+      width: 659
+      height: 980
+  -
+    id: "yellow_cab"
+    image_url: "/img/yellow_cab.png"
+    end_location:
+      top: 656
+      left: 1356
+    dimensions:
+      width: 398
+      height: 227
+  -
+    id: "rickshaw_left"
+    image_url: "/img/rickshaw_left.png"
+    end_location:
+      top: 671
+      left: 1725
+    dimensions:
+      width: 264
+      height: 270
+  -
+    id: "rickshaw_right"
+    image_url: "/img/rickshaw_right.png"
+    end_location:
+      top: 671
+      left: 2042
+    dimensions:
+      width: 239
+      height: 270
+  -
+    id: "luxo_lamp"
+    image_url: "/img/luxo_lamp.png"
+    end_location:
+      top: 0
+      left: 1052
+    dimensions:
+      width: 892
+      height: 974
+  -
+    id: "tattoo"
+    image_url: "/img/tattoo.png"
+    end_location:
+      top: 104
+      left: 2965
+    dimensions:
+      width: 507
+      height: 801
+  -
+    id: "lines"
+    image_url: "/img/lines.png"
+    end_location:
+      top: 109
+      left: 2842
+    dimensions:
+      width: 912
+      height: 797
+  -
+    id: "circle_small"
+    image_url: "/img/circle_small.png"
+    end_location:
+      top: 109
+      left: 2842
+    dimensions:
+      width: 245
+      height: 245

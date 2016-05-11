@@ -4,8 +4,9 @@
 {% endblock %}
 {% block content %}
     {{ parent() }}
-    <!-- <img id="flat_image" src="/img/flat_image.jpg" /> -->
-    <!-- <pre>{{layout|print_r}}</pre> -->
+    <script type="text/javascript">
+        var layout = {{layout|json_encode|raw}};
+    </script>
     <div id="container">
     {% for object in layout.objects %}
       <img
@@ -22,5 +23,5 @@
 
 {% block includes %}
   <!-- js includes -->
-  <!-- <script type="text/javascript" src="/js/pages/index.js"></script> -->
+  <script type="text/javascript" src="/js/pages/index.js"></script>
 {% endblock %}

@@ -1,0 +1,67 @@
+objects:
+  -
+    id: "menu_name"
+    image_url: "/img/menu_name.png"
+    alt: "Home"
+    clickable: true
+    end_location:
+      top: 364
+      left: 32
+  -
+    id: "menu_bio"
+    image_url: "/img/menu_bio.png"
+    alt: "Bio"
+    clickable: true
+    end_location:
+      top: 411
+      left: 32
+  -
+    id: "menu_gigs"
+    image_url: "/img/menu_gigs.png"
+    alt: "Gigs"
+    clickable: true
+    end_location:
+      top: 453
+      left: 32
+  -
+    id: "menu_projects"
+    image_url: "/img/menu_projects.png"
+    alt: "Projects"
+    clickable: true
+    end_location:
+      top: 491
+      left: 32
+  -
+    id: "menu_publications"
+    image_url: "/img/menu_publications.png"
+    alt: "Publications"
+    clickable: true
+    end_location:
+      top: 532
+      left: 32
+  -
+    id: "menu_contact"
+    image_url: "/img/menu_contact.png"
+    alt: "Contact"
+    clickable: true
+    end_location:
+      top: 569
+      left: 32
+  -
+    id: "mickey001"
+    image_url: "/img/mickey.png"
+    end_location:
+      top: 282
+      left: 528
+  -
+    id: "mickey002"
+    image_url: "/img/mickey.png"
+    end_location:
+      top: 321
+      left: 398
+  -
+    id: "mickey003"
+    image_url: "/img/mickey.png"
+    end_location:
+      top: 321
+      left: 659

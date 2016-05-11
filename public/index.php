@@ -64,12 +64,12 @@ $app->get("/logout", function () use ($app) {
 $app->get("/", function () use ($app) {
 
     $configs = $app->container->get('configs');
-    $projects = Yaml::parse(file_get_contents("../configs/projects.yml"));
+    $layout = Yaml::parse(file_get_contents("../configs/layout.yml"));
 
     $templateVars = array(
         "configs" => $configs,
         "section" => "index",
-        "projects" => $projects
+        "layout" => $layout
     );
 
     $app->render(

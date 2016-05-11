@@ -4,11 +4,23 @@
 {% endblock %}
 {% block content %}
     {{ parent() }}
-    <h1>Prutha Raithatha's Website</h1>
-  {% endblock %}
+    <!-- <img id="flat_image" src="/img/flat_image.jpg" /> -->
+    <!-- <pre>{{layout|print_r}}</pre> -->
+    <div id="container">
+    {% for object in layout.objects %}
+      <img
+        src="{{object.image_url}}"
+        id="{{object.id}}"
+        class="object{% if object.clickable %} clickable{% endif %}"
+        style="top: {{object.end_location.top}}px; left: {{object.end_location.left}}px;"
+        {% if object.alt %} title={{object.alt}}{% endif %}
+      />
+    {% endfor %}
+    </div>
+{% endblock %}
 
 
 {% block includes %}
   <!-- js includes -->
-  <script type="text/javascript" src="/js/pages/index.js"></script>
+  <!-- <script type="text/javascript" src="/js/pages/index.js"></script> -->
 {% endblock %}

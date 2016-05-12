@@ -1,5 +1,6 @@
 var FlickerView = require('./animations/FlickerView');
 var SlideIntoView = require('./animations/SlideIntoView');
+var ClickScrollView = require('./buttons/ClickScrollView');
 
 var HorizontalPanelView = Backbone.View.extend({
     w: null,
@@ -36,6 +37,14 @@ var HorizontalPanelView = Backbone.View.extend({
                 el: '#' + e.attr('id'),
                 object: object,
                 scaleFactor: that.scaleFactor
+              });
+            }
+
+            if (e.hasClass('click-scroll')) {
+              var clickScrollView = new ClickScrollView({
+                el: '#' + e.attr('id'),
+                object: object,
+                parent: that
               });
             }
 

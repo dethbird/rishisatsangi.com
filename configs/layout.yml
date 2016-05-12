@@ -6,7 +6,9 @@ objects:
     id: "menu_name"
     image_url: "/img/menu_name.png"
     alt: "Home"
-    clickable: true
+    click_scroll:
+      scroll_x: 0
+      duration: 2
     location:
       top: 364
       left: 32
@@ -21,7 +23,9 @@ objects:
     id: "menu_bio"
     image_url: "/img/menu_bio.png"
     alt: "Bio"
-    clickable: true
+    click_scroll:
+      scroll_x: 382
+      duration: 2
     location:
       top: 411
       left: 32
@@ -36,7 +40,9 @@ objects:
     id: "menu_gigs"
     image_url: "/img/menu_gigs.png"
     alt: "Gigs"
-    clickable: true
+    click_scroll:
+      scroll_x: 2052
+      duration: 2
     location:
       top: 453
       left: 32
@@ -51,7 +57,9 @@ objects:
     id: "menu_projects"
     image_url: "/img/menu_projects.png"
     alt: "Projects"
-    clickable: true
+    click_scroll:
+      scroll_x: 3813
+      duration: 2
     location:
       top: 491
       left: 32
@@ -66,7 +74,9 @@ objects:
     id: "menu_publications"
     image_url: "/img/menu_publications.png"
     alt: "Publications"
-    clickable: true
+    click_scroll:
+      scroll_x: 0
+      duration: 2
     location:
       top: 532
       left: 32
@@ -81,7 +91,9 @@ objects:
     id: "menu_contact"
     image_url: "/img/menu_contact.png"
     alt: "Contact"
-    clickable: true
+    click_scroll:
+      scroll_x: 5748
+      duration: 2
     location:
       top: 569
       left: 32
@@ -359,7 +371,7 @@ text:
       left: 888
     dimensions:
       width: 350
-      height: 350
+      height: 500
     overflow:
       y: "auto"
       x: "hidden"

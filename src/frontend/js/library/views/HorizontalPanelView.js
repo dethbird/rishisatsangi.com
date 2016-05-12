@@ -31,6 +31,17 @@ var HorizontalPanelView = Backbone.View.extend({
             left: that.scaleFactor * object.end_location.left
           });
       });
+
+      _.each($(that.el).find('.text'), function(e, i){
+          e = $(e);
+          var object = _.findWhere(that.layout.text, {'id': e.attr('id')});
+          e.css({
+            width: that.scaleFactor * object.dimensions.width,
+            height: that.scaleFactor * object.dimensions.height,
+            top: that.scaleFactor * object.end_location.top,
+            left: that.scaleFactor * object.end_location.left
+          });
+      });
     }
 });
 

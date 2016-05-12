@@ -105,6 +105,15 @@ objects:
       width: 50
       height: 32
   -
+    id: "header_bombay_to_nyc"
+    image_url: "/img/header_bombay_to_nyc.png"
+    end_location:
+      top: 899
+      left: 1472
+    dimensions:
+      width: 373
+      height: 37
+  -
     id: "face_deer"
     image_url: "/img/face_deer.png"
     end_location:
@@ -145,7 +154,7 @@ objects:
     image_url: "/img/rickshaw_right.png"
     end_location:
       top: 671
-      left: 2042
+      left: 2061
     dimensions:
       width: 239
       height: 270
@@ -180,8 +189,121 @@ objects:
     id: "circle_small"
     image_url: "/img/circle_small.png"
     end_location:
-      top: 109
-      left: 2842
+      top: 99
+      left: 3520
     dimensions:
-      width: 245
-      height: 245
+      width: 244
+      height: 244
+  -
+    id: "circle_medium"
+    image_url: "/img/circle_medium.png"
+    end_location:
+      top: 105
+      left: 2972
+    dimensions:
+      width: 584
+      height: 584
+  -
+    id: "circle_large"
+    image_url: "/img/circle_large.png"
+    end_location:
+      top: 27
+      left: 2631
+    dimensions:
+      width: 836
+      height: 815
+  -
+    id: "resume"
+    image_url: "/img/resume.png"
+    end_location:
+      top: 57
+      left: 2662
+    dimensions:
+      width: 1083
+      height: 941
+  -
+    id: "portfolio_sketch"
+    image_url: "/img/portfolio_sketch.png"
+    end_location:
+      top: 141
+      left: 3825
+    dimensions:
+      width: 1822
+      height: 620
+  -
+    id: "elephant"
+    image_url: "/img/elephant.png"
+    end_location:
+      top: 226
+      left: 5781
+    dimensions:
+      width: 466
+      height: 585
+  -
+    id: "mouse"
+    image_url: "/img/mouse.png"
+    end_location:
+      top: 789
+      left: 6058
+    dimensions:
+      width: 112
+      height: 61
+  -
+    id: "city_sketch"
+    image_url: "/img/city_sketch.png"
+    end_location:
+      top: 122
+      left: 5896
+    dimensions:
+      width: 1772
+      height: 752
+  -
+    id: "header_contact"
+    image_url: "/img/header_contact.png"
+    end_location:
+      top: 406
+      left: 7316
+    dimensions:
+      width: 142
+      height: 34
+text:
+  -
+    id: "bio_text"
+    copy: |
+      Ligula a magna natoque condimentum ridiculus a vulputate a pretium a in parturient parturient vestibulum venenatis parturient dis consequat scelerisque a scelerisque euismod posuere dolor hendrerit cum at lectus. Odio a at venenatis adipiscing lobortis a suspendisse vestibulum consectetur libero urna ante bibendum interdum a adipiscing commodo urna dapibus a condimentum ornare bibendum dictum a sagittis parturient. Erat suspendisse gravida libero iaculis parturient ad tempus tincidunt et eget suspendisse arcu a a eget. Euismod nibh nam facilisi quis vivamus luctus aptent fusce suscipit laoreet proin velit eu interdum cubilia suspendisse commodo sapien blandit interdum a sem mauris in blandit vel a hendrerit. Sagittis ullamcorper ullamcorper mattis ut a quis a in eget a diam luctus consequat luctus magna arcu ultricies platea torquent ad donec scelerisque lacus a habitant.
+
+      A morbi amet imperdiet natoque sem sociosqu a porttitor a ad vivamus cum a leo fames sed vestibulum a ad inceptos velit sit faucibus et curabitur senectus. Orci iaculis torquent proin a vestibulum gravida natoque per risus condimentum integer amet mus vitae. Natoque bibendum nam a a mi aenean commodo ullamcorper a integer eros parturient nascetur ullamcorper suscipit ullamcorper a praesent posuere a orci condimentum at suspendisse.
+
+      Vel sapien gravida imperdiet elit pulvinar quam ullamcorper condimentum habitant placerat a in eros turpis elementum himenaeos adipiscing a a praesent aptent mollis et a integer. Euismod at per potenti potenti duis penatibus scelerisque suscipit primis feugiat a sagittis duis vestibulum porttitor vestibulum tempus pulvinar quis vestibulum suscipit a risus adipiscing a primis nibh neque. A a in adipiscing vivamus ullamcorper dictum dictum vestibulum accumsan ad cras hac purus adipiscing ac elit laoreet in a eleifend hac ornare blandit ridiculus. Dui ligula nam scelerisque sodales a gravida neque erat mi lacinia parturient a quis primis. Donec pharetra a hendrerit vestibulum potenti leo vehicula mattis eu sociis dapibus magnis leo scelerisque dolor elementum adipiscing volutpat sodales tincidunt parturient sem ultricies adipiscing adipiscing at cursus dolor. Parturient tellus aliquam odio condimentum purus penatibus dis rhoncus a a enim metus mus id ullamcorper magna at a mattis diam vivamus sodales quis nec magna elit.
+    end_location:
+      top: 350
+      left: 888
+    dimensions:
+      width: 350
+      height: 350
+    overflow:
+      y: "auto"
+      x: "hidden"
+    text_align: "left"
+  -
+    id: "contact_text"
+    copy: |
+      You can often find Prutha riding her zebralephant in the East village.
+
+      But for the rest of the times find her at:
+
+      405 E 6th street<br />
+      New York, NY10009
+
+      Email: prutharaithatha@gmail.com<br />
+      BatMobile: 917-971-6271
+    end_location:
+      top: 450
+      left: 7225
+    dimensions:
+      width: 350
+      height: 350
+    overflow:
+      y: "auto"
+      x: "hidden"
+    text_align: "center"

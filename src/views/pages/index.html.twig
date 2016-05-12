@@ -12,8 +12,13 @@
       <img
         src="{{object.image_url}}"
         id="{{object.id}}"
-        class="object{% if object.clickable %} clickable{% endif %}"
-        style="top: {{object.end_location.top}}px; left: {{object.end_location.left}}px;"
+        class="object
+        {% if object.clickable %} clickable{% endif %}
+        {% if object.rotate %} rotate{% endif %}
+        {% if object.flicker %} flicker{% endif %}
+        {% if object.slide_in %} slide-in{% endif %}
+        "
+        style="top: {{object.location.top}}px; left: {{object.location.left}}px; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px;"
         {% if object.alt %} title={{object.alt}}{% endif %}
       />
     {% endfor %}
@@ -21,7 +26,7 @@
       <div
         id="{{object.id}}"
         class="text"
-        style="top: {{object.end_location.top}}px; left: {{object.end_location.left}}px; overflow-y: {{object.overflow.y}}; overflow-x: {{object.overflow.x}}; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px; text-align: {{object.text_align}};"
+        style="top: {{object.location.top}}px; left: {{object.location.left}}px; overflow-y: {{object.overflow.y}}; overflow-x: {{object.overflow.x}}; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px; text-align: {{object.text_align}};"
       >{{object.copy|raw|markdown}}</div>
     {% endfor %}
     </div>

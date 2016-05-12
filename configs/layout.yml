@@ -7,125 +7,177 @@ objects:
     image_url: "/img/menu_name.png"
     alt: "Home"
     clickable: true
-    end_location:
+    location:
       top: 364
       left: 32
     dimensions:
       width: 309
       height: 35
+    slide_in:
+      top: -364
+      left: 32
+      duration: 1.5
   -
     id: "menu_bio"
     image_url: "/img/menu_bio.png"
     alt: "Bio"
     clickable: true
-    end_location:
+    location:
       top: 411
       left: 32
     dimensions:
       width: 37
       height: 24
+    slide_in:
+      top: -411
+      left: 32
+      duration: 1.5
   -
     id: "menu_gigs"
     image_url: "/img/menu_gigs.png"
     alt: "Gigs"
     clickable: true
-    end_location:
+    location:
       top: 453
       left: 32
     dimensions:
       width: 53
       height: 25
+    slide_in:
+      top: -453
+      left: 32
+      duration: 1.5
   -
     id: "menu_projects"
     image_url: "/img/menu_projects.png"
     alt: "Projects"
     clickable: true
-    end_location:
+    location:
       top: 491
       left: 32
     dimensions:
       width: 120
       height: 25
+    slide_in:
+      top: -491
+      left: 32
+      duration: 1.5
   -
     id: "menu_publications"
     image_url: "/img/menu_publications.png"
     alt: "Publications"
     clickable: true
-    end_location:
+    location:
       top: 532
       left: 32
     dimensions:
       width: 164
       height: 25
+    slide_in:
+      top: -532
+      left: 32
+      duration: 1.5
   -
     id: "menu_contact"
     image_url: "/img/menu_contact.png"
     alt: "Contact"
     clickable: true
-    end_location:
+    location:
       top: 569
       left: 32
     dimensions:
       width: 106
       height: 26
+    slide_in:
+      top: -569
+      left: 32
+      duration: 1.5
   -
     id: "mickey001"
     image_url: "/img/mickey.png"
-    end_location:
+    location:
       top: 282
       left: 528
     dimensions:
       width: 162
       height: 545
+    slide_in:
+      top: -550
+      left: 528
+      duration: 1.5
   -
     id: "mickey002"
     image_url: "/img/mickey.png"
-    end_location:
+    location:
       top: 321
       left: 398
     dimensions:
       width: 162
       height: 545
+    flicker:
+      delay: 3
+      min_duration: 0.1
+      max_duration: 0.5
+      min_opacity: 0.5
+      max_opacity: 0.9
   -
     id: "mickey003"
     image_url: "/img/mickey.png"
-    end_location:
+    location:
       top: 321
       left: 659
     dimensions:
       width: 162
       height: 545
+    flicker:
+      delay: 3
+      min_duration: 0.1
+      max_duration: 0.5
+      min_opacity: 0.5
+      max_opacity: 0.9
   -
     id: "header_bio"
     image_url: "/img/header_bio.png"
-    end_location:
+    location:
       top: 301
       left: 888
     dimensions:
       width: 50
       height: 32
+    slide_in:
+      top: -301
+      left: 888
+      duration: 1.5
   -
     id: "header_bombay_to_nyc"
     image_url: "/img/header_bombay_to_nyc.png"
-    end_location:
+    location:
       top: 899
       left: 1472
     dimensions:
       width: 373
       height: 37
+    slide_in:
+      top: -899
+      left: 1472
+      duration: 1.5
   -
     id: "face_deer"
     image_url: "/img/face_deer.png"
-    end_location:
+    location:
       top: 430
       left: 1515
     dimensions:
       width: 357
       height: 262
+    slide_in:
+      top: 980
+      left: 1515
+      duration: 1.5
   -
     id: "black_structure"
     image_url: "/img/black_structure.png"
-    end_location:
+    location:
       top: -5
       left: 1872
     dimensions:
@@ -134,43 +186,61 @@ objects:
   -
     id: "yellow_cab"
     image_url: "/img/yellow_cab.png"
-    end_location:
+    location:
       top: 656
       left: 1356
     dimensions:
       width: 398
       height: 227
+    slide_in:
+      top: 980
+      left: 1356
+      duration: 1.5
   -
     id: "rickshaw_left"
     image_url: "/img/rickshaw_left.png"
-    end_location:
+    location:
       top: 671
       left: 1725
     dimensions:
       width: 264
       height: 270
+    slide_in:
+      top: 980
+      left: 1725
+      duration: 1.5
   -
     id: "rickshaw_right"
     image_url: "/img/rickshaw_right.png"
-    end_location:
+    location:
       top: 671
       left: 2061
     dimensions:
       width: 239
       height: 270
+    flicker:
+      delay: 0
+      min_duration: 0.05
+      max_duration: 0.18
+      min_opacity: 0.5
+      max_opacity: 0.9
   -
     id: "luxo_lamp"
     image_url: "/img/luxo_lamp.png"
-    end_location:
+    location:
       top: 0
       left: 1052
     dimensions:
       width: 892
       height: 974
+    slide_in:
+      top: 980
+      left: 1052
+      duration: 2.2
   -
     id: "tattoo"
     image_url: "/img/tattoo.png"
-    end_location:
+    location:
       top: 104
       left: 2965
     dimensions:
@@ -179,7 +249,7 @@ objects:
   -
     id: "lines"
     image_url: "/img/lines.png"
-    end_location:
+    location:
       top: 109
       left: 2842
     dimensions:
@@ -188,34 +258,43 @@ objects:
   -
     id: "circle_small"
     image_url: "/img/circle_small.png"
-    end_location:
+    location:
       top: 99
       left: 3520
     dimensions:
       width: 244
       height: 244
+    rotate:
+      duration: 20
+      degrees: 360
   -
     id: "circle_medium"
     image_url: "/img/circle_medium.png"
-    end_location:
+    location:
       top: 105
       left: 2972
     dimensions:
       width: 584
       height: 584
+    rotate:
+      duration: 15
+      degrees: -360
   -
     id: "circle_large"
     image_url: "/img/circle_large.png"
-    end_location:
+    location:
       top: 27
       left: 2631
     dimensions:
       width: 836
-      height: 815
+      height: 836
+    rotate:
+      duration: 20
+      degrees: 360
   -
     id: "resume"
     image_url: "/img/resume.png"
-    end_location:
+    location:
       top: 57
       left: 2662
     dimensions:
@@ -224,7 +303,7 @@ objects:
   -
     id: "portfolio_sketch"
     image_url: "/img/portfolio_sketch.png"
-    end_location:
+    location:
       top: 141
       left: 3825
     dimensions:
@@ -233,7 +312,7 @@ objects:
   -
     id: "elephant"
     image_url: "/img/elephant.png"
-    end_location:
+    location:
       top: 226
       left: 5781
     dimensions:
@@ -242,7 +321,7 @@ objects:
   -
     id: "mouse"
     image_url: "/img/mouse.png"
-    end_location:
+    location:
       top: 789
       left: 6058
     dimensions:
@@ -251,7 +330,7 @@ objects:
   -
     id: "city_sketch"
     image_url: "/img/city_sketch.png"
-    end_location:
+    location:
       top: 122
       left: 5896
     dimensions:
@@ -260,7 +339,7 @@ objects:
   -
     id: "header_contact"
     image_url: "/img/header_contact.png"
-    end_location:
+    location:
       top: 406
       left: 7316
     dimensions:
@@ -275,7 +354,7 @@ text:
       A morbi amet imperdiet natoque sem sociosqu a porttitor a ad vivamus cum a leo fames sed vestibulum a ad inceptos velit sit faucibus et curabitur senectus. Orci iaculis torquent proin a vestibulum gravida natoque per risus condimentum integer amet mus vitae. Natoque bibendum nam a a mi aenean commodo ullamcorper a integer eros parturient nascetur ullamcorper suscipit ullamcorper a praesent posuere a orci condimentum at suspendisse.
 
       Vel sapien gravida imperdiet elit pulvinar quam ullamcorper condimentum habitant placerat a in eros turpis elementum himenaeos adipiscing a a praesent aptent mollis et a integer. Euismod at per potenti potenti duis penatibus scelerisque suscipit primis feugiat a sagittis duis vestibulum porttitor vestibulum tempus pulvinar quis vestibulum suscipit a risus adipiscing a primis nibh neque. A a in adipiscing vivamus ullamcorper dictum dictum vestibulum accumsan ad cras hac purus adipiscing ac elit laoreet in a eleifend hac ornare blandit ridiculus. Dui ligula nam scelerisque sodales a gravida neque erat mi lacinia parturient a quis primis. Donec pharetra a hendrerit vestibulum potenti leo vehicula mattis eu sociis dapibus magnis leo scelerisque dolor elementum adipiscing volutpat sodales tincidunt parturient sem ultricies adipiscing adipiscing at cursus dolor. Parturient tellus aliquam odio condimentum purus penatibus dis rhoncus a a enim metus mus id ullamcorper magna at a mattis diam vivamus sodales quis nec magna elit.
-    end_location:
+    location:
       top: 350
       left: 888
     dimensions:
@@ -297,7 +376,7 @@ text:
 
       Email: prutharaithatha@gmail.com<br />
       BatMobile: 917-971-6271
-    end_location:
+    location:
       top: 450
       left: 7225
     dimensions:

@@ -1,6 +1,7 @@
 body {
   padding: 0px;
   margin: 35px 0 0 0;
+  overflow-y: hidden;
 }
 #container {
   display: block;
@@ -12,4 +13,7 @@ body {
 }
 .clickable {
   cursor: pointer;
+}
+.flicker {
+  opacity: 0;
 }

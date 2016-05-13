@@ -3,108 +3,6 @@ panel:
   height: 1080
 objects:
   -
-    id: "menu_name"
-    image_url: "/img/menu_name.png"
-    alt: "Home"
-    click_scroll:
-      scroll_x: 0
-      duration: 2
-    location:
-      top: 364
-      left: 32
-    dimensions:
-      width: 309
-      height: 35
-    slide_in:
-      top: -364
-      left: 32
-      duration: 1.5
-  -
-    id: "menu_bio"
-    image_url: "/img/menu_bio.png"
-    alt: "Bio"
-    click_scroll:
-      scroll_x: 382
-      duration: 2
-    location:
-      top: 411
-      left: 32
-    dimensions:
-      width: 37
-      height: 24
-    slide_in:
-      top: -411
-      left: 32
-      duration: 1.5
-  -
-    id: "menu_gigs"
-    image_url: "/img/menu_gigs.png"
-    alt: "Gigs"
-    click_scroll:
-      scroll_x: 2052
-      duration: 2
-    location:
-      top: 453
-      left: 32
-    dimensions:
-      width: 53
-      height: 25
-    slide_in:
-      top: -453
-      left: 32
-      duration: 1.5
-  -
-    id: "menu_projects"
-    image_url: "/img/menu_projects.png"
-    alt: "Projects"
-    click_scroll:
-      scroll_x: 3813
-      duration: 2
-    location:
-      top: 491
-      left: 32
-    dimensions:
-      width: 120
-      height: 25
-    slide_in:
-      top: -491
-      left: 32
-      duration: 1.5
-  -
-    id: "menu_publications"
-    image_url: "/img/menu_publications.png"
-    alt: "Publications"
-    click_scroll:
-      scroll_x: 0
-      duration: 2
-    location:
-      top: 532
-      left: 32
-    dimensions:
-      width: 164
-      height: 25
-    slide_in:
-      top: -532
-      left: 32
-      duration: 1.5
-  -
-    id: "menu_contact"
-    image_url: "/img/menu_contact.png"
-    alt: "Contact"
-    click_scroll:
-      scroll_x: 5748
-      duration: 2
-    location:
-      top: 569
-      left: 32
-    dimensions:
-      width: 106
-      height: 26
-    slide_in:
-      top: -569
-      left: 32
-      duration: 1.5
-  -
     id: "mickey001"
     image_url: "/img/mickey.png"
     location:
@@ -127,7 +25,7 @@ objects:
       width: 162
       height: 545
     flicker:
-      delay: 3
+      delay: 2.4
       min_duration: 0.1
       max_duration: 0.5
       min_opacity: 0.5
@@ -142,7 +40,7 @@ objects:
       width: 162
       height: 545
     flicker:
-      delay: 3
+      delay: 2.4
       min_duration: 0.1
       max_duration: 0.5
       min_opacity: 0.5
@@ -172,7 +70,7 @@ objects:
     slide_in:
       top: -899
       left: 1472
-      duration: 1.5
+      duration: 2.8
   -
     id: "face_deer"
     image_url: "/img/face_deer.png"
@@ -221,21 +119,21 @@ objects:
       top: 980
       left: 1725
       duration: 1.5
-  -
-    id: "rickshaw_right"
-    image_url: "/img/rickshaw_right.png"
-    location:
-      top: 671
-      left: 2061
-    dimensions:
-      width: 239
-      height: 270
-    flicker:
-      delay: 0
-      min_duration: 0.05
-      max_duration: 0.18
-      min_opacity: 0.5
-      max_opacity: 0.9
+  # -
+  #   id: "rickshaw_right"
+  #   image_url: "/img/rickshaw_right.png"
+  #   location:
+  #     top: 671
+  #     left: 2061
+  #   dimensions:
+  #     width: 239
+  #     height: 270
+  #   flicker:
+  #     delay: 0
+  #     min_duration: 0.05
+  #     max_duration: 0.18
+  #     min_opacity: 0.5
+  #     max_opacity: 0.9
   -
     id: "luxo_lamp"
     image_url: "/img/luxo_lamp.png"
@@ -357,6 +255,120 @@ objects:
     dimensions:
       width: 142
       height: 34
+  -
+    id: "menu_name"
+    image_url: "/img/menu_name.png"
+    alt: "Home"
+    click_scroll:
+      scroll_x: 0
+      duration: 1
+    location:
+      top: 364
+      left: 32
+    dimensions:
+      width: 315
+      height: 41
+    slide_in:
+      top: -364
+      left: 32
+      duration: 1.5
+    always_on_top:
+      duration: 1
+  -
+    id: "menu_bio"
+    image_url: "/img/menu_bio.png"
+    alt: "Bio"
+    click_scroll:
+      scroll_x: 382
+      duration: 1
+    location:
+      top: 411
+      left: 32
+    dimensions:
+      width: 43
+      height: 30
+    slide_in:
+      top: -411
+      left: 32
+      duration: 1.5
+    always_on_top:
+      duration: 1
+  -
+    id: "menu_gigs"
+    image_url: "/img/menu_gigs.png"
+    alt: "Gigs"
+    click_scroll:
+      scroll_x: 2052
+      duration: 1
+    location:
+      top: 453
+      left: 32
+    dimensions:
+      width: 59
+      height: 31
+    slide_in:
+      top: -453
+      left: 32
+      duration: 1.5
+    always_on_top:
+      duration: 1
+  -
+    id: "menu_projects"
+    image_url: "/img/menu_projects.png"
+    alt: "Projects"
+    click_scroll:
+      scroll_x: 3813
+      duration: 1
+    location:
+      top: 491
+      left: 32
+    dimensions:
+      width: 126
+      height: 31
+    slide_in:
+      top: -491
+      left: 32
+      duration: 1.5
+    always_on_top:
+      duration: 1
+  -
+    id: "menu_publications"
+    image_url: "/img/menu_publications.png"
+    alt: "Publications"
+    click_scroll:
+      scroll_x: 0
+      duration: 1
+    location:
+      top: 532
+      left: 32
+    dimensions:
+      width: 170
+      height: 31
+    slide_in:
+      top: -532
+      left: 32
+      duration: 1.5
+    always_on_top:
+      duration: 1
+  -
+    id: "menu_contact"
+    image_url: "/img/menu_contact.png"
+    alt: "Contact"
+    click_scroll:
+      scroll_x: 5748
+      duration: 1
+    location:
+      top: 569
+      left: 32
+    dimensions:
+      width: 112
+      height: 32
+    slide_in:
+      top: -569
+      left: 32
+      duration: 1.5
+    always_on_top:
+      duration: 1
 text:
   -
     id: "bio_text"
@@ -376,6 +388,10 @@ text:
       y: "auto"
       x: "hidden"
     text_align: "left"
+    slide_in:
+      top: -520
+      left: 888
+      duration: 2.2
   -
     id: "contact_text"
     copy: |

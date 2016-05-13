@@ -11,7 +11,7 @@ var SlideIntoView = Backbone.View.extend({
     },
     slideIn: function() {
         var that = this;
-        // console.log(that.el);
+        $(that.el).css('opacity', 1);
         var tm = new TweenLite.fromTo($(that.el), that.object.slide_in.duration,
           {
             top: that.scaleFactor * that.object.slide_in.top,

@@ -11,6 +11,9 @@ body {
   position: absolute;
   display: block;
 }
+.slide-in {
+  opacity: 0
+}
 .click-scroll {
   cursor: pointer;
 }

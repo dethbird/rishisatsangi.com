@@ -1,11 +1,13 @@
 var FlickerView = require('./animations/FlickerView');
 var SlideIntoView = require('./animations/SlideIntoView');
 var ClickScrollView = require('./buttons/ClickScrollView');
+var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
 
 var HorizontalPanelView = Backbone.View.extend({
     w: null,
     layout: null,
     scaleFactor: 1,
+    alwaysOnTopManager: null,
     initialize: function(options) {
         var that = this;
         that.w = $(window);
@@ -13,6 +15,12 @@ var HorizontalPanelView = Backbone.View.extend({
 
         // figure out the scale multiplier
         that.scaleFactor = that.w.width() / that.layout.panel.width;
+
+        // always on top manager keeps the menu on top
+        that.alwaysOnTopManager = new AlwaysOnTopManagerView({
+          el: window,
+          parent: that
+        });
 
         // start infinite animations
         _.each($(that.el).find('.object'), function(e, i){
@@ -48,6 +56,22 @@ var HorizontalPanelView = Backbone.View.extend({
               });
             }
 
+            if (e.hasClass('always-on-top')) {
+              that.alwaysOnTopManager.addObject(object);
+            }
+
+        });
+
+        _.each($(that.el).find('.text'), function(e, i){
+            e = $(e);
+            var object = _.findWhere(that.layout.text, {'id': e.attr('id')});
+            if (e.hasClass('slide-in')) {
+              var slideIntoView = new SlideIntoView({
+                el: '#' + e.attr('id'),
+                object: object,
+                scaleFactor: that.scaleFactor
+              });
+            }
         });
 
         // rescale on window resize
@@ -59,6 +83,8 @@ var HorizontalPanelView = Backbone.View.extend({
 
       // figure out the scale multiplier
       that.scaleFactor = that.w.width() / that.layout.panel.width;
+
+      that.alwaysOnTopManager.adjust();
 
       $(that.el).css({
         marginTop: (that.w.height() - that.scaleFactor * that.layout.panel.height) / 2

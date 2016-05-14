@@ -1,5 +1,6 @@
 var FlickerView = require('./animations/FlickerView');
 var SlideIntoView = require('./animations/SlideIntoView');
+var SequenceView = require('./animations/SequenceView');
 var ClickScrollView = require('./buttons/ClickScrollView');
 var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
 
@@ -61,6 +62,14 @@ var HorizontalPanelView = Backbone.View.extend({
               });
             }
 
+            if (e.hasClass('sequence')) {
+              var sequenceView = new SequenceView({
+                el: '#' + e.attr('id'),
+                object: object,
+                parent: that
+              });
+            }
+
             if (e.hasClass('always-on-top')) {
               that.alwaysOnTopManager.addObject(object);
             }
@@ -87,16 +96,19 @@ var HorizontalPanelView = Backbone.View.extend({
           e = $(e);
           if (e.hasClass('text')) {
               var object = _.findWhere(that.layout.text, {'id': e.attr('id')});
+          } else if (e.hasClass('sprite')) {
+              var object = _.findWhere(that.layout.sprite, {'id': e.attr('id')});
           } else {
               var object = _.findWhere(that.layout.objects, {'id': e.attr('id')});
           }
-
-          e.css({
-            width: that.scaleFactor * object.dimensions.width,
-            height: that.scaleFactor * object.dimensions.height,
-            top: that.scaleFactor * object.location.top,
-            left: that.scaleFactor * object.location.left
-          });
+          if (object) {
+            e.css({
+              width: that.scaleFactor * object.dimensions.width,
+              height: that.scaleFactor * object.dimensions.height,
+              top: that.scaleFactor * object.location.top,
+              left: that.scaleFactor * object.location.left
+            });
+          }
       });
     }
 });

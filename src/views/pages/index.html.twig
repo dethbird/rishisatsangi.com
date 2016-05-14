@@ -18,6 +18,7 @@
         {% if object.flicker %} flicker{% endif %}
         {% if object.slide_in %} slide-in{% endif %}
         {% if object.always_on_top %} always-on-top{% endif %}
+        {% if object.sequence %} sequence{% endif %}
         "
         style="top: {{object.location.top}}px; left: {{object.location.left}}px; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px;"
         {% if object.alt %} title={{object.alt}}{% endif %}

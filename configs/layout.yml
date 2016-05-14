@@ -3,6 +3,22 @@ panel:
   height: 1080
 objects:
   -
+    id: "rat_animation"
+    image_url: "/img/rat_animation001.png"
+    location:
+      top: 0
+      left: 0
+    dimensions:
+      width: 380
+      height: 85
+    sequence:
+      -
+        image_url: "/img/rat_animation001.png"
+        duration: 0.25
+      -
+        image_url: "/img/rat_animation002.png"
+        duration: 0.25
+  -
     id: "mickey001"
     image_url: "/img/mickey.png"
     location:

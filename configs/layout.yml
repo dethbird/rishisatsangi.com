@@ -214,20 +214,29 @@ objects:
     id: "portfolio_sketch"
     image_url: "/img/portfolio_sketch.png"
     location:
-      top: 141
-      left: 3825
+      top: 72
+      left: 4059
     dimensions:
-      width: 1822
-      height: 620
+      width: 1672
+      height: 866
+  -
+    id: "city_sketch"
+    image_url: "/img/city_sketch.png"
+    location:
+      top: 178
+      left: 6175
+    dimensions:
+      width: 1480
+      height: 628
   -
     id: "elephant"
     image_url: "/img/elephant.png"
     location:
-      top: 226
-      left: 5781
+      top: 214
+      left: 6117
     dimensions:
-      width: 466
-      height: 585
+      width: 427
+      height: 536
   -
     id: "mouse"
     image_url: "/img/mouse.png"
@@ -238,20 +247,11 @@ objects:
       width: 112
       height: 61
   -
-    id: "city_sketch"
-    image_url: "/img/city_sketch.png"
-    location:
-      top: 122
-      left: 5896
-    dimensions:
-      width: 1772
-      height: 752
-  -
     id: "header_contact"
     image_url: "/img/header_contact.png"
     location:
-      top: 406
-      left: 7316
+      top: 415
+      left: 7348
     dimensions:
       width: 142
       height: 34
@@ -406,7 +406,7 @@ text:
       BatMobile: 917-971-6271
     location:
       top: 450
-      left: 7225
+      left: 7235
     dimensions:
       width: 350
       height: 350

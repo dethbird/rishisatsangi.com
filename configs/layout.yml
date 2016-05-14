@@ -3,21 +3,13 @@ panel:
   height: 1080
 objects:
   -
-    id: "rat_animation"
-    image_url: "/img/rat_animation001.png"
+    id: "container"
     location:
       top: 0
       left: 0
     dimensions:
-      width: 380
-      height: 85
-    sequence:
-      -
-        image_url: "/img/rat_animation001.png"
-        duration: 0.25
-      -
-        image_url: "/img/rat_animation002.png"
-        duration: 0.25
+      width: 7740
+      height: 980
   -
     id: "mickey001"
     image_url: "/img/mickey.png"
@@ -245,6 +237,36 @@ objects:
       width: 1480
       height: 628
   -
+    id: "rat_animation"
+    image_url: "/img/rat_animation001.png"
+    location:
+      top: 875
+      left: 7800
+    dimensions:
+      width: 380
+      height: 85
+    sequence:
+      -
+        image_url: "/img/rat_animation001.png"
+        duration: 0.25
+      -
+        image_url: "/img/rat_animation002.png"
+        duration: 0.25
+    from_to:
+      sequence:
+        -
+          from:
+            left: 6100
+            top: 650
+            scale: 0.8
+          to:
+            left: 7800
+            top: 875
+            scale: 1
+          duration: 2
+          min_delay: 6
+          random_delay: 2
+  -
     id: "elephant"
     image_url: "/img/elephant.png"
     location:
@@ -253,15 +275,6 @@ objects:
     dimensions:
       width: 427
       height: 536
-  -
-    id: "mouse"
-    image_url: "/img/mouse.png"
-    location:
-      top: 789
-      left: 6058
-    dimensions:
-      width: 112
-      height: 61
   -
     id: "header_contact"
     image_url: "/img/header_contact.png"

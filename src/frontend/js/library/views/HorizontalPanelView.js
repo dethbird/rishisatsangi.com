@@ -1,5 +1,6 @@
 var FlickerView = require('./animations/FlickerView');
 var SlideIntoView = require('./animations/SlideIntoView');
+var FromToView = require('./animations/FromToView');
 var SequenceView = require('./animations/SequenceView');
 var ClickScrollView = require('./buttons/ClickScrollView');
 var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
@@ -63,7 +64,15 @@ var HorizontalPanelView = Backbone.View.extend({
             }
 
             if (e.hasClass('sequence')) {
-              var sequenceView = new SequenceView({
+              new SequenceView({
+                el: '#' + e.attr('id'),
+                object: object,
+                parent: that
+              });
+            }
+
+            if (e.hasClass('from-to')) {
+              new FromToView({
                 el: '#' + e.attr('id'),
                 object: object,
                 parent: that

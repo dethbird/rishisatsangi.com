@@ -12,12 +12,15 @@ var SequenceView = Backbone.View.extend({
     },
     sequence: function() {
         var that = this;
+        clearTimeout(that.timeout);
+
         that.currentIndex++;
         if(that.currentIndex>=that.object.sequence.length) {
           that.currentIndex = 0;
         }
+
         $(that.el).attr('src',  that.object.sequence[that.currentIndex].image_url);
-        clearTimeout(that.timeout);
+
         that.timeout = setTimeout(function(){
           that.sequence();
         }, that.object.sequence[that.currentIndex].duration * 1000);

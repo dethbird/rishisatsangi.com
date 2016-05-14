@@ -7,8 +7,9 @@
     <script type="text/javascript">
         var layout = {{layout|json_encode|raw}};
     </script>
-    <div id="container">
+    <div id="container" class="object">
     {% for object in layout.objects %}
+      {% if object.image_url %}
       <img
         src="{{object.image_url}}"
         id="{{object.id}}"
@@ -19,10 +20,12 @@
         {% if object.slide_in %} slide-in{% endif %}
         {% if object.always_on_top %} always-on-top{% endif %}
         {% if object.sequence %} sequence{% endif %}
+        {% if object.from_to %} from-to{% endif %}
         "
         style="top: {{object.location.top}}px; left: {{object.location.left}}px; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px;"
         {% if object.alt %} title={{object.alt}}{% endif %}
       />
+      {% endif %}
     {% endfor %}
     {% for object in layout.text %}
       <div

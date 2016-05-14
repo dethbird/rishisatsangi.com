@@ -1,11 +1,13 @@
 body {
-  padding: 0px;
   margin: 35px 0 0 0;
   overflow-y: hidden;
 }
 #container {
+  width: 7740px;
+  height: 980px;
   display: block;
   position: relative;
+  overflow-x: hidden;
 }
 .object, .text {
   position: absolute;

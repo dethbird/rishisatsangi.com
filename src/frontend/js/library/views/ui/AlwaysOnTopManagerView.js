@@ -13,7 +13,6 @@ var AlwaysOnTopManagerView = Backbone.View.extend({
     adjust: function() {
         var that = this;
         _.each(that.objects, function(object,i){
-            console.log(object);
             TweenLite.to(
               $('#' + object.id),
               object.always_on_top.duration,

@@ -25,7 +25,12 @@ var HorizontalPanelView = Backbone.View.extend({
         // start infinite animations
         _.each($(that.el).find('.object'), function(e, i){
             e = $(e);
-            var object = _.findWhere(that.layout.objects, {'id': e.attr('id')});
+
+            if (e.hasClass('text')) {
+                var object = _.findWhere(that.layout.text, {'id': e.attr('id')});
+            } else {
+                var object = _.findWhere(that.layout.objects, {'id': e.attr('id')});
+            }
 
             // rotate
             if (e.hasClass('rotate')) {
@@ -62,18 +67,6 @@ var HorizontalPanelView = Backbone.View.extend({
 
         });
 
-        _.each($(that.el).find('.text'), function(e, i){
-            e = $(e);
-            var object = _.findWhere(that.layout.text, {'id': e.attr('id')});
-            if (e.hasClass('slide-in')) {
-              var slideIntoView = new SlideIntoView({
-                el: '#' + e.attr('id'),
-                object: object,
-                scaleFactor: that.scaleFactor
-              });
-            }
-        });
-
         // rescale on window resize
         that.w.resize(_.bind($.debounce(250, that.resize), that));
         that.resize();
@@ -92,18 +85,12 @@ var HorizontalPanelView = Backbone.View.extend({
 
       _.each($(that.el).find('.object'), function(e, i){
           e = $(e);
-          var object = _.findWhere(that.layout.objects, {'id': e.attr('id')});
-          e.css({
-            width: that.scaleFactor * object.dimensions.width,
-            height: that.scaleFactor * object.dimensions.height,
-            top: that.scaleFactor * object.location.top,
-            left: that.scaleFactor * object.location.left
-          });
-      });
+          if (e.hasClass('text')) {
+              var object = _.findWhere(that.layout.text, {'id': e.attr('id')});
+          } else {
+              var object = _.findWhere(that.layout.objects, {'id': e.attr('id')});
+          }
 
-      _.each($(that.el).find('.text'), function(e, i){
-          e = $(e);
-          var object = _.findWhere(that.layout.text, {'id': e.attr('id')});
           e.css({
             width: that.scaleFactor * object.dimensions.width,
             height: that.scaleFactor * object.dimensions.height,

@@ -26,7 +26,7 @@
     {% for object in layout.text %}
       <div
         id="{{object.id}}"
-        class="text
+        class="object text
         {% if object.slide_in %} slide-in{% endif %}"
         style="top: {{object.location.top}}px; left: {{object.location.left}}px; overflow-y: {{object.overflow.y}}; overflow-x: {{object.overflow.x}}; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px; text-align: {{object.text_align}};"
       >{{object.copy|raw|markdown}}</div>

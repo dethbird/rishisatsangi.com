@@ -1,5 +1,5 @@
 body {
-  margin: 35px 0 0 0;
+  margin: 0 0 0 0;
   overflow-y: hidden;
 }
 #container {
@@ -12,6 +12,9 @@ body {
 .object, .text {
   position: absolute;
   display: block;
+}
+.text p {
+  background-color: rgba(255,255,255,0.8);
 }
 .slide-in {
   opacity: 0

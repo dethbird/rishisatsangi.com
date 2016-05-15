@@ -352,6 +352,19 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_coronet"
   -
+    id: "portfolio_hotspot_dsm"
+    image_url: "/img/portfolio_hotspot_dsm.png"
+    alt: "Don't Show Me"
+    location:
+      top: 571
+      left: 5482
+    dimensions:
+      width: 75
+      height: 172
+    hotspot: true
+    popup_slideshow:
+      popup_slideshow_id: "popup_slideshow_dsm"
+  -
     id: "city_sketch"
     image_url: "/img/city_sketch.png"
     location:
@@ -926,3 +939,53 @@ popup_slideshow:
         image_url: "/img/projects/coronet/17.jpg"
         caption: |
           Coronet
+  -
+    id: popup_slideshow_dsm
+    title: "Don't Show Me"
+    image_dimensions:
+      max_height: 920
+    slides:
+      -
+        image_url: "/img/projects/dsm/1.jpg"
+        caption: |
+          Don't Shoe Me
+      -
+        image_url: "/img/projects/dsm/2.jpg"
+        caption: |
+          Don't Shoe Me
+      -
+        image_url: "/img/projects/dsm/3.jpg"
+        caption: |
+          Don't Shoe Me
+      -
+        image_url: "/img/projects/dsm/4.jpg"
+        caption: |
+          Don't Shoe Me
+      -
+        image_url: "/img/projects/dsm/5.jpg"
+        caption: |
+          Don't Shoe Me
+      -
+        image_url: "/img/projects/dsm/6.jpg"
+        caption: |
+          Don't Shoe Me
+      -
+        image_url: "/img/projects/dsm/7.1.jpg"
+        caption: |
+          Don't Shoe Me
+      -
+        image_url: "/img/projects/dsm/8.jpg"
+        caption: |
+          Don't Shoe Me
+      -
+        image_url: "/img/projects/dsm/9.1.jpg"
+        caption: |
+          Don't Shoe Me
+      -
+        image_url: "/img/projects/dsm/10.jpg"
+        caption: |
+          Don't Shoe Me
+      -
+        image_url: "/img/projects/dsm/11.jpg"
+        caption: |
+          Don't Shoe Me

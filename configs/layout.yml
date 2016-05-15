@@ -336,7 +336,8 @@ objects:
       width: 116
       height: 98
     hotspot: true
-    # popup_slideshow: true
+    popup_slideshow:
+      popup_slideshow_id: "popup_slideshow_rustom"
   -
     id: "portfolio_hotspot_coronet"
     image_url: "/img/portfolio_hotspot_coronet.png"
@@ -348,7 +349,8 @@ objects:
       width: 160
       height: 100
     hotspot: true
-    # popup_slideshow: true
+    popup_slideshow:
+      popup_slideshow_id: "popup_slideshow_coronet"
   -
     id: "city_sketch"
     image_url: "/img/city_sketch.png"
@@ -808,3 +810,119 @@ popup_slideshow:
         image_url: "/img/projects/egg/4.jpg"
         caption: |
           Egg Stall. Client: Silber Jewelry Retailer
+  -
+    id: popup_slideshow_rustom
+    title: "Rustom"
+    image_dimensions:
+      max_height: 920
+    slides:
+      -
+        image_url: "/img/projects/rustom/1. text.jpg"
+        caption: |
+          Rustrom
+      -
+        image_url: "/img/projects/rustom/1.jpg"
+        caption: |
+          Rustrom
+      -
+        image_url: "/img/projects/rustom/2.jpg"
+        caption: |
+          Rustrom
+      -
+        image_url: "/img/projects/rustom/3.jpg"
+        caption: |
+          Rustrom
+      -
+        image_url: "/img/projects/rustom/4.jpg"
+        caption: |
+          Rustrom
+      -
+        image_url: "/img/projects/rustom/5.jpg"
+        caption: |
+          Rustrom
+      -
+        image_url: "/img/projects/rustom/6.jpg"
+        caption: |
+          Rustrom
+      -
+        image_url: "/img/projects/rustom/7.jpg"
+        caption: |
+          Rustrom
+      -
+        image_url: "/img/projects/rustom/8.jpg"
+        caption: |
+          Rustrom
+  -
+    id: popup_slideshow_coronet
+    title: "Coronet"
+    image_dimensions:
+      max_height: 920
+    slides:
+      -
+        image_url: "/img/projects/coronet/1.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/2.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/3.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/4.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/5.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/6.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/7.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/8.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/9.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/10.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/11.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/12.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/13.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/14.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/15.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/16.jpg"
+        caption: |
+          Coronet
+      -
+        image_url: "/img/projects/coronet/17.jpg"
+        caption: |
+          Coronet

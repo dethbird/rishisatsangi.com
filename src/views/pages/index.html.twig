@@ -8,33 +8,46 @@
         var layout = {{layout|json_encode|raw}};
     </script>
     <div id="container" class="object">
-    {% for object in layout.objects %}
-      {% if object.image_url %}
-      <img
-        src="{{object.image_url}}"
-        id="{{object.id}}"
-        class="object
-        {% if object.click_scroll %} click-scroll{% endif %}
-        {% if object.rotate %} rotate{% endif %}
-        {% if object.flicker %} flicker{% endif %}
-        {% if object.slide_in %} slide-in{% endif %}
-        {% if object.always_on_top %} always-on-top{% endif %}
-        {% if object.sequence %} sequence{% endif %}
-        {% if object.from_to %} from-to{% endif %}
-        "
-        style="top: {{object.location.top}}px; left: {{object.location.left}}px; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px;"
-        {% if object.alt %} title={{object.alt}}{% endif %}
-      />
-      {% endif %}
-    {% endfor %}
-    {% for object in layout.text %}
-      <div
-        id="{{object.id}}"
-        class="object text
-        {% if object.slide_in %} slide-in{% endif %}"
-        style="top: {{object.location.top}}px; left: {{object.location.left}}px; overflow-y: {{object.overflow.y}}; overflow-x: {{object.overflow.x}}; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px; text-align: {{object.text_align}};"
-      >{{object.copy|raw|markdown}}</div>
-    {% endfor %}
+      {% for object in layout.objects %}
+        {% if object.image_url %}
+        <img
+          src="{{object.image_url}}"
+          id="{{object.id}}"
+          class="object
+          {% if object.click_scroll %} click-scroll{% endif %}
+          {% if object.rotate %} rotate{% endif %}
+          {% if object.flicker %} flicker{% endif %}
+          {% if object.slide_in %} slide-in{% endif %}
+          {% if object.always_on_top %} always-on-top{% endif %}
+          {% if object.sequence %} sequence{% endif %}
+          {% if object.from_to %} from-to{% endif %}
+          {% if object.popup_banner %} popup-banner-trigger{% endif %}
+          "
+          style="top: {{object.location.top}}px; left: {{object.location.left}}px; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px;"
+          {% if object.alt %} title="{{object.alt}}"{% endif %}
+        />
+        {% endif %}
+      {% endfor %}
+      {% for object in layout.text %}
+        <div
+          id="{{object.id}}"
+          class="object text
+          {% if object.slide_in %} slide-in{% endif %}"
+          style="top: {{object.location.top}}px; left: {{object.location.left}}px; overflow-y: {{object.overflow.y}}; overflow-x: {{object.overflow.x}}; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px; text-align: {{object.text_align}};"
+        >{{object.copy|raw|markdown}}</div>
+      {% endfor %}
+
+      {% for object in layout.popup_banner %}
+        <div id="{{object.id}}" class="popup-content">{{object.copy|raw|markdown}}</div>
+      {% endfor %}
+      <div id="popup_banner">
+        <div class="row">
+          <div class="pull-right"><i class="fa fa-times fa-3 close" aria-hidden="true"></i></div>
+        </div>
+        <div class="row">
+          <div class="popup-content-body col-xs-12"></div>
+        </div>
+      </div>
     </div>
 {% endblock %}
 

@@ -4,6 +4,7 @@ var FromToView = require('./animations/FromToView');
 var SequenceView = require('./animations/SequenceView');
 var ClickScrollView = require('./buttons/ClickScrollView');
 var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
+var PopupBannerView = require('./ui/PopupBannerView');
 
 var HorizontalPanelView = Backbone.View.extend({
     w: null,
@@ -75,6 +76,16 @@ var HorizontalPanelView = Backbone.View.extend({
               new FromToView({
                 el: '#' + e.attr('id'),
                 object: object,
+                parent: that
+              });
+            }
+
+            if (e.hasClass('popup-banner-trigger')) {
+              new PopupBannerView({
+                el: '#' + e.attr('id'),
+                popup_el: '#popup_banner',
+                object: object,
+                popup_details: _.findWhere(that.layout.popup_banner, {'id': object.popup_banner.popup_content_id}),
                 parent: that
               });
             }

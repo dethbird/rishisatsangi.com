@@ -1,17 +1,28 @@
 body {
   margin: 0 0 0 0;
   overflow-y: hidden;
+  position: relative;
+  font-family: "Times New Roman", Times, serif;
 }
 #container {
+  margin-top: 25px;
   width: 7740px;
   height: 980px;
   display: block;
   position: relative;
   overflow-x: hidden;
 }
+#popup_banner {
+  z-index: 5000;
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  display: none;
+}
 .object, .text {
   position: absolute;
   display: block;
+  z-index: 1;
 }
 .text p {
   background-color: rgba(255,255,255,0.8);
@@ -19,9 +30,24 @@ body {
 .slide-in {
   opacity: 0
 }
-.click-scroll {
+.click-scroll, .popup-banner-trigger {
   cursor: pointer;
 }
 .flicker {
   opacity: 0;
+}
+.popup-content {
+  display: none;
+}
+.row {
+  margin: 0;
+}
+.close, .close:hover {
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+  opacity: 1;
+}
+.pull-right {
+  text-align: right;
 }

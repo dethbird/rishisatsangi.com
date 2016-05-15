@@ -188,48 +188,75 @@ objects:
   -
     id: "resume_ba"
     image_url: "/img/resume_ba.png"
+    alt: "BA"
     location:
       top: 45
       left: 2952
     dimensions:
       width: 242
       height: 68
+    popup_banner:
+      popup_content_id: "resume_ba_popup"
   -
     id: "resume_ms"
     image_url: "/img/resume_ms.png"
+    alt: "MS"
     location:
       top: 177
       left: 2760
     dimensions:
       width: 238
       height: 144
+    popup_banner:
+      popup_content_id: "resume_ms_popup"
   -
     id: "resume_grad_assoc"
     image_url: "/img/resume_grad_assoc.png"
+    alt: "Grad Associates"
     location:
       top: 874
       left: 3131
     dimensions:
       width: 188
       height: 91
+    popup_banner:
+      popup_content_id: "resume_grad_assoc_popup"
+  -
+    id: "resume_diabes"
+    image_url: "/img/resume_diabes.png"
+    alt: "Diabes"
+    location:
+      top: 675
+      left: 3403
+    dimensions:
+      width: 189
+      height: 91
+    popup_banner:
+      popup_content_id: "resume_diabes_popup"
   -
     id: "resume_buck_moorhead"
     image_url: "/img/resume_buck_moorhead.png"
+    alt: "Buck Moorhead"
     location:
       top: 533
       left: 2702
     dimensions:
       width: 222
       height: 90
+    popup_banner:
+      popup_content_id: "resume_buck_moorhead_popup"
   -
     id: "resume_corgan"
     image_url: "/img/resume_corgan.png"
+    alt: "Corgan"
     location:
-      top: 155
+      top: 175
       left: 3547
     dimensions:
       width: 203
       height: 121
+    popup_banner:
+      popup_content_id: "resume_corgan_popup"
   -
     id: "portfolio_sketch"
     image_url: "/img/portfolio_sketch.png"
@@ -455,3 +482,114 @@ text:
       y: "auto"
       x: "hidden"
     text_align: "center"
+popup_banner:
+  -
+    id: "resume_ba_popup"
+    copy: |
+      <div class="col-xs-12">
+        <div class="pull-left col-xs-10">
+          <h1>Bachelor of Architecture</h1>
+          <p>University of Mumbai, India</p>
+        </div>
+        <div class="pull-right col-xs-2">
+          <strong>May 2003</strong>
+        </div>
+      </div>
+    screen_location:
+      left: 0
+      top: 50
+    dimensions:
+      width: 1920
+      height: auto
+  -
+    id: "resume_ms_popup"
+    copy: |
+      <div class="col-xs-12">
+        <div class="pull-left col-xs-10">
+          <h1>Masters of Science in Sustainable Design</h1>
+          <p>Carnegie Mellon University, USA</p>
+        </div>
+        <div class="pull-right col-xs-2">
+          <strong>May 2005</strong>
+        </div>
+      </div>
+    screen_location:
+      left: 0
+      top: 150
+    dimensions:
+      width: 1920
+      height: auto
+  -
+    id: "resume_corgan_popup"
+    copy: |
+      <div class="col-xs-12">
+        <div class="pull-left col-xs-10">
+          <h1>Corgan Associates, Project Architect</h1>
+          <p>Manhattan, NY</p>
+        </div>
+        <div class="pull-right col-xs-2">
+          <strong>04/14 - Present</strong>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <ul>
+          <li>Unilever, Corporate Interior, Multi-storey high-end experiential interior design project for a world renowned Consumer Product Company in Tribeca, Manhattan (20,000 SF): Project Manager and Designer. Lead the project from start to finish.</li>
+          <li>NASDAQ, Corporate Interior, Two storey high-end corporate interior design project for a top Finance and Technology Company in Time Square, Manhattan (20,000 SF): Senior Designer. Designed the space to fit the needs of the client’s aesthetic, brand, schedule and budget.  </li>
+        </ul>
+      </div>
+  -
+    id: "resume_buck_moorhead_popup"
+    copy: |
+      <div class="col-xs-12">
+        <div class="pull-left col-xs-10">
+          <h1>Buck Moorhead Architect, Junior Architect</h1>
+          <p>New York, NY</p>
+        </div>
+        <div class="pull-right col-xs-2">
+          <strong>08/05 - 10/06</strong>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <ul>
+          <li>Audubon Center for Sustainability, Interpretive Center, LEED certification aimed, Albany, NY, (3,000 sf):  LEED consultant, Schematic Design.</li>
+          <li>Small Residential Lofts and apartment interior Renovation Projects, NYC, NY: Survey, DOB Filling, Construction Documents.</li>
+        </ul>
+      </div>
+  -
+    id: "resume_grad_assoc_popup"
+    copy: |
+      <div class="col-xs-12">
+        <div class="pull-left col-xs-10">
+          <h1>Grad Associates, P.A., Intermediate Architect</h1>
+          <p>Newark, NJ</p>
+        </div>
+        <div class="pull-right col-xs-2">
+          <strong>10/06 - 01/10</strong>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <ul>
+          <li>Rensselaer Education Center, Green Building Award winning project, LEED Platinum aimed, 8.8-acre Ecological Park with a Center for Sustainability, Rensselaer, NY, (3,800 sf):  LEED Online, Redesign for value engineering, Project Management.</li>
+          <li>Standard Chartered Bank, Cooperate Office Interiors, Newark, NJ (45,000 sf): Survey, Schematic Design, Product Research, Construction Documents.</li>
+          <li>Starbucks Café, Café Interiors, Newark, NJ (500 SF): Survey, Project and Design coordination with company Standards and specifications, Site supervision.</li>
+          <li>700 Broadway, Lobby Interior Design, New York, NY (600 sf): Schematic Design, Design Development.</li>
+        </ul>
+      </div>
+  -
+    id: "resume_diabes_popup"
+    copy: |
+      <div class="col-xs-12">
+        <div class="pull-left col-xs-10">
+          <h1>Daibes Design Group, Intermediate Architect</h1>
+          <p>Edgewater, NJ</p>
+        </div>
+        <div class="pull-right col-xs-2">
+          <strong>01/10 – 04/14</strong>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <ul>
+          <li>The Alexander, Multi-storey Luxury Residential Apartment project in Edgewater, NJ (650,000 SF, 300 apartments): Construction Documents, Project Coordination and Construction Administration.</li>
+          <li>Multiple small to midsized residential and commercial development projects in New Jersey.</li>
+        </ul>
+      </div>

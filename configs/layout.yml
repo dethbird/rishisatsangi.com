@@ -323,7 +323,8 @@ objects:
       width: 57
       height: 80
     hotspot: true
-    # popup_slideshow: true
+    popup_slideshow:
+      popup_slideshow_id: "popup_slideshow_egg"
   -
     id: "portfolio_hotspot_rustom"
     image_url: "/img/portfolio_hotspot_rustom.png"
@@ -785,3 +786,25 @@ popup_slideshow:
         image_url: "/img/projects/unilever/28.jpg"
         caption: |
            28
+  -
+    id: popup_slideshow_egg
+    title: "Egg"
+    image_dimensions:
+      max_height: 920
+    slides:
+      -
+        image_url: "/img/projects/egg/1.jpg"
+        caption: |
+          Egg Stall. Client: Silber Jewelry Retailer
+      -
+        image_url: "/img/projects/egg/2.jpg"
+        caption: |
+          Egg Stall. Client: Silber Jewelry Retailer
+      -
+        image_url: "/img/projects/egg/3.jpg"
+        caption: |
+          Egg Stall. Client: Silber Jewelry Retailer
+      -
+        image_url: "/img/projects/egg/4.jpg"
+        caption: |
+          Egg Stall. Client: Silber Jewelry Retailer

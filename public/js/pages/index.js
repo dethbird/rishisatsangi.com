@@ -475,14 +475,6 @@ var PopupSlideshowView = Backbone.View.extend({
           });
         });
 
-        // _.each(that.jQpopup.find('.popup-slideshow-image.portrait'), function(e){
-        //   e = $(e);
-        //   e.css({
-        //     maxHeight: that.parent.scaleFactor * that.popup_details.image_dimensions.portrait.height,
-        //     width: 'auto'
-        //   });
-        // });
-
         that.jQpopup.show();
 
         TweenLite.to(

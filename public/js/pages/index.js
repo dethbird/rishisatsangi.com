@@ -459,29 +459,29 @@ var PopupSlideshowView = Backbone.View.extend({
 
         that.jQpopup.find('.popup-controls .indicator').html(that.currentIndex +  1 + '/' + that.popup_details.slides.length);
 
-        _.each(that.jQpopup.find('.popup-slideshow-image.landscape'), function(e){
+        _.each(that.jQpopup.find('.popup-slideshow-image'), function(e){
           e = $(e);
           e.css({
-            width: that.parent.scaleFactor * that.popup_details.image_dimensions.landscape.width,
-            height: 'auto'
+            height: that.parent.scaleFactor * that.popup_details.image_dimensions.max_height,
+            width: 'auto'
           });
         });
 
         _.each(that.jQpopup.find('iframe'), function(e){
           e = $(e);
           e.css({
-            width: that.parent.scaleFactor * that.popup_details.image_dimensions.landscape.width,
-            height: that.parent.scaleFactor * that.popup_details.image_dimensions.landscape.width * 0.75
+            height: that.parent.scaleFactor * that.popup_details.image_dimensions.max_height,
+            width: that.parent.scaleFactor * that.popup_details.image_dimensions.max_height * 1.25
           });
         });
 
-        _.each(that.jQpopup.find('.popup-slideshow-image.portrait'), function(e){
-          e = $(e);
-          e.css({
-            height: that.parent.scaleFactor * that.popup_details.image_dimensions.portrait.height,
-            width: 'auto'
-          });
-        });
+        // _.each(that.jQpopup.find('.popup-slideshow-image.portrait'), function(e){
+        //   e = $(e);
+        //   e.css({
+        //     maxHeight: that.parent.scaleFactor * that.popup_details.image_dimensions.portrait.height,
+        //     width: 'auto'
+        //   });
+        // });
 
         that.jQpopup.show();
 

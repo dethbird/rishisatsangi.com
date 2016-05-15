@@ -39,16 +39,24 @@ body {
 #popup_slideshow {
   z-index: 5000;
   position: absolute;
-  background-color: #000;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
   display: none;
   /*border:dotted 4px #000000;*/
+}
+#popup_slideshow .popup-controls.top-controls {
+  position: absolute;
+  top: 0;
+}
+#popup_slideshow .popup-controls.center-controls {
+  position: absolute;
+  top: 50%;
 }
 #popup_slideshow .popup-controls i,
 #popup_slideshow .popup-controls i:hover {
   padding: 10px 15px 0px 0px;
   cursor: pointer;
-  color: #fff;
+  color: #000;
   opacity: 1;
   font-size: 24px;
 }
@@ -61,12 +69,13 @@ body {
   font-size: 24px;
 }
 #popup_slideshow .popup-content-body {
+  position: absolute;
   text-align: center;
   padding: 25px;
 }
 #popup_slideshow .caption {
-  text-align: left;
-  font-size: 24px;
+  margin-top: 5px;
+  text-align: center;
 }
 #popup_banner li, #popup_banner p {
   font-size: 21px;

@@ -268,6 +268,7 @@ objects:
       height: 866
     parallax:
       parallax_id: portfolio_parallax
+      scale: 0.16
   -
     id: "portfolio_bg_02"
     image_url: "/img/portfolio_bg_02.png"
@@ -279,6 +280,7 @@ objects:
       height: 844
     parallax:
       parallax_id: portfolio_parallax
+      scale: 0.08
   -
     id: "portfolio_bg_01"
     image_url: "/img/portfolio_bg_01.png"
@@ -290,6 +292,7 @@ objects:
       height: 841
     parallax:
       parallax_id: portfolio_parallax
+      scale: 0.04
   -
     id: "portfolio_sketch"
     image_url: "/img/portfolio_sketch.png"
@@ -529,6 +532,12 @@ objects:
       duration: 1.5
     always_on_top:
       duration: 1
+parallax:
+  -
+    id: portfolio_parallax
+    location:
+      left: 4850
+      top: 680
 text:
   -
     id: "bio_text"

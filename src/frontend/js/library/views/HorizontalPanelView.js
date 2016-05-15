@@ -1,6 +1,7 @@
 var FlickerView = require('./animations/FlickerView');
 var SlideIntoView = require('./animations/SlideIntoView');
 var FromToView = require('./animations/FromToView');
+var ParallaxView = require('./animations/ParallaxView');
 var SequenceView = require('./animations/SequenceView');
 var ClickScrollView = require('./buttons/ClickScrollView');
 var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
@@ -98,6 +99,15 @@ var HorizontalPanelView = Backbone.View.extend({
                 popup_el: '#' + object.popup_slideshow.popup_slideshow_id,
                 object: object,
                 popup_details: _.findWhere(that.layout.popup_slideshow, {'id': object.popup_slideshow.popup_slideshow_id}),
+                parent: that
+              });
+            }
+
+            if (e.hasClass('parallax')) {
+              var parallaxView = new ParallaxView({
+                el: '#' + e.attr('id'),
+                object: object,
+                parallax_details: _.findWhere(that.layout.parallax, {'id': object.parallax.parallax_id}),
                 parent: that
               });
             }

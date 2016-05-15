@@ -2,6 +2,7 @@
 var FlickerView = require('./animations/FlickerView');
 var SlideIntoView = require('./animations/SlideIntoView');
 var FromToView = require('./animations/FromToView');
+var ParallaxView = require('./animations/ParallaxView');
 var SequenceView = require('./animations/SequenceView');
 var ClickScrollView = require('./buttons/ClickScrollView');
 var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
@@ -103,6 +104,15 @@ var HorizontalPanelView = Backbone.View.extend({
               });
             }
 
+            if (e.hasClass('parallax')) {
+              var parallaxView = new ParallaxView({
+                el: '#' + e.attr('id'),
+                object: object,
+                parallax_details: _.findWhere(that.layout.parallax, {'id': object.parallax.parallax_id}),
+                parent: that
+              });
+            }
+
             if (e.hasClass('always-on-top')) {
               that.alwaysOnTopManager.addObject(object);
             }
@@ -148,7 +158,7 @@ var HorizontalPanelView = Backbone.View.extend({
 
 module.exports = HorizontalPanelView;
 
-},{"./animations/FlickerView":2,"./animations/FromToView":3,"./animations/SequenceView":4,"./animations/SlideIntoView":5,"./buttons/ClickScrollView":6,"./ui/AlwaysOnTopManagerView":7,"./ui/PopupBannerView":8,"./ui/PopupSlideshowView":9}],2:[function(require,module,exports){
+},{"./animations/FlickerView":2,"./animations/FromToView":3,"./animations/ParallaxView":4,"./animations/SequenceView":5,"./animations/SlideIntoView":6,"./buttons/ClickScrollView":7,"./ui/AlwaysOnTopManagerView":8,"./ui/PopupBannerView":9,"./ui/PopupSlideshowView":10}],2:[function(require,module,exports){
 var FlickerView = Backbone.View.extend({
     initialize: function(options) {
         var that = this;
@@ -232,6 +242,42 @@ var FromTo = Backbone.View.extend({
 module.exports = FromTo;
 
 },{}],4:[function(require,module,exports){
+var ParallaxView = Backbone.View.extend({
+    object: null,
+    parent: null,
+    currentIndex: null,
+    timeout: null,
+    initialize: function(options) {
+        var that = this;
+        that.object = options.object;
+        that.parent = options.parent;
+        that.parallax_details = options.parallax_details;
+        that.parent.w.mousemove(_.bind($.debounce(1, that.animate), that));
+    },
+    animate: function(e) {
+        var that = this;
+        $('#' + that.object.id).css({
+          left: that.parent.scaleFactor * ((that.object.location.left + (
+            -1 * (
+              e.screenX + window.scrollX -
+              (that.parent.scaleFactor * that.parallax_details.location.left)
+            ) * that.object.parallax.scale
+          ))),
+          top: that.parent.scaleFactor * ((that.object.location.top + (
+            -1 * (
+              e.screenY + window.scrollY -
+              (that.parent.scaleFactor * that.parallax_details.location.top)
+            ) * that.object.parallax.scale
+          )))
+        });
+
+
+    }
+});
+
+module.exports = ParallaxView;
+
+},{}],5:[function(require,module,exports){
 var SequenceView = Backbone.View.extend({
     object: null,
     parent: null,
@@ -264,7 +310,7 @@ var SequenceView = Backbone.View.extend({
 
 module.exports = SequenceView;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var SlideIntoView = Backbone.View.extend({
     object: null,
     scaleFactor: 1,
@@ -294,7 +340,7 @@ var SlideIntoView = Backbone.View.extend({
 
 module.exports = SlideIntoView;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var ClickScrollView = Backbone.View.extend({
     object: null,
     parent: null,
@@ -323,7 +369,7 @@ var ClickScrollView = Backbone.View.extend({
 
 module.exports = ClickScrollView;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var AlwaysOnTopManagerView = Backbone.View.extend({
     objects: [],
     parent: null,
@@ -355,7 +401,7 @@ var AlwaysOnTopManagerView = Backbone.View.extend({
 
 module.exports = AlwaysOnTopManagerView;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var PopupBannerView = Backbone.View.extend({
     objects: [],
     parent: null,
@@ -402,7 +448,7 @@ var PopupBannerView = Backbone.View.extend({
 
 module.exports = PopupBannerView;
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var PopupSlideshowView = Backbone.View.extend({
     objects: [],
     parent: null,
@@ -488,7 +534,7 @@ var PopupSlideshowView = Backbone.View.extend({
 
 module.exports = PopupSlideshowView;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var HorizontalPanelView = require('../library/views/HorizontalPanelView');
 
 var horizontalPanelView = new HorizontalPanelView({
@@ -496,4 +542,4 @@ var horizontalPanelView = new HorizontalPanelView({
     layout: layout
 });
 
-},{"../library/views/HorizontalPanelView":1}]},{},[10]);
+},{"../library/views/HorizontalPanelView":1}]},{},[11]);

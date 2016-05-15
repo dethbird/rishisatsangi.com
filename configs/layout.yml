@@ -267,6 +267,55 @@ objects:
       width: 1672
       height: 866
   -
+    id: "portfolio_hotspot_unilever"
+    image_url: "/img/portfolio_hotspot_unilever.png"
+    alt: "Unilever"
+    location:
+      top: 564
+      left: 4186
+    dimensions:
+      width: 99
+      height: 126
+    hotspot: true
+    popup_slideshow:
+      popup_slideshow_id: "popup_slideshow_unilever"
+  -
+    id: "portfolio_hotspot_egg"
+    image_url: "/img/portfolio_hotspot_egg.png"
+    alt: "Egg Stall"
+    location:
+      top: 601
+      left: 4627
+    dimensions:
+      width: 57
+      height: 80
+    hotspot: true
+    # popup_slideshow: true
+  -
+    id: "portfolio_hotspot_rustom"
+    image_url: "/img/portfolio_hotspot_rustom.png"
+    alt: "Rustom"
+    location:
+      top: 583
+      left: 4806
+    dimensions:
+      width: 116
+      height: 98
+    hotspot: true
+    # popup_slideshow: true
+  -
+    id: "portfolio_hotspot_coronet"
+    image_url: "/img/portfolio_hotspot_coronet.png"
+    alt: "Coronet"
+    location:
+      top: 390
+      left: 5016
+    dimensions:
+      width: 160
+      height: 100
+    hotspot: true
+    # popup_slideshow: true
+  -
     id: "city_sketch"
     image_url: "/img/city_sketch.png"
     location:
@@ -445,7 +494,7 @@ text:
     id: "contact_text"
     copy: |
       You can often find Prutha riding her zebralephant in the East village.
-      But for the rest of the times find her at:
+      But for the rest of the times find her at:<br />
       405 E 6th street<br />
       New York, NY10009
 
@@ -572,3 +621,168 @@ popup_banner:
           <li>Multiple small to midsized residential and commercial development projects in New Jersey.</li>
         </ul>
       </div>
+popup_slideshow:
+  -
+    id: popup_slideshow_unilever
+    title: "Unilever"
+    image_dimensions:
+      landscape:
+        width: 900
+        height: "auto"
+      portrait:
+        width: "auto"
+        height: 875
+    slides:
+      -
+        image_url: "/img/projects/unilever/1.Loung Seating in Cafe with Touch Screen Coffee Tables.jpg"
+        caption: |
+          Lounge Seating in Cafe with Touch Screen Coffee Tables
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/2. Reception Desk.jpg"
+        caption: |
+          Reception Desk
+        orientation: portrait
+      -
+        image_url: "/img/projects/unilever/3. Site Sketch for Reception Desk Power and Data .jpg"
+        caption: |
+          Site Sketch for Reception Desk Power and Data
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/4. Waiting Area.jpg"
+        caption: |
+          Waiting Area
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/5.jpg"
+        caption: |
+          Signage
+        orientation: landscape
+      -
+        markup: |
+          <iframe src="https://www.youtube.com/embed/yYeXPATWRtc" frameborder="0" allowfullscreen></iframe>
+        caption: |
+          The Tunnel is the experiential portal into the entire space.
+          Set up as a white box art gallery to receive new art from
+           time to time, the tunnel has ceiling mounted projectors,
+          color changing lights, scent dispensers installed within
+          the air supply system and provision for future smoke
+          machines. Employees are treated to some inspiration
+          before commencing work everyday as they walk through
+           this tunnel to get to their work stations.
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/7. Cafe with custom millwork and food carts.jpg"
+        caption: |
+          Cafe with custom millwork and food carts
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/8.Internal Stair between two floors.jpg"
+        caption: |
+           Internal Stair between two floors
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/9. Site before commencement of any work.jpg"
+        caption: |
+           Site before commencement of any work
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/10. Slab cutout to receive new internal stair.jpg"
+        caption: |
+           Slab cutout to receive new internal stair
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/11. Men of steel installing the stair structure.jpg"
+        caption: |
+           Men of steel installing the stair structure
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/12. Final Stair with digital screen art at Mid-landing.jpg"
+        caption: |
+           Final Stair with digital screen art at Mid-landing
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/12.5. Cafe space with a large moveable Video wall on Barn Door Hardware and steel framework.jpg"
+        caption: |
+           Cafe space with a large moveable Video wall on Barn Door Hardware and steel framework
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/13. Material selection excersise with the client.jpg"
+        caption: |
+           Material selection excersise with the client
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/14. Best assistant ever.jpg"
+        caption: |
+           Best assistant ever
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/15.Site Learnings.jpg"
+        caption: |
+           Site Learnings
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/16.jpg"
+        caption: |
+           16
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/17Custom designed and built Wet Wall and Tea Point.jpg"
+        caption: |
+           Custom designed and built Wet Wall and Tea Point
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/18 Custom design and built Scent Wall and Materials wall.jpg"
+        caption: |
+           Custom design and built Scent Wall and Materials wall
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/19.jpg"
+        caption: |
+           19
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/20. Neon Light installation above Material Wall Millwork.jpg"
+        caption: |
+           Neon Light installation above Material Wall Millwork
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/21. My Contractor entertaining my Bindi fetish.jpg"
+        caption: |
+           My Contractor entertaining my Bindi fetish
+        orientation: portrait
+      -
+        image_url: "/img/projects/unilever/22. Coccon Chair outside the Artist Studio.jpg"
+        caption: |
+           Coccon Chair outside the Artist Studio
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/23. Plenary under construction.jpg"
+        caption: |
+           Plenary under construction
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/24. Plenary complete.jpg"
+        caption: |
+           Plenary complete
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/25. Roof Deck Under Construction.jpg"
+        caption: |
+           Roof Deck Under Construction
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/26. Roof Deck and Skylight completed.jpg"
+        caption: |
+           Roof Deck and Skylight completed
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/27.jpg"
+        caption: |
+           27
+        orientation: landscape
+      -
+        image_url: "/img/projects/unilever/28.jpg"
+        caption: |
+           28
+        orientation: landscape

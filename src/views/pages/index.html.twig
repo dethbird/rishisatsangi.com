@@ -22,6 +22,8 @@
           {% if object.sequence %} sequence{% endif %}
           {% if object.from_to %} from-to{% endif %}
           {% if object.popup_banner %} popup-banner-trigger{% endif %}
+          {% if object.hotspot %} hotspot{% endif %}
+          {% if object.popup_slideshow %} popup-slideshow-trigger{% endif %}
           "
           style="top: {{object.location.top}}px; left: {{object.location.left}}px; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px;"
           {% if object.alt %} title="{{object.alt}}"{% endif %}
@@ -42,12 +44,52 @@
       {% endfor %}
       <div id="popup_banner">
         <div class="row">
-          <div class="pull-right"><i class="fa fa-times fa-3 close" aria-hidden="true"></i></div>
+          <div class="pull-right popup-controls">
+            <i class="fa fa-times fa-5 close" aria-hidden="true"></i>
+          </div>
         </div>
         <div class="row">
           <div class="popup-content-body col-xs-12"></div>
         </div>
       </div>
+      {% for slideshow in layout.popup_slideshow %}
+        {% for object in slideshow.slides %}
+        <div id="{{slideshow.id}}{{loop.index0}}" class="popup-content">
+          <div class="row">
+            <div class="col-xs-7 popup-media">
+              {% if object.image_url %}
+                <img src="{{object.image_url}}" class="popup-slideshow-image {{object.orientation}}"/>
+              {% endif %}
+              {% if object.markup %}
+                {{object.markup|raw|markdown}}
+              {% endif %}
+            </div>
+            <div class="col-xs-5 caption">
+              {{object.caption|raw}}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% endfor %}
+
+      <div id="popup_slideshow">
+        <div class="row popup-controls">
+          <div class="pull-left">
+            <span class="title">Farts</span>
+            <span class="indicator">1/12</span>
+          </div>
+          <div class="pull-right">
+            <i class="fa fa-caret-left fa-5 prev" aria-hidden="true"></i>
+            <i class="fa fa-caret-right fa-5 next" aria-hidden="true"></i>
+            <i class="fa fa-times fa-5 close" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="popup-content-body col-xs-12"></div>
+        </div>
+      </div>
+
+
     </div>
 {% endblock %}
 

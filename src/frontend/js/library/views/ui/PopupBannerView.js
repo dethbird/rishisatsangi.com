@@ -29,16 +29,6 @@ var PopupBannerView = Backbone.View.extend({
         );
         that.jQpopup.show();
 
-        // console.log(
-        //   that.parent.w.height() - that.jQpopup.height()
-        // );
-        // that.jQpopup.css({
-        //   left: window.scrollX,
-        //   top: "50%",
-        //   width: that.parent.w.width(),
-        //   height: 'auto'
-        // });
-
         TweenLite.to(
           that.popup_el,
           1,

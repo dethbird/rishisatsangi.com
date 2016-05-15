@@ -36,8 +36,48 @@ body {
   display: none;
   /*border:dotted 4px #000000;*/
 }
+#popup_slideshow {
+  z-index: 5000;
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  display: none;
+  /*border:dotted 4px #000000;*/
+}
+#popup_slideshow .popup-controls i,
+#popup_slideshow .popup-controls i:hover {
+  padding: 10px 15px 0px 0px;
+  cursor: pointer;
+  color: #fff;
+  opacity: 1;
+  font-size: 24px;
+}
+#popup_slideshow .popup-controls span.title,
+#popup_slideshow .popup-controls span.indicator {
+  padding: 10px 0px 0px 15px;
+  cursor: pointer;
+  color: #fff;
+  opacity: 1;
+  font-size: 24px;
+}
+#popup_slideshow .popup-content-body {
+  text-align: center;
+  padding: 25px;
+}
+#popup_slideshow .caption {
+  text-align: left;
+  font-size: 24px;
+}
 #popup_banner li, #popup_banner p {
   font-size: 21px;
+}
+#popup_banner .popup-controls i,
+#popup_banner .popup-controls i:hover {
+  padding: 10px 15px 0px 0px;
+  cursor: pointer;
+  color: #fff;
+  opacity: 1;
+  font-size: 24px;
 }
 .object, .text {
   position: absolute;
@@ -51,23 +91,21 @@ body {
 .slide-in {
   opacity: 0
 }
-.click-scroll, .popup-banner-trigger {
+.click-scroll, .popup-banner-trigger, .popup-slideshow-trigger {
   cursor: pointer;
 }
 .flicker {
   opacity: 0;
+}
+img.hotspot {
+  opacity: 0;
+  cursor: pointer;
 }
 .popup-content {
   display: none;
 }
 .row {
   margin: 0;
-}
-.close, .close:hover {
-  padding: 10px;
-  cursor: pointer;
-  color: #fff;
-  opacity: 1;
 }
 .pull-right {
   text-align: right;

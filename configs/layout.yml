@@ -356,11 +356,11 @@ objects:
     image_url: "/img/portfolio_hotspot_coronet.png"
     alt: "Coronet"
     location:
-      top: 390
-      left: 5016
+      top: 654
+      left: 5294
     dimensions:
-      width: 160
-      height: 100
+      width: 107
+      height: 95
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_coronet"
@@ -1023,52 +1023,52 @@ popup_slideshow:
       -
         image_url: "/img/projects/nasdaq/4.jpg"
         caption: |
-          NASDAQ
+          Pantry - Design Rendering
       -
         image_url: "/img/projects/nasdaq/5.jpg"
         caption: |
-          NASDAQ
+          Pantry - During Construction
       -
         image_url: "/img/projects/nasdaq/6.jpg"
         caption: |
-          NASDAQ
+          Pantry - Completed
       -
         image_url: "/img/projects/nasdaq/7.jpg"
         caption: |
-          NASDAQ
+          Pantry
       -
         image_url: "/img/projects/nasdaq/8.jpg"
         caption: |
-          NASDAQ
+          Network Operations Center - Design Rendering included a projector in the ceiling that would project a long exposure live feed of people from the streets of Time Square
       -
         image_url: "/img/projects/nasdaq/9.jpg"
         caption: |
-          NASDAQ
+          NOC Design Option Rendering  -Paul Smith Wallcovering to represent the ligths and eergy of Time Square
       -
         image_url: "/img/projects/nasdaq/10.jpg"
         caption: |
-          NASDAQ
+          NOC - Completed
       -
         image_url: "/img/projects/nasdaq/11.jpg"
         caption: |
-          NASDAQ
+          Brick Detail  during construction
       -
         image_url: "/img/projects/nasdaq/12.jpg"
         caption: |
-          NASDAQ
+          Brick Detail post completion
       -
         image_url: "/img/projects/nasdaq/13.jpg"
         caption: |
-          NASDAQ
+          Design Rendering of Meeting Rooms
       -
         image_url: "/img/projects/nasdaq/14.jpg"
         caption: |
-          NASDAQ
+          Completed Meeting Rooms
       -
         image_url: "/img/projects/nasdaq/15.jpg"
         caption: |
-          NASDAQ
+          Open Collaboration Zone
       -
         image_url: "/img/projects/nasdaq/16.jpg"
         caption: |
-          NASDAQ
+          Nasdaq NoEdit--56

@@ -331,7 +331,7 @@ objects:
       scroll_x: 0
       duration: 1
     location:
-      top: 364
+      top: 370
       left: 32
     dimensions:
       width: 315
@@ -350,7 +350,7 @@ objects:
       scroll_x: 382
       duration: 1
     location:
-      top: 411
+      top: 417
       left: 32
     dimensions:
       width: 43
@@ -400,25 +400,6 @@ objects:
     always_on_top:
       duration: 1
   -
-    id: "menu_publications"
-    image_url: "/img/menu_publications.png"
-    alt: "Publications"
-    click_scroll:
-      scroll_x: 0
-      duration: 1
-    location:
-      top: 532
-      left: 32
-    dimensions:
-      width: 170
-      height: 31
-    slide_in:
-      top: -532
-      left: 32
-      duration: 1.5
-    always_on_top:
-      duration: 1
-  -
     id: "menu_contact"
     image_url: "/img/menu_contact.png"
     alt: "Contact"
@@ -426,7 +407,7 @@ objects:
       scroll_x: 5748
       duration: 1
     location:
-      top: 569
+      top: 525
       left: 32
     dimensions:
       width: 112
@@ -464,14 +445,12 @@ text:
     id: "contact_text"
     copy: |
       You can often find Prutha riding her zebralephant in the East village.
-
       But for the rest of the times find her at:
-
       405 E 6th street<br />
       New York, NY10009
 
-      Email: prutharaithatha@gmail.com<br />
-      BatMobile: 917-971-6271
+      Email: <a href="mailto:prutharaithatha@gmail.com">prutharaithatha@gmail.com</a><br />
+      BatMobile: <a href="callto:9179719271">917-971-6271</a>
     location:
       top: 450
       left: 7235

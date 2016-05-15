@@ -295,10 +295,10 @@ objects:
     image_url: "/img/portfolio_sketch.png"
     location:
       top: 225
-      left: 4125
+      left: 4104
     dimensions:
-      width: 1541
-      height: 544
+      width: 1585
+      height: 703
   -
     id: "portfolio_hotspot_unilever"
     image_url: "/img/portfolio_hotspot_unilever.png"

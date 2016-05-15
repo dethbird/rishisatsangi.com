@@ -313,6 +313,19 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_unilever"
   -
+    id: "portfolio_hotspot_nasdaq"
+    image_url: "/img/portfolio_hotspot_nasdaq.png"
+    alt: "Unilever"
+    location:
+      top: 413
+      left: 4351
+    dimensions:
+      width: 85
+      height: 274
+    hotspot: true
+    popup_slideshow:
+      popup_slideshow_id: "popup_slideshow_nasdaq"
+  -
     id: "portfolio_hotspot_egg"
     image_url: "/img/portfolio_hotspot_egg.png"
     alt: "Egg Stall"
@@ -445,7 +458,7 @@ objects:
     image_url: "/img/menu_bio.png"
     alt: "Bio"
     click_scroll:
-      scroll_x: 382
+      scroll_x: 0
       duration: 1
     location:
       top: 417
@@ -989,3 +1002,73 @@ popup_slideshow:
         image_url: "/img/projects/dsm/11.jpg"
         caption: |
           Don't Shoe Me
+  -
+    id: popup_slideshow_nasdaq
+    title: "NASDAQ"
+    image_dimensions:
+      max_height: 920
+    slides:
+      -
+        image_url: "/img/projects/nasdaq/1.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/2.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/3.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/4.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/5.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/6.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/7.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/8.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/9.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/10.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/11.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/12.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/13.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/14.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/15.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/16.jpg"
+        caption: |
+          NASDAQ

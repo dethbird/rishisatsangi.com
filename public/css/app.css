@@ -36,7 +36,7 @@ body {
   display: none;
   /*border:dotted 4px #000000;*/
 }
-#popup_slideshow {
+.popup-slideshow {
   z-index: 5000;
   position: absolute;
   background-color: #fff;
@@ -44,36 +44,37 @@ body {
   display: none;
   /*border:dotted 4px #000000;*/
 }
-#popup_slideshow .popup-controls.top-controls {
+.popup-slideshow .popup-controls.top-controls {
   position: absolute;
   top: 0;
 }
-#popup_slideshow .popup-controls.center-controls {
+.popup-slideshow .popup-controls.center-controls {
   position: absolute;
   top: 50%;
 }
-#popup_slideshow .popup-controls i,
-#popup_slideshow .popup-controls i:hover {
+.popup-slideshow .popup-controls i,
+.popup-slideshow .popup-controls i:hover {
   padding: 10px 15px 0px 0px;
   cursor: pointer;
   color: #000;
   opacity: 1;
   font-size: 24px;
 }
-#popup_slideshow .popup-controls span.title,
-#popup_slideshow .popup-controls span.indicator {
+.popup-slideshow .popup-controls span.title,
+.popup-slideshow .popup-controls span.indicator {
   padding: 10px 0px 0px 15px;
   cursor: pointer;
   color: #fff;
   opacity: 1;
   font-size: 24px;
 }
-#popup_slideshow .popup-content-body {
+.popup-slideshow-slide {
+  display:none;
   position: absolute;
   text-align: center;
-  padding: 25px;
+  /*padding: 25px;*/
 }
-#popup_slideshow .caption {
+.popup-slideshow .caption {
   margin-top: 5px;
   text-align: center;
 }

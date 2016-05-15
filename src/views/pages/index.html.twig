@@ -54,23 +54,30 @@
         </div>
       </div>
       {% for slideshow in layout.popup_slideshow %}
-        {% for object in slideshow.slides %}
-        <div id="{{slideshow.id}}{{loop.index0}}" class="popup-content">
-          <div class="row">
-            <div class="col-xs-12 popup-media">
-              {% if object.image_url %}
-                <img src="{{object.image_url}}" class="popup-slideshow-image {{object.orientation}}"/>
-              {% endif %}
-              {% if object.markup %}
-                {{object.markup|raw|markdown}}
-              {% endif %}
+        <div id="{{slideshow.id}}" class="row popup-slideshow">
+            {% for object in slideshow.slides %}
+            <div id="{{slideshow.id}}{{loop.index0}}" class="popup-slideshow-slide col-xs-12">
+              <div class="popup-media">
+                {% if object.image_url %}
+                  <img src="{{object.image_url}}" class="popup-slideshow-image {{object.orientation}}"/>
+                {% endif %}
+                {% if object.markup %}
+                  {{object.markup|raw|markdown}}
+                {% endif %}
+              </div>
+              <div class="col-xs-12 caption">
+                {{object.caption|raw}}
+              </div>
             </div>
-            <div class="col-xs-12 caption">
-              {{object.caption|raw}}
+            {% endfor %}
+            <div class="popup-controls top-controls col-xs-12">
+              <i class="fa fa-times fa-5 close pull-right" aria-hidden="true"></i>
             </div>
-          </div>
+            <div class="popup-controls center-controls col-xs-12">
+                <i class="fa fa-caret-left fa-5 prev pull-left" aria-hidden="true"></i>
+                <i class="fa fa-caret-right fa-5 next pull-right" aria-hidden="true"></i>
+            </div>
         </div>
-        {% endfor %}
       {% endfor %}
 
       <div id="popup_slideshow_top_controls">
@@ -90,7 +97,7 @@
         </div>
       </div>
 
-      <div id="popup_slideshow">
+      <!-- <div id="popup_slideshow">
         <div class="row">
             <div class="popup-content-body col-xs-12"></div>
             <div class="popup-controls top-controls col-xs-12">
@@ -101,7 +108,7 @@
                 <i class="fa fa-caret-right fa-5 next pull-right" aria-hidden="true"></i>
             </div>
         </div>
-      </div>
+      </div> -->
 
 
     </div>

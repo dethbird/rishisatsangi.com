@@ -12,6 +12,7 @@ var HorizontalPanelView = Backbone.View.extend({
     layout: null,
     scaleFactor: 1,
     alwaysOnTopManager: null,
+    popupSlideshowView: null,
     initialize: function(options) {
         var that = this;
         that.w = $(window);
@@ -92,9 +93,9 @@ var HorizontalPanelView = Backbone.View.extend({
             }
 
             if (e.hasClass('popup-slideshow-trigger')) {
-              new PopupSlideshowView({
+              var popupSlideshowView = new PopupSlideshowView({
                 el: '#' + e.attr('id'),
-                popup_el: '#popup_slideshow',
+                popup_el: '#' + object.popup_slideshow.popup_slideshow_id,
                 object: object,
                 popup_details: _.findWhere(that.layout.popup_slideshow, {'id': object.popup_slideshow.popup_slideshow_id}),
                 parent: that

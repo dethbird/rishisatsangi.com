@@ -13,6 +13,7 @@ var HorizontalPanelView = Backbone.View.extend({
     layout: null,
     scaleFactor: 1,
     alwaysOnTopManager: null,
+    popupSlideshowView: null,
     initialize: function(options) {
         var that = this;
         that.w = $(window);
@@ -93,9 +94,9 @@ var HorizontalPanelView = Backbone.View.extend({
             }
 
             if (e.hasClass('popup-slideshow-trigger')) {
-              new PopupSlideshowView({
+              var popupSlideshowView = new PopupSlideshowView({
                 el: '#' + e.attr('id'),
-                popup_el: '#popup_slideshow',
+                popup_el: '#' + object.popup_slideshow.popup_slideshow_id,
                 object: object,
                 popup_details: _.findWhere(that.layout.popup_slideshow, {'id': object.popup_slideshow.popup_slideshow_id}),
                 parent: that
@@ -450,15 +451,10 @@ var PopupSlideshowView = Backbone.View.extend({
     },
     render: function() {
         var that = this;
-        that.jQpopup.find('.popup-content-body').html('');
-        that.jQpopup.find('.popup-content-body').html(
-          $('#' + that.object.popup_slideshow.popup_slideshow_id + that.currentIndex).html()
-        );
-
-        that.jQpopup.find('.popup-controls .title').html(that.popup_details.title);
-
-        that.jQpopup.find('.popup-controls .indicator').html(that.currentIndex +  1 + '/' + that.popup_details.slides.length);
-
+        
+        that.jQpopup.show();
+        that.jQpopup.find('.popup-slideshow-slide').hide();
+        $('#' + that.object.popup_slideshow.popup_slideshow_id + that.currentIndex).show();
         _.each(that.jQpopup.find('.popup-slideshow-image'), function(e){
           e = $(e);
           e.css({
@@ -475,7 +471,6 @@ var PopupSlideshowView = Backbone.View.extend({
           });
         });
 
-        that.jQpopup.show();
 
         TweenLite.to(
           that.popup_el,
@@ -483,8 +478,8 @@ var PopupSlideshowView = Backbone.View.extend({
           {
             left: window.scrollX,
             top: 0,
-            width: that.parent.w.width(),
-            height: that.parent.w.height(),
+            width: that.parent.scaleFactor * 1920,
+            height: that.parent.scaleFactor * 1080,
             ease: Power2.easeOut
           }
         );

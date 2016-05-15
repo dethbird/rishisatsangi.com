@@ -343,11 +343,11 @@ objects:
     image_url: "/img/portfolio_hotspot_rustom.png"
     alt: "Rustom"
     location:
-      top: 583
-      left: 4806
+      top: 376
+      left: 5037
     dimensions:
-      width: 116
-      height: 98
+      width: 139
+      height: 118
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_rustom"
@@ -845,39 +845,39 @@ popup_slideshow:
       -
         image_url: "/img/projects/rustom/1. text.jpg"
         caption: |
-          Rustrom
+          Rustom
       -
         image_url: "/img/projects/rustom/1.jpg"
         caption: |
-          Rustrom
+          Rustom
       -
         image_url: "/img/projects/rustom/2.jpg"
         caption: |
-          Rustrom
+          Rustom
       -
         image_url: "/img/projects/rustom/3.jpg"
         caption: |
-          Rustrom
+          Rustom
       -
         image_url: "/img/projects/rustom/4.jpg"
         caption: |
-          Rustrom
+          Rustom
       -
         image_url: "/img/projects/rustom/5.jpg"
         caption: |
-          Rustrom
+          Rustom
       -
         image_url: "/img/projects/rustom/6.jpg"
         caption: |
-          Rustrom
+          Rustom
       -
         image_url: "/img/projects/rustom/7.jpg"
         caption: |
-          Rustrom
+          Rustom
       -
         image_url: "/img/projects/rustom/8.jpg"
         caption: |
-          Rustrom
+          Rustom
   -
     id: popup_slideshow_coronet
     title: "Coronet"

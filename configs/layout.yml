@@ -144,17 +144,17 @@ objects:
     id: "tattoo"
     image_url: "/img/tattoo.png"
     location:
-      top: 97
-      left: 2878
+      top: 102
+      left: 2893
     dimensions:
-      width: 877
-      height: 771
+      width: 861
+      height: 767
   -
     id: "circle_small"
     image_url: "/img/circle_small.png"
     location:
       top: 92
-      left: 3530
+      left: 3535
     dimensions:
       width: 234
       height: 234
@@ -166,7 +166,7 @@ objects:
     image_url: "/img/circle_medium.png"
     location:
       top: 98
-      left: 3003
+      left: 3012
     dimensions:
       width: 561
       height: 561
@@ -177,11 +177,11 @@ objects:
     id: "circle_large"
     image_url: "/img/circle_large.png"
     location:
-      top: 23
-      left: 2675
+      top: 7
+      left: 2672
     dimensions:
-      width: 803
-      height: 803
+      width: 800
+      height: 800
     rotate:
       duration: 20
       degrees: 360
@@ -190,7 +190,7 @@ objects:
     image_url: "/img/resume_ba.png"
     alt: "BA"
     location:
-      top: 45
+      top: 50
       left: 2952
     dimensions:
       width: 242
@@ -226,8 +226,8 @@ objects:
     image_url: "/img/resume_diabes.png"
     alt: "Diabes"
     location:
-      top: 675
-      left: 3403
+      top: 680
+      left: 3404
     dimensions:
       width: 189
       height: 91
@@ -238,8 +238,8 @@ objects:
     image_url: "/img/resume_buck_moorhead.png"
     alt: "Buck Moorhead"
     location:
-      top: 533
-      left: 2702
+      top: 543
+      left: 2708
     dimensions:
       width: 222
       height: 90
@@ -250,8 +250,8 @@ objects:
     image_url: "/img/resume_corgan.png"
     alt: "Corgan"
     location:
-      top: 175
-      left: 3547
+      top: 172
+      left: 3550
     dimensions:
       width: 203
       height: 121
@@ -730,6 +730,10 @@ popup_slideshow:
       max_height: 920
     slides:
       -
+        image_url: "/img/projects/unilever/cover.jpg"
+        caption: |
+          Unilever
+      -
         image_url: "/img/projects/unilever/1.Loung Seating in Cafe with Touch Screen Coffee Tables.jpg"
         caption: |
           Lounge Seating in Cafe with Touch Screen Coffee Tables
@@ -924,7 +928,16 @@ popup_slideshow:
       max_height: 920
     slides:
       -
+        image_url: "/img/projects/coronet/cover.jpg"
+        caption: |
+          Coronet
+      -
         image_url: "/img/projects/coronet/1.jpg"
+        caption: |
+          Coronet
+      -
+        markup: |
+          <iframe src="https://www.youtube.com/embed/SRTv4K3C4ws" frameborder="0" allowfullscreen></iframe>
         caption: |
           Coronet
       -
@@ -998,6 +1011,10 @@ popup_slideshow:
       max_height: 920
     slides:
       -
+        image_url: "/img/projects/dsm/cover.jpg"
+        caption: |
+          Don't Shoe Me
+      -
         image_url: "/img/projects/dsm/1.jpg"
         caption: |
           Don't Shoe Me
@@ -1047,6 +1064,10 @@ popup_slideshow:
     image_dimensions:
       max_height: 920
     slides:
+      -
+        image_url: "/img/projects/nasdaq/cover.jpg"
+        caption: |
+          NASDAQ
       -
         image_url: "/img/projects/nasdaq/1.jpg"
         caption: |
@@ -1113,19 +1134,19 @@ popup_slideshow:
           Nasdaq NoEdit--56
   -
     id: popup_slideshow_bwstall
-    title: "NASDAQ"
+    title: "Brightest Circle"
     image_dimensions:
       max_height: 920
     slides:
       -
-        image_url: "/img/projects/nasdaq/1.jpg"
+        image_url: "/img/projects/bwstall/1.jpg"
         caption: |
-          NASDAQ
+          Brightest Circle
       -
-        image_url: "/img/projects/nasdaq/2.jpg"
+        image_url: "/img/projects/bwstall/2.jpg"
         caption: |
-          NASDAQ
+          Brightest Circle
       -
-        image_url: "/img/projects/nasdaq/3.jpg"
+        image_url: "/img/projects/bwstall/3.jpg"
         caption: |
-          NASDAQ
+          Brightest Circle

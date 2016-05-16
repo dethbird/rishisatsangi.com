@@ -268,7 +268,7 @@ objects:
       height: 866
     parallax:
       parallax_id: portfolio_parallax
-      scale: 0.16
+      scale: 0.20
   -
     id: "portfolio_bg_02"
     image_url: "/img/portfolio_bg_02.png"
@@ -280,7 +280,7 @@ objects:
       height: 844
     parallax:
       parallax_id: portfolio_parallax
-      scale: 0.08
+      scale: 0.10
   -
     id: "portfolio_bg_01"
     image_url: "/img/portfolio_bg_01.png"
@@ -292,7 +292,7 @@ objects:
       height: 841
     parallax:
       parallax_id: portfolio_parallax
-      scale: 0.04
+      scale: 0.06
   -
     id: "portfolio_sketch"
     image_url: "/img/portfolio_sketch.png"
@@ -305,7 +305,7 @@ objects:
   -
     id: "portfolio_hotspot_unilever"
     image_url: "/img/portfolio_hotspot_unilever.png"
-    alt: "Unilever"
+    alt: "Unilever - Commercial Interiors"
     location:
       top: 564
       left: 4186
@@ -316,9 +316,22 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_unilever"
   -
+    id: "portfolio_hotspot_bwstall"
+    image_url: "/img/portfolio_hotspot_bwstall.png"
+    alt: "Retail Exhibition Design"
+    location:
+      top: 569
+      left: 4799
+    dimensions:
+      width: 124
+      height: 107
+    hotspot: true
+    popup_slideshow:
+      popup_slideshow_id: "popup_slideshow_bwstall"
+  -
     id: "portfolio_hotspot_nasdaq"
     image_url: "/img/portfolio_hotspot_nasdaq.png"
-    alt: "Unilever"
+    alt: "NASDAQ - Commercial Interiors"
     location:
       top: 413
       left: 4351
@@ -331,7 +344,7 @@ objects:
   -
     id: "portfolio_hotspot_egg"
     image_url: "/img/portfolio_hotspot_egg.png"
-    alt: "Egg Stall"
+    alt: "Retail Exhibition Design"
     location:
       top: 601
       left: 4627
@@ -344,7 +357,7 @@ objects:
   -
     id: "portfolio_hotspot_rustom"
     image_url: "/img/portfolio_hotspot_rustom.png"
-    alt: "Rustom"
+    alt: "Residential"
     location:
       top: 376
       left: 5037
@@ -357,7 +370,7 @@ objects:
   -
     id: "portfolio_hotspot_coronet"
     image_url: "/img/portfolio_hotspot_coronet.png"
-    alt: "Coronet"
+    alt: "Design Competition Winner"
     location:
       top: 654
       left: 5294
@@ -370,7 +383,7 @@ objects:
   -
     id: "portfolio_hotspot_dsm"
     image_url: "/img/portfolio_hotspot_dsm.png"
-    alt: "Don't Show Me"
+    alt: "Press and Fashion"
     location:
       top: 571
       left: 5482
@@ -381,14 +394,26 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_dsm"
   -
+    id: "contact_run"
+    image_url: "/img/contact_sun.png"
+    location:
+      top: -573
+      left: 6271
+    dimensions:
+      width: 2147
+      height: 2156
+    rotate:
+      duration: 20
+      degrees: 360
+  -
     id: "city_sketch"
     image_url: "/img/city_sketch.png"
     location:
-      top: 178
-      left: 6175
+      top: 170
+      left: 6162
     dimensions:
-      width: 1480
-      height: 628
+      width: 1493
+      height: 644
   -
     id: "rat_animation"
     image_url: "/img/rat_animation001.png"
@@ -423,11 +448,11 @@ objects:
     id: "elephant"
     image_url: "/img/elephant.png"
     location:
-      top: 214
+      top: 185
       left: 6117
     dimensions:
-      width: 427
-      height: 536
+      width: 425
+      height: 569
   -
     id: "header_contact"
     image_url: "/img/header_contact.png"
@@ -536,17 +561,22 @@ parallax:
   -
     id: portfolio_parallax
     location:
-      left: 4850
+      left: 4722
       top: 680
 text:
   -
     id: "bio_text"
     copy: |
-      Ligula a magna natoque condimentum ridiculus a vulputate a pretium a in parturient parturient vestibulum venenatis parturient dis consequat scelerisque a scelerisque euismod posuere dolor hendrerit cum at lectus. Odio a at venenatis adipiscing lobortis a suspendisse vestibulum consectetur libero urna ante bibendum interdum a adipiscing commodo urna dapibus a condimentum ornare bibendum dictum a sagittis parturient. Erat suspendisse gravida libero iaculis parturient ad tempus tincidunt et eget suspendisse arcu a a eget. Euismod nibh nam facilisi quis vivamus luctus aptent fusce suscipit laoreet proin velit eu interdum cubilia suspendisse commodo sapien blandit interdum a sem mauris in blandit vel a hendrerit. Sagittis ullamcorper ullamcorper mattis ut a quis a in eget a diam luctus consequat luctus magna arcu ultricies platea torquent ad donec scelerisque lacus a habitant.
+      Prutha Raithatha is a unicorn in the making. She loves space design, fashion, daydreaming and dogs. She believes all alarm clocks are reincarnations of past dictators who loved harassing the kind restful souls of the night. But once at work, she resumes her aggressive quest to make the world an interesting  place one wall at a time. She also hates talking about herself in the third person but that's what all the good people of the inter-web advise on “how to write a bio”. Wasn't me her.
 
-      A morbi amet imperdiet natoque sem sociosqu a porttitor a ad vivamus cum a leo fames sed vestibulum a ad inceptos velit sit faucibus et curabitur senectus. Orci iaculis torquent proin a vestibulum gravida natoque per risus condimentum integer amet mus vitae. Natoque bibendum nam a a mi aenean commodo ullamcorper a integer eros parturient nascetur ullamcorper suscipit ullamcorper a praesent posuere a orci condimentum at suspendisse.
+      Prutha has over 11 years of work experience in the architecture and interior design industry in the NYC/ NJ area. She has a Bachelor of Architecture from Mumbai University (India) and a Master of Science in Sustainable Design from Carnegie Mellon University, USA. She is currently employed with Corgan Associates as a Project Architect in their commercial interior design studio and loves it. She is a strong leader, a collaborator with co workers, consultants, and clients, and nearly always, completes her projects having fostered lifelong relationships with the project team.
 
-      Vel sapien gravida imperdiet elit pulvinar quam ullamcorper condimentum habitant placerat a in eros turpis elementum himenaeos adipiscing a a praesent aptent mollis et a integer. Euismod at per potenti potenti duis penatibus scelerisque suscipit primis feugiat a sagittis duis vestibulum porttitor vestibulum tempus pulvinar quis vestibulum suscipit a risus adipiscing a primis nibh neque. A a in adipiscing vivamus ullamcorper dictum dictum vestibulum accumsan ad cras hac purus adipiscing ac elit laoreet in a eleifend hac ornare blandit ridiculus. Dui ligula nam scelerisque sodales a gravida neque erat mi lacinia parturient a quis primis. Donec pharetra a hendrerit vestibulum potenti leo vehicula mattis eu sociis dapibus magnis leo scelerisque dolor elementum adipiscing volutpat sodales tincidunt parturient sem ultricies adipiscing adipiscing at cursus dolor. Parturient tellus aliquam odio condimentum purus penatibus dis rhoncus a a enim metus mus id ullamcorper magna at a mattis diam vivamus sodales quis nec magna elit.
+      Her only goal in life is to be a designer. A good one. The kind of designer who has worked hard and experimented so much that they have finally found their own style that the world recognizes as distinctly their own. She is constantly experimenting, thinking, questioning and refining her creative process. She strongly believes that in order to stay creative one needs to step away from their profession in their free time and delve into other forms of art for inspiration. Creativity needs practice. Invention is a result of experimentation. The rest lies in the hands of fate and maybe Bernie Sanders.
+
+      When bored, she is restless and takes pictures of people on the street who look creative; she dresses herself as a character of her imagination and struts the streets of Manhattan. She also loves taking care of her organic garden in the East Village, collaborating with artists on art projects, sipping chai with family and being freaked out by her youngest niece who looks like a 3’-0” tall version of herself. (She’s alive and she talks back and she looks just like her. It’s really freaky.)
+
+      Ultimately Prutha hopes that she can contribute to this world in some way. Happiness is the goal.
+
     location:
       top: 350
       left: 888
@@ -1081,3 +1111,21 @@ popup_slideshow:
         image_url: "/img/projects/nasdaq/16.jpg"
         caption: |
           Nasdaq NoEdit--56
+  -
+    id: popup_slideshow_bwstall
+    title: "NASDAQ"
+    image_dimensions:
+      max_height: 920
+    slides:
+      -
+        image_url: "/img/projects/nasdaq/1.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/2.jpg"
+        caption: |
+          NASDAQ
+      -
+        image_url: "/img/projects/nasdaq/3.jpg"
+        caption: |
+          NASDAQ

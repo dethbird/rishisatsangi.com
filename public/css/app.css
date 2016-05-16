@@ -20,6 +20,9 @@ body {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+#contact_text {
+  font-weight: bold;
+}
 #container {
   margin-top: 25px;
   width: 7740px;

@@ -7,6 +7,7 @@ var ClickScrollView = require('./buttons/ClickScrollView');
 var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
 var PopupBannerView = require('./ui/PopupBannerView');
 var PopupSlideshowView = require('./ui/PopupSlideshowView');
+var HoverToggleView = require('./ui/HoverToggleView');
 
 var HorizontalPanelView = Backbone.View.extend({
     w: null,
@@ -83,6 +84,14 @@ var HorizontalPanelView = Backbone.View.extend({
               });
             }
 
+            if (e.hasClass('hover-toggle-trigger')) {
+              new HoverToggleView({
+                el: '#' + e.attr('id'),
+                object: object,
+                parent: that
+              });
+            }
+
             if (e.hasClass('popup-banner-trigger')) {
               new PopupBannerView({
                 el: '#' + e.attr('id'),
@@ -130,8 +139,6 @@ var HorizontalPanelView = Backbone.View.extend({
 
       that.alwaysOnTopManager.adjust();
 
-
-
       _.each($(that.el).find('.object'), function(e, i){
           e = $(e);
           if (e.hasClass('text')) {
@@ -150,6 +157,8 @@ var HorizontalPanelView = Backbone.View.extend({
             });
           }
       });
+
+      // vertically center the container
       var container = $('#container');
       container.css({
         marginTop: (that.w.height() - container.height()) / 2

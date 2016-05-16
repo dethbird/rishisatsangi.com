@@ -296,6 +296,76 @@ objects:
       parallax_id: portfolio_parallax
       scale: 0.06
   -
+    id: "portfolio_hover_unilever"
+    image_url: "/img/portfolio_hover_unilever.png"
+    location:
+      top: 481
+      left: 4182
+    dimensions:
+      width: 112
+      height: 239
+    hidden: true
+  -
+    id: "portfolio_hover_nasdaq"
+    image_url: "/img/portfolio_hover_nasdaq.png"
+    location:
+      top: 406
+      left: 4354
+    dimensions:
+      width: 86
+      height: 322
+    hidden: true
+  -
+    id: "portfolio_hover_egg"
+    image_url: "/img/portfolio_hover_egg.png"
+    location:
+      top: 600
+      left: 4630
+    dimensions:
+      width: 87
+      height: 90
+    hidden: true
+  -
+    id: "portfolio_hover_bwstall"
+    image_url: "/img/portfolio_hover_bwstall.png"
+    location:
+      top: 555
+      left: 4797
+    dimensions:
+      width: 133
+      height: 134
+    hidden: true
+  -
+    id: "portfolio_hover_coronet"
+    image_url: "/img/portfolio_hover_coronet.png"
+    location:
+      top: 648
+      left: 5297
+    dimensions:
+      width: 105
+      height: 107
+    hidden: true
+  -
+    id: "portfolio_hover_rustom"
+    image_url: "/img/portfolio_hover_rustom.png"
+    location:
+      top: 385
+      left: 5006
+    dimensions:
+      width: 179
+      height: 129
+    hidden: true
+  -
+    id: "portfolio_hover_dsm"
+    image_url: "/img/portfolio_hover_dsm.png"
+    location:
+      top: 575
+      left: 5483
+    dimensions:
+      width: 64
+      height: 168
+    hidden: true
+  -
     id: "portfolio_sketch"
     image_url: "/img/portfolio_sketch.png"
     location:
@@ -317,6 +387,8 @@ objects:
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_unilever"
+    hover_toggle:
+      toggle_id: "portfolio_hover_unilever"
   -
     id: "portfolio_hotspot_bwstall"
     image_url: "/img/portfolio_hotspot_bwstall.png"
@@ -330,6 +402,8 @@ objects:
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_bwstall"
+    hover_toggle:
+      toggle_id: "portfolio_hover_bwstall"
   -
     id: "portfolio_hotspot_nasdaq"
     image_url: "/img/portfolio_hotspot_nasdaq.png"
@@ -343,6 +417,8 @@ objects:
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_nasdaq"
+    hover_toggle:
+      toggle_id: "portfolio_hover_nasdaq"
   -
     id: "portfolio_hotspot_egg"
     image_url: "/img/portfolio_hotspot_egg.png"
@@ -356,6 +432,8 @@ objects:
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_egg"
+    hover_toggle:
+      toggle_id: "portfolio_hover_egg"
   -
     id: "portfolio_hotspot_rustom"
     image_url: "/img/portfolio_hotspot_rustom.png"
@@ -369,6 +447,8 @@ objects:
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_rustom"
+    hover_toggle:
+      toggle_id: "portfolio_hover_rustom"
   -
     id: "portfolio_hotspot_coronet"
     image_url: "/img/portfolio_hotspot_coronet.png"
@@ -382,6 +462,8 @@ objects:
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_coronet"
+    hover_toggle:
+      toggle_id: "portfolio_hover_coronet"
   -
     id: "portfolio_hotspot_dsm"
     image_url: "/img/portfolio_hotspot_dsm.png"
@@ -395,6 +477,8 @@ objects:
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_dsm"
+    hover_toggle:
+      toggle_id: "portfolio_hover_dsm"
   -
     id: "contact_run"
     image_url: "/img/contact_sun.png"

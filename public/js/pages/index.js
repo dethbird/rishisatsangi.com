@@ -8,6 +8,7 @@ var ClickScrollView = require('./buttons/ClickScrollView');
 var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
 var PopupBannerView = require('./ui/PopupBannerView');
 var PopupSlideshowView = require('./ui/PopupSlideshowView');
+var HoverToggleView = require('./ui/HoverToggleView');
 
 var HorizontalPanelView = Backbone.View.extend({
     w: null,
@@ -84,6 +85,14 @@ var HorizontalPanelView = Backbone.View.extend({
               });
             }
 
+            if (e.hasClass('hover-toggle-trigger')) {
+              new HoverToggleView({
+                el: '#' + e.attr('id'),
+                object: object,
+                parent: that
+              });
+            }
+
             if (e.hasClass('popup-banner-trigger')) {
               new PopupBannerView({
                 el: '#' + e.attr('id'),
@@ -131,8 +140,6 @@ var HorizontalPanelView = Backbone.View.extend({
 
       that.alwaysOnTopManager.adjust();
 
-
-
       _.each($(that.el).find('.object'), function(e, i){
           e = $(e);
           if (e.hasClass('text')) {
@@ -151,6 +158,8 @@ var HorizontalPanelView = Backbone.View.extend({
             });
           }
       });
+
+      // vertically center the container
       var container = $('#container');
       container.css({
         marginTop: (that.w.height() - container.height()) / 2
@@ -161,7 +170,7 @@ var HorizontalPanelView = Backbone.View.extend({
 
 module.exports = HorizontalPanelView;
 
-},{"./animations/FlickerView":2,"./animations/FromToView":3,"./animations/ParallaxView":4,"./animations/SequenceView":5,"./animations/SlideIntoView":6,"./buttons/ClickScrollView":7,"./ui/AlwaysOnTopManagerView":8,"./ui/PopupBannerView":9,"./ui/PopupSlideshowView":10}],2:[function(require,module,exports){
+},{"./animations/FlickerView":2,"./animations/FromToView":3,"./animations/ParallaxView":4,"./animations/SequenceView":5,"./animations/SlideIntoView":6,"./buttons/ClickScrollView":7,"./ui/AlwaysOnTopManagerView":8,"./ui/HoverToggleView":9,"./ui/PopupBannerView":10,"./ui/PopupSlideshowView":11}],2:[function(require,module,exports){
 var FlickerView = Backbone.View.extend({
     initialize: function(options) {
         var that = this;
@@ -405,6 +414,40 @@ var AlwaysOnTopManagerView = Backbone.View.extend({
 module.exports = AlwaysOnTopManagerView;
 
 },{}],9:[function(require,module,exports){
+var HoverToggleView = Backbone.View.extend({
+    object: null,
+    parent: null,
+    jqEl: null,
+    initialize: function(options) {
+        var that = this;
+        that.object = options.object;
+        that.parent = options.parent;
+        that.jqEl = $(that.el);
+        that.toggleEl = $('#' + that.object.hover_toggle.toggle_id);
+
+        that.jqEl.mouseover(function(){
+          that.show();
+        });
+
+        that.jqEl.mouseout(function(){
+          that.hide();
+        });
+
+        // that.parent.w.scroll(_.bind($.debounce(100, that.adjust), that));
+    },
+    show: function() {
+        var that = this;
+        that.toggleEl.show();
+    },
+    hide: function() {
+        var that = this;
+        that.toggleEl.hide();
+    }
+});
+
+module.exports = HoverToggleView;
+
+},{}],10:[function(require,module,exports){
 var PopupBannerView = Backbone.View.extend({
     objects: [],
     parent: null,
@@ -451,7 +494,7 @@ var PopupBannerView = Backbone.View.extend({
 
 module.exports = PopupBannerView;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var PopupSlideshowView = Backbone.View.extend({
     objects: [],
     parent: null,
@@ -537,7 +580,7 @@ var PopupSlideshowView = Backbone.View.extend({
 
 module.exports = PopupSlideshowView;
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var HorizontalPanelView = require('../library/views/HorizontalPanelView');
 
 var horizontalPanelView = new HorizontalPanelView({
@@ -545,4 +588,4 @@ var horizontalPanelView = new HorizontalPanelView({
     layout: layout
 });
 
-},{"../library/views/HorizontalPanelView":1}]},{},[11]);
+},{"../library/views/HorizontalPanelView":1}]},{},[12]);

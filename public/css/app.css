@@ -76,8 +76,12 @@ body {
   margin-top: 5px;
   text-align: center;
 }
-#popup_banner li, #popup_banner p {
+#popup_banner p {
   font-size: 21px;
+}
+#popup_banner li {
+  font-size: 19px;
+  margin-bottom: 12px;
 }
 #popup_banner .popup-controls i,
 #popup_banner .popup-controls i:hover {
@@ -119,4 +123,7 @@ img.hotspot {
 }
 .pull-right {
   text-align: right;
+}
+.hidden {
+  display: none;
 }

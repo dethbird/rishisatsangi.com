@@ -567,15 +567,15 @@ text:
   -
     id: "bio_text"
     copy: |
-      Prutha Raithatha is a unicorn in the making. She loves space design, fashion, daydreaming and dogs. She believes all alarm clocks are reincarnations of past dictators who loved harassing the kind restful souls of the night. But once at work, she resumes her aggressive quest to make the world an interesting  place one wall at a time. She also hates talking about herself in the third person but that's what all the good people of the inter-web advise on “how to write a bio”. Wasn't me her.
+      Prutha Raithatha is a unicorn in the making. She loves space design, fashion, daydreaming and dogs. She believes all alarm clocks are reincarnations of past dictators who loved harassing the kind restful souls of the night. But once at work, she resumes her aggressive quest to make the world an interesting  place one wall at a time. She also hates talking about herself in the third person but that's what all the good people of the inter-web advise on “how to write a bio”. Wasn't <strike>me</strike> her.
 
-      Prutha has over 11 years of work experience in the architecture and interior design industry in the NYC/ NJ area. She has a Bachelor of Architecture from Mumbai University (India) and a Master of Science in Sustainable Design from Carnegie Mellon University, USA. She is currently employed with Corgan Associates as a Project Architect in their commercial interior design studio and loves it. She is a strong leader, a collaborator with co workers, consultants, and clients, and nearly always, completes her projects having fostered lifelong relationships with the project team.
+      Prutha has over 11 years of work experience in the architecture and interior design industry in the NYC/ NJ area. She has a Bachelor of Architecture from Mumbai University (India) and a Master of Science in Sustainable Design from Carnegie Mellon University (USA). She is currently employed with Corgan Associates as a Project Architect in their commercial interior design studio and loves it. She is a strong leader, a collaborator with co-workers, consultants, and clients, and nearly always, completes her projects having fostered lifelong relationships with the project team.
 
       Her only goal in life is to be a designer. A good one. The kind of designer who has worked hard and experimented so much that they have finally found their own style that the world recognizes as distinctly their own. She is constantly experimenting, thinking, questioning and refining her creative process. She strongly believes that in order to stay creative one needs to step away from their profession in their free time and delve into other forms of art for inspiration. Creativity needs practice. Invention is a result of experimentation. The rest lies in the hands of fate and maybe Bernie Sanders.
 
-      When bored, she is restless and takes pictures of people on the street who look creative; she dresses herself as a character of her imagination and struts the streets of Manhattan. She also loves taking care of her organic garden in the East Village, collaborating with artists on art projects, sipping chai with family and being freaked out by her youngest niece who looks like a 3’-0” tall version of herself. (She’s alive and she talks back and she looks just like her. It’s really freaky.)
+      When bored, she is restless and takes pictures of people on the street who look creative; she dresses herself as a character of her imagination and struts the streets of Manhattan. She also loves taking care of her organic garden in the East Village, collaborating with artists on art projects, sipping chai with family and being freaked out by her youngest niece who looks like a 3’-0” tall version of herself.
 
-      Ultimately Prutha hopes that she can contribute to this world in some way. Happiness is the goal.
+      Ultimately Prutha hopes that she can contribute to this world in some creative way as a designer. Maybe also grow a pair of wings.
 
     location:
       top: 350
@@ -595,7 +595,7 @@ text:
     id: "contact_text"
     copy: |
       You can often find Prutha riding her zebralephant in the East village.
-      But for the rest of the times find her at:<br />
+      But for the rest of the time you could find her at:<br />
       405 E 6th street<br />
       New York, NY10009
 
@@ -624,6 +624,10 @@ popup_banner:
           <strong>May 2003</strong>
         </div>
       </div>
+      <div class="col-xs-12">
+        <ul>
+        </ul>
+      </div>
     screen_location:
       left: 0
       top: 50
@@ -641,6 +645,11 @@ popup_banner:
         <div class="pull-right col-xs-2">
           <strong>May 2005</strong>
         </div>
+      </div>
+      <div class="col-xs-12">
+        <ul>
+          <li>Thesis Project - Bioclimatic skyscrapers: An analysis of their performance in comparison to a code compliant skyscraper using E-Quest. Energy modeling and plants for indoor environment research</li>
+        </ul>
       </div>
     screen_location:
       left: 0
@@ -662,8 +671,9 @@ popup_banner:
       </div>
       <div class="col-xs-12">
         <ul>
-          <li>Unilever, Corporate Interior, Multi-storey high-end experiential interior design project for a world renowned Consumer Product Company in Tribeca, Manhattan (20,000 SF): Project Manager and Designer. Lead the project from start to finish.</li>
-          <li>NASDAQ, Corporate Interior, Two storey high-end corporate interior design project for a top Finance and Technology Company in Time Square, Manhattan (20,000 SF): Senior Designer. Designed the space to fit the needs of the client’s aesthetic, brand, schedule and budget.  </li>
+          <li>Unilever, Corporate Interior, Two-storey high-end experiential interior design project in Tribeca, Manhattan (20,000 SF): Project Manager and Designer. Led the project from start to finish.</li>
+          <li>NASDAQ, Corporate Interior, Two storey high-end corporate interior design project in Time Square, Manhattan (18,000 SF): Senior Designer. Designed the space to fit the needs of the client’s aesthetic, brand, schedule and budget.  </li>
+          <li>Design Spotlight Competition for CoreNet’s Annual Dinner Gala: Design leader. Led the design and execution on the concept of Alternate Realities as a respose to the competition topic of "Disruptive Innovation". Submitted a winning entry and landed Corgan in the first place in the Competition.</li>
         </ul>
       </div>
   -
@@ -699,17 +709,17 @@ popup_banner:
       <div class="col-xs-12">
         <ul>
           <li>Rensselaer Education Center, Green Building Award winning project, LEED Platinum aimed, 8.8-acre Ecological Park with a Center for Sustainability, Rensselaer, NY, (3,800 sf):  LEED Online, Redesign for value engineering, Project Management.</li>
-          <li>Standard Chartered Bank, Cooperate Office Interiors, Newark, NJ (45,000 sf): Survey, Schematic Design, Product Research, Construction Documents.</li>
+          <li>Standard Chartered Bank, Corporate Office Interiors, Newark, NJ (45,000 sf): Survey, Schematic Design, Product Research, Construction Documents.</li>
           <li>Starbucks Café, Café Interiors, Newark, NJ (500 SF): Survey, Project and Design coordination with company Standards and specifications, Site supervision.</li>
           <li>700 Broadway, Lobby Interior Design, New York, NY (600 sf): Schematic Design, Design Development.</li>
         </ul>
       </div>
   -
-    id: "resume_diabes_popup"
+    id: "resume_waterside_popup"
     copy: |
       <div class="col-xs-12">
         <div class="pull-left col-xs-10">
-          <h1>Daibes Design Group, Intermediate Architect</h1>
+          <h1>Waterside Construction, Intermediate Architect</h1>
           <p>Edgewater, NJ</p>
         </div>
         <div class="pull-right col-xs-2">
@@ -732,7 +742,7 @@ popup_slideshow:
       -
         image_url: "/img/projects/unilever/cover.jpg"
         caption: |
-          Unilever
+
       -
         image_url: "/img/projects/unilever/1.Loung Seating in Cafe with Touch Screen Coffee Tables.jpg"
         caption: |
@@ -744,7 +754,7 @@ popup_slideshow:
       -
         image_url: "/img/projects/unilever/3. Site Sketch for Reception Desk Power and Data .jpg"
         caption: |
-          Site Sketch for Reception Desk Power and Data
+          Site Sketch for Reception Desk power and data integration
       -
         image_url: "/img/projects/unilever/4. Waiting Area.jpg"
         caption: |
@@ -759,7 +769,7 @@ popup_slideshow:
         caption: |
           The Tunnel is the experiential portal into the entire space.
           Set up as a white box art gallery to receive new art from
-           time to time, the tunnel has ceiling mounted projectors,
+           time to time. The tunnel has ceiling mounted projectors,
           color changing lights, scent dispensers installed within
           the air supply system and provision for future smoke
           machines. Employees are treated to some inspiration
@@ -776,7 +786,7 @@ popup_slideshow:
       -
         image_url: "/img/projects/unilever/9. Site before commencement of any work.jpg"
         caption: |
-           Site before commencement of any work
+           Site before commencement of work
       -
         image_url: "/img/projects/unilever/10. Slab cutout to receive new internal stair.jpg"
         caption: |
@@ -788,7 +798,7 @@ popup_slideshow:
       -
         image_url: "/img/projects/unilever/12. Final Stair with digital screen art at Mid-landing.jpg"
         caption: |
-           Final Stair with digital screen art at Mid-landing
+           Final Stair with digital screen art at mid-landing
       -
         image_url: "/img/projects/unilever/12.5. Cafe space with a large moveable Video wall on Barn Door Hardware and steel framework.jpg"
         caption: |
@@ -796,19 +806,19 @@ popup_slideshow:
       -
         image_url: "/img/projects/unilever/13. Material selection excersise with the client.jpg"
         caption: |
-           Material selection excersise with the client
+           Material selection exercise with the client
       -
         image_url: "/img/projects/unilever/14. Best assistant ever.jpg"
         caption: |
-           Best assistant ever
+           Best assistant ever!
       -
         image_url: "/img/projects/unilever/15.Site Learnings.jpg"
         caption: |
-           Site Learnings
+           Site Learnings.
       -
         image_url: "/img/projects/unilever/16.jpg"
         caption: |
-           16
+
       -
         image_url: "/img/projects/unilever/17Custom designed and built Wet Wall and Tea Point.jpg"
         caption: |
@@ -816,15 +826,15 @@ popup_slideshow:
       -
         image_url: "/img/projects/unilever/18 Custom design and built Scent Wall and Materials wall.jpg"
         caption: |
-           Custom design and built Scent Wall and Materials wall
+           Custom designed and built Scent Wall and Materials wall
       -
         image_url: "/img/projects/unilever/19.jpg"
         caption: |
-           19
+
       -
         image_url: "/img/projects/unilever/20. Neon Light installation above Material Wall Millwork.jpg"
         caption: |
-           Neon Light installation above Material Wall Millwork
+           Neon Light installation above Material Wall millwork
       -
         image_url: "/img/projects/unilever/21. My Contractor entertaining my Bindi fetish.jpg"
         caption: |
@@ -832,7 +842,7 @@ popup_slideshow:
       -
         image_url: "/img/projects/unilever/22. Coccon Chair outside the Artist Studio.jpg"
         caption: |
-           Coccon Chair outside the Artist Studio
+           Cocoon Chair outside the Artist Studio
       -
         image_url: "/img/projects/unilever/23. Plenary under construction.jpg"
         caption: |
@@ -840,7 +850,7 @@ popup_slideshow:
       -
         image_url: "/img/projects/unilever/24. Plenary complete.jpg"
         caption: |
-           Plenary complete
+           Plenary complete with virtual windows on far wall. These two monitors are connected to cameras located on the roof of the building for a live feed of the views outside.
       -
         image_url: "/img/projects/unilever/25. Roof Deck Under Construction.jpg"
         caption: |
@@ -848,15 +858,15 @@ popup_slideshow:
       -
         image_url: "/img/projects/unilever/26. Roof Deck and Skylight completed.jpg"
         caption: |
-           Roof Deck and Skylight completed
+           Roof Deck and Skylight complete
       -
         image_url: "/img/projects/unilever/27.jpg"
         caption: |
-           27
+
       -
         image_url: "/img/projects/unilever/28.jpg"
         caption: |
-           28
+
   -
     id: popup_slideshow_egg
     title: "Egg"
@@ -866,19 +876,19 @@ popup_slideshow:
       -
         image_url: "/img/projects/egg/1.jpg"
         caption: |
-          Egg Stall. Client: Silber Jewelry Retailer
+
       -
         image_url: "/img/projects/egg/2.jpg"
         caption: |
-          Egg Stall. Client: Silber Jewelry Retailer
+          Hand Sketch of the design.
       -
         image_url: "/img/projects/egg/3.jpg"
         caption: |
-          Egg Stall. Client: Silber Jewelry Retailer
+          Rendering of the Reception and Display Area. Rendering by others.
       -
         image_url: "/img/projects/egg/4.jpg"
         caption: |
-          Egg Stall. Client: Silber Jewelry Retailer
+          Rendering of the Oval Meeting Room. Rendering by others.
   -
     id: popup_slideshow_rustom
     title: "Rustom"
@@ -888,39 +898,39 @@ popup_slideshow:
       -
         image_url: "/img/projects/rustom/1. text.jpg"
         caption: |
-          Rustom
+
       -
         image_url: "/img/projects/rustom/1.jpg"
         caption: |
-          Rustom
+          Floating Entrance door
       -
         image_url: "/img/projects/rustom/2.jpg"
         caption: |
-          Rustom
+          Floor Plan
       -
         image_url: "/img/projects/rustom/3.jpg"
         caption: |
-          Rustom
+          Living Room
       -
         image_url: "/img/projects/rustom/4.jpg"
         caption: |
-          Rustom
+          Facade included Red Stone excavated on site.
       -
         image_url: "/img/projects/rustom/5.jpg"
         caption: |
-          Rustom
+          Completed elevation
       -
         image_url: "/img/projects/rustom/6.jpg"
         caption: |
-          Rustom
+          Study model made by me
       -
         image_url: "/img/projects/rustom/7.jpg"
         caption: |
-          Rustom
+          Infinity Pool under construction
       -
         image_url: "/img/projects/rustom/8.jpg"
         caption: |
-          Rustom
+          Balcony railing detail
   -
     id: popup_slideshow_coronet
     title: "Coronet"
@@ -930,80 +940,80 @@ popup_slideshow:
       -
         image_url: "/img/projects/coronet/cover.jpg"
         caption: |
-          Coronet
+
       -
         image_url: "/img/projects/coronet/1.jpg"
         caption: |
-          Coronet
+          CoreNet Competition Entry: Round 1, Page 1/2
+      -
+        image_url: "/img/projects/coronet/2.jpg"
+        caption: |
+          CoreNet Competition Entry: Round 1, Page 2/2
       -
         markup: |
           <iframe src="https://www.youtube.com/embed/SRTv4K3C4ws" frameborder="0" allowfullscreen></iframe>
         caption: |
-          Coronet
-      -
-        image_url: "/img/projects/coronet/2.jpg"
-        caption: |
-          Coronet
+          CoreNet Winning Entry model with Floating Hologram Video
       -
         image_url: "/img/projects/coronet/3.jpg"
         caption: |
-          Coronet
+          Interior Scene of one of our alternate reality landscapes
       -
         image_url: "/img/projects/coronet/4.jpg"
         caption: |
-          Coronet
+          Model interior made with foancore, black electric tape and balsa wood
       -
         image_url: "/img/projects/coronet/5.jpg"
         caption: |
-          Coronet
+
       -
         image_url: "/img/projects/coronet/6.jpg"
         caption: |
-          Coronet
+          Final Model displayed at the Intrepid Museum in NYC
       -
         image_url: "/img/projects/coronet/7.jpg"
         caption: |
-          Coronet
+          No. 1
       -
         image_url: "/img/projects/coronet/8.jpg"
         caption: |
-          Coronet
+          Flat Stanley
       -
         image_url: "/img/projects/coronet/9.jpg"
         caption: |
-          Coronet
+          Making of the box
       -
         image_url: "/img/projects/coronet/10.jpg"
         caption: |
-          Coronet
+          Who put me inside the box?!
       -
         image_url: "/img/projects/coronet/11.jpg"
         caption: |
-          Coronet
+          Nailing miters of a 1/8" ply in not fun
       -
         image_url: "/img/projects/coronet/12.jpg"
         caption: |
-          Coronet
+          My amazing team
       -
         image_url: "/img/projects/coronet/13.jpg"
         caption: |
-          Coronet
+          The Black outter box
       -
         image_url: "/img/projects/coronet/14.jpg"
         caption: |
-          Coronet
+          The white inner box with a plexi panel for hologram projection
       -
         image_url: "/img/projects/coronet/15.jpg"
         caption: |
-          Coronet
+          My massing concept for the interiors of the box
       -
         image_url: "/img/projects/coronet/16.jpg"
         caption: |
-          Coronet
+          First attempt at mirror mountains
       -
         image_url: "/img/projects/coronet/17.jpg"
         caption: |
-          Coronet
+          Alternate Reality lanscape in progress
   -
     id: popup_slideshow_dsm
     title: "Don't Show Me"
@@ -1013,51 +1023,52 @@ popup_slideshow:
       -
         image_url: "/img/projects/dsm/cover.jpg"
         caption: |
-          Don't Shoe Me
+
       -
         image_url: "/img/projects/dsm/1.jpg"
         caption: |
-          Don't Shoe Me
+          Interviewed by Archinect.com
       -
         image_url: "/img/projects/dsm/2.jpg"
         caption: |
-          Don't Shoe Me
+          On BBC World
       -
         image_url: "/img/projects/dsm/3.jpg"
         caption: |
-          Don't Shoe Me
+          Published in multiple fashion magazines
       -
         image_url: "/img/projects/dsm/4.jpg"
         caption: |
-          Don't Shoe Me
+
       -
         image_url: "/img/projects/dsm/5.jpg"
         caption: |
-          Don't Shoe Me
+          Published in India Business of Fashion Report 2013 Yearbook
       -
         image_url: "/img/projects/dsm/6.jpg"
         caption: |
-          Don't Shoe Me
+          Published in POOL International Design Book
       -
         image_url: "/img/projects/dsm/7.1.jpg"
         caption: |
-          Don't Shoe Me
+          "Levitation": A photo art project with photographer Rishi Vimadalal for my blog Don't Shoe Me
       -
         image_url: "/img/projects/dsm/8.jpg"
         caption: |
-          Don't Shoe Me
+          "May the Gods Me with You": A photo art project with photographer Alison Wynn for my blog Don't Shoe Me
       -
         image_url: "/img/projects/dsm/9.1.jpg"
         caption: |
-          Don't Shoe Me
+          "Stairway to Mars": Photo by Alison Wynn
       -
         image_url: "/img/projects/dsm/10.jpg"
         caption: |
-          Don't Shoe Me
+          "A Day in the life of a glamorous Construction Worker": Photo story shot in the slums of Raey Road in Mumbai by Upasana Jain.
       -
         image_url: "/img/projects/dsm/11.jpg"
         caption: |
-          Don't Shoe Me
+          "Postage stamp, something to write home about": Performance Art with Iranian artist Nooshin Rustomi at Flux Factory art gallery in Long Island City, NY.
+
   -
     id: popup_slideshow_nasdaq
     title: "NASDAQ"
@@ -1067,7 +1078,7 @@ popup_slideshow:
       -
         image_url: "/img/projects/nasdaq/cover.jpg"
         caption: |
-          NASDAQ
+
       -
         image_url: "/img/projects/nasdaq/1.jpg"
         caption: |
@@ -1099,11 +1110,11 @@ popup_slideshow:
       -
         image_url: "/img/projects/nasdaq/8.jpg"
         caption: |
-          Network Operations Center - Design Rendering included a projector in the ceiling that would project a long exposure live feed of people from the streets of Time Square
+          Network Operations Center - Design includes a projector in the ceiling that will project a long exposure live feed of people from the streets of Time Square. Rendering by other.
       -
         image_url: "/img/projects/nasdaq/9.jpg"
         caption: |
-          NOC Design Option Rendering  -Paul Smith Wallcovering to represent the ligths and eergy of Time Square
+          NOC Design Option Rendering - Paul Smith wallcovering to represent the lights and energy of Time Square. Rendering by other.
       -
         image_url: "/img/projects/nasdaq/10.jpg"
         caption: |
@@ -1119,7 +1130,7 @@ popup_slideshow:
       -
         image_url: "/img/projects/nasdaq/13.jpg"
         caption: |
-          Design Rendering of Meeting Rooms
+          Design Rendering of Meeting Rooms. All computer renderings by others.
       -
         image_url: "/img/projects/nasdaq/14.jpg"
         caption: |
@@ -1131,7 +1142,7 @@ popup_slideshow:
       -
         image_url: "/img/projects/nasdaq/16.jpg"
         caption: |
-          Nasdaq NoEdit--56
+
   -
     id: popup_slideshow_bwstall
     title: "Brightest Circle"
@@ -1141,12 +1152,12 @@ popup_slideshow:
       -
         image_url: "/img/projects/bwstall/1.jpg"
         caption: |
-          Brightest Circle
+
       -
         image_url: "/img/projects/bwstall/2.jpg"
         caption: |
-          Brightest Circle
+          Design concept sketch by me.
       -
         image_url: "/img/projects/bwstall/3.jpg"
         caption: |
-          Brightest Circle
+          Rendering of the 3 Meeting Rooms and jewelry display area. Rendering by others.

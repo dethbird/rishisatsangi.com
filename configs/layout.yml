@@ -313,7 +313,7 @@ objects:
       left: 4186
     dimensions:
       width: 99
-      height: 126
+      height: 198
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_unilever"
@@ -325,8 +325,8 @@ objects:
       top: 569
       left: 4799
     dimensions:
-      width: 124
-      height: 107
+      width: 153
+      height: 170
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_bwstall"
@@ -339,7 +339,7 @@ objects:
       left: 4351
     dimensions:
       width: 85
-      height: 274
+      height: 341
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_nasdaq"
@@ -349,10 +349,10 @@ objects:
     alt: "Retail Exhibition Design"
     location:
       top: 601
-      left: 4627
+      left: 4623
     dimensions:
-      width: 57
-      height: 80
+      width: 97
+      height: 126
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_egg"
@@ -365,7 +365,7 @@ objects:
       left: 5037
     dimensions:
       width: 139
-      height: 118
+      height: 147
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_rustom"
@@ -378,7 +378,7 @@ objects:
       left: 5294
     dimensions:
       width: 107
-      height: 95
+      height: 143
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_coronet"
@@ -391,7 +391,7 @@ objects:
       left: 5482
     dimensions:
       width: 75
-      height: 172
+      height: 218
     hotspot: true
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_dsm"

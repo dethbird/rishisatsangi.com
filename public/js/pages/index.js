@@ -131,9 +131,7 @@ var HorizontalPanelView = Backbone.View.extend({
 
       that.alwaysOnTopManager.adjust();
 
-      $(that.el).css({
-        marginTop: (that.w.height() - that.scaleFactor * that.layout.panel.height) / 2
-      });
+
 
       _.each($(that.el).find('.object'), function(e, i){
           e = $(e);
@@ -153,6 +151,11 @@ var HorizontalPanelView = Backbone.View.extend({
             });
           }
       });
+      var container = $('#container');
+      container.css({
+        marginTop: (that.w.height() - container.height()) / 2
+      });
+
     }
 });
 

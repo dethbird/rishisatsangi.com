@@ -178,7 +178,7 @@ objects:
     image_url: "/img/circle_large.png"
     location:
       top: 7
-      left: 2672
+      left: 2680
     dimensions:
       width: 800
       height: 800
@@ -224,22 +224,24 @@ objects:
   -
     id: "resume_diabes"
     image_url: "/img/resume_diabes.png"
-    alt: "Diabes"
+    alt: "Waterside Construction"
     location:
       top: 680
-      left: 3404
+      left: 3400
     dimensions:
-      width: 189
+      width: 197
       height: 91
     popup_banner:
       popup_content_id: "resume_diabes_popup"
+
+
   -
     id: "resume_buck_moorhead"
     image_url: "/img/resume_buck_moorhead.png"
     alt: "Buck Moorhead"
     location:
       top: 543
-      left: 2708
+      left: 2713
     dimensions:
       width: 222
       height: 90
@@ -715,7 +717,7 @@ popup_banner:
         </ul>
       </div>
   -
-    id: "resume_waterside_popup"
+    id: "resume_diabes_popup"
     copy: |
       <div class="col-xs-12">
         <div class="pull-left col-xs-10">

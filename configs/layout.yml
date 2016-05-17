@@ -141,6 +141,36 @@ objects:
       left: 1052
       duration: 2.2
   -
+    id: "luxo_lamp_glow"
+    image_url: "/img/luxo_lamp_glow.png"
+    location:
+      top: 181
+      left: 1032
+    dimensions:
+      width: 243
+      height: 172
+    flicker:
+      delay: 2.4
+      min_duration: 0.05
+      max_duration: 0.2
+      min_opacity: 0.6
+      max_opacity: 0.9
+  -
+    id: "luxo_bulb"
+    image_url: "/img/luxo_bulb.png"
+    location:
+      top: 233
+      left: 1119
+    dimensions:
+      width: 60
+      height: 60
+    flicker:
+      delay: 2.4
+      min_duration: 0.1
+      max_duration: 0.5
+      min_opacity: 0.9
+      max_opacity: 1
+  -
     id: "tattoo"
     image_url: "/img/tattoo.png"
     location:
@@ -384,6 +414,30 @@ objects:
     dimensions:
       width: 1585
       height: 703
+  -
+    id: "pigeons"
+    image_url: "/img/pigeons.png"
+    location:
+      top: -14
+      left: 3883
+    dimensions:
+      width: 2113
+      height: 580
+    parallax:
+      parallax_id: portfolio_parallax
+      scale: 0.03
+  # -
+  #   id: "pigeons_notsomany"
+  #   image_url: "/img/pigeons_notsomany.png"
+  #   location:
+  #     top: 4
+  #     left: 3883
+  #   dimensions:
+  #     width: 2147
+  #     height: 562
+  #   parallax:
+  #     parallax_id: portfolio_parallax
+  #     scale: 0.03
   -
     id: "portfolio_hotspot_unilever"
     image_url: "/img/portfolio_hotspot_unilever.png"

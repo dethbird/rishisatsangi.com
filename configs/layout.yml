@@ -836,7 +836,7 @@ text:
       left: 7235
     dimensions:
       width: 350
-      height: 350
+      height: 550
     overflow:
       y: "auto"
       x: "hidden"

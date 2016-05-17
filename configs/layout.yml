@@ -683,7 +683,7 @@ text:
       You can often find Prutha riding her zebralephant in the East village.
       But for the rest of the time you could find her at:<br />
       405 E 6th street<br />
-      New York, NY10009
+      New York, NY 10009
 
       Email: <a href="mailto:prutharaithatha@gmail.com">prutharaithatha@gmail.com</a><br />
       BatMobile: <a href="callto:9179719271">917-971-6271</a>
@@ -861,6 +861,13 @@ popup_slideshow:
           machines. Employees are treated to some inspiration
           before commencing work everyday as they walk through
            this tunnel to get to their work stations.
+      -
+        image_url: "/img/projects/unilever/tunnel_concept.jpg"
+        caption: |
+      -
+        image_url: "/img/projects/unilever/9_ Stair design Process .jpg"
+        caption: |
+
       -
         image_url: "/img/projects/unilever/7. Cafe with custom millwork and food carts.jpg"
         caption: |
@@ -1197,6 +1204,14 @@ popup_slideshow:
         image_url: "/img/projects/nasdaq/8.jpg"
         caption: |
           Network Operations Center - Design includes a projector in the ceiling that will project a long exposure live feed of people from the streets of Time Square. Rendering by other.
+      -
+        image_url: "/img/projects/nasdaq/9.2.jpg"
+        caption: |
+          Visioning session with client team.
+      -
+        image_url: "/img/projects/nasdaq/9.3.jpg"
+        caption: |
+          When you take CEOs and CTOs furniture shopping.
       -
         image_url: "/img/projects/nasdaq/9.jpg"
         caption: |

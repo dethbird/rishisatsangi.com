@@ -216,6 +216,66 @@ objects:
       duration: 20
       degrees: 360
   -
+    id: "resume_ba_swap_hidden"
+    image_url: "/img/resume_ba_swap.png"
+    location:
+      top: 50
+      left: 2952
+    dimensions:
+      width: 242
+      height: 68
+    hidden: true
+  -
+    id: "resume_ms_swap_hidden"
+    image_url: "/img/resume_ms_swap.png"
+    location:
+      top: 177
+      left: 2760
+    dimensions:
+      width: 238
+      height: 144
+    hidden: true
+  -
+    id: "resume_grad_assoc_swap_hidden"
+    image_url: "/img/resume_grad_assoc_swap.png"
+    location:
+      top: 874
+      left: 3131
+    dimensions:
+      width: 188
+      height: 91
+    hidden: true
+  -
+    id: "resume_diabes_swap_hidden"
+    image_url: "/img/resume_diabes_swap.png"
+    location:
+      top: 680
+      left: 3400
+    dimensions:
+      width: 197
+      height: 91
+    hidden: true
+  -
+    id: "resume_buck_moorhead_swap_hidden"
+    image_url: "/img/resume_buck_moorhead_swap.png"
+    location:
+      top: 543
+      left: 2713
+    dimensions:
+      width: 222
+      height: 90
+    hidden: true
+  -
+    id: "resume_corgan_swap_hidden"
+    image_url: "/img/resume_corgan_swap.png"
+    location:
+      top: 172
+      left: 3550
+    dimensions:
+      width: 203
+      height: 121
+    hidden: true
+  -
     id: "resume_ba"
     image_url: "/img/resume_ba.png"
     alt: "BA"
@@ -227,6 +287,8 @@ objects:
       height: 68
     popup_banner:
       popup_content_id: "resume_ba_popup"
+    hover_swap:
+      swap_image_src: "/img/resume_ba_swap.png"
   -
     id: "resume_ms"
     image_url: "/img/resume_ms.png"
@@ -239,6 +301,8 @@ objects:
       height: 144
     popup_banner:
       popup_content_id: "resume_ms_popup"
+    hover_swap:
+      swap_image_src: "/img/resume_ms_swap.png"
   -
     id: "resume_grad_assoc"
     image_url: "/img/resume_grad_assoc.png"
@@ -251,6 +315,8 @@ objects:
       height: 91
     popup_banner:
       popup_content_id: "resume_grad_assoc_popup"
+    hover_swap:
+      swap_image_src: "/img/resume_grad_assoc_swap.png"
   -
     id: "resume_diabes"
     image_url: "/img/resume_diabes.png"
@@ -263,8 +329,8 @@ objects:
       height: 91
     popup_banner:
       popup_content_id: "resume_diabes_popup"
-
-
+    hover_swap:
+      swap_image_src: "/img/resume_diabes_swap.png"
   -
     id: "resume_buck_moorhead"
     image_url: "/img/resume_buck_moorhead.png"
@@ -277,6 +343,8 @@ objects:
       height: 90
     popup_banner:
       popup_content_id: "resume_buck_moorhead_popup"
+    hover_swap:
+      swap_image_src: "/img/resume_buck_moorhead_swap.png"
   -
     id: "resume_corgan"
     image_url: "/img/resume_corgan.png"
@@ -289,6 +357,8 @@ objects:
       height: 121
     popup_banner:
       popup_content_id: "resume_corgan_popup"
+    hover_swap:
+      swap_image_src: "/img/resume_corgan_swap.png"
   -
     id: "portfolio_bg_03"
     image_url: "/img/portfolio_bg_03.png"

@@ -9,6 +9,7 @@ var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
 var PopupBannerView = require('./ui/PopupBannerView');
 var PopupSlideshowView = require('./ui/PopupSlideshowView');
 var HoverToggleView = require('./ui/HoverToggleView');
+var HoverSwapView = require('./ui/HoverSwapView');
 
 var HorizontalPanelView = Backbone.View.extend({
     w: null,
@@ -93,6 +94,14 @@ var HorizontalPanelView = Backbone.View.extend({
               });
             }
 
+            if (e.hasClass('hover-swap-trigger')) {
+              new HoverSwapView({
+                el: '#' + e.attr('id'),
+                object: object,
+                parent: that
+              });
+            }
+
             if (e.hasClass('popup-banner-trigger')) {
               new PopupBannerView({
                 el: '#' + e.attr('id'),
@@ -170,7 +179,7 @@ var HorizontalPanelView = Backbone.View.extend({
 
 module.exports = HorizontalPanelView;
 
-},{"./animations/FlickerView":2,"./animations/FromToView":3,"./animations/ParallaxView":4,"./animations/SequenceView":5,"./animations/SlideIntoView":6,"./buttons/ClickScrollView":7,"./ui/AlwaysOnTopManagerView":8,"./ui/HoverToggleView":9,"./ui/PopupBannerView":10,"./ui/PopupSlideshowView":11}],2:[function(require,module,exports){
+},{"./animations/FlickerView":2,"./animations/FromToView":3,"./animations/ParallaxView":4,"./animations/SequenceView":5,"./animations/SlideIntoView":6,"./buttons/ClickScrollView":7,"./ui/AlwaysOnTopManagerView":8,"./ui/HoverSwapView":9,"./ui/HoverToggleView":10,"./ui/PopupBannerView":11,"./ui/PopupSlideshowView":12}],2:[function(require,module,exports){
 var FlickerView = Backbone.View.extend({
     initialize: function(options) {
         var that = this;
@@ -414,6 +423,43 @@ var AlwaysOnTopManagerView = Backbone.View.extend({
 module.exports = AlwaysOnTopManagerView;
 
 },{}],9:[function(require,module,exports){
+var HoverSwapView = Backbone.View.extend({
+    object: null,
+    parent: null,
+    jqEl: null,
+    children: null,
+    initialize: function(options) {
+        var that = this;
+        that.object = options.object;
+        that.parent = options.parent;
+        that.jqEl = $(that.el);
+        that.children = [];
+        _.each(that.object.hover_toggle, function(e){
+          that.children.push($('#' + e.toggle_id));
+        });
+
+        that.jqEl.mouseover(function(){
+          that.swap();
+        });
+
+        that.jqEl.mouseout(function(){
+          that.restore();
+        });
+
+    },
+    swap: function() {
+        var that = this;
+        that.jqEl.attr('src', that.object.hover_swap.swap_image_src);
+    },
+    restore: function() {
+        var that = this;
+        that.jqEl.attr('src', that.object.image_url);
+    }
+});
+
+module.exports = HoverSwapView;
+
+},{}],10:[function(require,module,exports){
 var HoverToggleView = Backbone.View.extend({
     object: null,
     parent: null,
@@ -424,11 +470,8 @@ var HoverToggleView = Backbone.View.extend({
         that.object = options.object;
         that.parent = options.parent;
         that.jqEl = $(that.el);
-        // console.log(that.object.hover_toggle);
         that.children = [];
         _.each(that.object.hover_toggle, function(e){
-          // console.log(that.toggles);
-          // console.log($('#' + e.toggle_id));
           that.children.push($('#' + e.toggle_id));
         });
 
@@ -439,8 +482,6 @@ var HoverToggleView = Backbone.View.extend({
         that.jqEl.mouseout(function(){
           that.hide();
         });
-
-        console.log(that.children);
     },
     show: function() {
         var that = this;
@@ -458,7 +499,7 @@ var HoverToggleView = Backbone.View.extend({
 
 module.exports = HoverToggleView;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var PopupBannerView = Backbone.View.extend({
     objects: [],
     parent: null,
@@ -505,7 +546,7 @@ var PopupBannerView = Backbone.View.extend({
 
 module.exports = PopupBannerView;
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var PopupSlideshowView = Backbone.View.extend({
     objects: [],
     parent: null,
@@ -591,7 +632,7 @@ var PopupSlideshowView = Backbone.View.extend({
 
 module.exports = PopupSlideshowView;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var HorizontalPanelView = require('../library/views/HorizontalPanelView');
 
 var horizontalPanelView = new HorizontalPanelView({
@@ -599,4 +640,4 @@ var horizontalPanelView = new HorizontalPanelView({
     layout: layout
 });
 
-},{"../library/views/HorizontalPanelView":1}]},{},[12]);
+},{"../library/views/HorizontalPanelView":1}]},{},[13]);

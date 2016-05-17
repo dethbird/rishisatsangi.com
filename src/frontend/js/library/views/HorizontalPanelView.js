@@ -8,6 +8,7 @@ var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
 var PopupBannerView = require('./ui/PopupBannerView');
 var PopupSlideshowView = require('./ui/PopupSlideshowView');
 var HoverToggleView = require('./ui/HoverToggleView');
+var HoverSwapView = require('./ui/HoverSwapView');
 
 var HorizontalPanelView = Backbone.View.extend({
     w: null,
@@ -86,6 +87,14 @@ var HorizontalPanelView = Backbone.View.extend({
 
             if (e.hasClass('hover-toggle-trigger')) {
               new HoverToggleView({
+                el: '#' + e.attr('id'),
+                object: object,
+                parent: that
+              });
+            }
+
+            if (e.hasClass('hover-swap-trigger')) {
+              new HoverSwapView({
                 el: '#' + e.attr('id'),
                 object: object,
                 parent: that

@@ -299,71 +299,81 @@ objects:
     id: "portfolio_hover_unilever"
     image_url: "/img/portfolio_hover_unilever.png"
     location:
-      top: 481
-      left: 4182
+      top: 486
+      left: 4168
     dimensions:
-      width: 112
-      height: 239
+      width: 132
+      height: 218
     hidden: true
   -
     id: "portfolio_hover_nasdaq"
     image_url: "/img/portfolio_hover_nasdaq.png"
     location:
-      top: 406
-      left: 4354
+      top: 384
+      left: 4344
     dimensions:
-      width: 86
-      height: 322
+      width: 105
+      height: 307
+    hidden: true
+  -
+    id: "portfolio_hover_streetlight"
+    image_url: "/img/portfolio_hover_streetlight.png"
+    location:
+      top: 384
+      left: 4344
+    dimensions:
+      width: 218
+      height: 307
     hidden: true
   -
     id: "portfolio_hover_egg"
     image_url: "/img/portfolio_hover_egg.png"
     location:
-      top: 600
-      left: 4630
+      top: 599
+      left: 4625
     dimensions:
-      width: 87
-      height: 90
+      width: 92
+      height: 91
     hidden: true
   -
     id: "portfolio_hover_bwstall"
     image_url: "/img/portfolio_hover_bwstall.png"
     location:
-      top: 555
-      left: 4797
+      top: 568
+      left: 4800
     dimensions:
-      width: 133
-      height: 134
+      width: 127
+      height: 121
     hidden: true
   -
     id: "portfolio_hover_coronet"
     image_url: "/img/portfolio_hover_coronet.png"
     location:
-      top: 648
-      left: 5297
+      top: 644
+      left: 5296
     dimensions:
-      width: 105
-      height: 107
+      width: 110
+      height: 111
     hidden: true
   -
     id: "portfolio_hover_rustom"
     image_url: "/img/portfolio_hover_rustom.png"
     location:
-      top: 385
-      left: 5006
+      top: 367
+      left: 5002
     dimensions:
-      width: 179
-      height: 129
+      width: 186
+      height: 198
     hidden: true
   -
     id: "portfolio_hover_dsm"
     image_url: "/img/portfolio_hover_dsm.png"
     location:
       top: 575
-      left: 5483
+      left: 5485
     dimensions:
-      width: 64
-      height: 168
+      width: 71
+      height: 169
     hidden: true
   -
     id: "portfolio_sketch"
@@ -388,7 +398,8 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_unilever"
     hover_toggle:
-      toggle_id: "portfolio_hover_unilever"
+      -
+        toggle_id: "portfolio_hover_unilever"
   -
     id: "portfolio_hotspot_bwstall"
     image_url: "/img/portfolio_hotspot_bwstall.png"
@@ -403,7 +414,8 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_bwstall"
     hover_toggle:
-      toggle_id: "portfolio_hover_bwstall"
+      -
+        toggle_id: "portfolio_hover_bwstall"
   -
     id: "portfolio_hotspot_nasdaq"
     image_url: "/img/portfolio_hotspot_nasdaq.png"
@@ -418,7 +430,10 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_nasdaq"
     hover_toggle:
-      toggle_id: "portfolio_hover_nasdaq"
+      -
+        toggle_id: "portfolio_hover_nasdaq"
+      -
+        toggle_id: "portfolio_hover_streetlight"
   -
     id: "portfolio_hotspot_egg"
     image_url: "/img/portfolio_hotspot_egg.png"
@@ -433,7 +448,8 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_egg"
     hover_toggle:
-      toggle_id: "portfolio_hover_egg"
+      -
+        toggle_id: "portfolio_hover_egg"
   -
     id: "portfolio_hotspot_rustom"
     image_url: "/img/portfolio_hotspot_rustom.png"
@@ -448,7 +464,8 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_rustom"
     hover_toggle:
-      toggle_id: "portfolio_hover_rustom"
+      -
+        toggle_id: "portfolio_hover_rustom"
   -
     id: "portfolio_hotspot_coronet"
     image_url: "/img/portfolio_hotspot_coronet.png"
@@ -463,7 +480,8 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_coronet"
     hover_toggle:
-      toggle_id: "portfolio_hover_coronet"
+      -
+        toggle_id: "portfolio_hover_coronet"
   -
     id: "portfolio_hotspot_dsm"
     image_url: "/img/portfolio_hotspot_dsm.png"
@@ -478,9 +496,10 @@ objects:
     popup_slideshow:
       popup_slideshow_id: "popup_slideshow_dsm"
     hover_toggle:
-      toggle_id: "portfolio_hover_dsm"
+      -
+        toggle_id: "portfolio_hover_dsm"
   -
-    id: "contact_run"
+    id: "contact_sun"
     image_url: "/img/contact_sun.png"
     location:
       top: -573
@@ -655,13 +674,14 @@ text:
     copy: |
       Prutha Raithatha is a unicorn in the making. She loves space design, fashion, daydreaming and dogs. She believes all alarm clocks are reincarnations of past dictators who loved harassing the kind restful souls of the night. But once at work, she resumes her aggressive quest to make the world an interesting  place one wall at a time. She also hates talking about herself in the third person but that's what all the good people of the inter-web advise on “how to write a bio”. Wasn't <strike>me</strike> her.
 
-      Prutha has over 11 years of work experience in the architecture and interior design industry in the NYC/ NJ area. She has a Bachelor of Architecture from Mumbai University (India) and a Master of Science in Sustainable Design from Carnegie Mellon University (USA). She is currently employed with Corgan Associates as a Project Architect in their commercial interior design studio and loves it. She is a strong leader, a collaborator with co-workers, consultants, and clients, and nearly always, completes her projects having fostered lifelong relationships with the project team.
+      Prutha has over 11 years of work experience in the architecture and interior design industry in the NYC/ NJ area. She is a LEED Accredited Professional. She has a Bachelor of Architecture from Mumbai University (India) and a Master of Science in Sustainable Design from Carnegie Mellon University (USA). She is currently employed with Corgan Associates as a Project Architect in their commercial interior design studio and loves it. She is a strong leader, a collaborator with co-workers, consultants, and clients, and nearly always, completes her projects having fostered lifelong relationships with the project team.
 
-      Her only goal in life is to be a designer. A good one. The kind of designer who has worked hard and experimented so much that they have finally found their own style that the world recognizes as distinctly their own. She is constantly experimenting, thinking, questioning and refining her creative process. She strongly believes that in order to stay creative one needs to step away from their profession in their free time and delve into other forms of art for inspiration. Creativity needs practice. Invention is a result of experimentation. The rest lies in the hands of fate and maybe Bernie Sanders.
+      Her main goal in life is to be a designer. A good one. The kind of designer who has worked hard and experimented so much that they have finally found their own style that the world recognizes as distinctly their own. She is constantly experimenting, thinking, questioning and refining her creative process. She strongly believes that in order to stay creative one needs to step away from their profession in their free time and delve into other forms of art for inspiration. Creativity needs practice. Invention is a result of experimentation.
+
 
       When bored, she is restless and takes pictures of people on the street who look creative; she dresses herself as a character of her imagination and struts the streets of Manhattan. She also loves taking care of her organic garden in the East Village, collaborating with artists on art projects, sipping chai with family and being freaked out by her youngest niece who looks like a 3’-0” tall version of herself.
 
-      Ultimately Prutha hopes that she can contribute to this world in some creative way as a designer. Maybe also grow a pair of wings.
+      Ultimately Prutha hopes that she can contribute to this world in some creative way. Maybe also grow a pair of wings. How long can that take?
 
     location:
       top: 350
@@ -864,14 +884,14 @@ popup_slideshow:
       -
         image_url: "/img/projects/unilever/tunnel_concept.jpg"
         caption: |
-      -
-        image_url: "/img/projects/unilever/9_ Stair design Process .jpg"
-        caption: |
-
+          Tunnel design concept sketch by me
       -
         image_url: "/img/projects/unilever/7. Cafe with custom millwork and food carts.jpg"
         caption: |
           Cafe with custom millwork and food carts
+      -
+        image_url: "/img/projects/unilever/9_ Stair design Process .jpg"
+        caption: |
       -
         image_url: "/img/projects/unilever/8.Internal Stair between two floors.jpg"
         caption: |

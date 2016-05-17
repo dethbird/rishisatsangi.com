@@ -2,12 +2,16 @@ var HoverToggleView = Backbone.View.extend({
     object: null,
     parent: null,
     jqEl: null,
+    children: null,
     initialize: function(options) {
         var that = this;
         that.object = options.object;
         that.parent = options.parent;
         that.jqEl = $(that.el);
-        that.toggleEl = $('#' + that.object.hover_toggle.toggle_id);
+        that.children = [];
+        _.each(that.object.hover_toggle, function(e){
+          that.children.push($('#' + e.toggle_id));
+        });
 
         that.jqEl.mouseover(function(){
           that.show();
@@ -19,11 +23,15 @@ var HoverToggleView = Backbone.View.extend({
     },
     show: function() {
         var that = this;
-        that.toggleEl.show();
+        _.each(that.children, function(e){
+          e.show();
+        });
     },
     hide: function() {
         var that = this;
-        that.toggleEl.hide();
+        _.each(that.children, function(e){
+          e.hide();
+        });
     }
 });
 

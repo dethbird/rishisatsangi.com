@@ -1201,10 +1201,6 @@ popup_slideshow:
         caption: |
           Pantry
       -
-        image_url: "/img/projects/nasdaq/8.jpg"
-        caption: |
-          Network Operations Center - Design includes a projector in the ceiling that will project a long exposure live feed of people from the streets of Time Square. Rendering by other.
-      -
         image_url: "/img/projects/nasdaq/9.2.jpg"
         caption: |
           Visioning session with client team.
@@ -1212,6 +1208,10 @@ popup_slideshow:
         image_url: "/img/projects/nasdaq/9.3.jpg"
         caption: |
           When you take CEOs and CTOs furniture shopping.
+      -
+        image_url: "/img/projects/nasdaq/8.jpg"
+        caption: |
+          Network Operations Center - Design includes a projector in the ceiling that will project a long exposure live feed of people from the streets of Time Square. Rendering by other.
       -
         image_url: "/img/projects/nasdaq/9.jpg"
         caption: |

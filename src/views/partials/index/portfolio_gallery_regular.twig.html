@@ -9,12 +9,12 @@
 {% for object in gallery %}
   <div class="row gallery-slide" id="{{id}}{{loop.index}}">
     <div class="col-xl-12 gallery-object">
-        <div class="title">{{object.title}}</div>
         {% if object.type == "image" %}
           <img src="{{object.content}}" class="{{object.orientation}}"/>
         {% elseif object.type == "embed" %}
           {{object.content|raw}}
         {% endif %}
+        <div class="caption">{{object.title|raw}}</div>
     </div>
   </div>
 {% endfor %}

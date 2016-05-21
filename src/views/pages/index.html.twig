@@ -59,6 +59,8 @@
           {% endif %}
           {% if object.container.id == "portfolio_gallery_instagram" %}
             {% include object.container.view_script with {'instagram_posts': instagram_posts, 'id': object.container.id} %}
+          {% else %}
+            {% include object.container.view_script with {'id': object.container.id} %}
           {% endif %}
           </div>
         {% endif %}

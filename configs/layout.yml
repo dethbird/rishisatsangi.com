@@ -68,7 +68,7 @@ objects:
     id: "portfolio_background"
     image_url: "/img/portfolio_background.jpg"
     location:
-      top: 889
+      top: 863
       left: 0
     dimensions:
       width: 1919
@@ -111,7 +111,7 @@ objects:
   -
     id: "portfolio_gallery_instagram_container"
     location:
-      top: 982
+      top: 914
       left: 0
     dimensions:
       width: 1919
@@ -125,7 +125,7 @@ objects:
   -
     id: "portfolio_gallery_regular_container"
     location:
-      top: 982
+      top: 914
       left: 0
     dimensions:
       width: 1919
@@ -170,6 +170,9 @@ objects:
       swap_image_src: "/img/portfolio_trigger_gallery_hover.png"
     slides_gallery_trigger:
       swap_image_src: "/img/portfolio_trigger_gallery_hover.png"
+    click_scroll:
+      scroll_y: 825
+      duration: 1
   -
     id: "portfolio_trigger_instagram"
     image_url: "/img/portfolio_trigger_instagram.png"
@@ -184,6 +187,40 @@ objects:
       swap_image_src: "/img/portfolio_trigger_instagram_hover.png"
     slides_gallery_trigger:
       swap_image_src: "/img/portfolio_trigger_instagram_hover.png"
+    click_scroll:
+      scroll_y: 825
+      duration: 1
+  -
+    id: "whatido_background"
+    image_url: "/img/whatido_background.jpg"
+    location:
+      top: 2016
+      left: 203
+    dimensions:
+      width: 1514
+      height: 862
+    classes:
+      - img-round-corners
+  -
+    id: "whatido_title"
+    image_url: "/img/whatido_title.png"
+    location:
+      top: 1936
+      left: 163
+    dimensions:
+      width: 438
+      height: 113
+  -
+    id: "whatido_copy"
+    container:
+      id: whatido_copy_markup
+      view_script: "partials/index/whatido_copy.twig.html"
+    location:
+      top: 2016
+      left: 203
+    dimensions:
+      width: 1514
+      height: 862
 parallax:
   -
     id: intro_parallax

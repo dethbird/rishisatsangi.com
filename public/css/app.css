@@ -59,6 +59,10 @@ body {
   padding: 0px 0px 10px 10px;
   margin: 0;
 }
+.gallery-container {
+  background: rgba(0,0,0,.8);
+  border-radius: 0.5rem;
+}
 .slides-gallery {
   position: relative;
 }
@@ -111,6 +115,11 @@ img.hotspot {
 }
 .hidden {
   display: none;
+}
+#whatido_copy_markup {
+  top: 5%;
+  padding: 15px;
+  text-shadow: 1px 2px 4px #000;
 }
 @media screen and (max-width: 800px) {
     body {

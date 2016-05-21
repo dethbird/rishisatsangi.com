@@ -8,1401 +8,190 @@ objects:
       top: 0
       left: 0
     dimensions:
-      width: 7740
-      height: 980
+      width: 1920
+      height: 4860
   -
-    id: "mickey001"
-    image_url: "/img/mickey.png"
+    id: "intro_hydrant"
+    image_url: "/img/intro_hydrant.jpg"
     location:
-      top: 282
-      left: 528
+      top: 41
+      left: 309
     dimensions:
-      width: 162
-      height: 545
-    slide_in:
-      top: -550
-      left: 528
-      duration: 1.5
+      width: 1301
+      height: 756
+    classes:
+      - img-round-corners
   -
-    id: "mickey002"
-    image_url: "/img/mickey.png"
-    location:
-      top: 321
-      left: 398
-    dimensions:
-      width: 162
-      height: 545
-    flicker:
-      delay: 2.4
-      min_duration: 0.1
-      max_duration: 0.5
-      min_opacity: 0.5
-      max_opacity: 0.9
-  -
-    id: "mickey003"
-    image_url: "/img/mickey.png"
-    location:
-      top: 321
-      left: 659
-    dimensions:
-      width: 162
-      height: 545
-    flicker:
-      delay: 2.4
-      min_duration: 0.1
-      max_duration: 0.5
-      min_opacity: 0.5
-      max_opacity: 0.9
-  -
-    id: "header_bio"
-    image_url: "/img/header_bio.png"
-    location:
-      top: 301
-      left: 888
-    dimensions:
-      width: 50
-      height: 32
-    slide_in:
-      top: -301
-      left: 888
-      duration: 1.5
-  -
-    id: "header_bombay_to_nyc"
-    image_url: "/img/header_bombay_to_nyc.png"
-    location:
-      top: 899
-      left: 1472
-    dimensions:
-      width: 373
-      height: 37
-    slide_in:
-      top: -899
-      left: 1472
-      duration: 2.8
-  -
-    id: "face_deer"
-    image_url: "/img/face_deer.png"
-    location:
-      top: 430
-      left: 1515
-    dimensions:
-      width: 357
-      height: 262
-    slide_in:
-      top: 980
-      left: 1515
-      duration: 1.5
-  -
-    id: "black_structure"
-    image_url: "/img/black_structure.png"
-    location:
-      top: -5
-      left: 1872
-    dimensions:
-      width: 659
-      height: 980
-  -
-    id: "yellow_cab"
-    image_url: "/img/yellow_cab.png"
-    location:
-      top: 656
-      left: 1356
-    dimensions:
-      width: 398
-      height: 227
-    slide_in:
-      top: 980
-      left: 1356
-      duration: 1.5
-  -
-    id: "rickshaw_left"
-    image_url: "/img/rickshaw_left.png"
-    location:
-      top: 671
-      left: 1725
-    dimensions:
-      width: 264
-      height: 270
-    slide_in:
-      top: 980
-      left: 1725
-      duration: 1.5
-  -
-    id: "luxo_lamp"
-    image_url: "/img/luxo_lamp.png"
+    id: "intro_shoes"
+    image_url: "/img/intro_shoes.png"
     location:
       top: 0
-      left: 1052
+      left: 1219
     dimensions:
-      width: 892
-      height: 974
-    slide_in:
-      top: 980
-      left: 1052
-      duration: 2.2
+      width: 377
+      height: 583
   -
-    id: "luxo_lamp_glow"
-    image_url: "/img/luxo_lamp_glow.png"
+    id: "intro_signature"
+    image_url: "/img/intro_signature.png"
     location:
-      top: 181
-      left: 1032
+      top: 0
+      left: 36
     dimensions:
-      width: 243
-      height: 172
-    flicker:
-      delay: 2.4
-      min_duration: 0.05
-      max_duration: 0.2
-      min_opacity: 0.6
-      max_opacity: 0.9
+      width: 893
+      height: 381
+    parallax:
+      parallax_id: intro_parallax
+      scale: 0.04
   -
-    id: "luxo_bulb"
-    image_url: "/img/luxo_bulb.png"
+    id: "intro_tagline"
+    image_url: "/img/intro_tagline.png"
     location:
-      top: 233
-      left: 1119
+      top: 460
+      left: 1060
     dimensions:
-      width: 60
-      height: 60
-    flicker:
-      delay: 2.4
-      min_duration: 0.1
-      max_duration: 0.5
-      min_opacity: 0.9
-      max_opacity: 1
+      width: 592
+      height: 368
+    parallax:
+      parallax_id: intro_parallax
+      scale: 0.015
   -
-    id: "tattoo"
-    image_url: "/img/tattoo.png"
+    id: "great_button"
     location:
-      top: 102
-      left: 2893
-    dimensions:
-      width: 861
-      height: 767
+      top: 672
+      left: 857
+    button:
+      text: "Great!"
+    classes:
+      - btn
+      - btn-success
   -
-    id: "circle_small"
-    image_url: "/img/circle_small.png"
+    id: "portfolio_background"
+    image_url: "/img/portfolio_background.jpg"
     location:
-      top: 92
-      left: 3535
+      top: 889
+      left: 0
     dimensions:
-      width: 234
-      height: 234
-    rotate:
-      duration: 20
-      degrees: 360
+      width: 1919
+      height: 1024
+    classes:
+      - img-round-corners
   -
-    id: "circle_medium"
-    image_url: "/img/circle_medium.png"
+    id: "portfolio_title_parallax02"
+    image_url: "/img/portfolio_title_parallax02.png"
     location:
-      top: 98
-      left: 3012
+      top: 859
+      left: 154
     dimensions:
-      width: 561
-      height: 561
-    rotate:
-      duration: 15
-      degrees: -360
-  -
-    id: "circle_large"
-    image_url: "/img/circle_large.png"
-    location:
-      top: 7
-      left: 2680
-    dimensions:
-      width: 800
-      height: 800
-    rotate:
-      duration: 20
-      degrees: 360
-  -
-    id: "resume_ba_swap_hidden"
-    image_url: "/img/resume_ba_swap.png"
-    location:
-      top: 50
-      left: 2952
-    dimensions:
-      width: 242
-      height: 68
-    hidden: true
-  -
-    id: "resume_ms_swap_hidden"
-    image_url: "/img/resume_ms_swap.png"
-    location:
-      top: 177
-      left: 2760
-    dimensions:
-      width: 238
-      height: 144
-    hidden: true
-  -
-    id: "resume_grad_assoc_swap_hidden"
-    image_url: "/img/resume_grad_assoc_swap.png"
-    location:
-      top: 874
-      left: 3131
-    dimensions:
-      width: 188
-      height: 91
-    hidden: true
-  -
-    id: "resume_diabes_swap_hidden"
-    image_url: "/img/resume_diabes_swap.png"
-    location:
-      top: 680
-      left: 3400
-    dimensions:
-      width: 197
-      height: 91
-    hidden: true
-  -
-    id: "resume_buck_moorhead_swap_hidden"
-    image_url: "/img/resume_buck_moorhead_swap.png"
-    location:
-      top: 543
-      left: 2713
-    dimensions:
-      width: 222
-      height: 90
-    hidden: true
-  -
-    id: "resume_corgan_swap_hidden"
-    image_url: "/img/resume_corgan_swap.png"
-    location:
-      top: 172
-      left: 3550
-    dimensions:
-      width: 203
-      height: 121
-    hidden: true
-  -
-    id: "resume_ba"
-    image_url: "/img/resume_ba.png"
-    alt: "BA"
-    location:
-      top: 50
-      left: 2952
-    dimensions:
-      width: 242
-      height: 68
-    popup_banner:
-      popup_content_id: "resume_ba_popup"
-    hover_swap:
-      swap_image_src: "/img/resume_ba_swap.png"
-  -
-    id: "resume_ms"
-    image_url: "/img/resume_ms.png"
-    alt: "MS"
-    location:
-      top: 177
-      left: 2760
-    dimensions:
-      width: 238
-      height: 144
-    popup_banner:
-      popup_content_id: "resume_ms_popup"
-    hover_swap:
-      swap_image_src: "/img/resume_ms_swap.png"
-  -
-    id: "resume_grad_assoc"
-    image_url: "/img/resume_grad_assoc.png"
-    alt: "Grad Associates"
-    location:
-      top: 874
-      left: 3131
-    dimensions:
-      width: 188
-      height: 91
-    popup_banner:
-      popup_content_id: "resume_grad_assoc_popup"
-    hover_swap:
-      swap_image_src: "/img/resume_grad_assoc_swap.png"
-  -
-    id: "resume_diabes"
-    image_url: "/img/resume_diabes.png"
-    alt: "Waterside Construction"
-    location:
-      top: 680
-      left: 3400
-    dimensions:
-      width: 197
-      height: 91
-    popup_banner:
-      popup_content_id: "resume_diabes_popup"
-    hover_swap:
-      swap_image_src: "/img/resume_diabes_swap.png"
-  -
-    id: "resume_buck_moorhead"
-    image_url: "/img/resume_buck_moorhead.png"
-    alt: "Buck Moorhead"
-    location:
-      top: 543
-      left: 2713
-    dimensions:
-      width: 222
-      height: 90
-    popup_banner:
-      popup_content_id: "resume_buck_moorhead_popup"
-    hover_swap:
-      swap_image_src: "/img/resume_buck_moorhead_swap.png"
-  -
-    id: "resume_corgan"
-    image_url: "/img/resume_corgan.png"
-    alt: "Corgan"
-    location:
-      top: 172
-      left: 3550
-    dimensions:
-      width: 203
-      height: 121
-    popup_banner:
-      popup_content_id: "resume_corgan_popup"
-    hover_swap:
-      swap_image_src: "/img/resume_corgan_swap.png"
-  -
-    id: "portfolio_bg_03"
-    image_url: "/img/portfolio_bg_03.png"
-    location:
-      top: 72
-      left: 4059
-    dimensions:
-      width: 1639
-      height: 866
+      width: 273
+      height: 83
     parallax:
       parallax_id: portfolio_parallax
-      scale: 0.20
+      scale: 0.05
   -
-    id: "portfolio_bg_02"
-    image_url: "/img/portfolio_bg_02.png"
+    id: "portfolio_title_parallax01"
+    image_url: "/img/portfolio_title_parallax01.png"
     location:
-      top: 85
-      left: 4112
+      top: 848
+      left: 159
     dimensions:
-      width: 1589
-      height: 844
-    parallax:
-      parallax_id: portfolio_parallax
-      scale: 0.10
-  -
-    id: "portfolio_bg_01"
-    image_url: "/img/portfolio_bg_01.png"
-    location:
-      top: 72
-      left: 4110
-    dimensions:
-      width: 1621
-      height: 841
-    parallax:
-      parallax_id: portfolio_parallax
-      scale: 0.06
-  -
-    id: "portfolio_hover_unilever"
-    image_url: "/img/portfolio_hover_unilever.png"
-    location:
-      top: 486
-      left: 4168
-    dimensions:
-      width: 132
-      height: 218
-    hidden: true
-  -
-    id: "portfolio_hover_nasdaq"
-    image_url: "/img/portfolio_hover_nasdaq.png"
-    location:
-      top: 384
-      left: 4344
-    dimensions:
-      width: 105
-      height: 307
-    hidden: true
-  -
-    id: "portfolio_hover_streetlight"
-    image_url: "/img/portfolio_hover_streetlight.png"
-    location:
-      top: 384
-      left: 4344
-    dimensions:
-      width: 218
-      height: 307
-    hidden: true
-  -
-    id: "portfolio_hover_egg"
-    image_url: "/img/portfolio_hover_egg.png"
-    location:
-      top: 599
-      left: 4625
-    dimensions:
-      width: 92
+      width: 303
       height: 91
-    hidden: true
-  -
-    id: "portfolio_hover_bwstall"
-    image_url: "/img/portfolio_hover_bwstall.png"
-    location:
-      top: 568
-      left: 4800
-    dimensions:
-      width: 127
-      height: 121
-    hidden: true
-  -
-    id: "portfolio_hover_coronet"
-    image_url: "/img/portfolio_hover_coronet.png"
-    location:
-      top: 644
-      left: 5296
-    dimensions:
-      width: 110
-      height: 111
-    hidden: true
-  -
-    id: "portfolio_hover_rustom"
-    image_url: "/img/portfolio_hover_rustom.png"
-    location:
-      top: 367
-      left: 5002
-    dimensions:
-      width: 186
-      height: 198
-    hidden: true
-  -
-    id: "portfolio_hover_dsm"
-    image_url: "/img/portfolio_hover_dsm.png"
-    location:
-      top: 575
-      left: 5485
-    dimensions:
-      width: 71
-      height: 169
-    hidden: true
-  -
-    id: "portfolio_sketch"
-    image_url: "/img/portfolio_sketch.png"
-    location:
-      top: 225
-      left: 4104
-    dimensions:
-      width: 1585
-      height: 703
-  -
-    id: "pigeons"
-    image_url: "/img/pigeons.png"
-    location:
-      top: -14
-      left: 3883
-    dimensions:
-      width: 2113
-      height: 580
     parallax:
       parallax_id: portfolio_parallax
-      scale: 0.03
-  # -
-  #   id: "pigeons_notsomany"
-  #   image_url: "/img/pigeons_notsomany.png"
-  #   location:
-  #     top: 4
-  #     left: 3883
-  #   dimensions:
-  #     width: 2147
-  #     height: 562
-  #   parallax:
-  #     parallax_id: portfolio_parallax
-  #     scale: 0.03
+      scale: 0.025
   -
-    id: "portfolio_hotspot_unilever"
-    image_url: "/img/portfolio_hotspot_unilever.png"
-    alt: "Unilever - Commercial Interiors"
+    id: "portfolio_title"
+    image_url: "/img/portfolio_title.png"
     location:
-      top: 564
-      left: 4186
+      top: 846
+      left: 161
     dimensions:
-      width: 99
-      height: 198
-    hotspot: true
-    popup_slideshow:
-      popup_slideshow_id: "popup_slideshow_unilever"
-    hover_toggle:
-      -
-        toggle_id: "portfolio_hover_unilever"
+      width: 868
+      height: 91
   -
-    id: "portfolio_hotspot_bwstall"
-    image_url: "/img/portfolio_hotspot_bwstall.png"
-    alt: "Retail Exhibition Design"
+    id: "portfolio_gallery_instagram_container"
     location:
-      top: 569
-      left: 4799
+      top: 982
+      left: 0
     dimensions:
-      width: 153
-      height: 170
-    hotspot: true
-    popup_slideshow:
-      popup_slideshow_id: "popup_slideshow_bwstall"
-    hover_toggle:
-      -
-        toggle_id: "portfolio_hover_bwstall"
+      width: 1919
+      height: 915
+    container:
+      id: portfolio_gallery_instagram
+      view_script: "partials/index/portfolio_gallery_instagram.twig.html"
+    slides_gallery:
+      id: portfolio_gallery_intagram
+      trigger_id: portfolio_trigger_instagram
   -
-    id: "portfolio_hotspot_nasdaq"
-    image_url: "/img/portfolio_hotspot_nasdaq.png"
-    alt: "NASDAQ - Commercial Interiors"
+    id: "portfolio_gallery_regular_container"
     location:
-      top: 413
-      left: 4351
+      top: 982
+      left: 0
     dimensions:
-      width: 85
-      height: 341
-    hotspot: true
-    popup_slideshow:
-      popup_slideshow_id: "popup_slideshow_nasdaq"
-    hover_toggle:
-      -
-        toggle_id: "portfolio_hover_nasdaq"
-      -
-        toggle_id: "portfolio_hover_streetlight"
+      width: 1919
+      height: 915
+    container:
+      id: portfolio_gallery_regular
+      view_script: "partials/index/portfolio_gallery_regular.twig.html"
+    slides_gallery:
+      id: portfolio_gallery_regular
+      trigger_id: portfolio_trigger_gallery
   -
-    id: "portfolio_hotspot_egg"
-    image_url: "/img/portfolio_hotspot_egg.png"
-    alt: "Retail Exhibition Design"
-    location:
-      top: 601
-      left: 4623
-    dimensions:
-      width: 97
-      height: 126
-    hotspot: true
-    popup_slideshow:
-      popup_slideshow_id: "popup_slideshow_egg"
-    hover_toggle:
-      -
-        toggle_id: "portfolio_hover_egg"
-  -
-    id: "portfolio_hotspot_rustom"
-    image_url: "/img/portfolio_hotspot_rustom.png"
-    alt: "Residential"
-    location:
-      top: 376
-      left: 5037
-    dimensions:
-      width: 139
-      height: 147
-    hotspot: true
-    popup_slideshow:
-      popup_slideshow_id: "popup_slideshow_rustom"
-    hover_toggle:
-      -
-        toggle_id: "portfolio_hover_rustom"
-  -
-    id: "portfolio_hotspot_coronet"
-    image_url: "/img/portfolio_hotspot_coronet.png"
-    alt: "Design Competition Winner"
-    location:
-      top: 654
-      left: 5294
-    dimensions:
-      width: 107
-      height: 143
-    hotspot: true
-    popup_slideshow:
-      popup_slideshow_id: "popup_slideshow_coronet"
-    hover_toggle:
-      -
-        toggle_id: "portfolio_hover_coronet"
-  -
-    id: "portfolio_hotspot_dsm"
-    image_url: "/img/portfolio_hotspot_dsm.png"
-    alt: "Press and Fashion"
-    location:
-      top: 571
-      left: 5482
-    dimensions:
-      width: 75
-      height: 218
-    hotspot: true
-    popup_slideshow:
-      popup_slideshow_id: "popup_slideshow_dsm"
-    hover_toggle:
-      -
-        toggle_id: "portfolio_hover_dsm"
-  -
-    id: "contact_sun"
-    image_url: "/img/contact_sun.png"
-    location:
-      top: -573
-      left: 6271
-    dimensions:
-      width: 2147
-      height: 2156
-    rotate:
-      duration: 20
-      degrees: 360
-  -
-    id: "city_sketch"
-    image_url: "/img/city_sketch.png"
-    location:
-      top: 170
-      left: 6162
-    dimensions:
-      width: 1493
-      height: 644
-  -
-    id: "rat_animation"
-    image_url: "/img/rat_animation001.png"
+    id: "portfolio_trigger_gallery_swap"
+    image_url: "/img/portfolio_trigger_gallery_hover.png"
     location:
       top: 875
-      left: 7800
+      left: 865
     dimensions:
-      width: 380
-      height: 85
-    sequence:
-      -
-        image_url: "/img/rat_animation001.png"
-        duration: 0.25
-      -
-        image_url: "/img/rat_animation002.png"
-        duration: 0.25
-    from_to:
-      sequence:
-        -
-          from:
-            left: 6100
-            top: 650
-            scale: 0.8
-          to:
-            left: 7800
-            top: 875
-            scale: 1
-          duration: 2
-          min_delay: 4
-          random_delay: 2
+      width: 116
+      height: 39
+    hidden: true
   -
-    id: "elephant"
-    image_url: "/img/elephant.png"
+    id: "portfolio_trigger_instagram_swap"
+    image_url: "/img/portfolio_trigger_instagram_hover.png"
     location:
-      top: 185
-      left: 6117
+      top: 875
+      left: 692
     dimensions:
-      width: 425
-      height: 569
+      width: 140
+      height: 39
+    hidden: true
   -
-    id: "header_contact"
-    image_url: "/img/header_contact.png"
+    id: "portfolio_trigger_gallery"
+    image_url: "/img/portfolio_trigger_gallery.png"
+    alt: "Regular Gallery"
     location:
-      top: 415
-      left: 7348
+      top: 875
+      left: 865
     dimensions:
-      width: 142
-      height: 34
+      width: 116
+      height: 39
+    hover_swap:
+      swap_image_src: "/img/portfolio_trigger_gallery_hover.png"
+    slides_gallery_trigger:
+      swap_image_src: "/img/portfolio_trigger_gallery_hover.png"
   -
-    id: "menu_name"
-    image_url: "/img/menu_name.png"
-    alt: "Home"
-    click_scroll:
-      scroll_x: 0
-      duration: 1
+    id: "portfolio_trigger_instagram"
+    image_url: "/img/portfolio_trigger_instagram.png"
+    alt: "Instagram Gallery"
     location:
-      top: 370
-      left: 32
+      top: 875
+      left: 692
     dimensions:
-      width: 315
-      height: 41
-    slide_in:
-      top: -364
-      left: 32
-      duration: 1.5
-    always_on_top:
-      duration: 1
-  -
-    id: "menu_bio"
-    image_url: "/img/menu_bio.png"
-    alt: "Bio"
-    click_scroll:
-      scroll_x: 0
-      duration: 1
-    location:
-      top: 417
-      left: 32
-    dimensions:
-      width: 43
-      height: 30
-    slide_in:
-      top: -411
-      left: 32
-      duration: 1.5
-    always_on_top:
-      duration: 1
-  -
-    id: "menu_gigs"
-    image_url: "/img/menu_gigs.png"
-    alt: "Gigs"
-    click_scroll:
-      scroll_x: 1875
-      duration: 1
-    location:
-      top: 453
-      left: 32
-    dimensions:
-      width: 59
-      height: 31
-    slide_in:
-      top: -453
-      left: 32
-      duration: 1.5
-    always_on_top:
-      duration: 1
-  -
-    id: "menu_projects"
-    image_url: "/img/menu_projects.png"
-    alt: "Projects"
-    click_scroll:
-      scroll_x: 3813
-      duration: 1
-    location:
-      top: 491
-      left: 32
-    dimensions:
-      width: 126
-      height: 31
-    slide_in:
-      top: -491
-      left: 32
-      duration: 1.5
-    always_on_top:
-      duration: 1
-  -
-    id: "menu_contact"
-    image_url: "/img/menu_contact.png"
-    alt: "Contact"
-    click_scroll:
-      scroll_x: 5748
-      duration: 1
-    location:
-      top: 525
-      left: 32
-    dimensions:
-      width: 112
-      height: 32
-    slide_in:
-      top: -569
-      left: 32
-      duration: 1.5
-    always_on_top:
-      duration: 1
+      width: 140
+      height: 39
+    hover_swap:
+      swap_image_src: "/img/portfolio_trigger_instagram_hover.png"
+    slides_gallery_trigger:
+      swap_image_src: "/img/portfolio_trigger_instagram_hover.png"
 parallax:
+  -
+    id: intro_parallax
+    location:
+      left: 857
+      top: 672
   -
     id: portfolio_parallax
     location:
-      left: 4722
-      top: 680
-text:
-  -
-    id: "bio_text"
-    copy: |
-      Prutha Raithatha is a unicorn in the making. She loves space design, fashion, daydreaming and dogs. She believes all alarm clocks are reincarnations of past dictators who loved harassing the kind restful souls of the night. But once at work, she resumes her aggressive quest to make the world an interesting  place one wall at a time. She also hates talking about herself in the third person but that's what all the good people of the inter-web advise on “how to write a bio”. Wasn't <strike>me</strike> her.
-
-      Prutha has over 11 years of work experience in the architecture and interior design industry in the NYC/ NJ area. She is a LEED Accredited Professional. She has a Bachelor of Architecture from Mumbai University (India) and a Master of Science in Sustainable Design from Carnegie Mellon University (USA). She is currently employed with Corgan Associates as a Project Architect in their commercial interior design studio and loves it. She is a strong leader, a collaborator with co-workers, consultants, and clients, and nearly always, completes her projects having fostered lifelong relationships with the project team.
-
-      Her main goal in life is to be a designer. A good one. The kind of designer who has worked hard and experimented so much that they have finally found their own style that the world recognizes as distinctly their own. She is constantly experimenting, thinking, questioning and refining her creative process. She strongly believes that in order to stay creative one needs to step away from their profession in their free time and delve into other forms of art for inspiration. Creativity needs practice. Invention is a result of experimentation.
-
-
-      When bored, she is restless and takes pictures of people on the street who look creative; she dresses herself as a character of her imagination and struts the streets of Manhattan. She also loves taking care of her organic garden in the East Village, collaborating with artists on art projects, sipping chai with family and being freaked out by her youngest niece who looks like a 3’-0” tall version of herself.
-
-      Ultimately Prutha hopes that she can contribute to this world in some creative way. Maybe also grow a pair of wings. How long can that take?
-
-    location:
-      top: 350
-      left: 888
-    dimensions:
-      width: 350
-      height: 500
-    overflow:
-      y: "auto"
-      x: "hidden"
-    text_align: "left"
-    slide_in:
-      top: -520
-      left: 888
-      duration: 2.2
-  -
-    id: "contact_text"
-    copy: |
-      You can often find Prutha riding her zebralephant in the East village.
-      But for the rest of the time you could find her at:<br />
-      405 E 6th street<br />
-      New York, NY 10009
-
-      Email: <a href="mailto:prutharaithatha@gmail.com">prutharaithatha@gmail.com</a><br />
-      BatMobile: <a href="callto:9179719271">917-971-6271</a>
-    location:
-      top: 450
-      left: 7235
-    dimensions:
-      width: 350
-      height: 550
-    overflow:
-      y: "auto"
-      x: "hidden"
-    text_align: "center"
-popup_banner:
-  -
-    id: "resume_ba_popup"
-    copy: |
-      <div class="col-xs-12">
-        <div class="pull-left col-xs-10">
-          <h1>Bachelor of Architecture</h1>
-          <p>University of Mumbai, India</p>
-        </div>
-        <div class="pull-right col-xs-2">
-          <strong>May 2003</strong>
-        </div>
-      </div>
-      <div class="col-xs-12">
-        <ul>
-        </ul>
-      </div>
-    screen_location:
-      left: 0
-      top: 50
-    dimensions:
-      width: 1920
-      height: auto
-  -
-    id: "resume_ms_popup"
-    copy: |
-      <div class="col-xs-12">
-        <div class="pull-left col-xs-10">
-          <h1>Masters of Science in Sustainable Design</h1>
-          <p>Carnegie Mellon University, USA</p>
-        </div>
-        <div class="pull-right col-xs-2">
-          <strong>May 2005</strong>
-        </div>
-      </div>
-      <div class="col-xs-12">
-        <ul>
-          <li>Thesis Project - Bioclimatic skyscrapers: An analysis of their performance in comparison to a code compliant skyscraper using E-Quest. Energy modeling and plants for indoor environment research</li>
-        </ul>
-      </div>
-    screen_location:
-      left: 0
-      top: 150
-    dimensions:
-      width: 1920
-      height: auto
-  -
-    id: "resume_corgan_popup"
-    copy: |
-      <div class="col-xs-12">
-        <div class="pull-left col-xs-10">
-          <h1>Corgan Associates, Project Architect</h1>
-          <p>Manhattan, NY</p>
-        </div>
-        <div class="pull-right col-xs-2">
-          <strong>04/14 - Present</strong>
-        </div>
-      </div>
-      <div class="col-xs-12">
-        <ul>
-          <li>Unilever, Corporate Interior, Two-storey high-end experiential interior design project in Tribeca, Manhattan (20,000 SF): Project Manager and Designer. Led the project from start to finish.</li>
-          <li>NASDAQ, Corporate Interior, Two storey high-end corporate interior design project in Time Square, Manhattan (18,000 SF): Senior Designer. Designed the space to fit the needs of the client’s aesthetic, brand, schedule and budget.  </li>
-          <li>Design Spotlight Competition for CoreNet’s Annual Dinner Gala: Design leader. Led the design and execution on the concept of Alternate Realities as a respose to the competition topic of "Disruptive Innovation". Submitted a winning entry and landed Corgan in the first place in the Competition.</li>
-        </ul>
-      </div>
-  -
-    id: "resume_buck_moorhead_popup"
-    copy: |
-      <div class="col-xs-12">
-        <div class="pull-left col-xs-10">
-          <h1>Buck Moorhead Architect, Junior Architect</h1>
-          <p>New York, NY</p>
-        </div>
-        <div class="pull-right col-xs-2">
-          <strong>08/05 - 10/06</strong>
-        </div>
-      </div>
-      <div class="col-xs-12">
-        <ul>
-          <li>Audubon Center for Sustainability, Interpretive Center, LEED certification aimed, Albany, NY, (3,000 sf):  LEED consultant, Schematic Design.</li>
-          <li>Small Residential Lofts and apartment interior Renovation Projects, NYC, NY: Survey, DOB Filling, Construction Documents.</li>
-        </ul>
-      </div>
-  -
-    id: "resume_grad_assoc_popup"
-    copy: |
-      <div class="col-xs-12">
-        <div class="pull-left col-xs-10">
-          <h1>Grad Associates, P.A., Intermediate Architect</h1>
-          <p>Newark, NJ</p>
-        </div>
-        <div class="pull-right col-xs-2">
-          <strong>10/06 - 01/10</strong>
-        </div>
-      </div>
-      <div class="col-xs-12">
-        <ul>
-          <li>Rensselaer Education Center, Green Building Award winning project, LEED Platinum aimed, 8.8-acre Ecological Park with a Center for Sustainability, Rensselaer, NY, (3,800 sf):  LEED Online, Redesign for value engineering, Project Management.</li>
-          <li>Standard Chartered Bank, Corporate Office Interiors, Newark, NJ (45,000 sf): Survey, Schematic Design, Product Research, Construction Documents.</li>
-          <li>Starbucks Café, Café Interiors, Newark, NJ (500 SF): Survey, Project and Design coordination with company Standards and specifications, Site supervision.</li>
-          <li>700 Broadway, Lobby Interior Design, New York, NY (600 sf): Schematic Design, Design Development.</li>
-        </ul>
-      </div>
-  -
-    id: "resume_diabes_popup"
-    copy: |
-      <div class="col-xs-12">
-        <div class="pull-left col-xs-10">
-          <h1>Waterside Construction, Intermediate Architect</h1>
-          <p>Edgewater, NJ</p>
-        </div>
-        <div class="pull-right col-xs-2">
-          <strong>01/10 – 04/14</strong>
-        </div>
-      </div>
-      <div class="col-xs-12">
-        <ul>
-          <li>The Alexander, Multi-storey Luxury Residential Apartment project in Edgewater, NJ (650,000 SF, 300 apartments): Construction Documents, Project Coordination and Construction Administration.</li>
-          <li>Multiple small to midsized residential and commercial development projects in New Jersey.</li>
-        </ul>
-      </div>
-popup_slideshow:
-  -
-    id: popup_slideshow_unilever
-    title: "Unilever"
-    image_dimensions:
-      max_height: 920
-    slides:
-      -
-        image_url: "/img/projects/unilever/cover.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/unilever/1.Loung Seating in Cafe with Touch Screen Coffee Tables.jpg"
-        caption: |
-          Lounge Seating in Cafe with Touch Screen Coffee Tables
-      -
-        image_url: "/img/projects/unilever/2. Reception Desk.jpg"
-        caption: |
-          Reception Desk
-      -
-        image_url: "/img/projects/unilever/3. Site Sketch for Reception Desk Power and Data .jpg"
-        caption: |
-          Site Sketch for Reception Desk power and data integration
-      -
-        image_url: "/img/projects/unilever/4. Waiting Area.jpg"
-        caption: |
-          Waiting Area
-      -
-        image_url: "/img/projects/unilever/5.jpg"
-        caption: |
-          Signage
-      -
-        markup: |
-          <iframe src="https://www.youtube.com/embed/yYeXPATWRtc" frameborder="0" allowfullscreen></iframe>
-        caption: |
-          The Tunnel is the experiential portal into the entire space.
-          Set up as a white box art gallery to receive new art from
-           time to time. The tunnel has ceiling mounted projectors,
-          color changing lights, scent dispensers installed within
-          the air supply system and provision for future smoke
-          machines. Employees are treated to some inspiration
-          before commencing work everyday as they walk through
-           this tunnel to get to their work stations.
-      -
-        image_url: "/img/projects/unilever/tunnel_concept.jpg"
-        caption: |
-          Tunnel design concept sketch by me
-      -
-        image_url: "/img/projects/unilever/7. Cafe with custom millwork and food carts.jpg"
-        caption: |
-          Cafe with custom millwork and food carts
-      -
-        image_url: "/img/projects/unilever/9_ Stair design Process .jpg"
-        caption: |
-      -
-        image_url: "/img/projects/unilever/8.Internal Stair between two floors.jpg"
-        caption: |
-           Internal Stair between two floors
-      -
-        image_url: "/img/projects/unilever/9. Site before commencement of any work.jpg"
-        caption: |
-           Site before commencement of work
-      -
-        image_url: "/img/projects/unilever/10. Slab cutout to receive new internal stair.jpg"
-        caption: |
-           Slab cutout to receive new internal stair
-      -
-        image_url: "/img/projects/unilever/11. Men of steel installing the stair structure.jpg"
-        caption: |
-           Men of steel installing the stair structure
-      -
-        image_url: "/img/projects/unilever/12. Final Stair with digital screen art at Mid-landing.jpg"
-        caption: |
-           Final Stair with digital screen art at mid-landing
-      -
-        image_url: "/img/projects/unilever/12.5. Cafe space with a large moveable Video wall on Barn Door Hardware and steel framework.jpg"
-        caption: |
-           Cafe space with a large moveable Video wall on Barn Door Hardware and steel framework
-      -
-        image_url: "/img/projects/unilever/13. Material selection excersise with the client.jpg"
-        caption: |
-           Material selection exercise with the client
-      -
-        image_url: "/img/projects/unilever/14. Best assistant ever.jpg"
-        caption: |
-           Best assistant ever!
-      -
-        image_url: "/img/projects/unilever/15.Site Learnings.jpg"
-        caption: |
-           Site Learnings.
-      -
-        image_url: "/img/projects/unilever/16.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/unilever/17Custom designed and built Wet Wall and Tea Point.jpg"
-        caption: |
-           Custom designed and built Wet Wall and Tea Point
-      -
-        image_url: "/img/projects/unilever/18 Custom design and built Scent Wall and Materials wall.jpg"
-        caption: |
-           Custom designed and built Scent Wall and Materials wall
-      -
-        image_url: "/img/projects/unilever/19.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/unilever/20. Neon Light installation above Material Wall Millwork.jpg"
-        caption: |
-           Neon Light installation above Material Wall millwork
-      -
-        image_url: "/img/projects/unilever/21. My Contractor entertaining my Bindi fetish.jpg"
-        caption: |
-           My Contractor entertaining my Bindi fetish
-      -
-        image_url: "/img/projects/unilever/22. Coccon Chair outside the Artist Studio.jpg"
-        caption: |
-           Cocoon Chair outside the Artist Studio
-      -
-        image_url: "/img/projects/unilever/23. Plenary under construction.jpg"
-        caption: |
-           Plenary under construction
-      -
-        image_url: "/img/projects/unilever/24. Plenary complete.jpg"
-        caption: |
-           Plenary complete with virtual windows on far wall. These two monitors are connected to cameras located on the roof of the building for a live feed of the views outside.
-      -
-        image_url: "/img/projects/unilever/25. Roof Deck Under Construction.jpg"
-        caption: |
-           Roof Deck Under Construction
-      -
-        image_url: "/img/projects/unilever/26. Roof Deck and Skylight completed.jpg"
-        caption: |
-           Roof Deck and Skylight complete
-      -
-        image_url: "/img/projects/unilever/27.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/unilever/28.jpg"
-        caption: |
-
-  -
-    id: popup_slideshow_egg
-    title: "Egg"
-    image_dimensions:
-      max_height: 920
-    slides:
-      -
-        image_url: "/img/projects/egg/1.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/egg/2.jpg"
-        caption: |
-          Hand Sketch of the design.
-      -
-        image_url: "/img/projects/egg/3.jpg"
-        caption: |
-          Rendering of the Reception and Display Area. Rendering by others.
-      -
-        image_url: "/img/projects/egg/4.jpg"
-        caption: |
-          Rendering of the Oval Meeting Room. Rendering by others.
-  -
-    id: popup_slideshow_rustom
-    title: "Rustom"
-    image_dimensions:
-      max_height: 920
-    slides:
-      -
-        image_url: "/img/projects/rustom/1. text.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/rustom/1.jpg"
-        caption: |
-          Floating Entrance door
-      -
-        image_url: "/img/projects/rustom/2.jpg"
-        caption: |
-          Floor Plan
-      -
-        image_url: "/img/projects/rustom/3.jpg"
-        caption: |
-          Living Room
-      -
-        image_url: "/img/projects/rustom/4.jpg"
-        caption: |
-          Facade included Red Stone excavated on site.
-      -
-        image_url: "/img/projects/rustom/5.jpg"
-        caption: |
-          Completed elevation
-      -
-        image_url: "/img/projects/rustom/6.jpg"
-        caption: |
-          Study model made by me
-      -
-        image_url: "/img/projects/rustom/7.jpg"
-        caption: |
-          Infinity Pool under construction
-      -
-        image_url: "/img/projects/rustom/8.jpg"
-        caption: |
-          Balcony railing detail
-  -
-    id: popup_slideshow_coronet
-    title: "Coronet"
-    image_dimensions:
-      max_height: 920
-    slides:
-      -
-        image_url: "/img/projects/coronet/cover.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/coronet/1.jpg"
-        caption: |
-          CoreNet Competition Entry: Round 1, Page 1/2
-      -
-        image_url: "/img/projects/coronet/2.jpg"
-        caption: |
-          CoreNet Competition Entry: Round 1, Page 2/2
-      -
-        markup: |
-          <iframe src="https://www.youtube.com/embed/SRTv4K3C4ws" frameborder="0" allowfullscreen></iframe>
-        caption: |
-          CoreNet Winning Entry model with Floating Hologram Video
-      -
-        image_url: "/img/projects/coronet/3.jpg"
-        caption: |
-          Interior Scene of one of our alternate reality landscapes
-      -
-        image_url: "/img/projects/coronet/4.jpg"
-        caption: |
-          Model interior made with foancore, black electric tape and balsa wood
-      -
-        image_url: "/img/projects/coronet/5.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/coronet/6.jpg"
-        caption: |
-          Final Model displayed at the Intrepid Museum in NYC
-      -
-        image_url: "/img/projects/coronet/7.jpg"
-        caption: |
-          No. 1
-      -
-        image_url: "/img/projects/coronet/8.jpg"
-        caption: |
-          Flat Stanley
-      -
-        image_url: "/img/projects/coronet/9.jpg"
-        caption: |
-          Making of the box
-      -
-        image_url: "/img/projects/coronet/10.jpg"
-        caption: |
-          Who put me inside the box?!
-      -
-        image_url: "/img/projects/coronet/11.jpg"
-        caption: |
-          Nailing miters of a 1/8" ply in not fun
-      -
-        image_url: "/img/projects/coronet/12.jpg"
-        caption: |
-          My amazing team
-      -
-        image_url: "/img/projects/coronet/13.jpg"
-        caption: |
-          The Black outter box
-      -
-        image_url: "/img/projects/coronet/14.jpg"
-        caption: |
-          The white inner box with a plexi panel for hologram projection
-      -
-        image_url: "/img/projects/coronet/15.jpg"
-        caption: |
-          My massing concept for the interiors of the box
-      -
-        image_url: "/img/projects/coronet/16.jpg"
-        caption: |
-          First attempt at mirror mountains
-      -
-        image_url: "/img/projects/coronet/17.jpg"
-        caption: |
-          Alternate Reality lanscape in progress
-  -
-    id: popup_slideshow_dsm
-    title: "Don't Show Me"
-    image_dimensions:
-      max_height: 920
-    slides:
-      -
-        image_url: "/img/projects/dsm/cover.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/dsm/1.jpg"
-        caption: |
-          Interviewed by Archinect.com
-      -
-        image_url: "/img/projects/dsm/2.jpg"
-        caption: |
-          On BBC World
-      -
-        image_url: "/img/projects/dsm/3.jpg"
-        caption: |
-          Published in multiple fashion magazines
-      -
-        image_url: "/img/projects/dsm/4.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/dsm/5.jpg"
-        caption: |
-          Published in India Business of Fashion Report 2013 Yearbook
-      -
-        image_url: "/img/projects/dsm/6.jpg"
-        caption: |
-          Published in POOL International Design Book
-      -
-        image_url: "/img/projects/dsm/7.1.jpg"
-        caption: |
-          "Levitation": A photo art project with photographer Rishi Vimadalal for my blog Don't Shoe Me
-      -
-        image_url: "/img/projects/dsm/8.jpg"
-        caption: |
-          "May the Gods Me with You": A photo art project with photographer Alison Wynn for my blog Don't Shoe Me
-      -
-        image_url: "/img/projects/dsm/9.1.jpg"
-        caption: |
-          "Stairway to Mars": Photo by Alison Wynn
-      -
-        image_url: "/img/projects/dsm/10.jpg"
-        caption: |
-          "A Day in the life of a glamorous Construction Worker": Photo story shot in the slums of Raey Road in Mumbai by Upasana Jain.
-      -
-        image_url: "/img/projects/dsm/11.jpg"
-        caption: |
-          "Postage stamp, something to write home about": Performance Art with Iranian artist Nooshin Rustomi at Flux Factory art gallery in Long Island City, NY.
-
-  -
-    id: popup_slideshow_nasdaq
-    title: "NASDAQ"
-    image_dimensions:
-      max_height: 920
-    slides:
-      -
-        image_url: "/img/projects/nasdaq/cover.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/nasdaq/1.jpg"
-        caption: |
-          NASDAQ
-      -
-        image_url: "/img/projects/nasdaq/2.jpg"
-        caption: |
-          NASDAQ
-      -
-        image_url: "/img/projects/nasdaq/3.jpg"
-        caption: |
-          NASDAQ
-      -
-        image_url: "/img/projects/nasdaq/4.jpg"
-        caption: |
-          Pantry - Design Rendering
-      -
-        image_url: "/img/projects/nasdaq/5.jpg"
-        caption: |
-          Pantry - During Construction
-      -
-        image_url: "/img/projects/nasdaq/6.jpg"
-        caption: |
-          Pantry - Completed
-      -
-        image_url: "/img/projects/nasdaq/7.jpg"
-        caption: |
-          Pantry
-      -
-        image_url: "/img/projects/nasdaq/9.2.jpg"
-        caption: |
-          Visioning session with client team.
-      -
-        image_url: "/img/projects/nasdaq/9.3.jpg"
-        caption: |
-          When you take CEOs and CTOs furniture shopping.
-      -
-        image_url: "/img/projects/nasdaq/8.jpg"
-        caption: |
-          Network Operations Center - Design includes a projector in the ceiling that will project a long exposure live feed of people from the streets of Time Square. Rendering by other.
-      -
-        image_url: "/img/projects/nasdaq/9.jpg"
-        caption: |
-          NOC Design Option Rendering - Paul Smith wallcovering to represent the lights and energy of Time Square. Rendering by other.
-      -
-        image_url: "/img/projects/nasdaq/10.jpg"
-        caption: |
-          NOC - Completed
-      -
-        image_url: "/img/projects/nasdaq/11.jpg"
-        caption: |
-          Brick Detail  during construction
-      -
-        image_url: "/img/projects/nasdaq/12.jpg"
-        caption: |
-          Brick Detail post completion
-      -
-        image_url: "/img/projects/nasdaq/13.jpg"
-        caption: |
-          Design Rendering of Meeting Rooms. All computer renderings by others.
-      -
-        image_url: "/img/projects/nasdaq/14.jpg"
-        caption: |
-          Completed Meeting Rooms
-      -
-        image_url: "/img/projects/nasdaq/15.jpg"
-        caption: |
-          Open Collaboration Zone
-      -
-        image_url: "/img/projects/nasdaq/16.jpg"
-        caption: |
-
-  -
-    id: popup_slideshow_bwstall
-    title: "Brightest Circle"
-    image_dimensions:
-      max_height: 920
-    slides:
-      -
-        image_url: "/img/projects/bwstall/1.jpg"
-        caption: |
-
-      -
-        image_url: "/img/projects/bwstall/2.jpg"
-        caption: |
-          Design concept sketch by me.
-      -
-        image_url: "/img/projects/bwstall/3.jpg"
-        caption: |
-          Rendering of the 3 Meeting Rooms and jewelry display area. Rendering by others.
+      left: 165
+      top: 849

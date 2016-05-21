@@ -1,6 +1,7 @@
-var HorizontalPanelView = require('../library/views/HorizontalPanelView');
+var PanelView = require('../library/views/PanelView');
 
-var horizontalPanelView = new HorizontalPanelView({
+var panelView = new PanelView({
     el: 'body',
+    greatButtonId: "#great_button",
     layout: layout
 });

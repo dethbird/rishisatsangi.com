@@ -1,8 +1,8 @@
 body {
+  background-color: #000;
+  color: #fff;
   margin: 0 0 0 0;
-  overflow-y: hidden;
   position: relative;
-  font-family: "Times New Roman", Times, serif;
 
   /*overflow-wrap: break-word;
   word-wrap: break-word;
@@ -16,80 +16,61 @@ body {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+.row {
+  margin: 0;
+}
+.btn-great-outline {
+    color: #ec287b;
+    background-color: transparent;
+    background-image: none;
+    border-color: #ec287b;
+}
+.btn-great-outline:hover {
+    color: #fff;
+    background-color: #ec287b;
+    border-color: #ec287b;
+}
+.img-round-corners {
+  border-top-left-radius:2em;
+  border-bottom-right-radius:2em;
+}
+#great_button {
+  padding: 0.6rem 1.8rem;
+}
 #contact_text {
   font-weight: bold;
 }
 #container {
-  width: 7740px;
-  height: 980px;
+  width: 1920px;
+  height: 4320px;
   display: block;
   position: relative;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
-#popup_banner {
-  z-index: 5000;
-  position: absolute;
-  background-color: #000;
-  color: #fff;
-  display: none;
-  /*border:dotted 4px #000000;*/
+.gallery-controls {
+  vertical-align: middle;
 }
-.popup-slideshow {
-  z-index: 5000;
-  position: absolute;
-  background-color: #fff;
-  color: #000;
-  display: none;
-  /*border:dotted 4px #000000;*/
-}
-.popup-slideshow .popup-controls.top-controls {
-  position: absolute;
-  top: 0;
-}
-.popup-slideshow .popup-controls.center-controls {
-  position: absolute;
-  top: 50%;
-}
-.popup-slideshow .popup-controls i,
-.popup-slideshow .popup-controls i:hover {
-  padding: 10px 15px 0px 0px;
-  cursor: pointer;
-  color: #000;
-  opacity: 1;
-  font-size: 24px;
-}
-.popup-slideshow .popup-controls span.title,
-.popup-slideshow .popup-controls span.indicator {
-  padding: 10px 0px 0px 15px;
-  cursor: pointer;
+.gallery-controls i,
+.gallery-controls i:hover {
   color: #fff;
   opacity: 1;
   font-size: 24px;
+  padding: 0px 0px 10px 10px;
+  margin: 0;
 }
-.popup-slideshow-slide {
-  display:none;
-  position: absolute;
-  text-align: center;
-  /*padding: 25px;*/
-}
-.popup-slideshow .caption {
-  margin-top: 5px;
-  text-align: center;
-}
-#popup_banner p {
-  font-size: 21px;
-}
-#popup_banner li {
-  font-size: 19px;
-  margin-bottom: 12px;
-}
-#popup_banner .popup-controls i,
-#popup_banner .popup-controls i:hover {
-  padding: 10px 15px 0px 0px;
+.slides-gallery-trigger {
   cursor: pointer;
-  color: #fff;
-  opacity: 1;
-  font-size: 24px;
+}
+#portfolio_gallery img {
+  max-width: 95%;
+  max-height: 80%;
+}
+#portfolio_trigger_gallery.active {
+  url:('/img/portfolio_trigger_gallery_hover.png')
+}
+#portfolio_trigger_instagram.active {
+  url:('/img/portfolio_trigger_instagram_hover.png')
 }
 .object, .text {
   position: absolute;
@@ -117,9 +98,6 @@ img.hotspot {
 }
 .popup-content {
   display: none;
-}
-.row {
-  margin: 0;
 }
 .pull-right {
   text-align: right;

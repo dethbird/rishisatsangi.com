@@ -1,0 +1,26 @@
+<div id="{{id}}" class="gallery-container">
+  <div class="row col-xs-12 gallery-controls">
+    <!-- <div class="pull-left">
+      <span class="title">Farts</span>
+      <span class="indicator">1/12</span>
+    </div> -->
+    <div class="pull-right">
+      <i class="fa fa-caret-left fa-5 prev" aria-hidden="true"></i>
+      <i class="fa fa-caret-right fa-5 next" aria-hidden="true"></i>
+      <i class="fa fa-times fa-5 close" aria-hidden="true"></i>
+    </div>
+  </div>
+{% for object in gallery %}
+<!-- {{object|print_r}} -->
+  <div class="row gallery-slide">
+    <div class="col-xl-12 gallery-object">
+        <div class="title">{{object.title}}</div>
+        {% if object.type == "image" %}
+          <img src="{{object.content}}" class="{{object.orientation}}"/>
+        {% elseif object.type == "embed" %}
+          {{object.content|raw}}
+        {% endif %}
+    </div>
+  </div>
+{% endfor %}
+</div>

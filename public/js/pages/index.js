@@ -1,4 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var ButtonAnimationView = require('./animations/ButtonAnimationView');
 var FlickerView = require('./animations/FlickerView');
 var SlideIntoView = require('./animations/SlideIntoView');
 var FromToView = require('./animations/FromToView');
@@ -6,21 +7,24 @@ var ParallaxView = require('./animations/ParallaxView');
 var SequenceView = require('./animations/SequenceView');
 var ClickScrollView = require('./buttons/ClickScrollView');
 var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
-var PopupBannerView = require('./ui/PopupBannerView');
-var PopupSlideshowView = require('./ui/PopupSlideshowView');
+var SlidesGalleryView = require('./ui/SlidesGalleryView');
 var HoverToggleView = require('./ui/HoverToggleView');
 var HoverSwapView = require('./ui/HoverSwapView');
 
 var HorizontalPanelView = Backbone.View.extend({
+    $container: null,
+    greatButtonId: null,
     w: null,
     layout: null,
     scaleFactor: 1,
     alwaysOnTopManager: null,
-    popupSlideshowView: null,
+    slidesGalleryManager: null,
     initialize: function(options) {
         var that = this;
         that.w = $(window);
         that.layout = options.layout;
+        that.greatButtonId = options.greatButtonId;
+        that.$container = $('#container');
 
         // figure out the scale multiplier
         that.scaleFactor = that.w.width() / that.layout.panel.width;
@@ -29,6 +33,10 @@ var HorizontalPanelView = Backbone.View.extend({
         that.alwaysOnTopManager = new AlwaysOnTopManagerView({
           el: window,
           parent: that
+        });
+
+        new ButtonAnimationView({
+          el: that.greatButtonId
         });
 
         // start infinite animations
@@ -102,25 +110,24 @@ var HorizontalPanelView = Backbone.View.extend({
               });
             }
 
-            if (e.hasClass('popup-banner-trigger')) {
-              new PopupBannerView({
-                el: '#' + e.attr('id'),
-                popup_el: '#popup_banner',
-                object: object,
-                popup_details: _.findWhere(that.layout.popup_banner, {'id': object.popup_banner.popup_content_id}),
-                parent: that
-              });
-            }
+            // if (e.hasClass('popup-banner-trigger')) {
+            //   new PopupBannerView({
+            //     el: '#' + e.attr('id'),
+            //     popup_el: '#popup_banner',
+            //     object: object,
+            //     popup_details: _.findWhere(that.layout.popup_banner, {'id': object.popup_banner.popup_content_id}),
+            //     parent: that
+            //   });
+            // }
 
-            if (e.hasClass('popup-slideshow-trigger')) {
-              var popupSlideshowView = new PopupSlideshowView({
-                el: '#' + e.attr('id'),
-                popup_el: '#' + object.popup_slideshow.popup_slideshow_id,
-                object: object,
-                popup_details: _.findWhere(that.layout.popup_slideshow, {'id': object.popup_slideshow.popup_slideshow_id}),
-                parent: that
-              });
-            }
+            // if (e.hasClass('popup-slideshow-trigger')) {
+            //   var popupSlideshowView = new PopupSlideshowView({
+            //     el: '#' + e.attr('id'),
+            //     popup_el: '#' + object.popup_slideshow.popup_slideshow_id,
+            //     object: object,
+            //     parent: that
+            //   });
+            // }
 
             if (e.hasClass('parallax')) {
               var parallaxView = new ParallaxView({
@@ -131,8 +138,17 @@ var HorizontalPanelView = Backbone.View.extend({
               });
             }
 
+            if (e.hasClass('slides-gallery')) {
+              new SlidesGalleryView({
+                el: '#' + e.attr('id'),
+                object: object,
+                trigger_object: _.findWhere(that.layout.objects, {'id': object.slides_gallery.trigger_id}),
+                parent: that
+              });
+            }
+
             if (e.hasClass('always-on-top')) {
-              that.alwaysOnTopManager.addObject(object);
+                that.alwaysOnTopManager.addObject(object);
             }
 
         });
@@ -158,28 +174,89 @@ var HorizontalPanelView = Backbone.View.extend({
           } else {
               var object = _.findWhere(that.layout.objects, {'id': e.attr('id')});
           }
+
+          var cssProps = {};
+          if(object.dimensions != undefined) {
+            cssProps.width = that.scaleFactor * object.dimensions.width;
+            cssProps.height = that.scaleFactor * object.dimensions.height;
+          }
+          if(object.location != undefined) {
+            cssProps.top = that.scaleFactor * object.location.top;
+            cssProps.left = that.scaleFactor * object.location.left;
+          }
           if (object) {
-            e.css({
-              width: that.scaleFactor * object.dimensions.width,
-              height: that.scaleFactor * object.dimensions.height,
-              top: that.scaleFactor * object.location.top,
-              left: that.scaleFactor * object.location.left
-            });
+            e.css(cssProps);
           }
       });
 
-      // vertically center the container
-      var container = $('#container');
-      container.css({
-        marginTop: (that.w.height() - container.height()) / 2
-      });
 
     }
 });
 
 module.exports = HorizontalPanelView;
 
-},{"./animations/FlickerView":2,"./animations/FromToView":3,"./animations/ParallaxView":4,"./animations/SequenceView":5,"./animations/SlideIntoView":6,"./buttons/ClickScrollView":7,"./ui/AlwaysOnTopManagerView":8,"./ui/HoverSwapView":9,"./ui/HoverToggleView":10,"./ui/PopupBannerView":11,"./ui/PopupSlideshowView":12}],2:[function(require,module,exports){
+},{"./animations/ButtonAnimationView":2,"./animations/FlickerView":3,"./animations/FromToView":4,"./animations/ParallaxView":5,"./animations/SequenceView":6,"./animations/SlideIntoView":7,"./buttons/ClickScrollView":8,"./ui/AlwaysOnTopManagerView":9,"./ui/HoverSwapView":10,"./ui/HoverToggleView":11,"./ui/SlidesGalleryView":12}],2:[function(require,module,exports){
+var ButtonAnimationView = Backbone.View.extend({
+    initialize: function(options) {
+        var that = this;
+        this.timeline = new TimelineMax({
+            paused: true,
+            onComplete: function(){
+                alert('Fantastic!');
+            }
+        });
+        this.timeline.set($(this.el), {autoAlpha:1});
+        this.timeline
+        .fromTo(
+            this.el,
+            1,
+            {
+                transformStyle: "preserve-3d",
+                transformOrigin: "center 0px",
+                rotationX: 0
+            },
+            {
+                rotationX: 360 * 2,
+                ease: Back.easeOut
+            },
+            0
+        )
+        .fromTo(
+            this.el,
+            2.2,
+            {
+                transformStyle: "preserve-3d",
+                transformOrigin: "left 0px",
+                rotationZ: 0
+            },
+            {
+                rotationZ: 80,
+                ease: Elastic.easeOut.config(1.5, 0.3)
+            },
+            0.8
+        )
+        .to(
+            this.el,
+            1.2,
+            {
+                physics2D: {
+                    gravity: 5000,
+                    velocity: 600,
+                    angle: -90
+                }
+            },
+            1
+        );
+        // console.log(this);
+        $(this.el).on('click', function(){
+            that.timeline.play(0);
+        });
+    },
+});
+
+module.exports = ButtonAnimationView;
+
+},{}],3:[function(require,module,exports){
 var FlickerView = Backbone.View.extend({
     initialize: function(options) {
         var that = this;
@@ -203,7 +280,7 @@ var FlickerView = Backbone.View.extend({
 
 module.exports = FlickerView;
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var FromTo = Backbone.View.extend({
     object: null,
     parent: null,
@@ -262,7 +339,7 @@ var FromTo = Backbone.View.extend({
 
 module.exports = FromTo;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var ParallaxView = Backbone.View.extend({
     object: null,
     parent: null,
@@ -298,7 +375,7 @@ var ParallaxView = Backbone.View.extend({
 
 module.exports = ParallaxView;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var SequenceView = Backbone.View.extend({
     object: null,
     parent: null,
@@ -331,7 +408,7 @@ var SequenceView = Backbone.View.extend({
 
 module.exports = SequenceView;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var SlideIntoView = Backbone.View.extend({
     object: null,
     scaleFactor: 1,
@@ -361,7 +438,7 @@ var SlideIntoView = Backbone.View.extend({
 
 module.exports = SlideIntoView;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var ClickScrollView = Backbone.View.extend({
     object: null,
     parent: null,
@@ -390,7 +467,7 @@ var ClickScrollView = Backbone.View.extend({
 
 module.exports = ClickScrollView;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var AlwaysOnTopManagerView = Backbone.View.extend({
     objects: [],
     parent: null,
@@ -422,7 +499,7 @@ var AlwaysOnTopManagerView = Backbone.View.extend({
 
 module.exports = AlwaysOnTopManagerView;
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var HoverSwapView = Backbone.View.extend({
     object: null,
     parent: null,
@@ -446,20 +523,28 @@ var HoverSwapView = Backbone.View.extend({
           that.restore();
         });
 
+        that.jqEl.click(function(){
+          that.restore();
+        });
+
     },
     swap: function() {
         var that = this;
-        that.jqEl.attr('src', that.object.hover_swap.swap_image_src);
+        if(!that.jqEl.hasClass('active')){
+          that.jqEl.attr('src', that.object.hover_swap.swap_image_src);
+        }
     },
     restore: function() {
         var that = this;
-        that.jqEl.attr('src', that.object.image_url);
+        if(!that.jqEl.hasClass('active')){
+          that.jqEl.attr('src', that.object.image_url);
+        }
     }
 });
 
 module.exports = HoverSwapView;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var HoverToggleView = Backbone.View.extend({
     object: null,
     parent: null,
@@ -499,82 +584,59 @@ var HoverToggleView = Backbone.View.extend({
 
 module.exports = HoverToggleView;
 
-},{}],11:[function(require,module,exports){
-var PopupBannerView = Backbone.View.extend({
-    objects: [],
-    parent: null,
-    popup_el: null,
-    popup_details: null,
-    jQpopup: null,
-    initialize: function(options) {
-        var that = this;
-        that.object = options.object;
-        that.parent = options.parent;
-        that.popup_el = options.popup_el;
-        that.popup_details = options.popup_details;
-        that.jQpopup = $(that.popup_el);
-
-        that.jQpopup.find('.close').click(function(){
-          that.jQpopup.hide();
-        });
-
-        $(that.el).click(function(){
-          that.popup();
-        });
-
-    },
-    popup: function() {
-        var that = this;
-        that.jQpopup.find('.popup-content-body').html('');
-        that.jQpopup.find('.popup-content-body').html(
-          $('#' + that.object.popup_banner.popup_content_id).html()
-        );
-        that.jQpopup.show();
-
-        TweenLite.to(
-          that.popup_el,
-          1,
-          {
-            left: window.scrollX,
-            top: (( that.jQpopup.parent().height() - that.jQpopup.height()) / 2),
-            width: that.parent.w.width(),
-            ease: Power2.easeOut
-          }
-        );
-    }
-});
-
-module.exports = PopupBannerView;
-
 },{}],12:[function(require,module,exports){
-var PopupSlideshowView = Backbone.View.extend({
-    objects: [],
+var SlidesGalleryView = Backbone.View.extend({
+    object: null,
+    trigger_object: null,
     parent: null,
-    popup_el: null,
-    popup_details: null,
-    jQpopup: null,
+    $el: null,
+    $trigger: null,
     currentIndex: -1,
     initialize: function(options) {
         var that = this;
         that.object = options.object;
+        that.trigger_object = options.trigger_object;
         that.parent = options.parent;
-        that.popup_el = options.popup_el;
-        that.popup_details = options.popup_details;
-        that.jQpopup = $(that.popup_el);
-        that.currentIndex = that.popup_details.slides.length - 1;
-        that.jQpopup.find('.close').click(function(){
-          that.jQpopup.hide();
-        });
-        that.jQpopup.find('.prev').click(function(){
-          that.prev();
-        });
-        that.jQpopup.find('.next').click(function(){
-          that.next();
-        });
-        $(that.el).click(function(){
-          that.next();
-        });
+        that.$el = $(that.el);
+        that.$trigger = $('#' + that.object.slides_gallery.trigger_id);
+        that.$slides = that.$el.find('.gallery-slide');
+        that.$el.hide();
+        that.$slides.hide();
 
+        that.$trigger.click(function(){
+          that.show();
+        })
+        // that.currentIndex = that.popup_details.slides.length - 1;
+
+        that.$el.find('.close').click(function(){
+          that.hide();
+        });
+        // that.jQpopup.find('.prev').click(function(){
+        //   that.prev();
+        // });
+        // that.jQpopup.find('.next').click(function(){
+        //   that.next();
+        // });
+        // $(that.el).click(function(){
+        //   that.next();
+        // });
+        console.log(that);
+    },
+    show: function(){
+      var that = this;
+      that.parent.$container.find('.slides-gallery').hide();
+      that.parent.$container.find('.slides-gallery-trigger').removeClass('active');
+      that.$el.show();
+      that.$trigger.addClass('active');
+      // that.$trigger.attr('src', that.trigger_object.slides_gallery_trigger.swap_image_src);
+    },
+    hide: function(){
+      var that = this;
+      that.parent.$container.find('.slides-gallery').hide();
+      that.parent.$container.find('.slides-gallery-trigger').removeClass('active');
+      that.$trigger.removeClass('active');
+      that.$trigger.trigger('mouseout');
+      // that.$trigger.attr('src', that.trigger_object.image_url);
     },
     next: function() {
         var that = this;
@@ -595,7 +657,7 @@ var PopupSlideshowView = Backbone.View.extend({
     },
     render: function() {
         var that = this;
-        
+
         that.jQpopup.show();
         that.jQpopup.find('.popup-slideshow-slide').hide();
         $('#' + that.object.popup_slideshow.popup_slideshow_id + that.currentIndex).show();
@@ -630,14 +692,15 @@ var PopupSlideshowView = Backbone.View.extend({
     }
 });
 
-module.exports = PopupSlideshowView;
+module.exports = SlidesGalleryView;
 
 },{}],13:[function(require,module,exports){
-var HorizontalPanelView = require('../library/views/HorizontalPanelView');
+var PanelView = require('../library/views/PanelView');
 
-var horizontalPanelView = new HorizontalPanelView({
+var panelView = new PanelView({
     el: 'body',
+    greatButtonId: "#great_button",
     layout: layout
 });
 
-},{"../library/views/HorizontalPanelView":1}]},{},[13]);
+},{"../library/views/PanelView":1}]},{},[13]);

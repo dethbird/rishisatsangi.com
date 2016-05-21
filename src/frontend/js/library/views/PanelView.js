@@ -1,3 +1,4 @@
+var ButtonAnimationView = require('./animations/ButtonAnimationView');
 var FlickerView = require('./animations/FlickerView');
 var SlideIntoView = require('./animations/SlideIntoView');
 var FromToView = require('./animations/FromToView');
@@ -5,22 +6,25 @@ var ParallaxView = require('./animations/ParallaxView');
 var SequenceView = require('./animations/SequenceView');
 var ClickScrollView = require('./buttons/ClickScrollView');
 var AlwaysOnTopManagerView = require('./ui/AlwaysOnTopManagerView');
-var PopupBannerView = require('./ui/PopupBannerView');
-var PopupSlideshowView = require('./ui/PopupSlideshowView');
+var SlidesGalleryView = require('./ui/SlidesGalleryView');
 var HoverToggleView = require('./ui/HoverToggleView');
 var HoverSwapView = require('./ui/HoverSwapView');
 
 var HorizontalPanelView = Backbone.View.extend({
+    $container: null,
+    greatButtonId: null,
     w: null,
     layout: null,
     scaleFactor: 1,
     alwaysOnTopManager: null,
-    popupSlideshowView: null,
+    slidesGalleryManager: null,
     initialize: function(options) {
         var that = this;
         that.w = $(window);
         that.layout = options.layout;
-        console.log(that.w.width());
+        that.greatButtonId = options.greatButtonId;
+        that.$container = $('#container');
+
         // figure out the scale multiplier
         that.scaleFactor = that.w.width() / that.layout.panel.width;
 
@@ -28,6 +32,10 @@ var HorizontalPanelView = Backbone.View.extend({
         that.alwaysOnTopManager = new AlwaysOnTopManagerView({
           el: window,
           parent: that
+        });
+
+        new ButtonAnimationView({
+          el: that.greatButtonId
         });
 
         // start infinite animations
@@ -101,25 +109,24 @@ var HorizontalPanelView = Backbone.View.extend({
               });
             }
 
-            if (e.hasClass('popup-banner-trigger')) {
-              new PopupBannerView({
-                el: '#' + e.attr('id'),
-                popup_el: '#popup_banner',
-                object: object,
-                popup_details: _.findWhere(that.layout.popup_banner, {'id': object.popup_banner.popup_content_id}),
-                parent: that
-              });
-            }
+            // if (e.hasClass('popup-banner-trigger')) {
+            //   new PopupBannerView({
+            //     el: '#' + e.attr('id'),
+            //     popup_el: '#popup_banner',
+            //     object: object,
+            //     popup_details: _.findWhere(that.layout.popup_banner, {'id': object.popup_banner.popup_content_id}),
+            //     parent: that
+            //   });
+            // }
 
-            if (e.hasClass('popup-slideshow-trigger')) {
-              var popupSlideshowView = new PopupSlideshowView({
-                el: '#' + e.attr('id'),
-                popup_el: '#' + object.popup_slideshow.popup_slideshow_id,
-                object: object,
-                popup_details: _.findWhere(that.layout.popup_slideshow, {'id': object.popup_slideshow.popup_slideshow_id}),
-                parent: that
-              });
-            }
+            // if (e.hasClass('popup-slideshow-trigger')) {
+            //   var popupSlideshowView = new PopupSlideshowView({
+            //     el: '#' + e.attr('id'),
+            //     popup_el: '#' + object.popup_slideshow.popup_slideshow_id,
+            //     object: object,
+            //     parent: that
+            //   });
+            // }
 
             if (e.hasClass('parallax')) {
               var parallaxView = new ParallaxView({
@@ -130,8 +137,17 @@ var HorizontalPanelView = Backbone.View.extend({
               });
             }
 
+            if (e.hasClass('slides-gallery')) {
+              new SlidesGalleryView({
+                el: '#' + e.attr('id'),
+                object: object,
+                trigger_object: _.findWhere(that.layout.objects, {'id': object.slides_gallery.trigger_id}),
+                parent: that
+              });
+            }
+
             if (e.hasClass('always-on-top')) {
-              that.alwaysOnTopManager.addObject(object);
+                that.alwaysOnTopManager.addObject(object);
             }
 
         });
@@ -157,21 +173,21 @@ var HorizontalPanelView = Backbone.View.extend({
           } else {
               var object = _.findWhere(that.layout.objects, {'id': e.attr('id')});
           }
+
+          var cssProps = {};
+          if(object.dimensions != undefined) {
+            cssProps.width = that.scaleFactor * object.dimensions.width;
+            cssProps.height = that.scaleFactor * object.dimensions.height;
+          }
+          if(object.location != undefined) {
+            cssProps.top = that.scaleFactor * object.location.top;
+            cssProps.left = that.scaleFactor * object.location.left;
+          }
           if (object) {
-            e.css({
-              width: that.scaleFactor * object.dimensions.width,
-              height: that.scaleFactor * object.dimensions.height,
-              top: that.scaleFactor * object.location.top,
-              left: that.scaleFactor * object.location.left
-            });
+            e.css(cssProps);
           }
       });
 
-      // vertically center the container
-      var container = $('#container');
-      container.css({
-        marginTop: (that.w.height() - container.height()) / 2
-      });
 
     }
 });

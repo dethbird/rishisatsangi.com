@@ -21,14 +21,22 @@ var HoverSwapView = Backbone.View.extend({
           that.restore();
         });
 
+        that.jqEl.click(function(){
+          that.restore();
+        });
+
     },
     swap: function() {
         var that = this;
-        that.jqEl.attr('src', that.object.hover_swap.swap_image_src);
+        if(!that.jqEl.hasClass('active')){
+          that.jqEl.attr('src', that.object.hover_swap.swap_image_src);
+        }
     },
     restore: function() {
         var that = this;
-        that.jqEl.attr('src', that.object.image_url);
+        if(!that.jqEl.hasClass('active')){
+          that.jqEl.attr('src', that.object.image_url);
+        }
     }
 });
 

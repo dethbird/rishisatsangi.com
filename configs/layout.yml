@@ -120,7 +120,7 @@ objects:
       id: portfolio_gallery_instagram
       view_script: "partials/index/portfolio_gallery_instagram.twig.html"
     slides_gallery:
-      id: portfolio_gallery_intagram
+      id: portfolio_gallery_instagram
       trigger_id: portfolio_trigger_instagram
   -
     id: "portfolio_gallery_regular_container"

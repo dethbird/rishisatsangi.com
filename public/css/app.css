@@ -49,7 +49,7 @@ body {
   overflow-y: hidden;
 }
 .gallery-controls {
-  vertical-align: middle;
+  z-index: 5000;
 }
 .gallery-controls i,
 .gallery-controls i:hover {
@@ -58,6 +58,13 @@ body {
   font-size: 24px;
   padding: 0px 0px 10px 10px;
   margin: 0;
+}
+.slides-gallery {
+  position: relative;
+}
+.gallery-slide {
+  margin-top: 30px;
+  text-align: center;
 }
 .slides-gallery-trigger {
   cursor: pointer;

@@ -4,7 +4,7 @@ var SlidesGalleryView = Backbone.View.extend({
     parent: null,
     $el: null,
     $trigger: null,
-    currentIndex: -1,
+    currentIndex: 1,
     initialize: function(options) {
         var that = this;
         that.object = options.object;
@@ -13,35 +13,39 @@ var SlidesGalleryView = Backbone.View.extend({
         that.$el = $(that.el);
         that.$trigger = $('#' + that.object.slides_gallery.trigger_id);
         that.$slides = that.$el.find('.gallery-slide');
+
         that.$el.hide();
         that.$slides.hide();
 
         that.$trigger.click(function(){
           that.show();
         })
-        // that.currentIndex = that.popup_details.slides.length - 1;
 
         that.$el.find('.close').click(function(){
           that.hide();
         });
-        // that.jQpopup.find('.prev').click(function(){
-        //   that.prev();
-        // });
-        // that.jQpopup.find('.next').click(function(){
-        //   that.next();
-        // });
+        that.$el.find('.prev').click(function(){
+          that.prev();
+        });
+        that.$el.find('.next').click(function(){
+          that.next();
+        });
         // $(that.el).click(function(){
         //   that.next();
         // });
+
         console.log(that);
     },
     show: function(){
       var that = this;
       that.parent.$container.find('.slides-gallery').hide();
       that.parent.$container.find('.slides-gallery-trigger').removeClass('active');
+      that.parent.$container.find('.slides-gallery-trigger').trigger('mouseout');
+
       that.$el.show();
+      that.$trigger.trigger('mouseover');
       that.$trigger.addClass('active');
-      // that.$trigger.attr('src', that.trigger_object.slides_gallery_trigger.swap_image_src);
+      that.render();
     },
     hide: function(){
       var that = this;
@@ -49,59 +53,36 @@ var SlidesGalleryView = Backbone.View.extend({
       that.parent.$container.find('.slides-gallery-trigger').removeClass('active');
       that.$trigger.removeClass('active');
       that.$trigger.trigger('mouseout');
-      // that.$trigger.attr('src', that.trigger_object.image_url);
     },
     next: function() {
         var that = this;
-
         that.currentIndex++;
-        if(that.currentIndex>=that.popup_details.slides.length) {
-          that.currentIndex = 0;
+        if(that.currentIndex>=that.$slides.length) {
+          that.currentIndex = 1;
         }
         that.render();
     },
     prev: function() {
         var that = this;
         that.currentIndex--;
-        if(that.currentIndex<0) {
-          that.currentIndex = that.popup_details.slides.length -1;
+        if(that.currentIndex<1) {
+          that.currentIndex = that.$slides.length;
         }
         that.render();
     },
     render: function() {
         var that = this;
-
-        that.jQpopup.show();
-        that.jQpopup.find('.popup-slideshow-slide').hide();
-        $('#' + that.object.popup_slideshow.popup_slideshow_id + that.currentIndex).show();
-        _.each(that.jQpopup.find('.popup-slideshow-image'), function(e){
-          e = $(e);
-          e.css({
-            height: that.parent.scaleFactor * that.popup_details.image_dimensions.max_height,
-            width: 'auto'
-          });
+        that.$slides.hide();
+        var $slide = $('#' + that.object.slides_gallery.id + that.currentIndex);
+        $slide.show();
+        $slide.find('.gallery-object img').css({
+          maxHeight: that.$el.height() * 0.95,
+          maxWidth: that.$el.width() * 0.95
         });
-
-        _.each(that.jQpopup.find('iframe'), function(e){
-          e = $(e);
-          e.css({
-            height: that.parent.scaleFactor * that.popup_details.image_dimensions.max_height,
-            width: that.parent.scaleFactor * that.popup_details.image_dimensions.max_height * 1.25
-          });
+        $slide.find('.gallery-object iframe').css({
+          height: that.$el.height() * 0.95,
+          width: that.$el.width() * 0.95
         });
-
-
-        TweenLite.to(
-          that.popup_el,
-          1,
-          {
-            left: window.scrollX,
-            top: 0,
-            width: that.parent.scaleFactor * 1920,
-            height: that.parent.scaleFactor * 1080,
-            ease: Power2.easeOut
-          }
-        );
     }
 });
 

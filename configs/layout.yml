@@ -88,8 +88,8 @@ objects:
     id: "portfolio_title_parallax02"
     image_url: "/img/portfolio_title_parallax02.png"
     location:
-      top: 859
-      left: 154
+      top: 855
+      left: 175
     dimensions:
       width: 273
       height: 83
@@ -100,11 +100,11 @@ objects:
     id: "portfolio_title_parallax01"
     image_url: "/img/portfolio_title_parallax01.png"
     location:
-      top: 848
-      left: 159
+      top: 850
+      left: 169
     dimensions:
-      width: 303
-      height: 91
+      width: 288
+      height: 87
     parallax:
       parallax_id: portfolio_parallax
       scale: 0.025
@@ -282,6 +282,30 @@ objects:
     classes:
       - img-round-corners
   -
+    id: "whatido_title_parallax02"
+    image_url: "/img/whatido_title_parallax02.png"
+    location:
+      top: 1942
+      left: 185
+    dimensions:
+      width: 394
+      height: 101
+    parallax:
+      parallax_id: whatido_parallax
+      scale: 0.05
+  -
+    id: "whatido_title_parallax01"
+    image_url: "/img/whatido_title_parallax01.png"
+    location:
+      top: 1939
+      left: 174
+    dimensions:
+      width: 416
+      height: 107
+    parallax:
+      parallax_id: whatido_parallax
+      scale: 0.025
+  -
     id: "whatido_title"
     image_url: "/img/whatido_title.png"
     location:
@@ -312,6 +336,30 @@ objects:
       height: 897
     classes:
       - img-round-corners
+  -
+    id: "info_title_parallax02"
+    image_url: "/img/info_title_parallax02.png"
+    location:
+      top: 2987
+      left: 183
+    dimensions:
+      width: 357
+      height: 134
+    parallax:
+      parallax_id: info_parallax
+      scale: 0.05
+  -
+    id: "info_title_parallax01"
+    image_url: "/img/info_title_parallax01.png"
+    location:
+      top: 2983
+      left: 173
+    dimensions:
+      width: 377
+      height: 140
+    parallax:
+      parallax_id: info_parallax
+      scale: 0.025
   -
     id: "info_title"
     image_url: "/img/info_title.png"
@@ -349,3 +397,13 @@ parallax:
     location:
       left: 310
       top: 904
+  -
+    id: whatido_parallax
+    location:
+      left: 398
+      top: 2010
+  -
+    id: info_parallax
+    location:
+      left: 348
+      top: 3069

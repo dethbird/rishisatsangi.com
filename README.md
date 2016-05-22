@@ -1,4 +1,4 @@
-# Prutha Raithatha's website
+# Rishi Satsangi's website
 > A Slim PHP based website with Backbone.js and Twig thrown in
 
 #### Command line PHP deploy

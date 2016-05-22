@@ -19,6 +19,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 require '../vendor/autoload.php';
 require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/InstagramData.php';
+require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';
 
 use Aptoma\Twig\Extension\MarkdownExtension;
 use Aptoma\Twig\Extension\MarkdownEngine;
@@ -68,18 +69,20 @@ $app->get("/", function () use ($app) {
     $layout = Yaml::parse(file_get_contents("../configs/layout.yml"));
     $gallery = Yaml::parse(file_get_contents("../configs/gallery.yml"));
     $instagramData = new InstagramData($configs['instagram']['client_id']);
+    $pocketData = new PocketData($configs['pocket']['consumer_key'], $configs['pocket']['access_token']);
 
     $templateVars = array(
         "configs" => $configs,
         "section" => "index",
         "layout" => $layout,
         "gallery" => $gallery,
-        "instagram_posts" => $instagramData->getRecentMedia($configs['instagram']['user_id'], 16, array(
+        "instagram_posts" => $instagramData->getRecentMedia($configs['instagram']['user_id'], 25, array(
             "art",
             "drawing",
             "sketchbook",
             "characterdesign"
-        ))
+        )),
+        "pocket_articles" => $pocketData->getArticles(10, 3600)
     );
 
     $app->render(

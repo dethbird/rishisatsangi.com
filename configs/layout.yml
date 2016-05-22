@@ -9,7 +9,7 @@ objects:
       left: 0
     dimensions:
       width: 1920
-      height: 4860
+      height: 3990
   -
     id: "intro_hydrant"
     image_url: "/img/intro_hydrant.jpg"
@@ -40,7 +40,7 @@ objects:
       width: 893
       height: 381
     parallax:
-      parallax_id: intro_parallax
+      parallax_id: intro_signature_parallax
       scale: 0.04
   -
     id: "intro_tagline"
@@ -52,7 +52,7 @@ objects:
       width: 592
       height: 368
     parallax:
-      parallax_id: intro_parallax
+      parallax_id: intro_tagline_parallax
       scale: 0.015
   -
     id: "great_button"
@@ -221,14 +221,51 @@ objects:
     dimensions:
       width: 1514
       height: 862
+  -
+    id: "info_background"
+    image_url: "/img/info_background.jpg"
+    location:
+      top: 3046
+      left: 226
+    dimensions:
+      width: 1433
+      height: 897
+    classes:
+      - img-round-corners
+  -
+    id: "info_title"
+    image_url: "/img/info_title.png"
+    location:
+      top: 2977
+      left: 163
+    dimensions:
+      width: 397
+      height: 148
+  -
+    id: "info_copy"
+    container:
+      id: info_copy_markup
+      view_script: "partials/index/info_copy.twig.html"
+    location:
+      top: 3046
+      left: 226
+    dimensions:
+      width: 1433
+      height: 897
+
 parallax:
   -
-    id: intro_parallax
+    id: intro_signature_parallax
     location:
-      left: 857
-      top: 672
+      left: 530
+      top: 230
+  -
+    id: intro_tagline_parallax
+    location:
+      left: 1358
+      top: 678
   -
     id: portfolio_parallax
     location:
-      left: 165
-      top: 849
+      left: 310
+      top: 904

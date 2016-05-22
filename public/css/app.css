@@ -19,26 +19,12 @@ body {
 .row {
   margin: 0;
 }
-.btn-great-outline {
-    color: #ec287b;
-    background-color: transparent;
-    background-image: none;
-    border-color: #ec287b;
-}
-.btn-great-outline:hover {
-    color: #fff;
-    background-color: #ec287b;
-    border-color: #ec287b;
-}
 .img-round-corners {
   border-top-left-radius:2em;
   border-bottom-right-radius:2em;
 }
 #great_button {
   padding: 0.6rem 1.8rem;
-}
-#contact_text {
-  font-weight: bold;
 }
 #container {
   width: 1920px;
@@ -58,6 +44,7 @@ body {
   font-size: 24px;
   padding: 0px 0px 10px 10px;
   margin: 0;
+  cursor: pointer;
 }
 .gallery-container {
   background: rgba(0,0,0,.8);
@@ -69,9 +56,6 @@ body {
 .gallery-slide {
   margin-top: 30px;
   text-align: center;
-}
-.slides-gallery-trigger {
-  cursor: pointer;
 }
 #portfolio_gallery img {
   max-width: 95%;
@@ -91,13 +75,14 @@ body {
 .text p {
   font-size: 14px;
 }
-#contact_text p {
-  background-color: rgba(255,255,255,0.8);
-}
 .slide-in {
   opacity: 0
 }
-.click-scroll, .popup-banner-trigger, .popup-slideshow-trigger {
+
+.click-scroll,
+.popup-banner-trigger,
+.popup-slideshow-trigger,
+.slides-gallery-trigger {
   cursor: pointer;
 }
 .flicker {
@@ -107,35 +92,36 @@ img.hotspot {
   opacity: 0;
   cursor: pointer;
 }
-.popup-content {
-  display: none;
-}
 .pull-right {
   text-align: right;
 }
 .hidden {
   display: none;
 }
-#whatido_copy_markup {
+#whatido_copy_markup, #info_copy_markup {
   top: 5%;
   padding: 15px;
   text-shadow: 1px 2px 4px #000;
 }
-@media screen and (max-width: 800px) {
-    body {
-        /*background-color: lightgreen;*/
-    }
-    #popup_banner p {
-      font-size: 18px;
-    }
+#info_copy_markup {
+  top: 8%;
+}
+#pocket_articles {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 500px;
+}
+.img-article img {
+  max-width: 100%;
+}
+.contact-info i {
+  color: #f5b20a;
+}
+/*@media screen and (max-width: 800px) {
     .text p {
       font-size: 12px;
-    }
-    #popup_banner li {
-      font-size: 14px;
-      margin-bottom: 9px;
     }
     h1 {
       font-size: 1.8rem;
     }
-}
+}*/

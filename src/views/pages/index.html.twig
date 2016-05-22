@@ -56,9 +56,10 @@
           >
           {% if object.container.id == "portfolio_gallery_regular" %}
             {% include object.container.view_script with {'gallery': gallery.content, 'id': object.container.id} %}
-          {% endif %}
-          {% if object.container.id == "portfolio_gallery_instagram" %}
+          {% elseif object.container.id == "portfolio_gallery_instagram" %}
             {% include object.container.view_script with {'instagram_posts': instagram_posts, 'id': object.container.id} %}
+          {% elseif object.container.id == "info_copy_markup" %}
+            {% include object.container.view_script with {'pocket_articles': pocket_articles, 'id': object.container.id} %}
           {% else %}
             {% include object.container.view_script with {'id': object.container.id} %}
           {% endif %}

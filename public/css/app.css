@@ -1,4 +1,5 @@
 body {
+  font-family: 'Open Sans', sans-serif;
   background-color: #000;
   color: #fff;
   margin: 0 0 0 0;
@@ -15,6 +16,13 @@ body {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+h1, h2, h3, h5, h5, h6 {
+  font-weight: bold;
+  margin: 10px 0px 10px 0px;
+}
+.card {
+  background-color: rgba(0,0,0,0.8);
 }
 .row {
   margin: 0;
@@ -56,6 +64,12 @@ body {
 .gallery-slide {
   margin-top: 30px;
   text-align: center;
+}
+.gallery-comic-object {
+  width: 95%;
+  display: inline-block;
+  oferflow-x: hidden;
+  overflow-y: scroll;
 }
 #portfolio_gallery img {
   max-width: 95%;
@@ -99,17 +113,24 @@ img.hotspot {
   display: none;
 }
 #whatido_copy_markup, #info_copy_markup {
-  top: 5%;
   padding: 15px;
   text-shadow: 1px 2px 4px #000;
 }
 #info_copy_markup {
   top: 8%;
 }
+#whatido_copy_markup .col-xs-6 {
+  padding: 50px;
+}
 #pocket_articles {
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 500px;
+  height: 700px;
+}
+.pocket-article {
+  background-color: rgba(0,0,0,0.7);
+  padding: 5px;
+  margin-bottom: 15px;
 }
 .img-article img {
   max-width: 100%;
@@ -117,11 +138,68 @@ img.hotspot {
 .contact-info i {
   color: #f5b20a;
 }
-/*@media screen and (max-width: 800px) {
-    .text p {
-      font-size: 12px;
+.contact-info .col-xs-1 {
+  text-align: right;
+  padding: 0px 10px 0px 0px;
+}
+.contact-info .col-xs-10 {
+  text-align: left;
+  padding-left: 0;
+}
+@media screen and (max-width: 1024px) {
+    #whatido_copy_markup .col-xs-6 {
+      padding: 25px;
+    }
+    #great_button {
+        padding: 0.5rem 1.2rem;
+    }
+    body {
+      font-size: 0.8rem;
     }
     h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
     }
-}*/
+    h5 {
+      font-size: 1.05rem;
+    }
+}
+@media screen and (max-width: 768px) {
+    #whatido_copy_markup .col-xs-6 {
+      padding: 10px;
+    }
+    #great_button {
+      padding: 0.2rem 0.6rem;
+    }
+    body {
+      font-size: 0.7rem;
+    }
+    h1 {
+      font-size: 1.7rem;
+    }
+    h5 {
+      font-size: 1.0rem;
+    }
+}
+@media screen and (max-width: 480px) {
+    #whatido_copy_markup .col-xs-6 {
+      padding: 2px;
+    }
+    #great_button {
+      padding: 0.1rem 0.4rem;
+    }
+    body {
+      font-size: 0.35rem;
+    }
+    h1 {
+      font-size: 1.2rem;
+    }
+    h5 {
+      font-size: 0.7rem;
+    }
+    .btn {
+      font-size: 0.55rem;
+    }
+    .btn-sm {
+      padding: .1rem .35rem;
+    }
+}

@@ -30,11 +30,7 @@ var SlidesGalleryView = Backbone.View.extend({
         that.$el.find('.next').click(function(){
           that.next();
         });
-        // $(that.el).click(function(){
-        //   that.next();
-        // });
 
-        console.log(that);
     },
     show: function(){
       var that = this;

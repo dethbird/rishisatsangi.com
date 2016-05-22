@@ -70,6 +70,7 @@ $app->get("/", function () use ($app) {
     $gallery = Yaml::parse(file_get_contents("../configs/gallery.yml"));
     $instagramData = new InstagramData($configs['instagram']['client_id']);
     $pocketData = new PocketData($configs['pocket']['consumer_key'], $configs['pocket']['access_token']);
+    $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
 
     $templateVars = array(
         "configs" => $configs,
@@ -82,7 +83,8 @@ $app->get("/", function () use ($app) {
             "sketchbook",
             "characterdesign"
         )),
-        "pocket_articles" => $pocketData->getArticles(10, 3600)
+        "pocket_articles" => $pocketData->getArticles(10, 3600),
+        "comics" => $comics
     );
 
     $app->render(

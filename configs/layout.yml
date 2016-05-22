@@ -76,6 +76,15 @@ objects:
     classes:
       - img-round-corners
   -
+    id: "portfolio_arrows"
+    image_url: "/img/portfolio_arrows.png"
+    location:
+      top: 867
+      left: 472
+    dimensions:
+      width: 557
+      height: 405
+  -
     id: "portfolio_title_parallax02"
     image_url: "/img/portfolio_title_parallax02.png"
     location:
@@ -106,36 +115,8 @@ objects:
       top: 846
       left: 161
     dimensions:
-      width: 868
+      width: 303
       height: 91
-  -
-    id: "portfolio_gallery_instagram_container"
-    location:
-      top: 914
-      left: 0
-    dimensions:
-      width: 1919
-      height: 915
-    container:
-      id: portfolio_gallery_instagram
-      view_script: "partials/index/portfolio_gallery_instagram.twig.html"
-    slides_gallery:
-      id: portfolio_gallery_instagram
-      trigger_id: portfolio_trigger_instagram
-  -
-    id: "portfolio_gallery_regular_container"
-    location:
-      top: 914
-      left: 0
-    dimensions:
-      width: 1919
-      height: 915
-    container:
-      id: portfolio_gallery_regular
-      view_script: "partials/index/portfolio_gallery_regular.twig.html"
-    slides_gallery:
-      id: portfolio_gallery_regular
-      trigger_id: portfolio_trigger_gallery
   -
     id: "portfolio_trigger_gallery_swap"
     image_url: "/img/portfolio_trigger_gallery_hover.png"
@@ -157,12 +138,22 @@ objects:
       height: 39
     hidden: true
   -
+    id: "portfolio_trigger_comics_swap"
+    image_url: "/img/portfolio_trigger_comics_hover.png"
+    location:
+      top: 1131
+      left: 705
+    dimensions:
+      width: 91
+      height: 39
+    hidden: true
+  -
     id: "portfolio_trigger_gallery"
     image_url: "/img/portfolio_trigger_gallery.png"
     alt: "Regular Gallery"
     location:
       top: 875
-      left: 865
+      left: 875
     dimensions:
       width: 116
       height: 39
@@ -190,6 +181,95 @@ objects:
     click_scroll:
       scroll_y: 825
       duration: 1
+  -
+    id: "portfolio_trigger_comics"
+    image_url: "/img/portfolio_trigger_comics.png"
+    alt: "Comics Gallery"
+    location:
+      top: 1131
+      left: 705
+    dimensions:
+      width: 91
+      height: 39
+    hover_swap:
+      swap_image_src: "/img/portfolio_trigger_comics_hover.png"
+    slides_gallery_trigger:
+      swap_image_src: "/img/portfolio_trigger_comics_hover.png"
+    click_scroll:
+      scroll_y: 825
+      duration: 1
+  -
+    id: "portfolio_neonsign01"
+    image_url: "/img/portfolio_neonsign01.png"
+    location:
+      top: 1650
+      left: 78
+    dimensions:
+      width: 174
+      height: 214
+    flicker:
+      delay: 1
+      min_duration: 0.05
+      max_duration: 0.5
+      min_opacity: 0.2
+      max_opacity: 0.9
+  -
+    id: "portfolio_neonsign02"
+    image_url: "/img/portfolio_neonsign02.png"
+    location:
+      top: 1513
+      left: 257
+    dimensions:
+      width: 214
+      height: 244
+    flicker:
+      delay: 1
+      min_duration: 0.05
+      max_duration: 0.5
+      min_opacity: 0.2
+      max_opacity: 0.9
+  -
+    id: "portfolio_gallery_regular_container"
+    location:
+      top: 914
+      left: 0
+    dimensions:
+      width: 1919
+      height: 915
+    container:
+      id: portfolio_gallery_regular
+      view_script: "partials/index/portfolio_gallery_regular.twig.html"
+    slides_gallery:
+      id: portfolio_gallery_regular
+      trigger_id: portfolio_trigger_gallery
+  -
+    id: "portfolio_gallery_instagram_container"
+    location:
+      top: 914
+      left: 0
+    dimensions:
+      width: 1919
+      height: 915
+    container:
+      id: portfolio_gallery_instagram
+      view_script: "partials/index/portfolio_gallery_instagram.twig.html"
+    slides_gallery:
+      id: portfolio_gallery_instagram
+      trigger_id: portfolio_trigger_instagram
+  -
+    id: "portfolio_gallery_comics_container"
+    location:
+      top: 914
+      left: 0
+    dimensions:
+      width: 1919
+      height: 915
+    container:
+      id: portfolio_gallery_comics
+      view_script: "partials/index/portfolio_gallery_comics.twig.html"
+    slides_gallery:
+      id: portfolio_gallery_comics
+      trigger_id: portfolio_trigger_comics
   -
     id: "whatido_background"
     image_url: "/img/whatido_background.jpg"

@@ -155,7 +155,7 @@ var HorizontalPanelView = Backbone.View.extend({
 
         // rescale on window resize
         that.w.resize(_.bind($.debounce(250, that.resize), that));
-        that.resize();
+        that.w.trigger('resize');
     },
     resize: function(){
       var that = this;
@@ -622,11 +622,7 @@ var SlidesGalleryView = Backbone.View.extend({
         that.$el.find('.next').click(function(){
           that.next();
         });
-        // $(that.el).click(function(){
-        //   that.next();
-        // });
 
-        console.log(that);
     },
     show: function(){
       var that = this;

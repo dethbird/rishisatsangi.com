@@ -79,6 +79,13 @@ var SlidesGalleryView = Backbone.View.extend({
           height: that.$el.height() * 0.95,
           width: that.$el.width() * 0.95
         });
+        $slide.find('.gallery-comic-object').css({
+          height: that.$el.height() * 0.95,
+          width: that.$el.width() * 0.95
+        });
+        $slide.find('.gallery-comic-object img').css({
+          maxHeight: that.$el.height() * 0.85
+        });
     }
 });
 

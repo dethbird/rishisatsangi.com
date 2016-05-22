@@ -50,6 +50,7 @@
             object
             {% if object.slides_gallery %} slides-gallery{% endif %}
             {% for class in object.classes %} {{class}}{% endfor %}
+            {% if object.container.id == "portfolio_gallery_comics" %} slides-gallery-comics{% endif %}
             "
             style="top: {{object.location.top}}px; left: {{object.location.left}}px; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px;"
             id="{{object.id}}"

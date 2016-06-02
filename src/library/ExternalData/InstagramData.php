@@ -2,7 +2,7 @@
 
 require_once("Base.php");
 
-class InstagramData extends DataBase {
+class InstagramData extends ExternalDataBase {
 
     private $clientId;
 

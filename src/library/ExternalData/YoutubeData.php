@@ -2,7 +2,7 @@
 
 require_once("Base.php");
 
-class YoutubeData extends DataBase {
+class YoutubeData extends ExternalDataBase {
 
     private $apiKey;
 

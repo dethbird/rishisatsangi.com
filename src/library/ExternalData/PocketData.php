@@ -2,7 +2,7 @@
 
 require_once("Base.php");
 
-class PocketData extends DataBase {
+class PocketData extends ExternalDataBase {
 
     private $consumer_key;
     private $access_token;

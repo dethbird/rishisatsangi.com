@@ -6,7 +6,7 @@
 
 require_once("Base.php");
 
-class WordpressData extends DataBase {
+class WordpressData extends ExternalDataBase {
 
     private $baseUrl;
 

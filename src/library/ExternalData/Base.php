@@ -2,7 +2,7 @@
 
 require_once(APPLICATION_PATH . "src/library/Cache/Manager.php");
 
-class DataBase {
+class ExternalDataBase {
 
     /**
      * Guzzle Http Client

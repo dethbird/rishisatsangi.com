@@ -122,7 +122,7 @@ class InstagramData extends ExternalDataBase {
 
                 $url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=".$instagramUser->access_token."&count=".$count."&min_id=".$d->id;
 
-                echo $url; exit();
+                // echo $url; exit();
             }
 
             $this->storeCache($cacheKey, $data);

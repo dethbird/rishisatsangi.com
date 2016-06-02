@@ -89,8 +89,8 @@ $app->get("/", function () use ($app) {
                 "characterdesign"
             ]
         ),
-        // "pocket_articles" => $pocketData->getArticles(10, 3600),
-        "pocket_articles" => [],
+        "pocket_articles" => $pocketData->getArticles(10, 3600),
+        // "pocket_articles" => [],
         "comics" => $comics
     );
 

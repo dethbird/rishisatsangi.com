@@ -5,11 +5,53 @@ require_once("Base.php");
 class InstagramData extends ExternalDataBase {
 
     private $clientId;
+    private $clientSecret;
 
-    public function __construct($clientId)
+    public function __construct($clientId, $clientSecret)
     {
         $this->clientId = $clientId;
+        $this->clientSecret = $clientSecret;
         parent::__construct();
+    }
+
+    /**
+     * @param $host server host
+     *
+     * @return string redirect url
+     */
+    public function getAuthRedirectUri($redirect_uri)
+    {
+        return "https://api.instagram.com/oauth/authorize/?client_id=".
+        $this->clientId.
+        "&redirect_uri=".
+        $redirect_uri."&response_type=code";
+
+    }
+
+
+    /**
+     * @param $code the code from the Instagram redirect in the GET params
+     *
+     * @return stdClass() JSON response
+     */
+    public function getAuthTokenFromCode($redirect_uri, $code)
+    {
+
+        $response = $this->httpClient->post(
+            "https://api.instagram.com/oauth/access_token", [
+                'form_params' => [
+                    'client_id' => $this->clientId,
+                    'client_secret' => $this->clientSecret,
+                    'grant_type' => 'authorization_code',
+                    'redirect_uri' => $redirect_uri,
+                    'code' => $code
+                ]
+            ]
+        );
+        $body = $response->getBody();
+        $data = json_decode($body);
+        $this->storeCache("instagramUser", $data);
+        return $data;
     }
 
     /**
@@ -36,14 +78,15 @@ class InstagramData extends ExternalDataBase {
 
     /**
      *
-     * @param  $userId Instagram user id
      * @param  $count Instagram user id
      * @return array() a collection of recent instagram posts by user id
      */
-    public function getRecentMedia($userId, $count = 6, $tags = array(), $cacheTime = 3600)
+    public function getRecentMedia($count = 6, $tags = array(), $cacheTime = 3600)
     {
-        $cacheKey = md5("instagramRecent:".$userId.$count,implode(",", $tags));
-        $cache = $this->retrieveCache($cacheKey, $cacheTime);
+        $instagramUser = $this->retrieveCache("instagramUser");
+        $cacheKey = md5("instagramRecent:".$instagramUser->user->id.$count,implode(",", $tags));
+        // $cache = $this->retrieveCache($cacheKey, $cacheTime);
+        $cache = false;
         if(!$cache) {
 
             $data = array();
@@ -51,10 +94,13 @@ class InstagramData extends ExternalDataBase {
             while (count($data) < $count) {
 
                 if(is_null($url)) {
-                    $url = 'https://api.instagram.com/v1/users/' . $userId . '/media/recent/?client_id=' . $this->clientId . '&count=' . $count;
+                    $url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=".$instagramUser->access_token."&count=".$count;
+
+                                    // echo $url; exit();
                 }
-                $response = $this->httpClient->get( $url )->send();
-                $response = json_decode($response->getBody(true));
+                $response = $this->httpClient->get( $url );
+                $response = $response->getBody();
+                $response = json_decode($response);
 
                 foreach($response->data as $d) {
                     if(count($data) < $count) {
@@ -73,7 +119,10 @@ class InstagramData extends ExternalDataBase {
                         break;
                     }
                 }
-                $url = $response->pagination->next_url;
+
+                $url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=".$instagramUser->access_token."&count=".$count."&min_id=".$d->id;
+
+                echo $url; exit();
             }
 
             $this->storeCache($cacheKey, $data);

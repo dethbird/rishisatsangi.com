@@ -2,6 +2,7 @@ security:
   secret: P1zzaP4rty!!!
 instagram:
   client_id: "a6c4e37cd91b4020a09a74a40cf836d6"
+  client_secret: "c01d4d6723004991bd3fb2ca7498955e"
   user_id: 31264453
 twitter:
   tweets:
@@ -25,4 +26,4 @@ wordpress:
 pocket:
   consumer_key: 53654-96b8c6b4457644ed3b2f25ff
   username: dethbird
-  access_token: 7b51fe1a-20b7-2751-22a3-fb86ec  
+  access_token: 7b51fe1a-20b7-2751-22a3-fb86ec

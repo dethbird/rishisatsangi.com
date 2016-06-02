@@ -13,7 +13,7 @@ class ExternalDataBase {
     public function __construct()
     {
         $this->cacheManager = new CacheManager();
-        $this->httpClient = new Guzzle\Http\Client();
+        $this->httpClient = new GuzzleHttp\Client();
     }
 
     protected function retrieveCache($key, $cacheTime = null)

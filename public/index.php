@@ -68,7 +68,10 @@ $app->get("/", function () use ($app) {
     $configs = $app->container->get('configs');
     $layout = Yaml::parse(file_get_contents("../configs/layout.yml"));
     $gallery = Yaml::parse(file_get_contents("../configs/gallery.yml"));
-    $instagramData = new InstagramData($configs['instagram']['client_id']);
+    $instagramData = new InstagramData(
+        $configs['instagram']['client_id'],
+        $configs['instagram']['client_secret']
+    );
     $pocketData = new PocketData($configs['pocket']['consumer_key'], $configs['pocket']['access_token']);
     $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
 
@@ -77,13 +80,17 @@ $app->get("/", function () use ($app) {
         "section" => "index",
         "layout" => $layout,
         "gallery" => $gallery,
-        "instagram_posts" => $instagramData->getRecentMedia($configs['instagram']['user_id'], 25, array(
-            "art",
-            "drawing",
-            "sketchbook",
-            "characterdesign"
-        )),
-        "pocket_articles" => $pocketData->getArticles(10, 3600),
+        "instagram_posts" => $instagramData->getRecentMedia(
+            25,
+            [
+                "art",
+                "drawing",
+                "sketchbook",
+                "characterdesign"
+            ]
+        ),
+        // "pocket_articles" => $pocketData->getArticles(10, 3600),
+        "pocket_articles" => [],
         "comics" => $comics
     );
 
@@ -92,6 +99,38 @@ $app->get("/", function () use ($app) {
         $templateVars,
         200
     );
+});
+
+$app->group('/service', function () use ($app) {
+    $app->group('/instagram', function () use ($app) {
+
+        $app->get('/authorize', function () use ($app) {
+            $configs = $app->container->get('configs');
+            $instagramData = new InstagramData(
+                $configs['instagram']['client_id'],
+                $configs['instagram']['client_secret']
+            );
+            $app->redirect($instagramData->getAuthRedirectUri(
+                "http://".$_SERVER['HTTP_HOST']."/service/instagram/redirect"
+            ));
+        });
+
+        $app->get('/redirect', function () use ($app) {
+            $configs = $app->container->get('configs');
+            $instagramData = new InstagramData(
+                $configs['instagram']['client_id'],
+                $configs['instagram']['client_secret']
+            );
+            $response = $instagramData->getAuthTokenFromCode(
+                "http://".$_SERVER['HTTP_HOST']."/service/instagram/redirect",
+                $app->request->params('code')
+            );
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($response));
+
+        });
+
+    });
 });
 
 

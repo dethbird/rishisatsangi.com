@@ -1,0 +1,17 @@
+<div id="{{id}}" class="gallery-container">
+  <div class="row col-xs-12 gallery-controls">
+    <div class="pull-right">
+      <i class="fa fa-caret-left fa-5 prev" aria-hidden="true"></i>
+      <i class="fa fa-caret-right fa-5 next" aria-hidden="true"></i>
+      <i class="fa fa-times fa-5 close" aria-hidden="true"></i>
+    </div>
+  </div>
+{% for object in instagram_posts %}
+  <div class="row gallery-slide" id="{{id}}{{loop.index}}">
+    <div class="col-xl-12 gallery-object">
+        <img src="{{object.images.standard_resolution.url}}"/>
+        <div class="caption">{{object.caption.text|raw}}</div>
+    </div>
+  </div>
+{% endfor %}
+</div>

@@ -1,0 +1,128 @@
+{% extends 'layout.html.twig' %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var layout = {{layout|json_encode|raw}};
+    </script>
+    <div id="container" class="object">
+      {% for object in layout.objects %}
+        {% if object.image_url %}
+        <img
+          src="{{object.image_url}}"
+          id="{{object.id}}"
+          class="object
+          {% if object.click_scroll %} click-scroll{% endif %}
+          {% if object.rotate %} rotate{% endif %}
+          {% if object.flicker %} flicker{% endif %}
+          {% if object.slide_in %} slide-in{% endif %}
+          {% if object.always_on_top %} always-on-top{% endif %}
+          {% if object.sequence %} sequence{% endif %}
+          {% if object.from_to %} from-to{% endif %}
+          {% if object.popup_banner %} popup-banner-trigger{% endif %}
+          {% if object.hotspot %} hotspot{% endif %}
+          {% if object.popup_slideshow %} popup-slideshow-trigger{% endif %}
+          {% if object.parallax %} parallax{% endif %}
+          {% if object.hover_toggle %} hover-toggle-trigger{% endif %}
+          {% if object.hover_swap %} hover-swap-trigger{% endif %}
+          {% if object.hidden %} hidden{% endif %}
+          {% if object.slides_gallery_trigger %} slides-gallery-trigger{% endif %}
+          {% for class in object.classes %} {{class}}{% endfor %}
+          "
+          style="top: {{object.location.top}}px; left: {{object.location.left}}px; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px;"
+          {% if object.alt %} title="{{object.alt}}"{% endif %}
+        />
+        {% elseif object.button %}
+          <button
+            type="button"
+            class="
+            object
+            {% for class in object.classes %} {{class}}{% endfor %}
+            "
+            style="top: {{object.location.top}}px; left: {{object.location.left}}px;"
+            id="{{object.id}}"
+          >{{object.button.text}}</button>
+        {% elseif object.container %}
+          <div
+            class="
+            object
+            {% if object.slides_gallery %} slides-gallery{% endif %}
+            {% for class in object.classes %} {{class}}{% endfor %}
+            {% if object.container.id == "portfolio_gallery_comics" %} slides-gallery-comics{% endif %}
+            "
+            style="top: {{object.location.top}}px; left: {{object.location.left}}px; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px;"
+            id="{{object.id}}"
+          >
+          {% if object.container.id == "portfolio_gallery_regular" %}
+            {% include object.container.view_script with {'gallery': gallery.content, 'id': object.container.id} %}
+          {% elseif object.container.id == "portfolio_gallery_instagram" %}
+            {% include object.container.view_script with {'instagram_posts': instagram_posts, 'id': object.container.id} %}
+          {% elseif object.container.id == "portfolio_gallery_comics" %}
+            {% include object.container.view_script with {'comics': comics, 'object': object} %}
+          {% elseif object.container.id == "info_copy_markup" %}
+            {% include object.container.view_script with {'pocket_articles': pocket_articles, 'id': object.container.id} %}
+          {% else %}
+            {% include object.container.view_script with {'id': object.container.id} %}
+          {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% for object in layout.text %}
+        <div
+          id="{{object.id}}"
+          class="object text
+          {% if object.slide_in %} slide-in{% endif %}"
+          style="top: {{object.location.top}}px; left: {{object.location.left}}px; overflow-y: {{object.overflow.y}}; overflow-x: {{object.overflow.x}}; width: {{object.dimensions.width}}px; height: {{object.dimensions.height}}px; text-align: {{object.text_align}};"
+        >{{object.copy|raw|markdown}}</div>
+      {% endfor %}
+
+      {% for object in layout.popup_banner %}
+        <div id="{{object.id}}" class="popup-content">{{object.copy|raw|markdown}}</div>
+      {% endfor %}
+      <div id="popup_banner">
+        <div class="row">
+          <div class="pull-right popup-controls">
+            <i class="fa fa-times fa-5 close" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="popup-content-body col-xs-12"></div>
+        </div>
+      </div>
+      {% for slideshow in layout.popup_slideshow %}
+        <div id="{{slideshow.id}}" class="row popup-slideshow">
+            {% for object in slideshow.slides %}
+            <div id="{{slideshow.id}}{{loop.index0}}" class="popup-slideshow-slide col-xs-12">
+              <div class="popup-media">
+                {% if object.image_url %}
+                  <img src="{{object.image_url}}" class="popup-slideshow-image {{object.orientation}}"/>
+                {% endif %}
+                {% if object.markup %}
+                  {{object.markup|raw|markdown}}
+                {% endif %}
+              </div>
+              <div class="col-xs-12 caption">
+                {{object.caption|raw}}
+              </div>
+            </div>
+            {% endfor %}
+            <div class="popup-controls top-controls col-xs-12">
+              <i class="fa fa-times fa-5 close pull-right" aria-hidden="true"></i>
+            </div>
+            <div class="popup-controls center-controls col-xs-12">
+                <i class="fa fa-caret-left fa-5 prev pull-left" aria-hidden="true"></i>
+                <i class="fa fa-caret-right fa-5 next pull-right" aria-hidden="true"></i>
+            </div>
+        </div>
+      {% endfor %}
+
+    </div>
+{% endblock %}
+
+
+{% block includes %}
+  <!-- js includes -->
+  <script type="text/javascript" src="/js/pages/index.js"></script>
+{% endblock %}

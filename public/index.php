@@ -49,6 +49,22 @@ $view->parserExtensions = array(
 );
 $app->container->set('configs', $configs);
 
+$authorize = function ($app) {
+
+    return function () use ($app) {
+
+        // store current path in session for smart login
+        $_SESSION['redirectTo'] = $app->request->getPathInfo();
+
+        // check cookie for securityContext
+        $securityContext = json_decode($app->getCookie('securityContext'));
+
+        if (!isset($securityContext->login)) {
+            $app->redirect("/login");
+        }
+
+    };
+};
 
 $app->notFound(function () use ($app) {
     $app->render(
@@ -84,6 +100,23 @@ $app->get("/", function () use ($app) {
 
     $configs = $app->container->get('configs');
 
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "dashboard.index"
+    );
+
+    $app->render(
+        'pages/dashboard/index.html.twig',
+        $templateVars,
+        200
+    );
+});
+
+
+$app->get("/dashboard", $authorize($app), function () use ($app) {
+
+    $configs = $app->container->get('configs');
+
     $db = new DataBase(
         $configs['mysql']['host'],
         $configs['mysql']['database'],
@@ -92,18 +125,18 @@ $app->get("/", function () use ($app) {
 
     $templateVars = array(
         "configs" => $configs,
-        "section" => "index"
+        "section" => "dashboard.index"
     );
 
     $app->render(
-        'pages/index.html.twig',
+        'pages/dashboard/index.html.twig',
         $templateVars,
         200
     );
 });
 
 
-$app->get("/account", function () use ($app) {
+$app->get("/account", $authorize($app), function () use ($app) {
 
     $configs = $app->container->get('configs');
 
@@ -113,7 +146,7 @@ $app->get("/account", function () use ($app) {
     );
 
     $app->render(
-        'pages/account.html.twig',
+        'pages/dashboard/account.html.twig',
         $templateVars,
         200
     );

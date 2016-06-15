@@ -1,0 +1,15 @@
+security:
+    secret: :SECURITY_SECRET
+mysql:
+    host: :MYSQL_HOST
+    database: :MYSQL_DATABASE
+    user: :MYSQL_USER
+    password: :MYSQL_PASSWORD
+sql:
+    users:
+        # authorization query
+        select_by_username_and_password: |
+            SELECT id, email
+            FROM `users`
+            WHERE username = :username
+            AND password = :password

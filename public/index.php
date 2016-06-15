@@ -2,7 +2,7 @@
 
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
-// ini_set('display_startup_errors',1);
+ini_set('display_startup_errors',1);
 define("APPLICATION_PATH", __DIR__ . "/../");
 date_default_timezone_set('America/New_York');
 session_cache_limiter(false);
@@ -57,45 +57,54 @@ $app->notFound(function () use ($app) {
 });
 
 
-
 $app->get("/logout", function () use ($app) {
   $app->deleteCookie('securityContext');
   $app->redirect("/");
 });
 
-$app->get("/", function () use ($app) {
+$app->get("/login", function () use ($app) {
 
     $configs = $app->container->get('configs');
-    $layout = Yaml::parse(file_get_contents("../configs/layout.yml"));
-    $gallery = Yaml::parse(file_get_contents("../configs/gallery.yml"));
-    $instagramData = new InstagramData(
-        $configs['instagram']['client_id'],
-        $configs['instagram']['client_secret']
-    );
-    $pocketData = new PocketData($configs['pocket']['consumer_key'], $configs['pocket']['access_token']);
-    $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
 
     $templateVars = array(
         "configs" => $configs,
-        "section" => "index",
-        "layout" => $layout,
-        "gallery" => $gallery,
-        "instagram_posts" => $instagramData->getRecentMedia(
-            25,
-            [
-                "art",
-                "drawing",
-                "sketchbook",
-                "characterdesign"
-            ]
-        ),
-        "pocket_articles" => $pocketData->getArticles(10, 3600),
-        // "pocket_articles" => [],
-        "comics" => $comics
+        "section" => "login"
+    );
+
+    $app->render(
+        'pages/login.html.twig',
+        $templateVars,
+        200
+    );
+});
+
+$app->get("/", function () use ($app) {
+
+    $configs = $app->container->get('configs');
+
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "index"
     );
 
     $app->render(
         'pages/index.html.twig',
+        $templateVars,
+        200
+    );
+});
+
+$app->get("/account", function () use ($app) {
+
+    $configs = $app->container->get('configs');
+
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "account"
+    );
+
+    $app->render(
+        'pages/account.html.twig',
         $templateVars,
         200
     );

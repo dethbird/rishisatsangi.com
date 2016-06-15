@@ -1,10 +1,10 @@
 security:
-    secret: SECURITY_SECRET
+    secret: "P1zzaP4rty!!!"
 mysql:
     host: localhost
-    database: MYSQL_DATABASE
-    user: MYSQL_USER
-    password: MYSQL_PASSWORD
+    database: explosio_likedrop-dev
+    user: explosio_root
+    password: uranium239
 sql:
     users:
         # authorization query

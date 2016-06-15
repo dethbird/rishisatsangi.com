@@ -20,6 +20,7 @@ require '../vendor/autoload.php';
 require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/InstagramData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';
+require_once APPLICATION_PATH . 'src/library/Data/Base.php';
 
 use Aptoma\Twig\Extension\MarkdownExtension;
 use Aptoma\Twig\Extension\MarkdownEngine;
@@ -46,7 +47,6 @@ $view->parserExtensions = array(
     new TemplateHelpers(),
     new MarkdownExtension($markdownEngine)
 );
-// $view->addExtension(new MarkdownExtension($markdownEngine));
 $app->container->set('configs', $configs);
 
 
@@ -61,6 +61,7 @@ $app->get("/logout", function () use ($app) {
   $app->deleteCookie('securityContext');
   $app->redirect("/");
 });
+
 
 $app->get("/login", function () use ($app) {
 
@@ -78,9 +79,16 @@ $app->get("/login", function () use ($app) {
     );
 });
 
+
 $app->get("/", function () use ($app) {
 
     $configs = $app->container->get('configs');
+
+    $db = new DataBase(
+        $configs['mysql']['host'],
+        $configs['mysql']['database'],
+        $configs['mysql']['user'],
+        $configs['mysql']['password']);
 
     $templateVars = array(
         "configs" => $configs,
@@ -93,6 +101,7 @@ $app->get("/", function () use ($app) {
         200
     );
 });
+
 
 $app->get("/account", function () use ($app) {
 
@@ -109,6 +118,7 @@ $app->get("/account", function () use ($app) {
         200
     );
 });
+
 
 $app->group('/service', function () use ($app) {
     $app->group('/instagram', function () use ($app) {

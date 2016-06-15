@@ -11,6 +11,7 @@
         "xrstf/fountain": "~1.0",
         "cocur/slugify": "~2.1",
         "mead-steve/console": "*",
-        "nategood/commando": "*"
+        "nategood/commando": "*",
+        "aura/sql": "~2.5" 
     }
 }

@@ -1,4 +1,5 @@
 .env
+error_log
 /configs/configs.yml
 
 composer.phar

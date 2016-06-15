@@ -12,6 +12,7 @@
         "cocur/slugify": "~2.1",
         "mead-steve/console": "*",
         "nategood/commando": "*",
-        "aura/sql": "~2.5" 
+        "aura/sql": "~2.5",
+        "josegonzalez/dotenv": "~2.0"
     }
 }

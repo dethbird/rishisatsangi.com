@@ -9,6 +9,12 @@ composer install required composer libs for the build script to function:
     php composer.phar install
 ```
 
+copy .env from .env.shadow and edit values
+```bash
+cp .env.shadow .#!/usr/bin/env
+vim .env
+```
+
 ### build help
 
 ```bash
@@ -19,28 +25,33 @@ displays help:
 
 ```bash
 
--c/--cache
+--cache/--cache
      Clear cache and reset permissions of cache directory
+
+
+--configs/--configs
+     Publish configs from .env
 
 
 --help
      Show the help page for this command.
 
 
--j/--javascript
+--js/--javascript
      Broswerify and minify the js
 
 
--n/--npm
+--npm/--npm
      Install node modules from package.json
 
 
--p/--php
+--php/--php
      PHP/Composer install
 
 
--u/--uglify
+--ugly/--uglify
      Uglify the compiled js (leave empty in dev)
+
 ```
 
 
@@ -48,10 +59,10 @@ displays help:
 
 build production:
 ```bash
-php build.php -c -j -n -p -u
+php build.php -cache -configs -js -npm -php -ugly
 ```
 
 build dev js:
 ```bash
-php build.php -j
+php build.php -js
 ```

@@ -48,7 +48,7 @@
                             "
             )
             ->white()->bold()->highlight('blue') . PHP_EOL;
-        // echo "cache:".$options['cache']."\n";
+
         $shell->executeCommand('rm', array(
             "-rf",
             "cache"
@@ -75,10 +75,8 @@
                         |___/     "
             )
             ->white()->bold()->highlight('blue') . PHP_EOL;
-        // echo "cache:".$options['cache']."\n";
 
 
-        // var_dump($dotenv); die();
         $shadows = $shell->executeCommand('find', array(
             "configs",
             "-name",
@@ -144,14 +142,12 @@
             "|",
             "php"
         ));
-        // var_dump($resp);
-        // shell_exec("rm -rf composer.phar");
+
         $resp = $shell->executeCommand('rm', array(
             "-rf",
             "composer.phar"
         ));
 
-        // shell_exec("chmod -R 777 configs/*");
         $resp = $shell->executeCommand('chmod', array(
             "-R",
             "777",
@@ -212,14 +208,20 @@
                 echo $c($outputFile)
                     ->yellow()->bold() . PHP_EOL;
 
-                $browserifyResponse = $shell->executeCommand('browserify', array(
+                $browserifyList = $shell->executeCommand('browserify', array(
                     $file,
                     "-o",
                     $outputFile,
                     "--list"
                 ));
 
-                foreach($browserifyResponse as $builtFrom) {
+                $browserifyResponse = $shell->executeCommand('browserify', array(
+                    $file,
+                    "-o",
+                    $outputFile
+                ));
+
+                foreach($browserifyList as $builtFrom) {
                     echo $c("   " . $builtFrom)
                         ->white() . PHP_EOL;
                 }
@@ -235,7 +237,7 @@
                 // report
                 echo $c(
                     "   browserified from " .
-                    count($browserifyResponse) .
+                    count($browserifyList) .
                     " modules" .
                     ( $cmd['uglify'] ? " and uglified" : null ).
                     ": ".

@@ -217,7 +217,7 @@ $app->group('/service', $authorize($app), function () use ($app) {
                 $_SESSION['pocketCode']);
 
             $result = $db->perform(
-                $configs['sql']['users']['insert_update_pocket'],
+                $configs['sql']['account_pocket']['insert_update_pocket_user'],
                 [
                     'user_id' => $securityContext->id,
                     'username' => $accessTokenData->username,

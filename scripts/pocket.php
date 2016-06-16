@@ -41,10 +41,11 @@
             $configs['sql']['account_pocket']['get_pocket_users'],[]);
 
         foreach ($pocket_users as $pocket_user) {
-            $user = $db->fetchAll(
+            $user = $db->fetchOne(
                 $configs['sql']['users']['get_by_id'],[
                     'id' => $pocket_user['user_id']
                 ]);
+
             $pocketData = new PocketData(
                 $configs['service']['pocket']['consumer_key'],
                 $pocket_user['access_token']);
@@ -60,7 +61,18 @@
                         echo $c($article->resolved_url)
                             ->yellow()->bold() . PHP_EOL;
 
-                    print_r($article);
+                    $db->perform(
+                        $configs['sql']['content_pocket']['insert_update_pocket_content_for_user'],
+                        [
+                            'user_id' => $user['id'],
+                            'item_id' => $article->item_id,
+                            'resolved_title' => $article->resolved_title,
+                            'resolved_url' => $article->resolved_url,
+                            'json' => json_encode($article),
+                            'date_added' => date('Y-m-d H:i:s', $article->time_added),
+                            'date_updated' => date('Y-m-d H:i:s', $article->time_updated)
+                        ]
+                    );
                 }
             }
 

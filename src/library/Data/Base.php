@@ -20,6 +20,11 @@ class DataBase {
         return $this->client->fetchAll($stmt, $bindVars);
     }
 
+    public function fetchOne($stmt, $bindVars)
+    {
+        return $this->client->fetchOne($stmt, $bindVars);
+    }
+
     public function perform($stmt, $bindVars)
     {
         return $this->client->perform($stmt, $bindVars);

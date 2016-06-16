@@ -19,13 +19,20 @@ sql:
             FROM `users`
             WHERE username = :username
             AND password = :password
+    account_pocket:
         # insert-update pocket account
-        insert_update_pocket: |
+        insert_update_pocket_user: |
             INSERT INTO account_pocket
             (user_id, username, access_token, date_added, date_updated)
             VALUES
             (:user_id, :username, :access_token, NOW(), NOW())
                 ON DUPLICATE KEY UPDATE access_token = :access_token, date_updated = NOW()
-    account_pocket:
         get_pocket_users: |
             SELECT * FROM account_pocket
+    content_pocket:
+        insert_update_pocket_content_for_user: |
+            INSERT INTO content_pocket
+            (user_id, item_id, resolved_title, resolved_url, json, date_added, date_updated)
+            VALUES
+            (:user_id, :item_id, :resolved_title, :resolved_url, :json, :date_added, :date_updated)
+                ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated

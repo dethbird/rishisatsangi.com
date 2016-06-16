@@ -16,3 +16,10 @@ sql:
             FROM `users`
             WHERE username = :username
             AND password = :password
+        # insert-update pocket account
+        insert_update_pocket: |
+            INSERT INTO user_account_pocket
+            (user_id, username, access_token)
+            VALUES
+            (:user_id, :username, :access_token)
+                ON DUPLICATE KEY UPDATE access_token = :access_token

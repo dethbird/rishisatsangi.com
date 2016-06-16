@@ -215,6 +215,7 @@ $app->group('/service', $authorize($app), function () use ($app) {
 
         $app->get('/redirect', function () use ($app) {
             $configs = $app->container->get('configs');
+            $securityContext = json_decode($app->getCookie('securityContext'));
             $client = new GuzzleHttp\Client();
             $response = $client->post(
                 "https://getpocket.com/v3/oauth/authorize", [
@@ -228,7 +229,21 @@ $app->group('/service', $authorize($app), function () use ($app) {
                 ]]
             );
             $data = json_decode($response->getBody()->getContents());
-            var_dump($data); exit();
+            $db = new DataBase(
+                $configs['mysql']['host'],
+                $configs['mysql']['database'],
+                $configs['mysql']['user'],
+                $configs['mysql']['password']);
+            // var_dump($data); exit();
+            $result = $db->perform(
+                $configs['sql']['users']['insert_update_pocket'],
+                [
+                    'user_id' => $securityContext->id,
+                    'username' => $data->username,
+                    'access_token' => $data->access_token
+                ]
+            );
+            $app->redirect('/dashboard');
 
         });
 

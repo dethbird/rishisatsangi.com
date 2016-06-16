@@ -116,14 +116,15 @@ $app->get("/", function () use ($app) {
 $app->get("/dashboard", $authorize($app), function () use ($app) {
 
     $configs = $app->container->get('configs');
-
+    // var_dump( $app->getCookie('securityContext')); exit();
     $templateVars = array(
         "configs" => $configs,
+        'securityContext' => json_decode($app->getCookie('securityContext')),
         "section" => "dashboard.index"
     );
 
     $app->render(
-        'pages/dashboard/index.html.twig',
+        'pages/dashboard.html.twig',
         $templateVars,
         200
     );

@@ -117,12 +117,6 @@ $app->get("/dashboard", $authorize($app), function () use ($app) {
 
     $configs = $app->container->get('configs');
 
-    $db = new DataBase(
-        $configs['mysql']['host'],
-        $configs['mysql']['database'],
-        $configs['mysql']['user'],
-        $configs['mysql']['password']);
-
     $templateVars = array(
         "configs" => $configs,
         "section" => "dashboard.index"
@@ -150,6 +144,37 @@ $app->get("/account", $authorize($app), function () use ($app) {
         $templateVars,
         200
     );
+});
+
+$app->group('/api', function () use ($app) {
+    $app->post('/login', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+
+        $db = new DataBase(
+            $configs['mysql']['host'],
+            $configs['mysql']['database'],
+            $configs['mysql']['user'],
+            $configs['mysql']['password']);
+
+        $result = $db->fetchAll(
+            $configs['sql']['users']['select_by_username_and_password'],
+            [
+                'username' => $app->request->params('username'),
+                'password' => $app->request->params('password')
+            ]
+        );
+
+        $app->response->setStatus(404);
+        if (isset($result[0])) {
+            if ($result[0]['username'] == $app->request->params('username')){
+                $app->response->setStatus(200);
+                $app->response->headers->set('Content-Type', 'application/json');
+                $result[0]['redirectTo'] = $_SESSION['redirectTo'];
+                $app->response->setBody(json_encode($result[0]));
+            }
+        }
+    });
 });
 
 

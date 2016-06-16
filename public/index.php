@@ -18,7 +18,6 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require '../vendor/autoload.php';
 require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php';
-require_once APPLICATION_PATH . 'src/library/ExternalData/InstagramData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';
 require_once APPLICATION_PATH . 'src/library/Data/Base.php';
 
@@ -47,7 +46,14 @@ $view->parserExtensions = array(
     new TemplateHelpers(),
     new MarkdownExtension($markdownEngine)
 );
+$db = new DataBase(
+    $configs['mysql']['host'],
+    $configs['mysql']['database'],
+    $configs['mysql']['user'],
+    $configs['mysql']['password']);
+
 $app->container->set('configs', $configs);
+$app->container->set('db', $db);
 
 $authorize = function ($app) {
 
@@ -116,7 +122,7 @@ $app->get("/", function () use ($app) {
 $app->get("/dashboard", $authorize($app), function () use ($app) {
 
     $configs = $app->container->get('configs');
-    // var_dump( $app->getCookie('securityContext')); exit();
+
     $templateVars = array(
         "configs" => $configs,
         'securityContext' => json_decode($app->getCookie('securityContext')),
@@ -151,13 +157,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/login', function () use ($app) {
 
         $configs = $app->container->get('configs');
-
-        $db = new DataBase(
-            $configs['mysql']['host'],
-            $configs['mysql']['database'],
-            $configs['mysql']['user'],
-            $configs['mysql']['password']);
-
+        $db = $app->container->get('db');
 
         $result = $db->fetchAll(
             $configs['sql']['users']['select_by_username_and_password'],
@@ -215,8 +215,10 @@ $app->group('/service', $authorize($app), function () use ($app) {
 
         $app->get('/redirect', function () use ($app) {
             $configs = $app->container->get('configs');
+            $db = $app->container->get('db');
             $securityContext = json_decode($app->getCookie('securityContext'));
             $client = new GuzzleHttp\Client();
+
             $response = $client->post(
                 "https://getpocket.com/v3/oauth/authorize", [
                 'headers' => [
@@ -229,12 +231,7 @@ $app->group('/service', $authorize($app), function () use ($app) {
                 ]]
             );
             $data = json_decode($response->getBody()->getContents());
-            $db = new DataBase(
-                $configs['mysql']['host'],
-                $configs['mysql']['database'],
-                $configs['mysql']['user'],
-                $configs['mysql']['password']);
-            // var_dump($data); exit();
+
             $result = $db->perform(
                 $configs['sql']['users']['insert_update_pocket'],
                 [

@@ -59,7 +59,7 @@ $authorize = function ($app) {
         // check cookie for securityContext
         $securityContext = json_decode($app->getCookie('securityContext'));
 
-        if (!isset($securityContext->login)) {
+        if (!isset($securityContext->username)) {
             $app->redirect("/login");
         }
 
@@ -102,11 +102,11 @@ $app->get("/", function () use ($app) {
 
     $templateVars = array(
         "configs" => $configs,
-        "section" => "dashboard.index"
+        "section" => "index"
     );
 
     $app->render(
-        'pages/dashboard/index.html.twig',
+        'pages/index.html.twig',
         $templateVars,
         200
     );
@@ -170,7 +170,16 @@ $app->group('/api', function () use ($app) {
             if ($result[0]['username'] == $app->request->params('username')){
                 $app->response->setStatus(200);
                 $app->response->headers->set('Content-Type', 'application/json');
-                $result[0]['redirectTo'] = $_SESSION['redirectTo'];
+                $app->setCookie(
+                    "securityContext",
+                    json_encode($result[0]),
+                    "1 days"
+                );
+                if (isset($_SESSION['redirectTo'])) {
+                    $result[0]['redirectTo'] = $_SESSION['redirectTo'];
+                } else {
+                    $result[0]['redirectTo'] = '/dashboard';
+                }
                 $app->response->setBody(json_encode($result[0]));
             }
         }

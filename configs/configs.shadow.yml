@@ -10,6 +10,9 @@ service:
         consumer_key: :POCKET_CONSUMER_KEY
 sql:
     users:
+        # get by id
+        get_by_id: |
+            SELECT id, username, email FROM users WHERE id = :id
         # authorization query
         select_by_username_and_password: |
             SELECT id, email, username
@@ -23,3 +26,6 @@ sql:
             VALUES
             (:user_id, :username, :access_token, NOW(), NOW())
                 ON DUPLICATE KEY UPDATE access_token = :access_token, date_updated = NOW()
+    user_account_pocket:
+        get_pocket_users: |
+            SELECT * FROM user_account_pocket

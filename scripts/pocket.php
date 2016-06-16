@@ -38,7 +38,7 @@
         echo $c(date("l Y-m-d h:i:sa", $cmd['time']) . " -> " . date("l Y-m-d h:i:sa", $until))
             ->yellow()->bold() . PHP_EOL;
         $pocket_users = $db->fetchAll(
-            $configs['sql']['user_account_pocket']['get_pocket_users'],[]);
+            $configs['sql']['account_pocket']['get_pocket_users'],[]);
 
         foreach ($pocket_users as $pocket_user) {
             $user = $db->fetchAll(

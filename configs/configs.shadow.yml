@@ -32,7 +32,7 @@ sql:
     content_pocket:
         insert_update_pocket_content_for_user: |
             INSERT INTO content_pocket
-            (user_id, item_id, resolved_title, resolved_url, json, date_added, date_updated)
+            (user_id, item_id, json, date_added, date_updated)
             VALUES
-            (:user_id, :item_id, :resolved_title, :resolved_url, :json, :date_added, :date_updated)
+            (:user_id, :item_id, :json, :date_added, :date_updated)
                 ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated

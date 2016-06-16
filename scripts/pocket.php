@@ -66,8 +66,6 @@
                         [
                             'user_id' => $user['id'],
                             'item_id' => $article->item_id,
-                            'resolved_title' => $article->resolved_title,
-                            'resolved_url' => $article->resolved_url,
                             'json' => json_encode($article),
                             'date_added' => date('Y-m-d H:i:s', $article->time_added),
                             'date_updated' => date('Y-m-d H:i:s', $article->time_updated)

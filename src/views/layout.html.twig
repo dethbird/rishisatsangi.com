@@ -25,19 +25,17 @@
 <body>
     <div class="container-fluid">
         {% if securityContext.username %}
-            <div class="row container">
-                <div class="col-xs-12 pull-right">
-                    {{securityContext.username}}
-                    <a href="/logout" title="Logout" class="btn btn-primary btn-sm">Logout</a>
-                </div>
+            <div class="col-xs-12 pull-right">
+                {{securityContext.username}}
+                <a href="/logout" title="Logout" class="btn btn-primary-outline btn-sm">Logout</a>
             </div>
         {% elseif section != "login" %}
-            <div class="row container">
-                <div class="col-xs-12 pull-right">
-                    <a href="/login" title="Login" class="btn btn-success btn-sm">Login</a>
-                </div>
+            <div class="col-xs-12 pull-right">
+                <a href="/login" title="Login" class="btn btn-success-outline btn-sm">Login</a>
             </div>
         {% endif %}
+    </div>
+    <div class="container-fluid">
         {% block content %}{% endblock %}
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

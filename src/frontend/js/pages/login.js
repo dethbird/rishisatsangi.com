@@ -1,7 +1,5 @@
-var LoginView = require('../library/views/LoginView');
+var LoginFormView = require('../library/views/forms/LoginFormView');
 
-var loginView = new LoginView({
-    el: '#loginForm'
+var loginFormView = new LoginFormView({
+    el: '#login_form'
 });
-
-console.log(loginView);

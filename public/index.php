@@ -195,55 +195,37 @@ $app->group('/service', $authorize($app), function () use ($app) {
 
         $app->get('/authorize', function () use ($app) {
             $configs = $app->container->get('configs');
-            $client = new GuzzleHttp\Client();
-            $response = $client->post(
-                "https://getpocket.com/v3/oauth/request", [
-                'headers' => [
-                    'Content-Type' => 'application/json; charset=UTF-8',
-                    'X-Accept' => 'application/json'
-                ],
-                'json' => [
-                    'consumer_key' => $configs['service']['pocket']['consumer_key'],
-                    'redirect_uri' => "http://".$_SERVER['HTTP_HOST']."/service/pocket/redirect"
-                ]]
-            );
-            $data = json_decode($response->getBody()->getContents());
-            $_SESSION['pocketCode'] = $data->code;
-            $app->redirect("https://getpocket.com/auth/authorize?request_token=".$data->code."&redirect_uri=http://".$_SERVER['HTTP_HOST']."/service/pocket/redirect");
-
+            $pocketData = new PocketData(
+                $configs['service']['pocket']['consumer_key']);
+            $code = $pocketData->fetchRequestCode(
+                "http://".$_SERVER['HTTP_HOST']."/service/pocket/redirect");
+            $_SESSION['pocketCode'] = $code;
+            $app->redirect($pocketData->getAuthorizeScreenUri(
+                $code,
+                "http://".$_SERVER['HTTP_HOST']."/service/pocket/redirect"
+            ));
         });
 
         $app->get('/redirect', function () use ($app) {
             $configs = $app->container->get('configs');
             $db = $app->container->get('db');
             $securityContext = json_decode($app->getCookie('securityContext'));
-            $client = new GuzzleHttp\Client();
+            $pocketData = new PocketData(
+                $configs['service']['pocket']['consumer_key']);
 
-            $response = $client->post(
-                "https://getpocket.com/v3/oauth/authorize", [
-                'headers' => [
-                    'Content-Type' => 'application/json; charset=UTF-8',
-                    'X-Accept' => 'application/json'
-                ],
-                'json' => [
-                    'consumer_key' => $configs['service']['pocket']['consumer_key'],
-                    'code' => $_SESSION['pocketCode']
-                ]]
-            );
-            $data = json_decode($response->getBody()->getContents());
+            $accessTokenData = $pocketData->fetchAccessTokenData(
+                $_SESSION['pocketCode']);
 
             $result = $db->perform(
                 $configs['sql']['users']['insert_update_pocket'],
                 [
                     'user_id' => $securityContext->id,
-                    'username' => $data->username,
-                    'access_token' => $data->access_token
+                    'username' => $accessTokenData->username,
+                    'access_token' => $accessTokenData->access_token
                 ]
             );
             $app->redirect('/dashboard');
-
         });
-
     });
 });
 

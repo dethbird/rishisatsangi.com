@@ -19,7 +19,7 @@ sql:
         # insert-update pocket account
         insert_update_pocket: |
             INSERT INTO user_account_pocket
-            (user_id, username, access_token)
+            (user_id, username, access_token, date_added, date_updated)
             VALUES
-            (:user_id, :username, :access_token)
-                ON DUPLICATE KEY UPDATE access_token = :access_token
+            (:user_id, :username, :access_token, NOW(), NOW())
+                ON DUPLICATE KEY UPDATE access_token = :access_token, date_updated = NOW()

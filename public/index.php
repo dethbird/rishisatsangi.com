@@ -158,11 +158,12 @@ $app->group('/api', function () use ($app) {
             $configs['mysql']['user'],
             $configs['mysql']['password']);
 
+
         $result = $db->fetchAll(
             $configs['sql']['users']['select_by_username_and_password'],
             [
                 'username' => $app->request->params('username'),
-                'password' => $app->request->params('password')
+                'password' => md5($app->request->params('password'))
             ]
         );
 
@@ -188,32 +189,46 @@ $app->group('/api', function () use ($app) {
 });
 
 
-$app->group('/service', function () use ($app) {
-    $app->group('/instagram', function () use ($app) {
+$app->group('/service', $authorize($app), function () use ($app) {
+
+    $app->group('/pocket', function () use ($app) {
 
         $app->get('/authorize', function () use ($app) {
             $configs = $app->container->get('configs');
-            $instagramData = new InstagramData(
-                $configs['instagram']['client_id'],
-                $configs['instagram']['client_secret']
+            $client = new GuzzleHttp\Client();
+            $response = $client->post(
+                "https://getpocket.com/v3/oauth/request", [
+                'headers' => [
+                    'Content-Type' => 'application/json; charset=UTF-8',
+                    'X-Accept' => 'application/json'
+                ],
+                'json' => [
+                    'consumer_key' => $configs['service']['pocket']['consumer_key'],
+                    'redirect_uri' => "http://".$_SERVER['HTTP_HOST']."/service/pocket/redirect"
+                ]]
             );
-            $app->redirect($instagramData->getAuthRedirectUri(
-                "http://".$_SERVER['HTTP_HOST']."/service/instagram/redirect"
-            ));
+            $data = json_decode($response->getBody()->getContents());
+            $_SESSION['pocketCode'] = $data->code;
+            $app->redirect("https://getpocket.com/auth/authorize?request_token=".$data->code."&redirect_uri=http://".$_SERVER['HTTP_HOST']."/service/pocket/redirect");
+
         });
 
         $app->get('/redirect', function () use ($app) {
             $configs = $app->container->get('configs');
-            $instagramData = new InstagramData(
-                $configs['instagram']['client_id'],
-                $configs['instagram']['client_secret']
+            $client = new GuzzleHttp\Client();
+            $response = $client->post(
+                "https://getpocket.com/v3/oauth/authorize", [
+                'headers' => [
+                    'Content-Type' => 'application/json; charset=UTF-8',
+                    'X-Accept' => 'application/json'
+                ],
+                'json' => [
+                    'consumer_key' => $configs['service']['pocket']['consumer_key'],
+                    'code' => $_SESSION['pocketCode']
+                ]]
             );
-            $response = $instagramData->getAuthTokenFromCode(
-                "http://".$_SERVER['HTTP_HOST']."/service/instagram/redirect",
-                $app->request->params('code')
-            );
-            $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($response));
+            $data = json_decode($response->getBody()->getContents());
+            var_dump($data); exit();
 
         });
 

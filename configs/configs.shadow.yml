@@ -5,11 +5,14 @@ mysql:
     database: :MYSQL_DATABASE
     user: :MYSQL_USER
     password: :MYSQL_PASSWORD
+service:
+    pocket:
+        consumer_key: :POCKET_CONSUMER_KEY
 sql:
     users:
         # authorization query
         select_by_username_and_password: |
-            SELECT id, email
+            SELECT id, email, username
             FROM `users`
             WHERE username = :username
             AND password = :password

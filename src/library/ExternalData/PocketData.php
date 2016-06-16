@@ -54,37 +54,21 @@ class PocketData extends ExternalDataBase {
     }
 
 
-    public function getArticles($count = 15, $cacheTime = 3600)
+    public function getArticles()
     {
-        $cacheKey = md5("pocket:".$count);
-        $cache = $this->retrieveCache($cacheKey, $cacheTime);
-
-        if(!$cache) {
-            $response = $this->httpClient->post(
-                'https://getpocket.com/v3/get',[
-                'headers' => [
-                    'X-Accept' => 'application/json'
-                ],
-                'json' => [
-                    'consumer_key' => $this->consumerKey,
-                    'access_token' => $this->accessToken,
-                    'state' => 'all',
-                    'favorite' => 1,
-                    'sort' => 'newest',
-                    'detailType' => 'complete',
-                    'count' => $count
-                ]
-            ]);
-            $body = $response->getBody();
-            $response = json_decode($body);
-            $data = [];
-            foreach ($response->list as $key=>$value) {
-              $data[$key] = $value;
-            }
-            $this->storeCache($cacheKey, $data);
-            return $data;
-        } else {
-            return $cache;
-        }
+        $response = $this->httpClient->post(
+            'https://getpocket.com/v3/get',[
+            'headers' => [
+                'X-Accept' => 'application/json'
+            ],
+            'json' => [
+                'consumer_key' => $this->consumerKey,
+                'access_token' => $this->accessToken,
+                'state' => 'all',
+                'sort' => 'newest',
+                'detailType' => 'complete'
+            ]
+        ]);
+        return json_decode($response->getBody()->getContents());
     }
 }

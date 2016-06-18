@@ -72,7 +72,9 @@
                     'pocket_articles' => $pocket_articles
                 ]);
 
-            $css = file_get_contents(
+            $css = file_get_contents('https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css');
+
+            $css .= PHP_EOL . file_get_contents(
                 APPLICATION_PATH . 'src/views/css/email.css');
 
             $cssToInlineStyles = new CssToInlineStyles();

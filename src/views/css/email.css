@@ -1,41 +1,44 @@
 body {
-  padding: 15px;
-  width: 800px;
+    padding: 15px;
+    width: 800px;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
 }
 h1,h2,h3,h4,h5 {
     padding: 0;
     margin: 0px 0px 15px 0px;
 }
 p {
-  margin:0;
-  padding: 10px;
-}
-a {
-    color: #ff0099;
+    margin:0;
+    padding: 10px;
 }
 a.title {
-    color: #000;
-    text-decoration: none;
-    font-size: 16px;
     font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    word-wrap: break-word;
 }
 blockquote {
-  margin:0;
-  padding: 10px 10px 10px 15px;
-  border: none;
-  width: 500px;
-  font-size: 14px;
-  color: #333;
+    margin:0;
+    padding: 15px 10px 10px 15px;
+    border: none;
+    max-width: 520px;
+    color: #333;
 }
 .content {
-    padding: 25px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
     margin-bottom: 10px;
+    padding: 25px;
+    border: 1px solid #EEE;
+    border-radius: 10px;
 }
 .content img {
-  max-width: 500px;
-  height: auto;
+    max-width: 550px;
+    height: auto;
 }
 .username {
     font-weight: bold;

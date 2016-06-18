@@ -1,4 +1,7 @@
-You saved {{pocket_articles|length}} article(s) from X to X. What the fuck you gonna do with them?
+<h2>Pocket Articles</h2>
+
+<p>You saved <span class="number">{{pocket_articles|length}}</span> article(s).<br />
+What the fuck you gonna do with them?</p>
 
 {% for article in pocket_articles %}
 {% set article_json = article.json|json_decode %}
@@ -9,7 +12,9 @@ You saved {{pocket_articles|length}} article(s) from X to X. What the fuck you g
     {{article_json.time_added|date_format('l Y-m-d h:i:sa')}}
     {% if article_json.favorite == 1 %} +1 {% endif %}
     <br />
-    <img src="{{article_json.image.src}}" />
+    {% if article_json.has_image %}
+        <img src="{{article_json.image.src}}" />
+    {% endif %}
     <br />
     <blockquote>{{article_json.excerpt|raw}}</blockquote>
 </div>

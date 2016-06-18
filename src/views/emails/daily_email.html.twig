@@ -5,8 +5,8 @@
 {% block content %}
     {{ parent() }}
         <div class="header-section">
-            <h3>LikeDrop Daily Email</h3>
-            <p>{{user.username}}, here lie the footsteps of a gimp hobbling across the internet:</p>
+            <h1>LikeDrop Daily Email</h1>
+            <p><span class="username">{{user.username}}</span>, here lie the footsteps of a gimp hobbling across the internet from <span class="date">{{from|date_format}}</span> to <span class="date">{{until|date_format}}</span>:</p>
         </div>
         <div class="service-section">
             {% include 'emails/partials/pocket_articles.html.twig' with {'pocket_articles': pocket_articles} %}

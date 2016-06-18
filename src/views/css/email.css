@@ -2,6 +2,10 @@ body {
   padding: 15px;
   width: 800px;
 }
+h1,h2,h3,h4,h5 {
+    padding: 0;
+    margin: 0px 0px 15px 0px;
+}
 p {
   margin:0;
   padding: 10px;
@@ -10,8 +14,9 @@ a {
     color: #ff0099;
 }
 a.title {
+    color: #000;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 blockquote {
@@ -31,4 +36,13 @@ blockquote {
 .content img {
   max-width: 500px;
   height: auto;
+}
+.username {
+    font-weight: bold;
+}
+.date {
+    font-weight: bold;
+}
+.number {
+    font-weight: bold;
 }

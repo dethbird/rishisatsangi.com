@@ -67,6 +67,8 @@
                 'emails/daily_email.html.twig',
                 [
                     'user' => $user,
+                    'from' => $until,
+                    'until' => $cmd['time'],
                     'pocket_articles' => $pocket_articles
                 ]);
 

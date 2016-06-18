@@ -7,11 +7,11 @@
         {% block head %}{% endblock %}
     </head>
 <body>
-    <h1>Header</h1>
-    <div class="container-fluid">
-        {% block content %}{% endblock %}
+    <div class="header">Email Header</div>
+    <div class="body">
+    {% block content %}{% endblock %}
     </div>
-    <h1>Footer</h2>
+    <div class="footer">Email Footer</div>
     {% block includes %}{% endblock %}
 </body>
 </html>

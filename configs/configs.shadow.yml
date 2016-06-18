@@ -36,3 +36,8 @@ sql:
             VALUES
             (:user_id, :item_id, :json, :date_added, :date_updated)
                 ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated
+        get_content_by_user: |
+            SELECT * FROM content_pocket
+            WHERE user_id = :user_id
+            AND date_added > :until
+            ORDER BY date_added DESC

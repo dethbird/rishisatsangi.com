@@ -1,4 +1,5 @@
 <?php
+
     define("APPLICATION_PATH", __DIR__ . "/../");
     date_default_timezone_set('America/New_York');
 
@@ -17,8 +18,6 @@
         $configs['mysql']['database'],
         $configs['mysql']['user'],
         $configs['mysql']['password']);
-    $twigLoader = new Twig_Loader_Filesystem(APPLICATION_PATH . 'src/views');
-    $twig = new Twig_Environment($twigLoader);
 
     $cmd = new Command();
     $cmd->beepOnError();
@@ -26,10 +25,6 @@
         ->boolean()
         ->aka('pull')
         ->describedAs('Pull the latest from a Pocket feed');
-    $cmd->flag('s')
-        ->boolean()
-        ->aka('send')
-        ->describedAs('Send a user their latest Pocket articles');
     $cmd->flag('t')
         ->aka('time')
         ->default(time())
@@ -41,16 +36,17 @@
 
     if ($cmd['pull']) {
         $until = $cmd['time'] - $cmd['hours'] * 3600;
+
         echo $c(date("l Y-m-d h:i:sa", $cmd['time']) . " -> " . date("l Y-m-d h:i:sa", $until))
             ->yellow()->bold() . PHP_EOL;
+
         $pocket_users = $db->fetchAll(
             $configs['sql']['account_pocket']['get_pocket_users'],[]);
 
         foreach ($pocket_users as $pocket_user) {
             $user = $db->fetchOne(
                 $configs['sql']['users']['get_by_id'],[
-                    'id' => $pocket_user['user_id']
-                ]);
+                    'id' => $pocket_user['user_id']]);
 
             $pocketData = new PocketData(
                 $configs['service']['pocket']['consumer_key'],
@@ -81,24 +77,4 @@
             }
 
         }
-    }
-
-    if ($cmd['send']) {
-
-        $mail = new PHPMailer;
-        $mail->setFrom('webmaster@explosioncorp.com', 'Explosioncorp Mailer');
-        $mail->addAddress('rishi.satsangi@gmail.com', 'Joe User');
-        $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Here is the subject';
-        $mail->Body    = $twig->render(
-            'emails/pocket_send.html.twig', ['key' => 'farts']);
-
-        if(!$mail->send()) {
-            echo 'Message could not be sent.';
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
-            echo 'Message has been sent';
-        }
-
-        echo PHP_EOL;
     }

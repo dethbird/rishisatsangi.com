@@ -13,6 +13,7 @@
         "mead-steve/console": "*",
         "nategood/commando": "*",
         "aura/sql": "~2.5",
-        "josegonzalez/dotenv": "~2.0"
+        "josegonzalez/dotenv": "~2.0",
+        "phpmailer/phpmailer": "~5.2"
     }
 }

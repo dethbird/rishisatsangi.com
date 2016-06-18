@@ -1,0 +1,13 @@
+{% extends 'layout-email.html.twig' %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+        <div class="header-section">
+            <p>{{user.username}}, here lie the footsteps of a gimp hobbling across the internet:</p>
+        </div>
+        <div class="service-section">
+            {% include 'emails/partials/pocket_articles.html.twig' with {'pocket_articles': pocket_articles} %}
+        </div>
+{% endblock %}

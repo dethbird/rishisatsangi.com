@@ -1,5 +1,34 @@
-.header {
-    padding: 5px;
-    color: #FF0099;
+body {
+  padding: 15px;
+  width: 800px;
+}
+p {
+  margin:0;
+  padding: 10px;
+}
+a {
+    color: #ff0099;
+}
+a.title {
+    text-decoration: none;
+    font-size: 18px;
     font-weight: bold;
+}
+blockquote {
+  margin:0;
+  padding: 10px 10px 10px 15px;
+  border: none;
+  width: 500px;
+  font-size: 14px;
+  color: #333;
+}
+.content {
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.content img {
+  max-width: 500px;
+  height: auto;
 }

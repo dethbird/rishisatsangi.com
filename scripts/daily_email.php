@@ -30,6 +30,10 @@
         ->boolean()
         ->aka('send')
         ->describedAs('Send a user their latest LikeDropped content');
+    $cmd->flag('o')
+        ->boolean()
+        ->aka('output')
+        ->describedAs('Output mode -- don\'t actually send an email, output HTML instead');
     $cmd->flag('t')
         ->aka('time')
         ->default(time())
@@ -65,6 +69,7 @@
                     'user' => $user,
                     'pocket_articles' => $pocket_articles
                 ]);
+
             $css = file_get_contents(
                 APPLICATION_PATH . 'src/views/css/email.css');
 
@@ -73,7 +78,7 @@
             // echo $mergedHtml . PHP_EOL;
 
             $mail = new PHPMailer;
-            $mail->Subject = $configs['email']['daily_email']['subject'];
+            $mail->Subject = $configs['email']['daily_email']['subject'] . " " . time();
             $mail->setFrom(
                 $configs['email']['daily_email']['from'],
                 $configs['email']['daily_email']['from_name']
@@ -82,11 +87,15 @@
             $mail->isHTML(true);
             $mail->Body = $mergedHtml;
 
-            if(!$mail->send()) {
-                echo 'Message could not be sent.';
-                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            if ($cmd['output']) {
+                echo PHP_EOL . $html . PHP_EOL;
             } else {
-                echo 'Message has been sent';
+                if(!$mail->send()) {
+                    echo 'Message could not be sent.';
+                    echo 'Mailer Error: ' . $mail->ErrorInfo;
+                } else {
+                    echo 'Message has been sent';
+                }
             }
             echo PHP_EOL;
         }

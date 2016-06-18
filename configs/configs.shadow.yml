@@ -1,3 +1,8 @@
+email:
+    daily_email:
+        from: :EMAIL_DAILY_EMAIL_FROM
+        from_name: :EMAIL_DAILY_EMAIL_FROM_NAME
+        subject: :EMAIL_DAILY_EMAIL_SUBJECT
 security:
     secret: :SECURITY_SECRET
 mysql:

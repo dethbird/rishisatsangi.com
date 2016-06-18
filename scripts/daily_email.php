@@ -70,29 +70,24 @@
 
             $cssToInlineStyles = new CssToInlineStyles();
             $mergedHtml = $cssToInlineStyles->convert($html, $css);
+            // echo $mergedHtml . PHP_EOL;
 
+            $mail = new PHPMailer;
+            $mail->Subject = $configs['email']['daily_email']['subject'];
+            $mail->setFrom(
+                $configs['email']['daily_email']['from'],
+                $configs['email']['daily_email']['from_name']
+            );
+            $mail->addAddress($user['email'], $user['username']);
+            $mail->isHTML(true);
+            $mail->Body = $mergedHtml;
 
-            echo $mergedHtml . PHP_EOL;
-
-            // $mail = new PHPMailer;
-            // $mail->setFrom('webmaster@explosioncorp.com', 'Explosioncorp Mailer');
-            // $mail->addAddress('rishi.satsangi@gmail.com', 'Joe User');
-            // $mail->isHTML(true);                                  // Set email format to HTML
-            // $mail->Subject = 'Here is the subject';
-            // $mail->Body = $twig->render(
-            //     'emails/pocket_send.html.twig', ['key' => 'farts']);
-            //
-            // if(!$mail->send()) {
-            //     echo 'Message could not be sent.';
-            //     echo 'Mailer Error: ' . $mail->ErrorInfo;
-            // } else {
-            //     echo 'Message has been sent';
-            // }
-
+            if(!$mail->send()) {
+                echo 'Message could not be sent.';
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                echo 'Message has been sent';
+            }
+            echo PHP_EOL;
         }
-
-
-
-
-        // echo PHP_EOL;
     }

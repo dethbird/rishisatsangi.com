@@ -96,7 +96,7 @@
                 if($v!=""){
                      $resp = $shell->executeCommand('sed', array(
                          "-i",
-                         "'s/:".$k."/".$v."/g'",
+                         "'s/:".$k."$/".$v."/g'",
                          $configFilePath
                      ));
                 }

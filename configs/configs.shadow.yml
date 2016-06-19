@@ -15,6 +15,9 @@ mysql:
 service:
     pocket:
         consumer_key: :POCKET_CONSUMER_KEY
+    gdrive:
+        # filename of the .json file that the google client needs to work
+        client_json_config_filename: gdrive_client.json
 sql:
     users:
         # get by id
@@ -36,6 +39,15 @@ sql:
                 ON DUPLICATE KEY UPDATE access_token = :access_token, date_updated = NOW()
         get_pocket_users: |
             SELECT * FROM account_pocket
+
+    account_gdrive:
+        # insert-update gdrive account
+        insert_update_gdrive_user: |
+            INSERT INTO account_gdrive
+            (user_id, access_token, date_added, date_updated)
+            VALUES
+            (:user_id, :access_token, NOW(), NOW())
+                ON DUPLICATE KEY UPDATE access_token = :access_token, date_updated = NOW()
     content_pocket:
         insert_update_pocket_content_for_user: |
             INSERT INTO content_pocket

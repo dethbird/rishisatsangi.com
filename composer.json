@@ -14,7 +14,6 @@
         "nategood/commando": "*",
         "aura/sql": "~2.5",
         "josegonzalez/dotenv": "~2.0",
-        "phpmailer/phpmailer": "~5.2",
-        "tijsverkoyen/css-to-inline-styles": "~2.0"
+        "google/apiclient": "~2.0"
     }
 }

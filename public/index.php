@@ -191,6 +191,37 @@ $app->group('/api', function () use ($app) {
 
 $app->group('/service', $authorize($app), function () use ($app) {
 
+    $app->group('/gdrive', function () use ($app) {
+
+        $app->get('/authorize', function () use ($app) {
+            $configs = $app->container->get('configs');
+            $client = new Google_Client();
+            $client->setAuthConfigFile(
+                "../configs/" . $configs['service']['gdrive']['client_json_config_filename']);
+            $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
+            $app->redirect($client->createAuthUrl());
+        });
+
+        $app->get('/redirect', function () use ($app) {
+            $configs = $app->container->get('configs');
+            $db = $app->container->get('db');
+            $securityContext = json_decode($app->getCookie('securityContext'));
+            $client = new Google_Client();
+            $client->setAuthConfigFile(
+                "../configs/" . $configs['service']['gdrive']['client_json_config_filename']);
+            $client->authenticate($app->request->params('code'));
+            $accessTokenData = $client->getAccessToken();
+            $result = $db->perform(
+                $configs['sql']['account_gdrive']['insert_update_gdrive_user'],
+                [
+                    'user_id' => $securityContext->id,
+                    'access_token' => $accessTokenData['access_token']
+                ]
+            );
+            $app->redirect('/dashboard');
+        });
+    });
+
     $app->group('/pocket', function () use ($app) {
 
         $app->get('/authorize', function () use ($app) {

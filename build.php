@@ -1,10 +1,12 @@
 <?php
 
+    define("APPLICATION_PATH", __DIR__);
     require_once 'vendor/autoload.php';
     use Colors\Color;
     use MeadSteve\Console\Shells\BasicShell;
     use Commando\Command;
     use josegonzalez\Dotenv\Loader;
+    use Symfony\Component\Yaml\Yaml;
 
     $cmd = new Command();
     $cmd->beepOnError();
@@ -94,14 +96,21 @@
             foreach ($dotenv as $k => $v) {
                 $v = trim($v);
                 if($v!=""){
-                     $resp = $shell->executeCommand('sed', array(
-                         "-i",
-                         "'s/:".$k."$/".$v."/g'",
-                         $configFilePath
-                     ));
+                    try {
+                        $resp = $shell->executeCommand('sed', array(
+                            "-i",
+                            "'s/:".$k."$/".addcslashes($v, "/")."/g'",
+                            $configFilePath
+                        ));
+                    } catch (Exception $e) {
+                        var_dump($e);
+                        var_dump(addcslashes($v, "/"));
+                        exit();
+                    }
                 }
             }
         }
+
         echo $c("Configs published.")
             ->green()->bold() . PHP_EOL;
     }

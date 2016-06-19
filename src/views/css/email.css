@@ -15,8 +15,9 @@ p {
     padding: 10px;
 }
 a.title {
+    color: #c9177c;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     text-decoration: none;
     -ms-hyphens: auto;
     -moz-hyphens: auto;
@@ -36,16 +37,41 @@ blockquote {
     border: 1px solid #EEE;
     border-radius: 10px;
 }
-.content img {
+.content-image {
+    margin: 10px 0px 10px 0px;
     max-width: 550px;
     height: auto;
 }
 .username {
     font-weight: bold;
+    color: #c9177c;
 }
 .date {
     font-weight: bold;
 }
 .number {
     font-weight: bold;
+}
+.service-logo {
+    max-width: 40px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.service-logo-manage {
+    max-width: 18px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+.btn-default {
+    background-color: #ddd;
+    color: #444;
+}
+label {
+    background-color: #c9177c;
+    padding: 3px;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 12px;
 }

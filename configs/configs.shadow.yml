@@ -1,3 +1,5 @@
+server:
+    hostname: :SERVER_HOSTNAME
 email:
     daily_email:
         from: :EMAIL_DAILY_EMAIL_FROM

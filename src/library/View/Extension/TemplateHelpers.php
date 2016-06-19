@@ -36,9 +36,9 @@ class TemplateHelpers extends \Twig_Extension
     {
         return json_encode($output);
     }
-    public function json_decode($output)
+    public function json_decode($output, $as_array = true)
     {
-        return json_decode($output);
+        return json_decode($output, $as_array);
     }
     public function fountain($output)
     {

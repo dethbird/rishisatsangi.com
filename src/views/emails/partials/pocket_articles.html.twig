@@ -1,25 +1,32 @@
 <div class="container col-xs-12">
     <div class="container col-xs-12">
-        <h2>Pocket Articles</h2>
+        <h2><img src="{{hostname}}/img/service/pocket/logo_sm.png" class="service-logo"/> Pocket Articles</h2>
 
-        <p>You saved <span class="number">{{pocket_articles|length}}</span> article(s).<br />
-        What the fuck you gonna do with them?</p>
+        <p>You saved <span class="number">{{pocket_articles|length}}</span> Pocket article(s).</p>
     </div>
 
     {% for article in pocket_articles %}
-    {% set article_json = article.json|json_decode %}
+    {% set article_json = article.json|json_decode(true) %}
         <div class="content container col-xs-12">
+            {# <pre>{{article_json|print_r}}</pre> #}
             <a href="{{article_json.resolved_url|raw}}" class="title">{{article_json.resolved_title|raw}}</a>
             <br />
-            <span class="timestamp">{{article_json.time_added|date_format('l Y-m-d h:i:sa')}}</span>
+            <span class="date">{{article_json.time_added|date_format('l F j, Y, g:i a')}}</span>
             {% if article_json.favorite == 1 %} +1 {% endif %}
             <br />
             {% if article_json.has_image %}
-                <img src="{{article_json.image.src}}" />
+                <img src="{{article_json.image.src}}" class="content-image"/>
+                <br />
             {% endif %}
-            <br />
             <blockquote>{{article_json.excerpt|raw}}</blockquote>
-            <a href="farts" class="btn btn-success-outline">View</a>
+            {% if article_json.tags|length > 0 %}
+                {% for k, tag in article_json.tags %}
+                <label class="label label-info">{{k}}</label>
+                {% endfor %}
+                <br />
+            {% endif %}
+            <a href="{{article_json.resolved_url|raw}}" class="btn btn-info btn-sm">{{article_json.resolved_url|url_hostname}}</a>
+            <a href="{{article_json.resolved_url|raw}}" class="btn btn-default btn-sm"><img src="{{hostname}}/img/service/pocket/logo_sm.png" class="service-logo-manage"/> Manage</a>
         </div>
     {% endfor %}
 </div>

@@ -66,6 +66,7 @@
             $html = $twig->render(
                 'emails/daily_email.html.twig',
                 [
+                    'hostname' => $configs['server']['hostname'],
                     'user' => $user,
                     'from' => $until,
                     'until' => $cmd['time'],

@@ -66,6 +66,7 @@
                     $db->perform(
                         $configs['sql']['content_pocket']['insert_update_pocket_content_for_user'],
                         [
+                            'account_pocket_id' => $pocket_user['id'],
                             'user_id' => $user['id'],
                             'item_id' => $article->item_id,
                             'json' => json_encode($article),

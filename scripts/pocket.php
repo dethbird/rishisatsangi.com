@@ -62,14 +62,15 @@
                             ->white()->bold() . " ";
                         echo $c($article->resolved_url)
                             ->yellow()->bold() . PHP_EOL;
-
+                    // print_r(json_encode($article));
                     $db->perform(
                         $configs['sql']['content_pocket']['insert_update_pocket_content_for_user'],
                         [
                             'account_pocket_id' => $pocket_user['id'],
                             'user_id' => $user['id'],
                             'item_id' => $article->item_id,
-                            'json' => json_encode($article),
+                            'json' => json_encode($pocketData->cleanData(
+                                $article)),
                             'date_added' => date('Y-m-d H:i:s', $article->time_added),
                             'date_updated' => date('Y-m-d H:i:s', $article->time_updated)
                         ]

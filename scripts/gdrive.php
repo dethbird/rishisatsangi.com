@@ -40,7 +40,7 @@
             ->yellow()->bold() . PHP_EOL;
 
         $gdrive_users = $db->fetchAll(
-            $configs['sql']['account_gdrive']['get_gdrive_users'],[]);
+            $configs['sql']['account_gdrive']['get_all'],[]);
 
         foreach ($gdrive_users as $gdrive_user) {
             $user = $db->fetchOne(

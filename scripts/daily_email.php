@@ -50,19 +50,35 @@
         echo $c(date("l Y-m-d h:i:sa", $cmd['time']) . " -> " . date("l Y-m-d h:i:sa", $until))
             ->yellow()->bold() . PHP_EOL;
 
-        $pocket_users = $db->fetchAll(
-            $configs['sql']['account_pocket']['get_pocket_users'],[]);
+        // get all users
+        $users = $db->fetchAll($configs['sql']['users']['get_all'],[]);
+        foreach ($users as $user) {
+            echo $c("user: ")
+                ->white();
+            echo $c($user['username'])
+                ->yellow()->bold() . PHP_EOL;
 
-        foreach ($pocket_users as $pocket_user) {
-            $user = $db->fetchOne(
-                $configs['sql']['users']['get_by_id'],
-                ['id' => $pocket_user['user_id']]);
+
+            // gather data
+            $pocket_user = $db->fetchOne(
+                $configs['sql']['account_pocket']['get_by_user_id'],[
+                    'user_id' => $user['id']]);
 
             $pocket_articles = $db->fetchAll(
-                $configs['sql']['content_pocket']['get_content_by_user'],[
+                $configs['sql']['content_pocket']['get_by_account_pocket_id'],[
                     'until' => date('Y-m-d H:i:s', $until),
-                    'user_id' => $pocket_user['user_id']]);
+                    'account_pocket_id' => $pocket_user['id']]);
 
+            $gdrive_user = $db->fetchOne(
+                $configs['sql']['account_gdrive']['get_by_user_id'],[
+                    'user_id' => $user['id']]);
+
+            $gdrive_files = $db->fetchAll(
+                $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
+                    'until' => date('Y-m-d H:i:s', $until),
+                    'account_gdrive_id' => $gdrive_user['id']]);
+
+            // render html
             $html = $twig->render(
                 'emails/daily_email.html.twig',
                 [
@@ -73,15 +89,17 @@
                     'pocket_articles' => $pocket_articles
                 ]);
 
+            // build css
             $css = file_get_contents('https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css');
 
             $css .= PHP_EOL . file_get_contents(
                 APPLICATION_PATH . 'src/views/css/email.css');
 
+            // compile html
             $cssToInlineStyles = new CssToInlineStyles();
             $mergedHtml = $cssToInlineStyles->convert($html, $css);
-            // echo $mergedHtml . PHP_EOL;
 
+            // send
             $mail = new PHPMailer;
             $mail->Subject = $configs['email']['daily_email']['subject'] . " " . time();
             $mail->setFrom(
@@ -103,5 +121,6 @@
                 }
             }
             echo PHP_EOL;
+
         }
     }

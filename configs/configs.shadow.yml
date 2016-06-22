@@ -20,6 +20,9 @@ service:
         client_json_config_filename: gdrive_client.json
 sql:
     users:
+        # get all
+        get_all: |
+            SELECT id, username, email FROM users ORDER BY id
         # get by id
         get_by_id: |
             SELECT id, username, email FROM users WHERE id = :id
@@ -37,8 +40,10 @@ sql:
             VALUES
             (:user_id, :username, :access_token, NOW(), NOW())
                 ON DUPLICATE KEY UPDATE access_token = :access_token, date_updated = NOW()
-        get_pocket_users: |
+        get_all: |
             SELECT * FROM account_pocket
+        get_by_user_id: |
+            SELECT * FROM account_pocket WHERE user_id = :user_id
 
     account_gdrive:
         # insert-update gdrive account
@@ -48,8 +53,10 @@ sql:
             VALUES
             (:user_id, :access_token, NOW(), NOW())
                 ON DUPLICATE KEY UPDATE access_token = :access_token, date_updated = NOW()
-        get_gdrive_users: |
+        get_all: |
             SELECT * FROM account_gdrive
+        get_by_user_id: |
+            SELECT * FROM account_gdrive WHERE user_id = :user_id
     content_pocket:
         insert_update_pocket_content_for_user: |
             INSERT INTO content_pocket
@@ -57,15 +64,21 @@ sql:
             VALUES
             (:account_pocket_id, :user_id, :item_id, :json, :date_added, :date_updated)
                 ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated
-        get_content_by_user: |
+        get_by_account_pocket_id: |
             SELECT * FROM content_pocket
-            WHERE user_id = :user_id
+            WHERE account_pocket_id = :account_pocket_id
             AND date_added > :until
             ORDER BY date_added DESC
     content_gdrive_files:
+        # insert / update file modification data from user's drive
         insert_update_files_for_user: |
             INSERT INTO content_gdrive_files
             (account_gdrive_id, user_id, item_id, json, date_added, date_updated)
             VALUES
             (:account_gdrive_id, :user_id, :item_id, :json, :date_added, :date_updated)
                 ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated
+        get_by_account_gdrive_id: |
+            SELECT * FROM content_gdrive_files
+            WHERE account_gdrive_id = :account_gdrive_id
+            AND date_updated > :until
+            ORDER BY date_updated DESC

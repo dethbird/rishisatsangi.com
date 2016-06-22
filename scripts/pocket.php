@@ -41,7 +41,7 @@
             ->yellow()->bold() . PHP_EOL;
 
         $pocket_users = $db->fetchAll(
-            $configs['sql']['account_pocket']['get_pocket_users'],[]);
+            $configs['sql']['account_pocket']['get_all'],[]);
 
         foreach ($pocket_users as $pocket_user) {
             $user = $db->fetchOne(

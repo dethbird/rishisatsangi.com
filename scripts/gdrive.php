@@ -60,41 +60,23 @@
             //     $client->refreshToken($client->getRefreshToken());
             //     file_put_contents($credentialsPath, $client->getAccessToken());
             // }
-
-
-
-
             $drive_service = new Google_Service_Drive($client);
-            $changes = $drive_service->changes->listChanges('1', [
-                'pageSize' => 10,
-                'restrictToMyDrive' => true,
+            $files = $drive_service->files->listFiles([
+                'orderBy' => 'modifiedByMeTime desc',
+                'pageSize' => 25,
                 'spaces' => 'drive'
             ]);
-            var_dump($changes); die();
+            foreach ($files->getFiles() as $file) {
+                // var_dump($file->getId()); die();
+                $file = $drive_service->files->get($file->getId(), [
+                    'fields' => 'appProperties,capabilities,contentHints,createdTime,description,explicitlyTrashed,fileExtension,folderColorRgb,fullFileExtension,headRevisionId,iconLink,id,imageMediaMetadata,isAppAuthorized,kind,lastModifyingUser,md5Checksum,mimeType,modifiedByMeTime,modifiedTime,name,originalFilename,ownedByMe,owners,parents,permissions,properties,quotaBytesUsed,shared,sharedWithMeTime,sharingUser,size,spaces,starred,thumbnailLink,trashed,version,videoMediaMetadata,viewedByMe,viewedByMeTime,viewersCanCopyContent,webContentLink,webViewLink,writersCanShare'
+                ]);
+                var_dump(json_encode($file)); die();
+            }
 
 
-            // foreach ($articles->list as $article) {
-            //
-            //     if ($cmd['time'] > $article->time_added &&
-            //         $article->time_added > $until) {
-            //             echo $c(date("l Y-m-d h:i:sa", $article->time_added))
-            //                 ->white()->bold() . " ";
-            //             echo $c($article->resolved_url)
-            //                 ->yellow()->bold() . PHP_EOL;
-            //
-            //         $db->perform(
-            //             $configs['sql']['content_gdrive']['insert_update_gdrive_content_for_user'],
-            //             [
-            //                 'account_gdrive_id' => $gdrive_user['id'],
-            //                 'user_id' => $user['id'],
-            //                 'item_id' => $article->item_id,
-            //                 'json' => json_encode($article),
-            //                 'date_added' => date('Y-m-d H:i:s', $article->time_added),
-            //                 'date_updated' => date('Y-m-d H:i:s', $article->time_updated)
-            //             ]
-            //         );
-            //     }
-            // }
+
+
 
         }
     }

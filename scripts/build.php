@@ -1,7 +1,8 @@
 <?php
 
-    define("APPLICATION_PATH", __DIR__);
-    require_once 'vendor/autoload.php';
+    define("APPLICATION_PATH", __DIR__ . "/../");
+    date_default_timezone_set('America/New_York');
+    require_once APPLICATION_PATH . 'vendor/autoload.php';
     use Colors\Color;
     use MeadSteve\Console\Shells\BasicShell;
     use Commando\Command;

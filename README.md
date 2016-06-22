@@ -18,7 +18,7 @@ vim .env
 ### build help
 
 ```bash
-php build.php --help
+php scripts/build.php --help
 ```
 
 displays help:
@@ -59,10 +59,10 @@ displays help:
 
 build production:
 ```bash
-php build.php -cache -configs -js -npm -php -ugly
+php scripts/build.php -cache -configs -js -npm -php -ugly
 ```
 
 build dev js:
 ```bash
-php build.php -js
+php scripts/build.php -js
 ```

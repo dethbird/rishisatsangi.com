@@ -48,6 +48,8 @@ sql:
             VALUES
             (:user_id, :access_token, NOW(), NOW())
                 ON DUPLICATE KEY UPDATE access_token = :access_token, date_updated = NOW()
+        get_gdrive_users: |
+            SELECT * FROM account_gdrive
     content_pocket:
         insert_update_pocket_content_for_user: |
             INSERT INTO content_pocket

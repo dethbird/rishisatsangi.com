@@ -63,20 +63,30 @@
             $drive_service = new Google_Service_Drive($client);
             $files = $drive_service->files->listFiles([
                 'orderBy' => 'modifiedByMeTime desc',
-                'pageSize' => 25,
+                'pageSize' => 250,
                 'spaces' => 'drive'
             ]);
             foreach ($files->getFiles() as $file) {
-                // var_dump($file->getId()); die();
                 $file = $drive_service->files->get($file->getId(), [
                     'fields' => 'appProperties,capabilities,contentHints,createdTime,description,explicitlyTrashed,fileExtension,folderColorRgb,fullFileExtension,headRevisionId,iconLink,id,imageMediaMetadata,isAppAuthorized,kind,lastModifyingUser,md5Checksum,mimeType,modifiedByMeTime,modifiedTime,name,originalFilename,ownedByMe,owners,parents,permissions,properties,quotaBytesUsed,shared,sharedWithMeTime,sharingUser,size,spaces,starred,thumbnailLink,trashed,version,videoMediaMetadata,viewedByMe,viewedByMeTime,viewersCanCopyContent,webContentLink,webViewLink,writersCanShare'
                 ]);
-                var_dump(json_encode($file)); die();
+
+                echo $c(date('Y-m-d H:i:s', strtotime($file->getModifiedByMeTime())))
+                    ->white()->bold() . " ";
+                echo $c($file->getName())
+                    ->yellow()->bold() . PHP_EOL;
+
+                $db->perform(
+                    $configs['sql']['content_gdrive_files']['insert_update_files_for_user'],
+                    [
+                        'account_gdrive_id' => $gdrive_user['id'],
+                        'user_id' => $user['id'],
+                        'item_id' => $file->getId(),
+                        'json' => json_encode($file),
+                        'date_added' => date('Y-m-d H:i:s', strtotime($file->getCreatedTime())),
+                        'date_updated' => date('Y-m-d H:i:s', strtotime($file->getModifiedByMeTime()))
+                    ]
+                );
             }
-
-
-
-
-
         }
     }

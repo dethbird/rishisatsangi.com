@@ -62,3 +62,10 @@ sql:
             WHERE user_id = :user_id
             AND date_added > :until
             ORDER BY date_added DESC
+    content_gdrive_files:
+        insert_update_files_for_user: |
+            INSERT INTO content_gdrive_files
+            (account_gdrive_id, user_id, item_id, json, date_added, date_updated)
+            VALUES
+            (:account_gdrive_id, :user_id, :item_id, :json, :date_added, :date_updated)
+                ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated

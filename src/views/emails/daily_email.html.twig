@@ -13,5 +13,8 @@
             <div class="service-section container col-xs-12">
                 {% include 'emails/partials/pocket_articles.html.twig' with {'pocket_articles': pocket_articles} %}
             </div>
+            <div class="service-section container col-xs-12">
+                {% include 'emails/partials/gdrive_files.html.twig' with {'gdrive_files': gdrive_files} %}
+            </div>
         </div>
 {% endblock %}

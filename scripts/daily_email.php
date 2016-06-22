@@ -86,7 +86,8 @@
                     'user' => $user,
                     'from' => $until,
                     'until' => $cmd['time'],
-                    'pocket_articles' => $pocket_articles
+                    'pocket_articles' => $pocket_articles,
+                    'gdrive_files' => $gdrive_files
                 ]);
 
             // build css

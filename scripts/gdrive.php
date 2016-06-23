@@ -71,6 +71,15 @@
                     'fields' => 'appProperties,capabilities,contentHints,createdTime,description,explicitlyTrashed,fileExtension,folderColorRgb,fullFileExtension,headRevisionId,iconLink,id,imageMediaMetadata,isAppAuthorized,kind,lastModifyingUser,md5Checksum,mimeType,modifiedByMeTime,modifiedTime,name,originalFilename,ownedByMe,owners,parents,permissions,properties,quotaBytesUsed,shared,sharedWithMeTime,sharingUser,size,spaces,starred,thumbnailLink,trashed,version,videoMediaMetadata,viewedByMe,viewedByMeTime,viewersCanCopyContent,webContentLink,webViewLink,writersCanShare'
                 ]);
 
+                // if(count($file->getParents()) > 0){
+                //     $parents = $file->getParents();
+                //     $parent = $drive_service->files->get($parents[0], [
+                //         'fields' => 'appProperties,capabilities,contentHints,createdTime,description,explicitlyTrashed,fileExtension,folderColorRgb,fullFileExtension,headRevisionId,iconLink,id,imageMediaMetadata,isAppAuthorized,kind,lastModifyingUser,md5Checksum,mimeType,modifiedByMeTime,modifiedTime,name,originalFilename,ownedByMe,owners,parents,permissions,properties,quotaBytesUsed,shared,sharedWithMeTime,sharingUser,size,spaces,starred,thumbnailLink,trashed,version,videoMediaMetadata,viewedByMe,viewedByMeTime,viewersCanCopyContent,webContentLink,webViewLink,writersCanShare'
+                //     ]);
+                //     print_r($parent);
+                // }
+                // exit();
+
                 echo $c(date('Y-m-d H:i:s', strtotime($file->getModifiedByMeTime())))
                     ->white()->bold() . " ";
                 echo $c($file->getName())
@@ -82,7 +91,7 @@
                         'account_gdrive_id' => $gdrive_user['id'],
                         'user_id' => $user['id'],
                         'item_id' => $file->getId(),
-                        'json' => json_encode($file),
+                        'json' => json_encode($file->toSimpleObject()),
                         'date_added' => date('Y-m-d H:i:s', strtotime($file->getCreatedTime())),
                         'date_updated' => date('Y-m-d H:i:s', strtotime($file->getModifiedByMeTime()))
                     ]

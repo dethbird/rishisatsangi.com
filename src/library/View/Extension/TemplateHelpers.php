@@ -8,6 +8,7 @@ class TemplateHelpers extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFilter('date_format', array($this, 'date_format')),
+            new \Twig_SimpleFilter('date_format_string', array($this, 'date_format_string')),
             new \Twig_SimpleFilter('print_r', array($this, 'print_r')),
             new \Twig_SimpleFilter('json_decode', array($this, 'json_decode')),
             new \Twig_SimpleFilter('json_encode', array($this, 'json_encode')),
@@ -21,8 +22,11 @@ class TemplateHelpers extends \Twig_Extension
     }
     public function date_format($unixtimestamp, $format = "Y-m-d h:i:sa")
     {
-        // echo $date; die();
         return date($format, $unixtimestamp);
+    }
+    public function date_format_string($string, $format = "Y-m-d h:i:sa")
+    {
+        return date($format, strtotime($string));
     }
     public function print_r($output)
     {

@@ -75,7 +75,7 @@
 
             $gdrive_files = $db->fetchAll(
                 $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
-                    'until' => date('Y-m-d H:i:s', $until),
+                    'limit' => 25,
                     'account_gdrive_id' => $gdrive_user['id']]);
 
             // render html

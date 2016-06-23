@@ -8,25 +8,10 @@
     {% for file in gdrive_files %}
     {% set file_json = file.json|json_decode(true) %}
         <div class="content container col-xs-12">
-            <pre>{{file_json|print_r}}</pre>
-            {# <a href="{{file_json.resolved_url|raw}}" class="title">{{file_json.resolved_title|raw}}</a>
+            {# <pre>{{file_json|print_r}}</pre> #}
+            <a href="{{file_json.webViewLink|raw}}" class="title"><img src="{{file_json.iconLink|raw}}" /> {{file_json.name|raw}}</a>
             <br />
-            <span class="date">{{file_json.time_added|date_format('l F j, Y, g:i a')}}</span>
-            {% if file_json.favorite == 1 %} +1 {% endif %}
-            <br />
-            {% if file_json.has_image %}
-                <img src="{{file_json.image.src}}" class="content-image"/>
-                <br />
-            {% endif %}
-            <blockquote>{{file_json.excerpt|raw}}</blockquote>
-            {% if file_json.tags|length > 0 %}
-                {% for k, tag in file_json.tags %}
-                <label class="label label-info">{{k}}</label>
-                {% endfor %}
-                <br />
-            {% endif %}
-            <a href="{{file_json.resolved_url|raw}}" class="btn btn-info btn-sm">{{file_json.resolved_url|url_hostname}}</a>
-            <a href="https://getgdrive.com/a/read/{{file_json.item_id}}" class="btn btn-default btn-sm"><img src="{{hostname}}/img/service/gdrive/logo_sm.png" class="service-logo-manage"/> Manage</a> #}
+            <span class="date">{{file_json.modifiedByMeTime|date_format_string('l F j, Y, g:i a')}}</span>
         </div>
     {% endfor %}
 </div>

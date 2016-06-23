@@ -80,5 +80,5 @@ sql:
         get_by_account_gdrive_id: |
             SELECT * FROM content_gdrive_files
             WHERE account_gdrive_id = :account_gdrive_id
-            AND date_updated > :until
             ORDER BY date_updated DESC
+            LIMIT :limit

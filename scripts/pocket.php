@@ -35,6 +35,17 @@
         ->describedAs('Hours back from timestamp to fetch eg: 24');
 
     if ($cmd['pull']) {
+
+        echo $c(
+"   ___       _ _
+  / _ \_   _| | |
+ / /_)/ | | | | |
+/ ___/| |_| | | |
+\/     \__,_|_|_|
+                 "
+            )
+            ->white()->bold()->highlight('blue') . PHP_EOL;
+
         $until = $cmd['time'] - $cmd['hours'] * 3600;
 
         echo $c(date("l Y-m-d h:i:sa", $cmd['time']) . " -> " . date("l Y-m-d h:i:sa", $until))

@@ -19,30 +19,42 @@
         $configs['mysql']['user'],
         $configs['mysql']['password']);
 
+    $googleDrive = new GoogleDrive(
+        "LikeDrop",
+        APPLICATION_PATH . "configs/" . $configs['service']['gdrive']['client_json_config_filename']
+    );
+    $gdrive_users = $db->fetchAll(
+        $configs['sql']['account_gdrive']['get_all'],[]);
+
     $cmd = new Command();
     $cmd->beepOnError();
     $cmd->flag('p')
         ->boolean()
         ->aka('pull')
-        ->describedAs('Pull the latest changes for a Google Drive user');
+        ->describedAs('Pull the latest changes for a Google Drive user.');
+    $cmd->flag('r')
+        ->boolean()
+        ->aka('refresh')
+        ->describedAs('Refresh the user\'s access token.');
     $cmd->flag('l')
         ->aka('limit')
         ->default(100)
-        ->describedAs('Limit for number of items to import');
+        ->describedAs('Limit for number of items to import.');
 
     if ($cmd['pull']) {
-        $until = $cmd['time'] - $cmd['hours'] * 3600;
 
-        echo $c(date("l Y-m-d h:i:sa", $cmd['time']) . " -> " . date("l Y-m-d h:i:sa", $until))
+        echo $c(
+"   ___       _ _
+  / _ \_   _| | |
+ / /_)/ | | | | |
+/ ___/| |_| | | |
+\/     \__,_|_|_|
+                 "
+            )
+            ->white()->bold()->highlight('blue') . PHP_EOL;
+
+        echo $c("Limit: ".$cmd['limit'])
             ->yellow()->bold() . PHP_EOL;
-
-        $googleDrive = new GoogleDrive(
-            "LikeDrop",
-            APPLICATION_PATH . "configs/" . $configs['service']['gdrive']['client_json_config_filename']
-        );
-
-        $gdrive_users = $db->fetchAll(
-            $configs['sql']['account_gdrive']['get_all'],[]);
 
         foreach ($gdrive_users as $gdrive_user) {
 
@@ -79,4 +91,16 @@
                 );
             }
         }
+    }
+
+    if ($cmd['refresh']) {
+        echo $c(
+"   __       __               _
+  /__\ ___ / _|_ __ ___  ___| |__
+ / \/// _ \ |_| '__/ _ \/ __| '_ \
+/ _  \  __/  _| | |  __/\__ \ | | |
+\/ \_/\___|_| |_|  \___||___/_| |_|
+                                   "
+            )
+            ->white()->bold()->highlight('blue') . PHP_EOL;
     }

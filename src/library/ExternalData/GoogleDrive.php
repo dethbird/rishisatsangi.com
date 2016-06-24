@@ -54,13 +54,46 @@ class GoogleDrive extends ExternalDataBase {
         return $data;
     }
 
+    /**
+     * Get the full metadata for a file
+     * @param  string $fileId The google file id to fetch for
+     * @return object         object representing the file
+     */
     public function getFile($fileId)
     {
         $drive_service = new Google_Service_Drive($this->client);
         $file = $drive_service->files->get($fileId, [
             'fields' => 'appProperties,capabilities,contentHints,createdTime,description,explicitlyTrashed,fileExtension,folderColorRgb,fullFileExtension,headRevisionId,iconLink,id,imageMediaMetadata,isAppAuthorized,kind,lastModifyingUser,md5Checksum,mimeType,modifiedByMeTime,modifiedTime,name,originalFilename,ownedByMe,owners,parents,permissions,properties,quotaBytesUsed,shared,sharedWithMeTime,sharingUser,size,spaces,starred,thumbnailLink,trashed,version,videoMediaMetadata,viewedByMe,viewedByMeTime,viewersCanCopyContent,webContentLink,webViewLink,writersCanShare'
         ]);
-        return $file->toSimpleObject();
+
+        $data = $file->toSimpleObject();
+        $data->folder = $this->getFileFolder(null, $file);
+        return $data;
+    }
+
+    /**
+     * Recusrively climb up the parent folder chain
+     * @param  [type] $folder the current folder
+     * @param  [type] $file   Google Drive file class
+     * @return [type]         another level up of the folder tree
+     */
+    public function getFileFolder($folder, $file)
+    {
+        if (count($file->getParents()) > 0){
+
+            $drive_service = new Google_Service_Drive($this->client);
+
+            $parents = $file->getParents();
+            $parent = $parents[0];
+
+            $file = $drive_service->files->get($parent, [
+                'fields' => 'appProperties,capabilities,contentHints,createdTime,description,explicitlyTrashed,fileExtension,folderColorRgb,fullFileExtension,headRevisionId,iconLink,id,imageMediaMetadata,isAppAuthorized,kind,lastModifyingUser,md5Checksum,mimeType,modifiedByMeTime,modifiedTime,name,originalFilename,ownedByMe,owners,parents,permissions,properties,quotaBytesUsed,shared,sharedWithMeTime,sharingUser,size,spaces,starred,thumbnailLink,trashed,version,videoMediaMetadata,viewedByMe,viewedByMeTime,viewersCanCopyContent,webContentLink,webViewLink,writersCanShare'
+            ]);
+
+            $folder = "/" . $file->getName() . $folder;
+            $folder = $this->getFileFolder($folder, $file);
+        }
+        return $folder;
     }
 
 

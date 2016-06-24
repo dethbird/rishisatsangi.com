@@ -1,12 +1,4 @@
 <?php
-
-// Refresh the token if it's expired.
-// if ($client->isAccessTokenExpired()) {
-//     $client->refreshToken($client->getRefreshToken());
-//     file_put_contents($credentialsPath, $client->getAccessToken());
-// }
-
-
 require_once("Base.php");
 
 class GoogleDrive extends ExternalDataBase {
@@ -25,6 +17,27 @@ class GoogleDrive extends ExternalDataBase {
         $this->client->setAuthConfigFile($authConfigFile);
         $this->client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
         $this->client->setAccessType('offline');
+        $this->client->setApprovalPrompt('force');
+    }
+
+    /**
+     * Get the auth screen url
+     * @return string the auth url
+     */
+    public function createAuthUrl()
+    {
+        return $this->client->createAuthUrl();
+    }
+
+    /**
+     * Fetch an access token
+     * @param  string $code The code GET param from the redirect
+     * @return string       json representing auth token
+     */
+    public function getAccessToken($code)
+    {
+        $this->client->authenticate($code);
+        return $this->client->getAccessToken();
     }
 
     /**
@@ -34,6 +47,17 @@ class GoogleDrive extends ExternalDataBase {
     public function setAccessToken($accessToken)
     {
         $this->client->setAccessToken(json_decode($accessToken, true));
+        // if ($this->client->isAccessTokenExpired()) {
+        //     echo "EXPIRED" . PHP_EOL;
+        //     $refreshToken = $this->client->getRefreshToken();
+        //     var_dump($refreshToken); exit();
+        //     $this->client->refreshToken($this->client->getRefreshToken());
+        //     $accessToken = $client->getAccessToken();
+        //     echo var_dump($accessToken) . PHP_EOL;
+        //     exit();
+        //     // file_put_contents($credentialsPath, $client->getAccessToken());
+        // }
+
     }
 
     /**

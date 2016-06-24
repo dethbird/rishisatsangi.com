@@ -18,6 +18,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require '../vendor/autoload.php';
 require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php';
+require_once APPLICATION_PATH . 'src/library/ExternalData/GoogleDrive.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';
 require_once APPLICATION_PATH . 'src/library/Data/Base.php';
 
@@ -195,22 +196,24 @@ $app->group('/service', $authorize($app), function () use ($app) {
 
         $app->get('/authorize', function () use ($app) {
             $configs = $app->container->get('configs');
-            $client = new Google_Client();
-            $client->setAuthConfigFile(
-                "../configs/" . $configs['service']['gdrive']['client_json_config_filename']);
-            $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
-            $app->redirect($client->createAuthUrl());
+            $googleDrive = new GoogleDrive(
+                "LikeDrop",
+                APPLICATION_PATH . "configs/" . $configs['service']['gdrive']['client_json_config_filename']);
+            $app->redirect($googleDrive->createAuthUrl());
         });
 
         $app->get('/redirect', function () use ($app) {
             $configs = $app->container->get('configs');
             $db = $app->container->get('db');
             $securityContext = json_decode($app->getCookie('securityContext'));
-            $client = new Google_Client();
-            $client->setAuthConfigFile(
-                "../configs/" . $configs['service']['gdrive']['client_json_config_filename']);
-            $client->authenticate($app->request->params('code'));
-            $accessTokenData = $client->getAccessToken();
+
+            $googleDrive = new GoogleDrive(
+                "LikeDrop",
+                APPLICATION_PATH . "configs/" . $configs['service']['gdrive']['client_json_config_filename']);
+
+            $accessTokenData = $googleDrive->getAccessToken(
+                $app->request->params('code'));
+
             $result = $db->perform(
                 $configs['sql']['account_gdrive']['insert_update_gdrive_user'],
                 [

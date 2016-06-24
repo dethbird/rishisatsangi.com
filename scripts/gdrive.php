@@ -21,8 +21,8 @@
 
     $googleDrive = new GoogleDrive(
         "LikeDrop",
-        APPLICATION_PATH . "configs/" . $configs['service']['gdrive']['client_json_config_filename']
-    );
+        APPLICATION_PATH . "configs/" . $configs['service']['gdrive']['client_json_config_filename']);
+
     $gdrive_users = $db->fetchAll(
         $configs['sql']['account_gdrive']['get_all'],[]);
 
@@ -103,4 +103,9 @@
                                    "
             )
             ->white()->bold()->highlight('blue') . PHP_EOL;
+        foreach ($gdrive_users as $gdrive_user) {
+
+        }
+        $googleDrive->setAccessToken($gdrive_user['access_token']);
+
     }

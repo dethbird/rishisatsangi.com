@@ -218,7 +218,8 @@ $app->group('/service', $authorize($app), function () use ($app) {
                 $configs['sql']['account_gdrive']['insert_update_gdrive_user'],
                 [
                     'user_id' => $securityContext->id,
-                    'access_token' => json_encode($accessTokenData)
+                    'access_token' => json_encode($accessTokenData),
+                    'refresh_token' => $accessTokenData['refresh_token']
                 ]
             );
             $app->redirect('/dashboard');

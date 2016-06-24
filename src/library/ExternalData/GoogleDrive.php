@@ -47,17 +47,17 @@ class GoogleDrive extends ExternalDataBase {
     public function setAccessToken($accessToken)
     {
         $this->client->setAccessToken(json_decode($accessToken, true));
-        // if ($this->client->isAccessTokenExpired()) {
-        //     echo "EXPIRED" . PHP_EOL;
-        //     $refreshToken = $this->client->getRefreshToken();
-        //     var_dump($refreshToken); exit();
-        //     $this->client->refreshToken($this->client->getRefreshToken());
-        //     $accessToken = $client->getAccessToken();
-        //     echo var_dump($accessToken) . PHP_EOL;
-        //     exit();
-        //     // file_put_contents($credentialsPath, $client->getAccessToken());
-        // }
+    }
 
+    /**
+     * Get a new access token
+     * @param  string $refreshToken Refresh token we got from the redirect
+     * @return obeject               New auth token (without refresh token!)
+     */
+    public function refreshAccessToken($refreshToken)
+    {
+        $this->client->refreshToken($refreshToken);
+        return $this->client->getAccessToken();
     }
 
     /**

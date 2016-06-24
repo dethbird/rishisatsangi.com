@@ -103,9 +103,19 @@
                                    "
             )
             ->white()->bold()->highlight('blue') . PHP_EOL;
-        foreach ($gdrive_users as $gdrive_user) {
 
+        foreach ($gdrive_users as $gdrive_user) {
+            $googleDrive->setAccessToken($gdrive_user['access_token']);
+            $accessTokenData = $googleDrive->refreshAccessToken(
+                $gdrive_user['refresh_token']);
+            $result = $db->perform(
+                $configs['sql']['account_gdrive']['insert_update_gdrive_user'],
+                [
+                    'user_id' => $gdrive_user['user_id'],
+                    'access_token' => json_encode($accessTokenData),
+                    'refresh_token' => $gdrive_user['refresh_token']
+                ]
+            );
         }
-        $googleDrive->setAccessToken($gdrive_user['access_token']);
 
     }

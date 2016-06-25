@@ -41,6 +41,15 @@ class GoogleDrive extends ExternalDataBase {
     }
 
     /**
+     * Is the access token expired?
+     * @return boolean 
+     */
+    public function isAccessTokenExpired()
+    {
+        return $this->client->isAccessTokenExpired();
+    }
+
+    /**
      * Set the auth token
      * @param string $accessToken the json encoded auth object from Google.
      */

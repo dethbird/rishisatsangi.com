@@ -167,7 +167,12 @@
                         ->white()->bold() . " ";
                     echo $c($fileObj->name)
                         ->yellow()->bold() . PHP_EOL;
+
+                    $cacheKey = $googleDrive->getThumbnailCacheKey($fileObj);
+
+                    echo $cacheKey; exit();
                     $contents = $googleDrive->downloadFile($fileObj->id);
+
                     echo $contents . PHP_EOL;
                     exit();
                 }

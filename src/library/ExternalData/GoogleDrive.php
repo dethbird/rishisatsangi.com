@@ -119,6 +119,16 @@ class GoogleDrive extends ExternalDataBase {
     }
 
     /**
+     * Build the cache key string we will use to find and serve thumbnails
+     * @param  object $fileObj simpleObject representation of file
+     * @return string         cache key
+     */
+    public function getThumbnailCacheKey($file)
+    {
+        return $file->headRevisionId;
+    }
+
+    /**
      * Recusrively climb up the parent folder chain
      * @param  [type] $folder the current folder
      * @param  [type] $file   Google Drive file class

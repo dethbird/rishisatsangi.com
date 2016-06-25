@@ -1,5 +1,6 @@
 body {
   font-family: 'Open Sans', sans-serif;
+  background-color: #F4F4F4;
 
   position: relative;
 
@@ -9,10 +10,65 @@ body {
   hyphens: auto;
   padding: 5px;
 }
+a.title {
+    color: #c9177c;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    word-wrap: break-word;
+}
+blockquote {
+    margin:0;
+    padding: 15px 10px 10px 15px;
+    border: none;
+    max-width: 520px;
+    color: #333;
+}
 
+img {
+    vertical-align: middle;
+    padding: 0px 5px 5px 0px;
+}
+
+
+label {
+    background-color: #c9177c;
+    padding: 3px;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 12px;
+}
+.content {
+    margin-bottom: 10px;
+    padding: 25px;
+    border: 1px solid #EEE;
+    border-radius: 10px;
+    background-color: #fff;
+}
 .pull-right, .text-align-right {
     text-align: right;
 }
+
+
+img.service-logo {
+    max-width: 48px;
+    height: auto;
+}
+
+img.service-logo-manage {
+    max-width: 24px;
+    height: auto;
+}
+.date {
+    font-weight: bold;
+}
+.number {
+    font-weight: bold;
+}
+
 
 /*@media screen and (max-width: 1024px) {
     body {

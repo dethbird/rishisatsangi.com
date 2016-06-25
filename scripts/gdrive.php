@@ -169,11 +169,12 @@
                         ->yellow()->bold() . PHP_EOL;
 
                     $cacheKey = $googleDrive->getThumbnailCacheKey($fileObj);
-
-                    echo $cacheKey; exit();
                     $contents = $googleDrive->downloadFile($fileObj->id);
-
-                    echo $contents . PHP_EOL;
+                    file_put_contents(
+                        APPLICATION_PATH .
+                        $configs['service']['gdrive']['thumbnail_cache_folder'] . "/" . $cacheKey,
+                        $contents
+                    );
                     exit();
                 }
             }

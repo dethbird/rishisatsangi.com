@@ -3,6 +3,7 @@
 error_log
 /configs/configs.yml
 /configs/gdrive_client.json
+/cache/
 
 composer.phar
 composer.lock

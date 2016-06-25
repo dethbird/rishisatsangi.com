@@ -18,6 +18,7 @@ service:
     gdrive:
         # filename of the .json file that the google client needs to work
         client_json_config_filename: gdrive_client.json
+        thumbnail_cache_folder: cache/gdrive/thumbnails
 sql:
     users:
         # get all

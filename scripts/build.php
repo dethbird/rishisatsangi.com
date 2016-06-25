@@ -59,6 +59,12 @@
         $shell->executeCommand('mkdir', array(
             "cache"
         ));
+        $shell->executeCommand('mkdir', array(
+            "cache/gdrive"
+        ));
+        $shell->executeCommand('mkdir', array(
+            "cache/gdrive/thumbnails"
+        ));
         $shell->executeCommand('chmod', array(
             "777",
             "cache"

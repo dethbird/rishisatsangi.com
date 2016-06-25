@@ -15,7 +15,7 @@ class GoogleDrive extends ExternalDataBase {
         $this->client = new Google_Client();
         $this->client->setApplicationName("LikeDrop");
         $this->client->setAuthConfigFile($authConfigFile);
-        $this->client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
+        $this->client->addScope(Google_Service_Drive::DRIVE);
         $this->client->setAccessType('offline');
         $this->client->setApprovalPrompt('force');
     }
@@ -42,7 +42,7 @@ class GoogleDrive extends ExternalDataBase {
 
     /**
      * Is the access token expired?
-     * @return boolean 
+     * @return boolean
      */
     public function isAccessTokenExpired()
     {
@@ -102,6 +102,20 @@ class GoogleDrive extends ExternalDataBase {
         $data = $file->toSimpleObject();
         $data->folder = $this->getFileFolder(null, $file);
         return $data;
+    }
+
+
+    /**
+     * Download the Google Drive file
+     * @param  string $fileId The google file id to fetch for
+     * @return string         contents of the file
+     */
+    public function downloadFile($fileId)
+    {
+        $drive_service = new Google_Service_Drive($this->client);
+        $response = $drive_service->files->get($fileId, ['alt' => 'media'] );
+        $body = $response->getBody();
+        return $body;
     }
 
     /**

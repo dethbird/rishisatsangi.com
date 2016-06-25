@@ -36,6 +36,10 @@
         ->boolean()
         ->aka('refresh')
         ->describedAs('Refresh the user\'s access token.');
+    $cmd->flag('c')
+        ->boolean()
+        ->aka('cache')
+        ->describedAs('Cache image thumbnails for JPG, PNG, and PSD.');
     $cmd->flag('l')
         ->aka('limit')
         ->default(100)
@@ -135,6 +139,39 @@
                     'refresh_token' => $gdrive_user['refresh_token']
                 ]
             );
+        }
+
+    }
+
+    if ($cmd['cache']) {
+        echo $c(
+"   ___           _
+  / __\__ _  ___| |__   ___
+ / /  / _` |/ __| '_ \ / _ \
+/ /__| (_| | (__| | | |  __/
+\____/\__,_|\___|_| |_|\___|
+                            "
+            )
+            ->white()->bold()->highlight('blue') . PHP_EOL;
+
+        foreach ($gdrive_users as $gdrive_user) {
+            $googleDrive->setAccessToken($gdrive_user['access_token']);
+            $gdrive_files = $db->fetchAll(
+                $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
+                    'limit' => 100,
+                    'account_gdrive_id' => $gdrive_user['id']]);
+            foreach ($gdrive_files as $file) {
+                $fileObj = json_decode($file['json']);
+                if (in_array($fileObj->mimeType, ["image/jpeg", "image/png", "image/x-photoshop"])) {
+                    echo $c($fileObj->mimeType . ': ')
+                        ->white()->bold() . " ";
+                    echo $c($fileObj->name)
+                        ->yellow()->bold() . PHP_EOL;
+                    $contents = $googleDrive->downloadFile($fileObj->id);
+                    echo $contents . PHP_EOL;
+                    exit();
+                }
+            }
         }
 
     }

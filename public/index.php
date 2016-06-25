@@ -123,10 +123,39 @@ $app->get("/", function () use ($app) {
 $app->get("/dashboard", $authorize($app), function () use ($app) {
 
     $configs = $app->container->get('configs');
+    $securityContext = json_decode($app->getCookie('securityContext'));
+    $db = $app->container->get('db');
+
+    // gather data
+    $pocket_user = $db->fetchOne(
+        $configs['sql']['account_pocket']['get_by_user_id'],[
+            'user_id' => $securityContext->id]);
+
+    if ($pocket_user) {
+        $pocket_articles = $db->fetchAll(
+            $configs['sql']['content_pocket']['get_by_account_pocket_id'],[
+                'until' => date('Y-m-d H:i:s', time() - (60 * 60 * 24 * 7)),
+                'account_pocket_id' => $pocket_user['id']]);
+    }
+
+    $gdrive_user = $db->fetchOne(
+        $configs['sql']['account_gdrive']['get_by_user_id'],[
+            'user_id' => $securityContext->id]);
+
+    if ($gdrive_user) {
+        $gdrive_files = $db->fetchAll(
+            $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
+                'limit' => 25,
+                'account_gdrive_id' => $gdrive_user['id']]);
+    }
 
     $templateVars = array(
         "configs" => $configs,
-        'securityContext' => json_decode($app->getCookie('securityContext')),
+        'securityContext' => $securityContext,
+        'pocket_user' => $pocket_user,
+        'pocket_articles' => $pocket_articles,
+        'gdrive_user' => $gdrive_user,
+        'gdrive_files' => $gdrive_files,
         "section" => "dashboard.index"
     );
 

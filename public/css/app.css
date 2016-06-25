@@ -34,7 +34,7 @@ img {
 }
 
 
-label {
+label.tag {
     background-color: #c9177c;
     padding: 3px;
     color: #fff;

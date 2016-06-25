@@ -38,7 +38,7 @@
                 <blockquote>{{article_json.excerpt|raw}}</blockquote>
                 {% if article_json.tags|length > 0 %}
                     {% for k, tag in article_json.tags %}
-                    <label>{{k}}</label>
+                    <label class="tag">{{k}}</label>
                     {% endfor %}
                     <br />
                 {% endif %}

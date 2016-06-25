@@ -253,6 +253,15 @@ $app->group('/service', $authorize($app), function () use ($app) {
             );
             $app->redirect('/dashboard');
         });
+
+        $app->get('/thumbnail/:cache_key', function ($cache_key) use ($app) {
+            $configs = $app->container->get('configs');
+            $file = APPLICATION_PATH .
+            $configs['service']['gdrive']['thumbnail_cache_folder'] . "/" . $cache_key;
+            header('Content-Type: ' . mime_content_type($file));
+            readfile($file);
+            exit();
+        });
     });
 
     $app->group('/pocket', function () use ($app) {

@@ -165,41 +165,47 @@
             foreach ($gdrive_files as $file) {
                 $fileObj = json_decode($file['json']);
                 if (in_array($fileObj->mimeType, ["image/jpeg", "image/png", "image/x-photoshop"])) {
-                // if (in_array($fileObj->mimeType, ["image/x-photoshop"])) {
                     echo $c($fileObj->mimeType . ': ')
                         ->white()->bold() . " ";
                     echo $c($fileObj->name)
                         ->yellow()->bold() . PHP_EOL;
 
                     $cacheKey = $googleDrive->getThumbnailCacheKey($fileObj);
-                    $contents = $googleDrive->downloadFile($fileObj->id);
-
+                    $cacheKey = $cacheKey . "." . ($fileObj->fileExtension == 'psd' ? 'png' : $fileObj->fileExtension);
                     $file = APPLICATION_PATH .
                         $configs['service']['gdrive']['thumbnail_cache_folder'] . "/" . $cacheKey;
 
-                    $wh = fopen($file, 'w+b');
-                    echo $cacheKey . PHP_EOL;
-                    while ($chunk = $contents->read(4096)) {
-                        fwrite($wh, $chunk);
-                    }
-                    fclose($wh);
-                    if ($fileObj->mimeType == "image/x-photoshop") {
-                        $shell->executeCommand('convert', array(
-                            "-flatten",
-                            "-thumbnail",
-                            "1024",
-                            $file . "[0]",
-                            $file . ".png"
-                        ));
+                    if (file_exists($file)) {
+                        echo $c("CACHE EXISTS")
+                            ->blue()->bold() . PHP_EOL;
                     } else {
-                        $shell->executeCommand('convert', array(
-                            "-resize",
-                            "1024",
-                            $file,
-                            $file . "." . $fileObj->fileExtension
-                        ));
-                    }
 
+                        $contents = $googleDrive->downloadFile($fileObj->id);
+
+                        $wh = fopen($file, 'w+b');
+                        echo $cacheKey . PHP_EOL;
+                        while ($chunk = $contents->read(4096)) {
+                            fwrite($wh, $chunk);
+                        }
+                        fclose($wh);
+                        if ($fileObj->mimeType == "image/x-photoshop") {
+                            $shell->executeCommand('convert', array(
+                                "-flatten",
+                                "-thumbnail",
+                                "1024",
+                                $file . "[0]",
+                                $file
+                            ));
+                        } else {
+                            $shell->executeCommand('convert', array(
+                                "-resize",
+                                "1024",
+                                $file,
+                                $file
+                            ));
+                        }
+
+                    }
                 }
             }
         }

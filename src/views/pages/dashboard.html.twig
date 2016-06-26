@@ -10,7 +10,7 @@
             {# }<pre>{{ gdrive_user|print_r }}</pre> #}
             {% for file in gdrive_files %}
             {% set file_json = file.json|json_decode(true) %}
-                <div class="content container col-xs-12">
+                <div class="content container col-xs-12 col-lg-6">
                     {# <pre>{{file_json|print_r}}</pre> #}
                     {% if file_json.mimeType=="image/jpeg" or file_json.mimeType=="image/png" or  file_json.mimeType=="image/x-photoshop" %}
                     <img src="http://{{hostname}}/service/gdrive/thumbnail/{{file_json.headRevisionId}}.{% if file_json.fileExtension == "psd" %}png{% else %}{{ file_json.fileExtension }}{% endif %}" class="col-xs-12"/>
@@ -20,6 +20,9 @@
                     {{file_json.folder|raw}}<br />
                     <span class="date">{{file_json.modifiedByMeTime|date_format_string('l F j, Y, g:i a')}}</span>
                 </div>
+                {% if loop.index is divisible by(2) %}
+                <div class="row"></div>
+                {% endif %}
             {% endfor %}
         {% endif %}
     </div>

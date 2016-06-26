@@ -13,7 +13,7 @@ body {
 a.title {
     color: #c9177c;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.1rem;
     text-decoration: none;
     -ms-hyphens: auto;
     -moz-hyphens: auto;
@@ -39,7 +39,7 @@ label.tag {
     padding: 3px;
     color: #fff;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: .7rem;
 }
 .content {
     margin-bottom: 10px;
@@ -70,7 +70,7 @@ img.service-logo-manage {
 }
 
 
-/*@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
     body {
       font-size: 0.8rem;
     }
@@ -94,7 +94,7 @@ img.service-logo-manage {
 }
 @media screen and (max-width: 480px) {
     body {
-      font-size: 0.35rem;
+      font-size: 0.5rem;
     }
     h1 {
       font-size: 1.2rem;
@@ -108,4 +108,25 @@ img.service-logo-manage {
     .btn-sm {
       padding: .1rem .35rem;
     }
-}*/
+    a.btn {
+        font-size: 0.5rem;
+    }
+    a.title {
+        font-size: .6rem;
+    }
+    .content {
+        padding: 10px;
+    }
+    label.tag {
+        font-size: .45rem;
+    }
+    img.service-logo {
+        max-width: 32px;
+        height: auto;
+    }
+
+    img.service-logo-manage {
+        max-width: 16px;
+        height: auto;
+    }
+}

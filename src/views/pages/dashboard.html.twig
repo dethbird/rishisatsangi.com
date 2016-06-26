@@ -18,7 +18,7 @@
                     <a href="{{file_json.webViewLink|raw}}" class="title"><img src="{{file_json.iconLink|raw}}" /> {{file_json.name|raw}}</a>
                     <br />
                     {{file_json.folder|raw}}<br />
-                    <span class="date">{{file_json.modifiedByMeTime|date_format_string('l F j, Y, g:i a')}}</span>
+                    <span class="date">{{file_json.modifiedByMeTime|time_ago}}</span>
                 </div>
                 {% if loop.index is divisible by(2) %}
                 <div class="row"></div>
@@ -40,7 +40,7 @@
                 {% endif %}
                 <a href="{{article_json.resolved_url|raw}}" class="title">{{article_json.resolved_title|raw}}</a>
                 <br />
-                <span class="date">{{article_json.time_added|date_format('l F j, Y, g:i a')}}</span>
+                <span class="date">{{article_json.time_added|date_format('l F j, Y, g:i a')|time_ago}}</span>
                 {% if article_json.favorite == 1 %} +1 {% endif %}
                 <br />
                 {% if article_json.has_image %}

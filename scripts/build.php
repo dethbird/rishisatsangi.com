@@ -164,6 +164,11 @@
             "composer.phar"
         ));
 
+        $resp = $shell->executeCommand('rm', array(
+            "-rf",
+            "composer.lock"
+        ));
+
         $resp = $shell->executeCommand('chmod', array(
             "-R",
             "777",

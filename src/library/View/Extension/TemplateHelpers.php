@@ -16,6 +16,7 @@ class TemplateHelpers extends \Twig_Extension
             new \Twig_SimpleFilter('fountain', array($this, 'fountain')),
             new \Twig_SimpleFilter('to_array', array($this, 'to_array')),
             new \Twig_SimpleFilter('slugify', array($this, 'slugify')),
+            new \Twig_SimpleFilter('time_ago', array($this, 'time_ago')),
             new \Twig_SimpleFilter('url_hostname', array($this, 'url_hostname')),
             new \Twig_SimpleFilter('md5', array($this, 'md5'))
         );
@@ -59,6 +60,10 @@ class TemplateHelpers extends \Twig_Extension
     }
     public function to_array($stdClassObject) {
         return json_decode(json_encode($stdClassObject), true);
+    }
+    public function time_ago($date_string) {
+        $timeAgo = new TimeAgo();
+        return $timeAgo->inWords($date_string);
     }
     public function slugify($str) {
         $slugify = new Slugify();

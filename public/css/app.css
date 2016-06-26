@@ -26,6 +26,7 @@ blockquote {
     border: none;
     max-width: 520px;
     color: #333;
+    font-size: 0.9rem;
 }
 
 img {
@@ -64,6 +65,7 @@ img.service-logo-manage {
 }
 .date {
     font-weight: bold;
+    font-size: 0.9rem;
 }
 .number {
     font-weight: bold;

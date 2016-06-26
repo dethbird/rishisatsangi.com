@@ -12,8 +12,8 @@
             {% set file_json = file.json|json_decode(true) %}
                 <div class="content container col-xs-12">
                     {# <pre>{{file_json|print_r}}</pre> #}
-                    {% if file_json.mimeType=="image/jpeg" or file_json.mimeType=="image/png" %}
-                    <img src="http://{{hostname}}/service/gdrive/thumbnail/{{file_json.headRevisionId}}" class="col-xs-12"/>
+                    {% if file_json.mimeType=="image/jpeg" or file_json.mimeType=="image/png" or  file_json.mimeType=="image/x-photoshop" %}
+                    <img src="http://{{hostname}}/service/gdrive/thumbnail/{{file_json.headRevisionId}}.{% if file_json.fileExtension == "psd" %}png{% else %}{{ file_json.fileExtension }}{% endif %}" class="col-xs-12"/>
                     {% endif %}
                     <a href="{{file_json.webViewLink|raw}}" class="title"><img src="{{file_json.iconLink|raw}}" /> {{file_json.name|raw}}</a>
                     <br />

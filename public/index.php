@@ -145,7 +145,7 @@ $app->get("/dashboard", $authorize($app), function () use ($app) {
     if ($gdrive_user) {
         $gdrive_files = $db->fetchAll(
             $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
-                'limit' => 25,
+                'limit' => 50,
                 'account_gdrive_id' => $gdrive_user['id']]);
     }
 
@@ -259,7 +259,12 @@ $app->group('/service', $authorize($app), function () use ($app) {
             $configs = $app->container->get('configs');
             $file = APPLICATION_PATH .
             $configs['service']['gdrive']['thumbnail_cache_folder'] . "/" . $cache_key;
-            header('Content-Type: ' . mime_content_type($file));
+            $mimeType =  mime_content_type($file);
+            if ($mimeType == "image/vnd.adobe.photoshop") {
+                $mimeType = "image/jpeg";
+            }
+            // echo $mimeType; exit();
+            header('Content-Type: ' .$mimeType);
             header('Content-Length: ' . filesize($file));
             readfile($file);
             exit();

@@ -164,7 +164,8 @@
                     'account_gdrive_id' => $gdrive_user['id']]);
             foreach ($gdrive_files as $file) {
                 $fileObj = json_decode($file['json']);
-                if (in_array($fileObj->mimeType, ["image/jpeg", "image/png"])) {
+                if (in_array($fileObj->mimeType, ["image/jpeg", "image/png", "image/x-photoshop"])) {
+                // if (in_array($fileObj->mimeType, ["image/x-photoshop"])) {
                     echo $c($fileObj->mimeType . ': ')
                         ->white()->bold() . " ";
                     echo $c($fileObj->name)
@@ -182,13 +183,22 @@
                         fwrite($wh, $chunk);
                     }
                     fclose($wh);
-
-                    $shell->executeCommand('convert', array(
-                        "-resize",
-                        "1024",
-                        $file,
-                        $file
-                    ));
+                    if ($fileObj->mimeType == "image/x-photoshop") {
+                        $shell->executeCommand('convert', array(
+                            "-flatten",
+                            "-thumbnail",
+                            "1024",
+                            $file . "[0]",
+                            $file . ".png"
+                        ));
+                    } else {
+                        $shell->executeCommand('convert', array(
+                            "-resize",
+                            "1024",
+                            $file,
+                            $file . "." . $fileObj->fileExtension
+                        ));
+                    }
 
                 }
             }

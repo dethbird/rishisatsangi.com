@@ -152,6 +152,7 @@ $app->get("/dashboard", $authorize($app), function () use ($app) {
     $templateVars = array(
         "configs" => $configs,
         'securityContext' => $securityContext,
+        'hostname' => $configs['server']['hostname'],
         'pocket_user' => $pocket_user,
         'pocket_articles' => $pocket_articles,
         'gdrive_user' => $gdrive_user,

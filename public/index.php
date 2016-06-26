@@ -152,12 +152,12 @@ $app->get("/dashboard", $authorize($app), function () use ($app) {
     $templateVars = array(
         "configs" => $configs,
         'securityContext' => $securityContext,
-        'hostname' => $configs['server']['hostname'],
         'pocket_user' => $pocket_user,
         'pocket_articles' => $pocket_articles,
         'gdrive_user' => $gdrive_user,
         'gdrive_files' => $gdrive_files,
-        "section" => "dashboard.index"
+        "section" => "dashboard.index",
+        'hostname' => $configs['server']['hostname']
     );
 
     $app->render(
@@ -260,6 +260,7 @@ $app->group('/service', $authorize($app), function () use ($app) {
             $file = APPLICATION_PATH .
             $configs['service']['gdrive']['thumbnail_cache_folder'] . "/" . $cache_key;
             header('Content-Type: ' . mime_content_type($file));
+            header('Content-Length: ' . filesize($file));
             readfile($file);
             exit();
         });

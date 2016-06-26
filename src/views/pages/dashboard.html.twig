@@ -5,7 +5,7 @@
 {% block content %}
     {{ parent() }}
     <div class="container col-xs-6">
-        <h1><img src="//{{hostname}}/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</h1>
+        <h1><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</h1>
         {% if gdrive_user %}
             {# }<pre>{{ gdrive_user|print_r }}</pre> #}
             {% for file in gdrive_files %}
@@ -13,7 +13,7 @@
                 <div class="content container col-xs-12">
                     {# <pre>{{file_json|print_r}}</pre> #}
                     {% if file_json.mimeType=="image/jpeg" or file_json.mimeType=="image/png" %}
-                    <img src="//{{hostname}}/service/gdrive/thumbnail/{{file_json.headRevisionId}}" class="col-xs-12"/>
+                    <img src="http://{{hostname}}/service/gdrive/thumbnail/{{file_json.headRevisionId}}" class="col-xs-12"/>
                     {% endif %}
                     <a href="{{file_json.webViewLink|raw}}" class="title"><img src="{{file_json.iconLink|raw}}" /> {{file_json.name|raw}}</a>
                     <br />
@@ -24,7 +24,7 @@
         {% endif %}
     </div>
     <div class="container col-xs-6">
-        <h1><img src="//{{hostname}}/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</h1>
+        <h1><img src="/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</h1>
         {% for article in pocket_articles %}
         {% set article_json = article.json|json_decode(true) %}
             <div class="content container col-xs-12">
@@ -41,7 +41,7 @@
                 <blockquote>{{article_json.excerpt|raw}}</blockquote>
                 {% if article_json.tags|length > 0 %}
                     {% for k, tag in article_json.tags %}
-                    <label>{{k}}</label>
+                    <label class="tag">{{k}}</label>
                     {% endfor %}
                     <br />
                 {% endif %}

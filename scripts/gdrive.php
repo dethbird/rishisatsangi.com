@@ -9,6 +9,7 @@
     use Colors\Color;
     use Commando\Command;
     use Symfony\Component\Yaml\Yaml;
+    use MeadSteve\Console\Shells\BasicShell;
 
     $c = new Color();
     $configs = Yaml::parse(
@@ -44,6 +45,7 @@
         ->aka('limit')
         ->default(100)
         ->describedAs('Limit for number of items to import.');
+    $shell = new BasicShell();
 
     if ($cmd['pull']) {
 
@@ -158,11 +160,11 @@
             $googleDrive->setAccessToken($gdrive_user['access_token']);
             $gdrive_files = $db->fetchAll(
                 $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
-                    'limit' => 100,
+                    'limit' => (int) $cmd['limit'],
                     'account_gdrive_id' => $gdrive_user['id']]);
             foreach ($gdrive_files as $file) {
                 $fileObj = json_decode($file['json']);
-                if (in_array($fileObj->mimeType, ["image/jpeg", "image/png", "image/x-photoshop"])) {
+                if (in_array($fileObj->mimeType, ["image/jpeg", "image/png"])) {
                     echo $c($fileObj->mimeType . ': ')
                         ->white()->bold() . " ";
                     echo $c($fileObj->name)
@@ -170,12 +172,24 @@
 
                     $cacheKey = $googleDrive->getThumbnailCacheKey($fileObj);
                     $contents = $googleDrive->downloadFile($fileObj->id);
-                    file_put_contents(
-                        APPLICATION_PATH .
-                        $configs['service']['gdrive']['thumbnail_cache_folder'] . "/" . $cacheKey,
-                        $contents
-                    );
-                    exit();
+
+                    $file = APPLICATION_PATH .
+                        $configs['service']['gdrive']['thumbnail_cache_folder'] . "/" . $cacheKey;
+
+                    $wh = fopen($file, 'w+b');
+                    echo $cacheKey . PHP_EOL;
+                    while ($chunk = $contents->read(4096)) {
+                        fwrite($wh, $chunk);
+                    }
+                    fclose($wh);
+
+                    $shell->executeCommand('convert', array(
+                        "-resize",
+                        "1024",
+                        $file,
+                        $file
+                    ));
+
                 }
             }
         }

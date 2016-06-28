@@ -69,6 +69,7 @@
                     'id' => $gdrive_user['user_id']]);
             $googleDrive->setAccessToken($gdrive_user['access_token']);
 
+            // refresh if needed
             if ($googleDrive->isAccessTokenExpired()) {
                 echo $c("EXPIRED TOKEN")
                     ->red()->bold() . PHP_EOL;
@@ -158,6 +159,27 @@
 
         foreach ($gdrive_users as $gdrive_user) {
             $googleDrive->setAccessToken($gdrive_user['access_token']);
+
+            // refresh if needed
+            if ($googleDrive->isAccessTokenExpired()) {
+                echo $c("EXPIRED TOKEN")
+                    ->red()->bold() . PHP_EOL;
+
+                $accessTokenData = $googleDrive->refreshAccessToken(
+                    $gdrive_user['refresh_token']);
+                $result = $db->perform(
+                    $configs['sql']['account_gdrive']['insert_update_gdrive_user'],
+                    [
+                        'user_id' => $gdrive_user['user_id'],
+                        'access_token' => json_encode($accessTokenData),
+                        'refresh_token' => $gdrive_user['refresh_token']
+                    ]
+                );
+                echo $c("REFRESHED TOKEN")
+                    ->green()->bold() . PHP_EOL;
+
+            }
+
             $gdrive_files = $db->fetchAll(
                 $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
                     'limit' => (int) $cmd['limit'],

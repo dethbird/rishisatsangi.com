@@ -125,7 +125,7 @@ class GoogleDrive extends ExternalDataBase {
      */
     public function getThumbnailCacheKey($file)
     {
-        return $file->headRevisionId;
+        return $file->md5Checksum;
     }
 
     /**

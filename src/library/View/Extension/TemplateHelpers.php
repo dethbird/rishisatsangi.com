@@ -16,6 +16,9 @@ class TemplateHelpers extends \Twig_Extension
             new \Twig_SimpleFilter(
                 'google_drive_thumbnail_filename', [
                     $this, 'google_drive_thumbnail_filename']),
+            new \Twig_SimpleFilter(
+                'google_drive_foldername', [
+                    $this, 'google_drive_foldername']),
             new \Twig_SimpleFilter('fountain', array($this, 'fountain')),
             new \Twig_SimpleFilter('to_array', array($this, 'to_array')),
             new \Twig_SimpleFilter('slugify', array($this, 'slugify')),
@@ -58,6 +61,10 @@ class TemplateHelpers extends \Twig_Extension
         $filename = $file_json['md5Checksum'] . ".";
         $filename .= ($file_json['fileExtension'] == "psd") ? 'png' : $file_json['fileExtension'];
         return $filename;
+    }
+    public function google_drive_foldername($folder)
+    {
+        return str_replace("/My Drive/", "", $folder);
     }
     public function md5($output)
     {

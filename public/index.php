@@ -220,7 +220,7 @@ $app->group('/api', function () use ($app) {
 });
 
 
-$app->group('/service', $authorize($app), function () use ($app) {
+$app->group('/service', function () use ($app) {
 
     $app->group('/gdrive', function () use ($app) {
 

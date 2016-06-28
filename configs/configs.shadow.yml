@@ -19,6 +19,9 @@ service:
         # filename of the .json file that the google client needs to work
         client_json_config_filename: gdrive_client.json
         thumbnail_cache_folder: cache/gdrive/thumbnails
+    instagram:
+        client_id: :INSTAGRAM_CLIENT_ID
+        client_secret: :INSTAGRAM_CLIENT_SECRET
 sql:
     users:
         # get all
@@ -33,6 +36,18 @@ sql:
             FROM `users`
             WHERE username = :username
             AND password = :password
+    account_instagram:
+        # insert-update instagram account
+        insert_update_instagram_user: |
+            INSERT INTO account_instagram
+            (user_id, access_token, date_added, date_updated)
+            VALUES
+            (:user_id, :access_token, NOW(), NOW())
+                ON DUPLICATE KEY UPDATE access_token = :access_token, date_updated = NOW()
+        get_all: |
+            SELECT * FROM account_instagram
+        get_by_user_id: |
+            SELECT * FROM account_instagram WHERE user_id = :user_id
     account_pocket:
         # insert-update pocket account
         insert_update_pocket_user: |
@@ -45,7 +60,6 @@ sql:
             SELECT * FROM account_pocket
         get_by_user_id: |
             SELECT * FROM account_pocket WHERE user_id = :user_id
-
     account_gdrive:
         # insert-update gdrive account
         insert_update_gdrive_user: |

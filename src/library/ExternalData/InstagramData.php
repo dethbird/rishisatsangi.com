@@ -15,26 +15,26 @@ class InstagramData extends ExternalDataBase {
     }
 
     /**
-     * @param $host server host
-     *
-     * @return string redirect url
+     * create the url to the instagram authorization screen.
+     * @param  [string] $redirectUri
+     * @return [string]               The url.
      */
-    public function getAuthRedirectUri($redirect_uri)
+    public function createAuthUrl($redirectUri)
     {
         return "https://api.instagram.com/oauth/authorize/?client_id=".
         $this->clientId.
         "&redirect_uri=".
-        $redirect_uri."&response_type=code";
-
+        $redirectUri."&response_type=code";
     }
 
 
     /**
-     * @param $code the code from the Instagram redirect in the GET params
-     *
-     * @return stdClass() JSON response
+     * Fetch the auth token for the user from instagram using code
+     * @param  [type] $redirectUri [description]
+     * @param  [type] $code         [description]
+     * @return [type]               [description]
      */
-    public function getAuthTokenFromCode($redirect_uri, $code)
+    public function getAuthTokenFromCode($redirectUri, $code)
     {
 
         $response = $this->httpClient->post(
@@ -43,14 +43,13 @@ class InstagramData extends ExternalDataBase {
                     'client_id' => $this->clientId,
                     'client_secret' => $this->clientSecret,
                     'grant_type' => 'authorization_code',
-                    'redirect_uri' => $redirect_uri,
+                    'redirect_uri' => $redirectUri,
                     'code' => $code
                 ]
             ]
         );
         $body = $response->getBody();
         $data = json_decode($body);
-        $this->storeCache("instagramUser", $data);
         return $data;
     }
 

@@ -4,6 +4,7 @@ require_once("Base.php");
 
 class InstagramData extends ExternalDataBase {
 
+    private $accessToken;
     private $clientId;
     private $clientSecret;
 
@@ -24,7 +25,7 @@ class InstagramData extends ExternalDataBase {
         return "https://api.instagram.com/oauth/authorize/?client_id=".
         $this->clientId.
         "&redirect_uri=".
-        $redirectUri."&response_type=code";
+        $redirectUri."&response_type=code&scope=public_content";
     }
 
 
@@ -54,82 +55,24 @@ class InstagramData extends ExternalDataBase {
     }
 
     /**
-     *
-     * @return array() a collection of media objects decoded from the youtube api response
+     * Set the access token.
+     * @param [string] $accessToken
      */
-    public function getEmbedMedia($shortcodes, $maxwidth = 525)
+    public function setAccessToken($accessToken)
     {
-        $cacheKey = md5("instagramShortcodes:" . implode("|", $shortcodes) . $maxwidth);
-        $cache = $this->retrieveCache($cacheKey);
-
-        if(!$cache) {
-            foreach ($shortcodes as $id) {
-                $response = $this->httpClient->get( 'http://api.instagram.com/publicapi/oembed/?url=' . $id . '&maxwidth=' .$maxwidth )->send();
-                $response = json_decode($response->getBody(true));
-                $data[] = $response;
-            }
-            $this->storeCache($cacheKey, $data);
-            return $data;
-        } else {
-            return $cache;
-        }
+        $this->accessToken = $accessToken;
     }
 
     /**
-     *
-     * @param  $count Instagram user id
-     * @return array() a collection of recent instagram posts by user id
+     * Get user's recently liked media.
+     * @return [array] Array of liked media objects
      */
-    public function getRecentMedia($count = 6, $tags = array(), $cacheTime = 3600)
+    public function getRecentLikedMedia()
     {
-        $instagramUser = $this->retrieveCache("instagramUser");
-        $cacheKey = md5("instagramRecent:".$instagramUser->user->id.$count,implode(",", $tags));
-        // $cache = $this->retrieveCache($cacheKey, $cacheTime);
-        $cache = false;
-        if(!$cache) {
-
-            $data = array();
-            $url = null;
-            while (count($data) < $count) {
-
-                if(is_null($url)) {
-                    $url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=".$instagramUser->access_token."&count=".$count;
-
-                                    // echo $url; exit();
-                }
-                $response = $this->httpClient->get( $url );
-                $response = $response->getBody();
-                $response = json_decode($response);
-
-                foreach($response->data as $d) {
-                    if(count($data) < $count) {
-                        $add = false;
-                        foreach ($tags as $tag) {
-                            if(count($tags) > 0) {
-                                if(in_array($tag, $d->tags)) {
-                                    $data[] = $d;
-                                    break;
-                                }
-                            } else {
-                                $data[] = $d;
-                            }
-                        }
-                    } else {
-                        break;
-                    }
-                }
-
-                $url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=".$instagramUser->access_token."&count=".$count."&min_id=".$d->id;
-
-                // echo $url; exit();
-            }
-
-            $this->storeCache($cacheKey, $data);
-        } else {
-            $data = $cache;
-        }
-
+        $response = $this->httpClient->get("https://api.instagram.com/v1/users/self/media/liked?access_token=" . $this->accessToken);
+        $body = $response->getBody();
+        $data = json_decode($body);
         return $data;
-
     }
+
 }

@@ -47,6 +47,10 @@
             $configs['sql']['account_instagram']['get_all'],[]);
 
         foreach ($instagram_users as $instagram_user) {
+
+            $accessTokenData = json_decode(
+                $instagram_user['access_token'], true);
+
             $user = $db->fetchOne(
                 $configs['sql']['users']['get_by_id'],[
                     'id' => $instagram_user['user_id']]);
@@ -55,33 +59,11 @@
                 $configs['service']['instagram']['client_id'],
                 $configs['service']['instagram']['client_secret']);
 
-            var_dump($user); exit();
+            $instagramData->setAccessToken($accessTokenData['access_token']);
 
-            $articles = $instagramData->getArticles();
+            $liked = $instagramData->getRecentLikedMedia();
 
-            foreach ($articles->list as $article) {
-
-                if ($cmd['time'] > $article->time_added &&
-                    $article->time_added > $until) {
-                        echo $c(date("l Y-m-d h:i:sa", $article->time_added))
-                            ->white()->bold() . " ";
-                        echo $c($article->resolved_url)
-                            ->yellow()->bold() . PHP_EOL;
-                    // print_r(json_encode($article));
-                    $db->perform(
-                        $configs['sql']['content_instagram']['insert_update_instagram_content_for_user'],
-                        [
-                            'account_instagram_id' => $instagram_user['id'],
-                            'user_id' => $user['id'],
-                            'item_id' => $article->item_id,
-                            'json' => json_encode($instagramData->cleanData(
-                                $article)),
-                            'date_added' => date('Y-m-d H:i:s', $article->time_added),
-                            'date_updated' => date('Y-m-d H:i:s', $article->time_updated)
-                        ]
-                    );
-                }
-            }
+            var_dump($liked); exit();
 
         }
     }

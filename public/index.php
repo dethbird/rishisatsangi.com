@@ -18,7 +18,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require '../vendor/autoload.php';
 require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php';
-require_once APPLICATION_PATH . 'src/library/ExternalData/GoogleDrive.php';
+require_once APPLICATION_PATH . 'src/library/ExternalData/GoogleData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/InstagramData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';
 require_once APPLICATION_PATH . 'src/library/Data/Base.php';
@@ -227,10 +227,10 @@ $app->group('/service', function () use ($app) {
 
         $app->get('/authorize', function () use ($app) {
             $configs = $app->container->get('configs');
-            $googleDrive = new GoogleDrive(
+            $googleData = new GoogleData(
                 "LikeDrop",
                 APPLICATION_PATH . "configs/" . $configs['service']['gdrive']['client_json_config_filename']);
-            $app->redirect($googleDrive->createAuthUrl());
+            $app->redirect($googleData->createAuthUrl());
         });
 
         $app->get('/redirect', function () use ($app) {
@@ -238,11 +238,11 @@ $app->group('/service', function () use ($app) {
             $db = $app->container->get('db');
             $securityContext = json_decode($app->getCookie('securityContext'));
 
-            $googleDrive = new GoogleDrive(
+            $googleData = new GoogleData(
                 "LikeDrop",
                 APPLICATION_PATH . "configs/" . $configs['service']['gdrive']['client_json_config_filename']);
 
-            $accessTokenData = $googleDrive->getAccessToken(
+            $accessTokenData = $googleData->getAccessToken(
                 $app->request->params('code'));
 
             $result = $db->perform(

@@ -1,7 +1,7 @@
 <?php
 require_once("Base.php");
 
-class GoogleDrive extends ExternalDataBase {
+class GoogleData extends ExternalDataBase {
 
     private $client;
 

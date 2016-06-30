@@ -16,6 +16,8 @@ class GoogleData extends ExternalDataBase {
         $this->client->setApplicationName("LikeDrop");
         $this->client->setAuthConfigFile($authConfigFile);
         $this->client->addScope(Google_Service_Drive::DRIVE);
+        $this->client->addScope(Google_Service_YouTube::YOUTUBE);
+        $this->client->addScope(Google_Service_YouTube::YOUTUBE_READONLY);
         $this->client->setAccessType('offline');
         $this->client->setApprovalPrompt('force');
     }
@@ -68,6 +70,8 @@ class GoogleData extends ExternalDataBase {
         $this->client->refreshToken($refreshToken);
         return $this->client->getAccessToken();
     }
+
+    /** DRIVE **/
 
     /**
      * Get file list for an authenticated user
@@ -129,7 +133,7 @@ class GoogleData extends ExternalDataBase {
     }
 
     /**
-     * Recusrively climb up the parent folder chain
+     * Recursively climb up the parent folder chain
      * @param  [type] $folder the current folder
      * @param  [type] $file   Google Drive file class
      * @return [type]         another level up of the folder tree
@@ -153,5 +157,29 @@ class GoogleData extends ExternalDataBase {
         return $folder;
     }
 
+    /** YOUTUBE **/
+    public function getYoutubeChannels($part, $options)
+    {
+        $youtube_service = new Google_Service_YouTube($this->client);
+        $channels = $youtube_service->channels->listChannels(
+            $part, $options)->getItems();
+        $data = [];
+        foreach($channels as $channel){
+            $data[] = $channel->toSimpleObject();
+        }
+        return $data;
+    }
+
+    public function getYoutubePlaylistItems($part, $options)
+    {
+        $youtube_service = new Google_Service_YouTube($this->client);
+        $items = $youtube_service->playlistItems->listPlaylistItems(
+            $part, $options)->getItems();
+        $data = [];
+        foreach($items as $video){
+            $data[] = $video->toSimpleObject();
+        }
+        return $data;
+    }
 
 }

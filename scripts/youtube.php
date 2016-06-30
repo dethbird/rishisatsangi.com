@@ -32,19 +32,7 @@
     $cmd->flag('p')
         ->boolean()
         ->aka('pull')
-        ->describedAs('Pull the latest changes for a Google Drive user.');
-    $cmd->flag('r')
-        ->boolean()
-        ->aka('refresh')
-        ->describedAs('Refresh the user\'s access token.');
-    $cmd->flag('c')
-        ->boolean()
-        ->aka('cache')
-        ->describedAs('Cache image thumbnails for JPG, PNG, and PSD.');
-    $cmd->flag('l')
-        ->aka('limit')
-        ->default(100)
-        ->describedAs('Limit for number of items to import.');
+        ->describedAs('Pull the latest from Youtube\'s watch later.');
     $shell = new BasicShell();
 
     if ($cmd['pull']) {
@@ -59,7 +47,7 @@
             )
             ->white()->bold()->highlight('blue') . PHP_EOL;
 
-        echo $c("Limit: ".$cmd['limit'])
+        echo $c('Yank dem vids.')
             ->yellow()->bold() . PHP_EOL;
 
         foreach ($gdrive_users as $gdrive_user) {
@@ -89,147 +77,20 @@
 
             }
 
-            $fileList= $googleData->listFiles([
-                'orderBy' => 'modifiedByMeTime desc',
-                'pageSize' => $cmd['limit'],
-                'spaces' => 'drive'
+            $channels = $googleData->getYoutubeChannels('contentDetails', [
+                'mine' => 'true']);
+            // print_r($channels->contentDetails['relatedPlaylists']['watchLater']); exit();
+            $videos = $googleData->getYoutubePlaylistItems('snippet', [
+                'playlistId' => $channels[0]->contentDetails['relatedPlaylists']['watchLater'],
+                'maxResults' => 50
             ]);
 
-            foreach($fileList as $fileInfo) {
+            print_r($videos); exit();
 
-                $file = $googleData->getFile($fileInfo->id);
 
-                echo $c(date('Y-m-d H:i:s', strtotime($file->modifiedByMeTime)))
-                    ->white()->bold() . " ";
-                echo $c($file->name)
-                    ->yellow()->bold() . PHP_EOL;
 
-                $db->perform(
-                    $configs['sql']['content_gdrive_files']['insert_update_files_for_user'],
-                    [
-                        'account_gdrive_id' => $gdrive_user['id'],
-                        'user_id' => $user['id'],
-                        'item_id' => $file->id,
-                        'json' => json_encode($file),
-                        'date_added' => date('Y-m-d H:i:s', strtotime($file->createdTime)),
-                        'date_updated' => date('Y-m-d H:i:s', strtotime($file->modifiedByMeTime))
-                    ]
-                );
-            }
+            exit();
+
+
         }
-    }
-
-    if ($cmd['refresh']) {
-        echo $c(
-"   __       __               _
-  /__\ ___ / _|_ __ ___  ___| |__
- / \/// _ \ |_| '__/ _ \/ __| '_ \
-/ _  \  __/  _| | |  __/\__ \ | | |
-\/ \_/\___|_| |_|  \___||___/_| |_|
-                                   "
-            )
-            ->white()->bold()->highlight('blue') . PHP_EOL;
-
-        foreach ($gdrive_users as $gdrive_user) {
-            $googleData->setAccessToken($gdrive_user['access_token']);
-            $accessTokenData = $googleData->refreshAccessToken(
-                $gdrive_user['refresh_token']);
-            $result = $db->perform(
-                $configs['sql']['account_gdrive']['insert_update_gdrive_user'],
-                [
-                    'user_id' => $gdrive_user['user_id'],
-                    'access_token' => json_encode($accessTokenData),
-                    'refresh_token' => $gdrive_user['refresh_token']
-                ]
-            );
-        }
-
-    }
-
-    if ($cmd['cache']) {
-        echo $c(
-"   ___           _
-  / __\__ _  ___| |__   ___
- / /  / _` |/ __| '_ \ / _ \
-/ /__| (_| | (__| | | |  __/
-\____/\__,_|\___|_| |_|\___|
-                            "
-            )
-            ->white()->bold()->highlight('blue') . PHP_EOL;
-
-        foreach ($gdrive_users as $gdrive_user) {
-            $googleData->setAccessToken($gdrive_user['access_token']);
-
-            // refresh if needed
-            if ($googleData->isAccessTokenExpired()) {
-                echo $c("EXPIRED TOKEN")
-                    ->red()->bold() . PHP_EOL;
-
-                $accessTokenData = $googleData->refreshAccessToken(
-                    $gdrive_user['refresh_token']);
-                $result = $db->perform(
-                    $configs['sql']['account_gdrive']['insert_update_gdrive_user'],
-                    [
-                        'user_id' => $gdrive_user['user_id'],
-                        'access_token' => json_encode($accessTokenData),
-                        'refresh_token' => $gdrive_user['refresh_token']
-                    ]
-                );
-                echo $c("REFRESHED TOKEN")
-                    ->green()->bold() . PHP_EOL;
-
-            }
-
-            $gdrive_files = $db->fetchAll(
-                $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
-                    'limit' => (int) $cmd['limit'],
-                    'account_gdrive_id' => $gdrive_user['id']]);
-            foreach ($gdrive_files as $file) {
-                $fileObj = json_decode($file['json']);
-                if (in_array($fileObj->mimeType, ["image/jpeg", "image/png", "image/x-photoshop"])) {
-                    echo $c($fileObj->mimeType . ': ')
-                        ->white()->bold() . " ";
-                    echo $c($fileObj->name)
-                        ->yellow()->bold() . PHP_EOL;
-
-                    $cacheKey = $googleData->getThumbnailCacheKey($fileObj);
-                    $cacheKey = $cacheKey . "." . ($fileObj->fileExtension == 'psd' ? 'png' : $fileObj->fileExtension);
-                    $file = APPLICATION_PATH .
-                        $configs['service']['gdrive']['thumbnail_cache_folder'] . "/" . $cacheKey;
-
-                    if (file_exists($file)) {
-                        echo $c("CACHE EXISTS")
-                            ->blue()->bold() . PHP_EOL;
-                    } else {
-
-                        $contents = $googleData->downloadFile($fileObj->id);
-
-                        $wh = fopen($file, 'w+b');
-                        echo $cacheKey . PHP_EOL;
-                        while ($chunk = $contents->read(4096)) {
-                            fwrite($wh, $chunk);
-                        }
-                        fclose($wh);
-                        if ($fileObj->mimeType == "image/x-photoshop") {
-                            $shell->executeCommand('convert', array(
-                                "-flatten",
-                                "-thumbnail",
-                                "1024",
-                                $file . "[0]",
-                                $file
-                            ));
-                        } else {
-                            $shell->executeCommand('convert', array(
-                                "-resize",
-                                "1024",
-                                $file,
-                                $file
-                            ));
-                        }
-
-                    }
-                }
-            }
-        }
-
     }

@@ -97,3 +97,16 @@ sql:
             WHERE account_gdrive_id = :account_gdrive_id
             ORDER BY date_updated DESC
             LIMIT :limit
+    content_youtube:
+        # insert / update file modification data from user's drive
+        insert_update_content_for_user: |
+            INSERT INTO content_youtube
+            (account_gdrive_id, user_id, item_id, json, date_added, date_updated)
+            VALUES
+            (:account_gdrive_id, :user_id, :item_id, :json, :date_added, :date_updated)
+                ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated
+        get_by_account_gdrive_id: |
+            SELECT * FROM content_youtube
+            WHERE account_gdrive_id = :account_gdrive_id
+            ORDER BY date_updated DESC
+            LIMIT :limit

@@ -84,7 +84,20 @@
                 'maxResults' => 50
             ]);
 
-            print_r($videos); exit();
+            foreach ($videos as $video) {
+                // print_r($video); exit();
+                $db->perform(
+                    $configs['sql']['content_youtube']['insert_update_content_for_user'],
+                    [
+                        'account_gdrive_id' => $gdrive_user['id'],
+                        'user_id' => $user['id'],
+                        'item_id' => $video->id,
+                        'json' => json_encode($video),
+                        'date_added' => date('Y-m-d H:i:s', strtotime($video->snippet['publishedAt'])),
+                        'date_updated' => date('Y-m-d H:i:s', strtotime($video->snippet['publishedAt']))
+                    ]
+                );
+            }
 
 
 

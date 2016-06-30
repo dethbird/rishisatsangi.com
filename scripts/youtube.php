@@ -79,7 +79,6 @@
 
             $channels = $googleData->getYoutubeChannels('contentDetails', [
                 'mine' => 'true']);
-            // print_r($channels->contentDetails['relatedPlaylists']['watchLater']); exit();
             $videos = $googleData->getYoutubePlaylistItems('snippet', [
                 'playlistId' => $channels[0]->contentDetails['relatedPlaylists']['watchLater'],
                 'maxResults' => 50

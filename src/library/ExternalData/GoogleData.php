@@ -173,12 +173,26 @@ class GoogleData extends ExternalDataBase {
     public function getYoutubePlaylistItems($part, $options)
     {
         $youtube_service = new Google_Service_YouTube($this->client);
-        $items = $youtube_service->playlistItems->listPlaylistItems(
-            $part, $options)->getItems();
+        $result = $youtube_service->playlistItems->listPlaylistItems(
+            $part, $options);
+        $items = $result->getItems();
+        $pageInfo = $result->getPageInfo();
+        $nextPageToken = $result->nextPageToken;
         $data = [];
-        foreach($items as $video){
-            $data[] = $video->toSimpleObject();
+
+        while (count($data) < $pageInfo->totalResults) {
+            foreach($items as $video){
+                $data[] = $video->toSimpleObject();
+            }
+            if (count($data) < $pageInfo->totalResults) {
+                $options['pageToken'] = $nextPageToken;
+                $result = $youtube_service->playlistItems->listPlaylistItems(
+                    $part, $options);
+                $items = $result->getItems();
+                $nextPageToken = $result->nextPageToken;
+            }
         }
+
         return $data;
     }
 

@@ -148,6 +148,11 @@ $app->get("/dashboard", $authorize($app), function () use ($app) {
             $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
                 'limit' => 50,
                 'account_gdrive_id' => $gdrive_user['id']]);
+
+        $youtube_watchlater_videos = $db->fetchAll(
+            $configs['sql']['content_youtube']['get_by_account_gdrive_id'],[
+                'limit' => 50,
+                'account_gdrive_id' => $gdrive_user['id']]);
     }
 
     $templateVars = array(
@@ -157,6 +162,7 @@ $app->get("/dashboard", $authorize($app), function () use ($app) {
         'pocket_articles' => $pocket_articles,
         'gdrive_user' => $gdrive_user,
         'gdrive_files' => $gdrive_files,
+        'youtube_watchlater_videos' => $youtube_watchlater_videos,
         "section" => "dashboard.index",
         'hostname' => $configs['server']['hostname']
     );

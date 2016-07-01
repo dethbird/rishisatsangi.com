@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     {{ parent() }}
-    <div class="container col-xs-6">
+    <div class="container col-xs-4">
         <h1><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</h1>
         {% if gdrive_user %}
             {# }<pre>{{ gdrive_user|print_r }}</pre> #}
@@ -27,7 +27,7 @@
             {% endfor %}
         {% endif %}
     </div>
-    <div class="container col-xs-6">
+    <div class="container col-xs-4">
         <h1><img src="/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</h1>
         {% for article in pocket_articles %}
         {% set article_json = article.json|json_decode(true) %}
@@ -56,6 +56,28 @@
             <div class="row"></div>
             {% endif %}
         {% endfor %}
+    </div>
+    <div class="container col-xs-4">
+        <h1><img src="/img/service/youtube/logo_sm.png" class="service-logo"/> Youtube</h1>
+        {% if gdrive_user %}
+            {# }<pre>{{ gdrive_user|print_r }}</pre> #}
+            {% for video in youtube_watchlater_videos %}
+            {% set v = video.json|json_decode(true) %}
+                <div class="content container col-xs-12 col-lg-6">
+                    {# }<pre>{{v|print_r}}</pre> #}
+                    <a href="https://www.youtube.com/watch?v={{v.snippet.resourceId.videoId|raw}}" class="title">{{v.snippet.title|raw}}</a><br />
+
+                    <span class="date">{{v.snippet.publishedAt|time_ago}}</span>
+
+                    <img src="{{v.snippet.thumbnails.high.url}}" class="col-xs-12"/>
+                    <br />
+                    <blockquote>{{v.snippet.description|raw|markdown}}</blockquote>
+                </div>
+                {% if loop.index is divisible by(2) %}
+                <div class="row"></div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}
 

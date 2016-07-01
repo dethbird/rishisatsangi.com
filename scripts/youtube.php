@@ -84,6 +84,13 @@
                 'maxResults' => 50
             ]);
 
+            $db->perform(
+                $configs['sql']['content_youtube']['delete_content_for_user'],
+                [
+                    'account_gdrive_id' => $gdrive_user['id']
+                ]
+            );
+
             foreach ($videos as $video) {
                 // print_r($video); exit();
                 $db->perform(

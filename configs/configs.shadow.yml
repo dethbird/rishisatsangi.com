@@ -105,6 +105,9 @@ sql:
             VALUES
             (:account_gdrive_id, :user_id, :item_id, :json, :date_added, :date_updated)
                 ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated
+        delete_content_for_user: |
+            DELETE FROM content_youtube
+            WHERE account_gdrive_id = :account_gdrive_id
         get_by_account_gdrive_id: |
             SELECT * FROM content_youtube
             WHERE account_gdrive_id = :account_gdrive_id

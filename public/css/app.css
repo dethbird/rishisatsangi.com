@@ -27,6 +27,9 @@ blockquote {
     max-width: 520px;
     color: #333;
     font-size: 0.9rem;
+    white-space: pre-wrap;
+    max-height: 350px;
+    overflow: auto;
 }
 
 img {

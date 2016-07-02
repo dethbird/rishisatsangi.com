@@ -45,6 +45,9 @@ label.tag {
     border-radius: 5px;
     font-size: .7rem;
 }
+.content-container {
+    display: none;
+}
 .content {
     margin-bottom: 10px;
     padding: 25px;

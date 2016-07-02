@@ -19,13 +19,13 @@
             </div>
         </div>
     </div>
-    <div class="container col-xs-4">
-        <h1><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</h1>
+    <div class="container-fluid col-xs-12 content-container" data-service="gdrive">
+        <!-- <h1><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</h1> -->
         {% if gdrive_user %}
             {# }<pre>{{ gdrive_user|print_r }}</pre> #}
             {% for file in gdrive_files %}
             {% set file_json = file.json|json_decode(true) %}
-                <div class="content container col-xs-12 col-lg-6">
+                <div class="content container col-xs-6 col-lg-2">
                     {# <pre>{{file_json|print_r}}</pre> #}
                     {% if file_json.mimeType=="image/jpeg" or file_json.mimeType=="image/png" or  file_json.mimeType=="image/x-photoshop" %}
                     <img src="http://{{hostname}}/service/gdrive/thumbnail/{{file_json|google_drive_thumbnail_filename}}" class="col-xs-12"/>
@@ -36,17 +36,17 @@
                     <br />
                     <label class="tag">{{file_json.folder|raw|google_drive_foldername}}</label><br />
                 </div>
-                {% if loop.index is divisible by(2) %}
+                {% if loop.index is divisible by(6) %}
                 <div class="row"></div>
                 {% endif %}
             {% endfor %}
         {% endif %}
     </div>
-    <div class="container col-xs-4">
-        <h1><img src="/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</h1>
+    <div class="container-fluid col-xs-12 content-container" data-service="pocket">
+        <!-- <h1><img src="/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</h1> -->
         {% for article in pocket_articles %}
         {% set article_json = article.json|json_decode(true) %}
-            <div class="content container col-xs-12 col-lg-6">
+            <div class="content container col-xs-6 col-lg-4">
                 {# <pre>{{article_json|print_r}}</pre> #}
                 <a href="{{article_json.resolved_url|raw}}" class="title">{{article_json.resolved_title|raw}}</a>
                 <br />
@@ -67,18 +67,18 @@
                 <a href="{{article_json.resolved_url|raw}}" class="btn btn-info btn-sm">{{article_json.resolved_url|url_hostname}}</a>
                 <a href="https://getpocket.com/a/read/{{article_json.item_id}}" class="btn btn-primary-outline btn-sm"><img src="//{{hostname}}/img/service/pocket/logo_sm.png" class="service-logo-manage"/> Manage</a>
             </div>
-            {% if loop.index is divisible by(2) %}
+            {% if loop.index is divisible by(3) %}
             <div class="row"></div>
             {% endif %}
         {% endfor %}
     </div>
-    <div class="container col-xs-4">
-        <h1><img src="/img/service/youtube/logo_sm.png" class="service-logo"/> Youtube</h1>
+    <div class="container-fluid col-xs-12 content-container" data-service="youtube">
+        <!-- <h1><img src="/img/service/youtube/logo_sm.png" class="service-logo"/> Youtube</h1> -->
         {% if gdrive_user %}
             {# }<pre>{{ gdrive_user|print_r }}</pre> #}
             {% for video in youtube_watchlater_videos %}
             {% set v = video.json|json_decode(true) %}
-                <div class="content container col-xs-12 col-lg-6">
+                <div class="content container col-xs-6 col-lg-2">
                     {# }<pre>{{v|print_r}}</pre> #}
                     <a href="https://www.youtube.com/watch?v={{v.snippet.resourceId.videoId|raw}}" class="title">{{v.snippet.title|raw}}</a><br />
 
@@ -88,7 +88,7 @@
                     <br />
                     <blockquote>{{v.snippet.description|raw}}</blockquote>
                 </div>
-                {% if loop.index is divisible by(2) %}
+                {% if loop.index is divisible by(6) %}
                 <div class="row"></div>
                 {% endif %}
             {% endfor %}

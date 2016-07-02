@@ -4,6 +4,21 @@
 {% endblock %}
 {% block content %}
     {{ parent() }}
+    <div class="row">
+        <div class="container col-xs-12">
+            <div class="btn-group" role="group" id="contentSelector">
+                <a type="button" class="btn btn-secondary btn-lg displayed-item"><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</a>
+                <a type="button" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" data-service="gdrive"><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</a>
+                    <a class="dropdown-item" href="#" data-service="pocket"><img src="/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</a>
+                    <a class="dropdown-item" href="#" data-service="youtube"><img src="/img/service/youtube/logo_sm.png" class="service-logo"/>YouTube</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container col-xs-4">
         <h1><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</h1>
         {% if gdrive_user %}

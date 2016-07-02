@@ -1,0 +1,49 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var DropdownButtonView = require('./buttons/DropdownButtonView');
+var DashboardView = Backbone.View.extend({
+    model: null,
+    dropdownButtonView: null,
+    initialize: function(options) {
+        var that = this;
+        this.render();
+
+        that.dropdownButtonView = new DropdownButtonView({
+            el: '#contentSelector'
+        });
+        // $('#contentSelector').parent().on('hide.bs.dropdown', function (e) {
+        //     console.log(e);
+        // });
+    }
+});
+
+module.exports = DashboardView;
+
+},{"./buttons/DropdownButtonView":2}],2:[function(require,module,exports){
+var DropdownButtonView = Backbone.View.extend({
+    currentService: null,
+    initialize: function(options) {
+        var that = this;
+        that.$el = $(that.el);
+        that.$el.find('.dropdown-item').on('click', function(e){
+            that.currentService = $(e.target).data('service');
+            that.render();
+        });
+    },
+    render: function() {
+        var that = this;
+        var content = that.$el.find(
+            '.dropdown-item[data-service=' + that.currentService+ ']').html();
+        that.$el.find('.displayed-item').html(content);
+    }
+});
+
+module.exports = DropdownButtonView;
+
+},{}],3:[function(require,module,exports){
+var DashboardView = require('../library/views/DashboardView');
+
+var dashboardView = new DashboardView({
+    el: 'body'
+});
+
+},{"../library/views/DashboardView":1}]},{},[3]);

@@ -65,6 +65,10 @@ a.displayed-item {
 .dropdown-toggle {
     height: 68px;
 }
+.dropdown-toggle::after {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
 .dropdown-menu {
     left: inherit;
 }

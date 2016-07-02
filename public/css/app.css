@@ -45,6 +45,10 @@ label.tag {
     border-radius: 5px;
     font-size: .7rem;
 }
+
+#contentSelector {
+    margin: 10px 0px 10px 0px;
+}
 .content-container {
     display: none;
 }
@@ -57,9 +61,13 @@ label.tag {
 }
 a.displayed-item {
     height: 68px;
+    text-align: left;
 }
 .dropdown-toggle {
     height: 68px;
+}
+.dropdown-menu {
+    left: inherit;
 }
 .pull-right, .text-align-right {
     text-align: right;

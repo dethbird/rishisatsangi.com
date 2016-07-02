@@ -4,18 +4,16 @@
 {% endblock %}
 {% block content %}
     {{ parent() }}
-    <div class="row">
-        <div class="container col-xs-12">
-            <div class="btn-group" role="group" id="contentSelector">
-                <a type="button" class="btn btn-secondary btn-lg displayed-item"><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</a>
-                <a type="button" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#" data-service="gdrive"><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</a>
-                    <a class="dropdown-item" href="#" data-service="pocket"><img src="/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</a>
-                    <a class="dropdown-item" href="#" data-service="youtube"><img src="/img/service/youtube/logo_sm.png" class="service-logo"/>YouTube</a>
-                </div>
+    <div class="container-fluid col-xs-12">
+        <div class="btn-group col-xs-12" role="group" id="contentSelector">
+            <a type="button" class="btn btn-secondary btn-lg displayed-item col-xs-11"><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</a>
+            <a type="button" class="btn btn-secondary btn-lg dropdown-toggle col-xs-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </a>
+            <div class="dropdown-menu col-xs-11">
+                <a class="dropdown-item" href="#" data-service="gdrive"><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</a>
+                <a class="dropdown-item" href="#" data-service="pocket"><img src="/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</a>
+                <a class="dropdown-item" href="#" data-service="youtube"><img src="/img/service/youtube/logo_sm.png" class="service-logo"/>YouTube</a>
             </div>
         </div>
     </div>

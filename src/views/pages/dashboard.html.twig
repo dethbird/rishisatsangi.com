@@ -18,13 +18,43 @@
         </div>
     </div>
     <div class="container-fluid col-xs-12 content-container" data-service="gdrive">
-        <!-- <h1><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/> Google Drive</h1> -->
-        {% if gdrive_user %}
-            {# }<pre>{{ gdrive_user|print_r }}</pre> #}
+        <table class="table table-striped">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-xs-3">Modified</th>
+                    <th class="col-xs-3">Filename</th>
+                    <th class="col-xs-3">Location</th>
+                    <th class="col-xs-3">Preview</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if gdrive_user %}
+                    {% for file in gdrive_files %}
+                    {% set file_json = file.json|json_decode(true) %}
+                        <tr>
+                            <td class="col-xs-3">
+                                <span class="date">{{file_json.modifiedByMeTime|time_ago}}</span>
+                            </td>
+                            <td class="col-xs-3">
+                                <a href="{{file_json.webViewLink|raw}}" class="title"><img src="{{file_json.iconLink|raw}}" /> {{file_json.name|raw}}</a>
+                            </td>
+                            <td class="col-xs-3">
+                                <label class="tag">{{file_json.folder|raw|google_drive_foldername}}</label>
+                            </td>
+                            <td class="col-xs-3">
+                                {% if file_json.mimeType=="image/jpeg" or file_json.mimeType=="image/png" or  file_json.mimeType=="image/x-photoshop" %}
+                                <img src="http://{{hostname}}/service/gdrive/thumbnail/{{file_json|google_drive_thumbnail_filename}}" class="col-xs-12"/>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+        {# {% if gdrive_user %}
             {% for file in gdrive_files %}
             {% set file_json = file.json|json_decode(true) %}
                 <div class="content container col-xs-6 col-lg-2">
-                    {# <pre>{{file_json|print_r}}</pre> #}
                     {% if file_json.mimeType=="image/jpeg" or file_json.mimeType=="image/png" or  file_json.mimeType=="image/x-photoshop" %}
                     <img src="http://{{hostname}}/service/gdrive/thumbnail/{{file_json|google_drive_thumbnail_filename}}" class="col-xs-12"/>
                     {% endif %}
@@ -38,7 +68,7 @@
                 <div class="row"></div>
                 {% endif %}
             {% endfor %}
-        {% endif %}
+        {% endif %} #}
     </div>
     <div class="container-fluid col-xs-12 content-container" data-service="pocket">
         <!-- <h1><img src="/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</h1> -->

@@ -1,0 +1,22 @@
+<div class="container col-xs-12">
+    <div class="container col-xs-12">
+        <h2><img src="{{hostname}}/img/service/youtube/logo_sm.png" class="service-logo"/> YouTube Videos</h2>
+    </div>
+
+    {% for video in youtube_watchlater_videos %}
+    {% set v = video.json|json_decode(true) %}
+        <div class="content container col-xs-6 col-lg-2">
+            {# }<pre>{{v|print_r}}</pre> #}
+            <a href="https://www.youtube.com/watch?v={{v.snippet.resourceId.videoId|raw}}" class="title">{{v.snippet.title|raw}}</a><br />
+
+            <span class="date">{{v.snippet.publishedAt|time_ago}}</span>
+
+            <img src="{{v.snippet.thumbnails.high.url}}" class="col-xs-12"/>
+            <br />
+            <blockquote>{{v.snippet.description|raw}}</blockquote>
+        </div>
+        {% if loop.index is divisible by(6) %}
+        <div class="row"></div>
+        {% endif %}
+    {% endfor %}
+</div>

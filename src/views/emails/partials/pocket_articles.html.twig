@@ -11,7 +11,7 @@
             {# <pre>{{article_json|print_r}}</pre> #}
             <a href="{{article_json.resolved_url|raw}}" class="title">{{article_json.resolved_title|raw}}</a>
             <br />
-            <span class="date">{{article_json.time_added|date_format('l F j, Y, g:i a')}}</span>
+            <span class="date">{{article_json.time_added|date_format('l F j, Y, g:i a')|time_ago}}</span>
             {% if article_json.favorite == 1 %} +1 {% endif %}
             <br />
             {% if article_json.has_image %}

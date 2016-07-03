@@ -135,7 +135,7 @@ $app->get("/dashboard", $authorize($app), function () use ($app) {
     if ($pocket_user) {
         $pocket_articles = $db->fetchAll(
             $configs['sql']['content_pocket']['get_by_account_pocket_id'],[
-                'until' => date('Y-m-d H:i:s', time() - (60 * 60 * 24 * 7)),
+                'limit' => 50,
                 'account_pocket_id' => $pocket_user['id']]);
     }
 

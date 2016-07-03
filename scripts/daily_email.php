@@ -34,20 +34,16 @@
         ->boolean()
         ->aka('output')
         ->describedAs('Output mode -- don\'t actually send an email, output HTML instead');
-    $cmd->flag('t')
-        ->aka('time')
-        ->default(time())
-        ->describedAs('Timestamp from which to start eg: 1466083468');
-    $cmd->flag('h')
-        ->aka('hours')
-        ->default(24)
-        ->describedAs('Hours back from timestamp to fetch eg: 24');
+    $cmd->flag('l')
+        ->aka('limit')
+        ->default(10)
+        ->describedAs('Limit the number of results from each service content.');
 
     if ($cmd['send']) {
 
         $until = $cmd['time'] - $cmd['hours'] * 3600;
 
-        echo $c(date("l Y-m-d h:i:sa", $cmd['time']) . " -> " . date("l Y-m-d h:i:sa", $until))
+        echo $c("limit: " . $cmd['limit'])
             ->yellow()->bold() . PHP_EOL;
 
         // get all users
@@ -66,7 +62,7 @@
 
             $pocket_articles = $db->fetchAll(
                 $configs['sql']['content_pocket']['get_by_account_pocket_id'],[
-                    'until' => date('Y-m-d H:i:s', $until),
+                    'limit' => (int) $cmd['limit'],
                     'account_pocket_id' => $pocket_user['id']]);
 
             $gdrive_user = $db->fetchOne(
@@ -75,7 +71,12 @@
 
             $gdrive_files = $db->fetchAll(
                 $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
-                    'limit' => 25,
+                    'limit' => (int) $cmd['limit'],
+                    'account_gdrive_id' => $gdrive_user['id']]);
+
+            $youtube_watchlater_videos = $db->fetchAll(
+                $configs['sql']['content_youtube']['get_by_account_gdrive_id'],[
+                    'limit' => (int) $cmd['limit'],
                     'account_gdrive_id' => $gdrive_user['id']]);
 
             // render html
@@ -87,7 +88,8 @@
                     'from' => $until,
                     'until' => $cmd['time'],
                     'pocket_articles' => $pocket_articles,
-                    'gdrive_files' => $gdrive_files
+                    'gdrive_files' => $gdrive_files,
+                    'youtube_watchlater_videos' => $youtube_watchlater_videos
                 ]);
 
             // build css

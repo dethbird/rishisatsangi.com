@@ -82,8 +82,8 @@ sql:
         get_by_account_pocket_id: |
             SELECT * FROM content_pocket
             WHERE account_pocket_id = :account_pocket_id
-            AND date_added > :until
             ORDER BY date_added DESC
+            LIMIT :limit
     content_gdrive_files:
         # insert / update file modification data from user's drive
         insert_update_files_for_user: |

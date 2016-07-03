@@ -6,15 +6,16 @@
     {{ parent() }}
         <div class="container col-xs-12">
             <div class="header-section container col-xs-12">
-                <h1>LikeDrop Daily Email</h1>
-                <p><span class="username">{{user.username}}</span>, here lie the footsteps of a gimp hobbling across the internet for the last 24 hours.<br />
-                <span class="date">{{from|date_format('l F j, Y, g:i a')}}</span> to <span class="date">{{until|date_format('l F j, Y, g:i a')}}</span>:</p>
+                <h1>LikeDrop Daily Email</h1><br />
             </div>
             <div class="service-section container col-xs-12">
                 {% include 'emails/partials/pocket_articles.html.twig' with {'pocket_articles': pocket_articles} %}
             </div>
             <div class="service-section container col-xs-12">
                 {% include 'emails/partials/gdrive_files.html.twig' with {'gdrive_files': gdrive_files} %}
+            </div>
+            <div class="service-section container col-xs-12">
+                {% include 'emails/partials/youtube_videos.html.twig' with {'youtube_watchlater_videos': youtube_watchlater_videos} %}
             </div>
         </div>
 {% endblock %}

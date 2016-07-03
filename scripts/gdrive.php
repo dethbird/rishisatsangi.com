@@ -215,6 +215,8 @@
                                 "-flatten",
                                 "-thumbnail",
                                 "1024",
+                                "-quality",
+                                "80",
                                 $file . "[0]",
                                 $file
                             ));
@@ -222,6 +224,8 @@
                             $shell->executeCommand('convert', array(
                                 "-resize",
                                 "1024",
+                                "-quality",
+                                "80",
                                 $file,
                                 $file
                             ));

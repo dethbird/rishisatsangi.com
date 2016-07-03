@@ -59,7 +59,7 @@ class TemplateHelpers extends \Twig_Extension
     public function google_drive_thumbnail_filename($file_json)
     {
         $filename = $file_json['md5Checksum'] . ".";
-        $filename .= ($file_json['fileExtension'] == "psd") ? 'png' : $file_json['fileExtension'];
+        $filename .= ($file_json['fileExtension'] == "psd") ? 'jpg' : $file_json['fileExtension'];
         return $filename;
     }
     public function google_drive_foldername($folder)

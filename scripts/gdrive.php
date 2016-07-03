@@ -193,7 +193,7 @@
                         ->yellow()->bold() . PHP_EOL;
 
                     $cacheKey = $googleData->getThumbnailCacheKey($fileObj);
-                    $cacheKey = $cacheKey . "." . ($fileObj->fileExtension == 'psd' ? 'png' : $fileObj->fileExtension);
+                    $cacheKey = $cacheKey . "." . ($fileObj->fileExtension == 'psd' ? 'jpg' : $fileObj->fileExtension);
                     $file = APPLICATION_PATH .
                         $configs['service']['gdrive']['thumbnail_cache_folder'] . "/" . $cacheKey;
 
@@ -205,7 +205,6 @@
                         $contents = $googleData->downloadFile($fileObj->id);
 
                         $wh = fopen($file, 'w+b');
-                        echo $cacheKey . PHP_EOL;
                         while ($chunk = $contents->read(4096)) {
                             fwrite($wh, $chunk);
                         }
@@ -230,6 +229,8 @@
                                 $file
                             ));
                         }
+
+                        echo $cacheKey . " " .round(filesize($file)/1024, 2) . " Kb.". PHP_EOL;
 
                     }
                 }

@@ -79,6 +79,9 @@ sql:
             VALUES
             (:account_pocket_id, :user_id, :item_id, :json, :date_added, :date_updated)
                 ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated
+        delete_content_for_user: |
+            DELETE FROM content_pocket
+            WHERE account_pocket_id = :account_pocket_id
         get_by_account_pocket_id: |
             SELECT * FROM content_pocket
             WHERE account_pocket_id = :account_pocket_id

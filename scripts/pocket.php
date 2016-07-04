@@ -25,14 +25,6 @@
         ->boolean()
         ->aka('pull')
         ->describedAs('Pull the latest from a Pocket feed');
-    $cmd->flag('t')
-        ->aka('time')
-        ->default(time())
-        ->describedAs('Timestamp from which to start eg: 1466083468');
-    $cmd->flag('h')
-        ->aka('hours')
-        ->default(24)
-        ->describedAs('Hours back from timestamp to fetch eg: 24');
 
     if ($cmd['pull']) {
 
@@ -46,9 +38,7 @@
             )
             ->white()->bold()->highlight('blue') . PHP_EOL;
 
-        $until = $cmd['time'] - $cmd['hours'] * 3600;
-
-        echo $c(date("l Y-m-d h:i:sa", $cmd['time']) . " -> " . date("l Y-m-d h:i:sa", $until))
+        echo $c('yank dem articles')
             ->yellow()->bold() . PHP_EOL;
 
         $pocket_users = $db->fetchAll(
@@ -65,29 +55,26 @@
 
             $articles = $pocketData->getArticles();
 
+            $db->perform(
+                $configs['sql']['content_pocket']['delete_content_for_user'],
+                [
+                    'account_pocket_id' => $pocket_user['id']
+                ]
+            );
+
             foreach ($articles->list as $article) {
-
-                if ($cmd['time'] > $article->time_added &&
-                    $article->time_added > $until) {
-                        echo $c(date("l Y-m-d h:i:sa", $article->time_added))
-                            ->white()->bold() . " ";
-                        echo $c($article->resolved_url)
-                            ->yellow()->bold() . PHP_EOL;
-                    // print_r(json_encode($article));
-                    $db->perform(
-                        $configs['sql']['content_pocket']['insert_update_pocket_content_for_user'],
-                        [
-                            'account_pocket_id' => $pocket_user['id'],
-                            'user_id' => $user['id'],
-                            'item_id' => $article->item_id,
-                            'json' => json_encode($pocketData->cleanData(
-                                $article)),
-                            'date_added' => date('Y-m-d H:i:s', $article->time_added),
-                            'date_updated' => date('Y-m-d H:i:s', $article->time_updated)
-                        ]
-                    );
-                }
+                $db->perform(
+                    $configs['sql']['content_pocket']['insert_update_pocket_content_for_user'],
+                    [
+                        'account_pocket_id' => $pocket_user['id'],
+                        'user_id' => $user['id'],
+                        'item_id' => $article->item_id,
+                        'json' => json_encode($pocketData->cleanData(
+                            $article)),
+                        'date_added' => date('Y-m-d H:i:s', $article->time_added),
+                        'date_updated' => date('Y-m-d H:i:s', $article->time_updated)
+                    ]
+                );
             }
-
         }
     }

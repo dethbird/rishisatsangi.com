@@ -1,21 +1,69 @@
 # Rishi Satsangi's website
 > A Slim PHP based website with Backbone.js and Twig thrown in
 
-#### Command line PHP deploy
+### initialize
+
+composer install required composer libs for the build script to function:
 
 ```bash
-# browserify
-sudo npm install -g browserify
-# uglify
-sudo npm install -g uglify
+    curl -sS https://getcomposer.org/installer | php
+    php composer.phar install
+```
+
+copy .env from .env.shadow and edit values
+```bash
+cp .env.shadow .#!/usr/bin/env
+vim .env
+```
+
+### build help
+
+```bash
+php build.php --help
+```
+
+displays help:
+
+```bash
+
+--cache/--cache
+     Clear cache and reset permissions of cache directory
+
+
+--configs/--configs
+     Publish configs from .env
+
+
+--help
+     Show the help page for this command.
+
+
+--js/--javascript
+     Broswerify and minify the js
+
+
+--npm/--npm
+     Install node modules from package.json
+
+
+--php/--php
+     PHP/Composer install
+
+
+--ugly/--uglify
+     Uglify the compiled js (leave empty in dev)
+
 ```
 
 
-#### Command line PHP deploy
+### build
 
+build production:
 ```bash
-# build all
-php build.php js=1 php=1 cache=1
-# build dev (don't uglify js)
-php build.php js=dev php=1 cache=1
+php build.php -cache -configs -js -npm -php -ugly
+```
+
+build dev js:
+```bash
+php build.php -js
 ```

@@ -29,6 +29,7 @@ use Guzzle\Http\Client;
 
 // Load configs and add to the app container
 $configs = Yaml::parse(file_get_contents("../configs/configs.yml"));
+
 $app = new \Slim\Slim(
     array(
         'view' => new Slim\Views\Twig(),
@@ -74,23 +75,16 @@ $app->get("/", function () use ($app) {
     );
     $pocketData = new PocketData($configs['pocket']['consumer_key'], $configs['pocket']['access_token']);
     $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
-
+    
     $templateVars = array(
         "configs" => $configs,
         "section" => "index",
         "layout" => $layout,
         "gallery" => $gallery,
-        "instagram_posts" => $instagramData->getRecentMedia(
-            25,
-            [
-                "art",
-                "drawing",
-                "sketchbook",
-                "characterdesign"
-            ]
+        "instagram_posts" => $instagramData->getEmbedMedia(
+            $configs['instagram']['photos']
         ),
         "pocket_articles" => $pocketData->getArticles(10, 3600),
-        // "pocket_articles" => [],
         "comics" => $comics
     );
 

@@ -55,25 +55,28 @@ class InstagramData extends ExternalDataBase {
     }
 
     /**
-     *
-     * @return array() a collection of media objects decoded from the youtube api response
+     * Geet the embed codes given list of instagram photo urls.
+     * @param  array $instagramUrls The list of instagram urls.
+     * @return array                The list of corresponding embed codes.
      */
-    public function getEmbedMedia($shortcodes, $maxwidth = 525)
+    public function getEmbedMedia($instagramUrls)
     {
-        $cacheKey = md5("instagramShortcodes:" . implode("|", $shortcodes) . $maxwidth);
-        $cache = $this->retrieveCache($cacheKey);
-
-        if(!$cache) {
-            foreach ($shortcodes as $id) {
-                $response = $this->httpClient->get( 'http://api.instagram.com/publicapi/oembed/?url=' . $id . '&maxwidth=' .$maxwidth )->send();
-                $response = json_decode($response->getBody(true));
-                $data[] = $response;
+        $data = [];
+        foreach ($instagramUrls as $url) {
+            $cacheKey = "instagramEmbed:" . md5($url);
+            $cache = $this->retrieveCache($cacheKey);
+            if(!$cache) {
+                $response = $this->httpClient->get(
+                    "https://api.instagram.com/oembed/?url=" . $url);
+                $body = $response->getBody()->getContents();
+                $_data = json_decode($body);
+                $this->storeCache($cacheKey, $_data);
+                $data[] = $_data;
+            } else {
+                $data[] = $cache;
             }
-            $this->storeCache($cacheKey, $data);
-            return $data;
-        } else {
-            return $cache;
         }
+        return $data;
     }
 
     /**

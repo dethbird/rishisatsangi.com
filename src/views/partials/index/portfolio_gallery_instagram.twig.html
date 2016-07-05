@@ -9,8 +9,9 @@
 {% for object in instagram_posts %}
   <div class="row gallery-slide" id="{{id}}{{loop.index}}">
     <div class="col-xl-12 gallery-object">
-        <img src="{{object.images.standard_resolution.url}}"/>
-        <div class="caption">{{object.caption.text|raw}}</div>
+        <div class="instagram-post">
+          {{object.html|raw}}
+        </div>
     </div>
   </div>
 {% endfor %}

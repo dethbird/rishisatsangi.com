@@ -39,7 +39,7 @@ class PocketData extends ExternalDataBase {
                     'count' => $count
                 ]
             ]);
-            $body = $response->getBody();
+            $body = $response->getBody()->getContents();
             $response = json_decode($body);
             $data = [];
             foreach ($response->list as $key=>$value) {

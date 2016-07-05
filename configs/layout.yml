@@ -161,6 +161,7 @@ objects:
       swap_image_src: "/img/portfolio_trigger_gallery_hover.png"
     slides_gallery_trigger:
       swap_image_src: "/img/portfolio_trigger_gallery_hover.png"
+      open: true
     click_scroll:
       scroll_y: 825
       duration: 1

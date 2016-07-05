@@ -614,7 +614,9 @@ var SlidesGalleryView = Backbone.View.extend({
         });
         if(that.trigger_object.slides_gallery_trigger.open !== undefined) {
             if(that.trigger_object.slides_gallery_trigger.open == true) {
-                that.$trigger.trigger('click');
+                $(window).load(function(){
+                    that.show();
+                });
             }
         }
         that.$el.find('.close').click(function(){

@@ -4,6 +4,22 @@ instagram:
   client_id: :INSTAGRAM_CLIENT_ID
   client_secret: :INSTAGRAM_CLIENT_SECRET
   user_id: 31264453
+  photos:
+    - https://www.instagram.com/p/BHAKUO-RZpc/
+    - https://www.instagram.com/p/BFoReZNxZt4/
+    - https://www.instagram.com/p/BFRP5_rxZvC/
+    - https://www.instagram.com/p/BBkT6-ZRZuO/
+    - https://www.instagram.com/p/BBi3QHnRZlD/
+    - https://www.instagram.com/p/BAgIuJ2xZhZ/
+    - https://www.instagram.com/p/-p4WTERZi4/
+    - https://www.instagram.com/p/-m0zKxRZg2/
+    - https://www.instagram.com/p/9gSJTCxZm3/
+    - https://www.instagram.com/p/84RqzQRZpv/
+    - https://www.instagram.com/p/ykW_-uxZtI/
+    - https://www.instagram.com/p/yYZoXQRZkN/
+    - https://www.instagram.com/p/yQ1lEuxZpN/
+    - https://www.instagram.com/p/tIMHDcxZv8/
+    - https://www.instagram.com/p/tcy7cYRZnx/
 twitter:
   tweets:
     - "175800300060409856"

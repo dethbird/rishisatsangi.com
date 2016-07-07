@@ -95,6 +95,12 @@
                 'spaces' => 'drive'
             ]);
 
+            $db->perform(
+                $configs['sql']['content_gdrive_files']['delete_content_for_user'],
+                [
+                    'account_gdrive_id' => $gdrive_user['id']
+                ]
+            );
             foreach($fileList as $fileInfo) {
 
                 $file = $googleData->getFile($fileInfo->id);

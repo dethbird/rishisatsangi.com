@@ -188,6 +188,29 @@ $app->get("/likedrop", $authorize($app), function () use ($app) {
     );
 });
 
+# project
+$app->group('/project', $authorize($app), function () use ($app) {
+    $app->get("/:id", function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+
+        $templateVars = array(
+            "configs" => $configs,
+            'securityContext' => $securityContext,
+            "section" => "project.index",
+            "project" => ['id' => 12]
+        );
+
+        $app->render(
+            'pages/project.html.twig',
+            $templateVars,
+            200
+        );
+    });
+});
+
 # projects
 $app->get("/projects", $authorize($app), function () use ($app) {
 

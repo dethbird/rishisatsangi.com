@@ -8,7 +8,7 @@ date_default_timezone_set('America/New_York');
 session_cache_limiter(false);
 session_start();
 
-// Ensure src/ is on include_path
+# Ensure src/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
     APPLICATION_PATH ,
     APPLICATION_PATH . 'library',
@@ -29,7 +29,7 @@ use Cocur\Slugify\Slugify;
 use Symfony\Component\Yaml\Yaml;
 use Guzzle\Http\Client;
 
-// Load configs and add to the app container
+# Load configs and add to the app container
 $configs = Yaml::parse(file_get_contents("../configs/configs.yml"));
 $app = new \Slim\Slim(
     array(
@@ -57,14 +57,15 @@ $db = new DataBase(
 $app->container->set('configs', $configs);
 $app->container->set('db', $db);
 
+# authorize the user by session (middleware)
 $authorize = function ($app) {
 
     return function () use ($app) {
 
-        // store current path in session for smart login
+        # store current path in session for smart login
         $_SESSION['redirectTo'] = $app->request->getPathInfo();
 
-        // check cookie for securityContext
+        # check cookie for securityContext
         $securityContext = json_decode($app->getCookie('securityContext'));
 
         if (!isset($securityContext->username)) {
@@ -80,30 +81,7 @@ $app->notFound(function () use ($app) {
     );
 });
 
-
-$app->get("/logout", function () use ($app) {
-  $app->deleteCookie('securityContext');
-  $app->redirect("/");
-});
-
-
-$app->get("/login", function () use ($app) {
-
-    $configs = $app->container->get('configs');
-
-    $templateVars = array(
-        "configs" => $configs,
-        "section" => "login"
-    );
-
-    $app->render(
-        'pages/login.html.twig',
-        $templateVars,
-        200
-    );
-});
-
-
+# index
 $app->get("/", function () use ($app) {
 
     $configs = $app->container->get('configs');
@@ -120,7 +98,43 @@ $app->get("/", function () use ($app) {
     );
 });
 
+# api
+$app->group('/api', function () use ($app) {
+    $app->post('/login', function () use ($app) {
 
+        $configs = $app->container->get('configs');
+        $db = $app->container->get('db');
+
+        $result = $db->fetchAll(
+            $configs['sql']['users']['select_by_username_and_password'],
+            [
+                'username' => $app->request->params('username'),
+                'password' => md5($app->request->params('password'))
+            ]
+        );
+
+        $app->response->setStatus(404);
+        if (isset($result[0])) {
+            if ($result[0]['username'] == $app->request->params('username')){
+                $app->response->setStatus(200);
+                $app->response->headers->set('Content-Type', 'application/json');
+                $app->setCookie(
+                    "securityContext",
+                    json_encode($result[0]),
+                    "1 days"
+                );
+                if (isset($_SESSION['redirectTo'])) {
+                    $result[0]['redirectTo'] = $_SESSION['redirectTo'];
+                } else {
+                    $result[0]['redirectTo'] = '/likedrop';
+                }
+                $app->response->setBody(json_encode($result[0]));
+            }
+        }
+    });
+});
+
+# likedrop
 $app->get("/likedrop", $authorize($app), function () use ($app) {
 
     $configs = $app->container->get('configs');
@@ -174,42 +188,33 @@ $app->get("/likedrop", $authorize($app), function () use ($app) {
     );
 });
 
-$app->group('/api', function () use ($app) {
-    $app->post('/login', function () use ($app) {
 
-        $configs = $app->container->get('configs');
-        $db = $app->container->get('db');
+# login
+$app->get("/login", function () use ($app) {
 
-        $result = $db->fetchAll(
-            $configs['sql']['users']['select_by_username_and_password'],
-            [
-                'username' => $app->request->params('username'),
-                'password' => md5($app->request->params('password'))
-            ]
-        );
+    $configs = $app->container->get('configs');
 
-        $app->response->setStatus(404);
-        if (isset($result[0])) {
-            if ($result[0]['username'] == $app->request->params('username')){
-                $app->response->setStatus(200);
-                $app->response->headers->set('Content-Type', 'application/json');
-                $app->setCookie(
-                    "securityContext",
-                    json_encode($result[0]),
-                    "1 days"
-                );
-                if (isset($_SESSION['redirectTo'])) {
-                    $result[0]['redirectTo'] = $_SESSION['redirectTo'];
-                } else {
-                    $result[0]['redirectTo'] = '/likedrop';
-                }
-                $app->response->setBody(json_encode($result[0]));
-            }
-        }
-    });
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "login"
+    );
+
+    $app->render(
+        'pages/login.html.twig',
+        $templateVars,
+        200
+    );
 });
 
 
+# logout
+$app->get("/logout", function () use ($app) {
+  $app->deleteCookie('securityContext');
+  $app->redirect("/");
+});
+
+
+# service
 $app->group('/service', function () use ($app) {
 
     $app->group('/gdrive', function () use ($app) {

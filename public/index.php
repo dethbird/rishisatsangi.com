@@ -121,7 +121,7 @@ $app->get("/", function () use ($app) {
 });
 
 
-$app->get("/dashboard", $authorize($app), function () use ($app) {
+$app->get("/likedrop", $authorize($app), function () use ($app) {
 
     $configs = $app->container->get('configs');
     $securityContext = json_decode($app->getCookie('securityContext'));
@@ -163,29 +163,12 @@ $app->get("/dashboard", $authorize($app), function () use ($app) {
         'gdrive_user' => $gdrive_user,
         'gdrive_files' => $gdrive_files,
         'youtube_watchlater_videos' => $youtube_watchlater_videos,
-        "section" => "dashboard.index",
+        "section" => "likedrop.index",
         'hostname' => $configs['server']['hostname']
     );
 
     $app->render(
-        'pages/dashboard.html.twig',
-        $templateVars,
-        200
-    );
-});
-
-
-$app->get("/account", $authorize($app), function () use ($app) {
-
-    $configs = $app->container->get('configs');
-
-    $templateVars = array(
-        "configs" => $configs,
-        "section" => "account"
-    );
-
-    $app->render(
-        'pages/dashboard/account.html.twig',
+        'pages/likedrop.html.twig',
         $templateVars,
         200
     );
@@ -218,7 +201,7 @@ $app->group('/api', function () use ($app) {
                 if (isset($_SESSION['redirectTo'])) {
                     $result[0]['redirectTo'] = $_SESSION['redirectTo'];
                 } else {
-                    $result[0]['redirectTo'] = '/dashboard';
+                    $result[0]['redirectTo'] = '/likedrop';
                 }
                 $app->response->setBody(json_encode($result[0]));
             }
@@ -259,7 +242,7 @@ $app->group('/service', function () use ($app) {
                     'refresh_token' => $accessTokenData['refresh_token']
                 ]
             );
-            $app->redirect('/dashboard');
+            $app->redirect('/likedrop');
         });
 
         $app->get('/thumbnail/:cache_key', function ($cache_key) use ($app) {
@@ -310,7 +293,7 @@ $app->group('/service', function () use ($app) {
                     'access_token' => json_encode($accessTokenData)
                 ]
             );
-            $app->redirect('/dashboard');
+            $app->redirect('/likedrop');
         });
     });
 
@@ -347,7 +330,7 @@ $app->group('/service', function () use ($app) {
                     'access_token' => $accessTokenData->access_token
                 ]
             );
-            $app->redirect('/dashboard');
+            $app->redirect('/likedrop');
         });
     });
 });

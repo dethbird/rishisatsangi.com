@@ -1,11 +1,12 @@
 {% extends 'layout.html.twig' %}
+{% block title %} - Projects{% endblock %}
 {% block head %}
     {{parent()}}
 {% endblock %}
 {% block content %}
     {{ parent() }}
     <div class="container-fluid col-xs-12">
-        projects
+        <a href="/project/create" class="btn btn-success btn-sm">New</a>
     </div>
 {% endblock %}
 

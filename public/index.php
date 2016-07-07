@@ -188,6 +188,22 @@ $app->get("/likedrop", $authorize($app), function () use ($app) {
     );
 });
 
+# projects
+$app->get("/projects", $authorize($app), function () use ($app) {
+    $configs = $app->container->get('configs');
+
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "projects.index"
+    );
+
+    $app->render(
+        'pages/projects.html.twig',
+        $templateVars,
+        200
+    );
+});
+
 
 # login
 $app->get("/login", function () use ($app) {

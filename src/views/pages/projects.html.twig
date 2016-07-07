@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+    <div class="container-fluid col-xs-12">
+        projects
+    </div>
+{% endblock %}
+
+
+{% block includes %}
+  <!-- js includes -->
+  <script type="text/javascript" src="/js/pages/projects.js"></script>
+{% endblock %}

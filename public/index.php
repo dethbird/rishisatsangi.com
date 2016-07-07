@@ -190,10 +190,14 @@ $app->get("/likedrop", $authorize($app), function () use ($app) {
 
 # projects
 $app->get("/projects", $authorize($app), function () use ($app) {
+
     $configs = $app->container->get('configs');
+    $securityContext = json_decode($app->getCookie('securityContext'));
+    $db = $app->container->get('db');
 
     $templateVars = array(
         "configs" => $configs,
+        'securityContext' => $securityContext,
         "section" => "projects.index"
     );
 

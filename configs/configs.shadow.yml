@@ -119,3 +119,12 @@ sql:
             WHERE account_gdrive_id = :account_gdrive_id
             ORDER BY date_updated DESC
             LIMIT :limit
+    projects:
+        insert: |
+            INSERT INTO projects
+            (user_id, name, description, date_added, date_updated)
+            VALUES
+            (:user_id, :name, :description,  NOW(), NOW())
+        select_by_id: |
+            SELECT * FROM projects
+            WHERE id = :id AND user_id = :user_id

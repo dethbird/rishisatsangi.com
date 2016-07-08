@@ -14,11 +14,10 @@ var ProjectFormView = Backbone.View.extend({
             data: data
         })
         .success(function(data){
-            console.log(data);
+            $el.find('input[name=id]').val(data.id);
         })
         .error(function(data){
             console.log(data);
-            var $el = $(that.el);
         });
     }
 });

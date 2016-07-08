@@ -100,6 +100,8 @@ $app->get("/", function () use ($app) {
 
 # api
 $app->group('/api', function () use ($app) {
+
+
     $app->post('/login', function () use ($app) {
 
         $configs = $app->container->get('configs');
@@ -131,6 +133,36 @@ $app->group('/api', function () use ($app) {
                 $app->response->setBody(json_encode($result[0]));
             }
         }
+    });
+
+
+    $app->post('/project', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+
+        $result = $db->perform(
+            $configs['sql']['projects']['insert'],
+            [
+                'user_id' => $securityContext->id,
+                'name' => $app->request->params('name'),
+                'description' => $app->request->params('description')
+            ]
+        );
+
+        $result = $db->fetchOne(
+            $configs['sql']['projects']['select_by_id'],
+            [
+                'id' => $db->lastInsertId(),
+                'user_id' => $securityContext->id
+            ]
+        );
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->setBody(json_encode($result));
+        
     });
 });
 

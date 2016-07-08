@@ -15,21 +15,11 @@ var ProjectFormView = Backbone.View.extend({
             data: data
         })
         .success(function(data){
-            console.log(data);
+            $el.find('input[name=id]').val(data.id);
         })
         .error(function(data){
             console.log(data);
             var $el = $(that.el);
-            $.each($el.children(), function(i,e) {
-                TweenLite.to($(e), 2, {
-                    rotation: -15 + Math.random() * 30,
-                    ease: Elastic.easeOut.config(1, 0.25)
-                });
-            });
-            TweenLite.to($el, 2, {
-                backgroundColor: "#500b0b",
-                ease: Elastic.easeOut.config(1, 0.25)
-            });
         });
     }
 });

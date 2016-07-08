@@ -15,6 +15,10 @@ class DataBase {
             $password);
     }
 
+    public function lastInsertId(){
+        return $this->client->lastInsertId();
+    }
+
     public function fetchAll($stmt, $bindVars)
     {
         return $this->client->fetchAll($stmt, $bindVars);

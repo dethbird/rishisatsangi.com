@@ -8,6 +8,27 @@
     <div class="container-fluid col-xs-12">
         <a href="/project/create" class="btn btn-success btn-sm">New</a>
     </div>
+    <div class="row">
+        <div class="container-fluid col-xs-12">
+            {% for project in projects %}
+                {#  <pre>{{project|print_r}}</pre> #}
+                <div class="row">
+                    <div class="col-xs-2">
+                        <a href="/project/{{project.id}}">{{project.name}}</a>
+                    </div>
+                    <div class="col-xs-4">
+                        {{project.description}}
+                    </div>
+                    <div class="col-xs-2">
+                        {{project.date_added}}
+                    </div>
+                    <div class="col-xs-2">
+                        {{project.date_updated}}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
 

@@ -128,6 +128,10 @@ sql:
         select_by_id: |
             SELECT * FROM projects
             WHERE id = :id AND user_id = :user_id
+        select_by_user: |
+            SELECT * FROM projects
+            WHERE user_id = :user_id
+            ORDER BY name DESC
         update: |
             UPDATE projects
             SET

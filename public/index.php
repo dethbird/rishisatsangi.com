@@ -293,10 +293,18 @@ $app->get("/projects", $authorize($app), function () use ($app) {
     $securityContext = json_decode($app->getCookie('securityContext'));
     $db = $app->container->get('db');
 
+    $projects = $db->fetchAll(
+        $configs['sql']['projects']['select_by_user'],
+        [
+            'user_id' => $securityContext->id
+        ]
+    );
+
     $templateVars = array(
         "configs" => $configs,
         'securityContext' => $securityContext,
-        "section" => "projects.index"
+        "section" => "projects.index",
+        "projects" => $projects
     );
 
     $app->render(

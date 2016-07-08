@@ -17,7 +17,7 @@
                         <a href="/project/{{project.id}}">{{project.name}}</a>
                     </div>
                     <div class="col-xs-4">
-                        {{project.description}}
+                        {{project.description|markdown}}
                     </div>
                     <div class="col-xs-2">
                         {{project.date_added}}

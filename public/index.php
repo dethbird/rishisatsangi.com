@@ -261,6 +261,7 @@ $app->group('/project', $authorize($app), function () use ($app) {
         $db = $app->container->get('db');
         $id = (int) $id;
 
+        $project = [];
         if($id > 0) {
             $project = $db->fetchOne(
                 $configs['sql']['projects']['select_by_id'],

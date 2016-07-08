@@ -1289,11 +1289,43 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],2:[function(require,module,exports){
 marked = require('marked');
+var ModalView = require('../ui/ModalView');
 
+var MarkdownEditorView = Backbone.View.extend({
+    modalView: null,
+    events: {
+        'click .markdown-edit-btn-preview': 'showPreview'
+    },
+    initialize: function() {
+        var that = this;
+        that.modalView = new ModalView();
+    },
+    showPreview: function() {
+        var that = this;
+        that.modalView.showContent(
+            marked(
+                $(that.el).find('.markdown-edit-editor').val()));
+    }
+});
+
+module.exports = MarkdownEditorView;
+
+},{"../ui/ModalView":4,"marked":1}],3:[function(require,module,exports){
+var MarkdownEditorView = require('./MarkdownEditorView');
 var ProjectFormView = Backbone.View.extend({
     projectUrl: '/api/project',
     events: {
         'click .submit-button': 'submit'
+    },
+    initialize: function() {
+        var that = this;
+        var $el = $(this.el);
+
+        $el.find('.markdown-edit').each(function(i,editor){
+            var markdownEditor = new MarkdownEditorView({
+                el: editor
+            });
+        });
     },
     submit: function(e) {
         var that = this;
@@ -1317,13 +1349,37 @@ var ProjectFormView = Backbone.View.extend({
 
 module.exports = ProjectFormView;
 
-},{"marked":1}],3:[function(require,module,exports){
+},{"./MarkdownEditorView":2}],4:[function(require,module,exports){
+var ModalView = Backbone.View.extend({
+    modal: null,
+    initialize: function() {
+        var that = this;
+        var $el = $(this.el);
+
+        that.modal = $('#explosioncorp-modal');
+        that.modal.find('#explosioncorp-modal-close').click(function(){
+            that.closeModal();
+        });
+
+    },
+    showContent: function(content) {
+        var that = this;
+        that.modal.find('#explosioncorp-modal-content').html(content);
+        that.modal.show();
+    },
+    closeModal: function() {
+        var that = this;
+        that.modal.hide();
+    }
+});
+
+module.exports = ModalView;
+
+},{}],5:[function(require,module,exports){
 var ProjectFormView = require('../library/views/forms/ProjectFormView');
 
 var projectFormView = new ProjectFormView({
     el: '#project-form'
 });
 
-console.log(projectFormView);
-
-},{"../library/views/forms/ProjectFormView":2}]},{},[3]);
+},{"../library/views/forms/ProjectFormView":3}]},{},[5]);

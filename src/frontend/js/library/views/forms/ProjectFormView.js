@@ -1,9 +1,18 @@
-marked = require('marked');
-
+var MarkdownEditorView = require('./MarkdownEditorView');
 var ProjectFormView = Backbone.View.extend({
     projectUrl: '/api/project',
     events: {
         'click .submit-button': 'submit'
+    },
+    initialize: function() {
+        var that = this;
+        var $el = $(this.el);
+
+        $el.find('.markdown-edit').each(function(i,editor){
+            var markdownEditor = new MarkdownEditorView({
+                el: editor
+            });
+        });
     },
     submit: function(e) {
         var that = this;

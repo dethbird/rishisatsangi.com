@@ -38,6 +38,16 @@
     <div class="container-fluid">
         {% block content %}{% endblock %}
     </div>
+    <div id="explosioncorp-modal">
+        <div id="explosioncorp-modal-content-container">
+            <div class="row container-fluid text-align-right">
+                <a class="btn btn-sm btn-danger-outline" id="explosioncorp-modal-close">close</a>
+            </div>
+            <div class="row container-fluid">
+                <div id="explosioncorp-modal-content"></div>
+            </div>
+        </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>

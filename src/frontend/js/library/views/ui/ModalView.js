@@ -8,7 +8,14 @@ var ModalView = Backbone.View.extend({
         that.modal.find('#explosioncorp-modal-close').click(function(){
             that.closeModal();
         });
-
+        $('body').keyup(function(e){
+            that.keyTest(e);
+        });
+    },
+    keyTest: function(e) {
+        if (e.keyCode == 27) {
+            this.closeModal();
+        }
     },
     showContent: function(content) {
         var that = this;

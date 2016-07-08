@@ -1294,11 +1294,18 @@ var ModalView = require('../ui/ModalView');
 var MarkdownEditorView = Backbone.View.extend({
     modalView: null,
     events: {
-        'click .markdown-edit-btn-preview': 'showPreview'
+        'click .markdown-edit-btn-preview': 'showPreview',
+        'keypress .markdown-edit-editor': 'keyTest'
     },
     initialize: function() {
         var that = this;
         that.modalView = new ModalView();
+    },
+    keyTest: function(e) {
+        var that = this;
+        if(e.keyCode == 13 && e.shiftKey && e.ctrlKey) {
+            that.showPreview();
+        }
     },
     showPreview: function() {
         var that = this;
@@ -1360,7 +1367,14 @@ var ModalView = Backbone.View.extend({
         that.modal.find('#explosioncorp-modal-close').click(function(){
             that.closeModal();
         });
-
+        $('body').keyup(function(e){
+            that.keyTest(e);
+        });
+    },
+    keyTest: function(e) {
+        if (e.keyCode == 27) {
+            this.closeModal();
+        }
     },
     showContent: function(content) {
         var that = this;

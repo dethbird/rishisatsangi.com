@@ -5,25 +5,23 @@
 {% endblock %}
 {% block content %}
     {{ parent() }}
-    <div class="container-fluid col-xs-12">
+    <div class="row container-fluid">
         <a href="/project/create" class="btn btn-success btn-sm">New</a>
     </div>
-    <div class="row">
+    <br />
+    <div class="row container-fluid">
         <div class="container-fluid col-xs-12">
             {% for project in projects %}
-                {#  <pre>{{project|print_r}}</pre> #}
-                <div class="row">
-                    <div class="col-xs-2">
-                        <a href="/project/{{project.id}}">{{project.name}}</a>
+                <div class="card col-xs-12 col-lg-6">
+                    <div class="card-block">
+                        <a class="display-5" href="/project/{{project.id}}">{{project.name}}</a>
                     </div>
-                    <div class="col-xs-4">
-                        {{project.description|markdown}}
+                    <div class="card-block">
+                        <blockquote>{{project.description|markdown}}</blockquote>
                     </div>
-                    <div class="col-xs-2">
-                        {{project.date_added}}
-                    </div>
-                    <div class="col-xs-2">
-                        {{project.date_updated}}
+                    <div class="card-block">
+                        <span class="date">modified {{project.date_updated|time_ago}}</span>
+                        <span class="muted">(created  {{project.date_added|time_ago}})</span>
                     </div>
                 </div>
             {% endfor %}

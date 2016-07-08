@@ -58,6 +58,10 @@ a.displayed-item {
     height: 68px;
     text-align: left;
 }
+.display-5 {
+    font-size: 1.8rem;
+    font-weight: 300;
+}
 .dropdown-toggle {
     height: 68px;
 }
@@ -89,9 +93,14 @@ img.service-logo-manage {
 .number {
     font-weight: bold;
 }
+.muted {
+    color: #aaa;
+}
 .hidden {
     display:none;
 }
+
+
 
 #explosioncorp-modal {
     display:none;

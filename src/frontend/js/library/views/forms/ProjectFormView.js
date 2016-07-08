@@ -1,3 +1,5 @@
+marked = require('marked');
+
 var ProjectFormView = Backbone.View.extend({
     projectUrl: '/api/project',
     events: {

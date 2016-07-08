@@ -7,6 +7,7 @@
     "uglify-js": "^2.5.0"
   },
   "scripts": {
-    "deploy": "bash ./build.sh -pjc"
+    "deploy": "php scripts/build.php --cache --php --configs --npm --javascript",
+    "build-js": "php scripts/build.php --javascript"
   }
 }

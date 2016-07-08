@@ -128,3 +128,13 @@ sql:
         select_by_id: |
             SELECT * FROM projects
             WHERE id = :id AND user_id = :user_id
+        update: |
+            UPDATE projects
+            SET
+                name = :name,
+                description = :description,
+                date_updated = NOW()
+            WHERE
+                id = :id
+            AND
+                user_id = :user_id

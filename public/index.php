@@ -159,10 +159,42 @@ $app->group('/api', function () use ($app) {
             ]
         );
 
+        $app->response->setStatus(201);
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->setBody(json_encode($result));
+
+    });
+
+
+    $app->put('/project/:id', function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $id = (int) $id;
+
+        $result = $db->perform(
+            $configs['sql']['projects']['update'],
+            [
+                'id' => $id,
+                'user_id' => $securityContext->id,
+                'name' => $app->request->params('name'),
+                'description' => $app->request->params('description')
+            ]
+        );
+
+        $result = $db->fetchOne(
+            $configs['sql']['projects']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $securityContext->id
+            ]
+        );
+
         $app->response->setStatus(200);
         $app->response->headers->set('Content-Type', 'application/json');
         $app->response->setBody(json_encode($result));
-        
+
     });
 });
 

@@ -11,7 +11,8 @@ var ProjectFormView = Backbone.View.extend({
 
         $.ajax({
             method: data['id'] == '' ? 'POST' : 'PUT',
-            url: this.projectUrl,
+            url: this.projectUrl + (
+                data['id'] == '' ? '' : '/' + data['id']),
             data: data
         })
         .success(function(data){
@@ -19,7 +20,6 @@ var ProjectFormView = Backbone.View.extend({
         })
         .error(function(data){
             console.log(data);
-            var $el = $(that.el);
         });
     }
 });

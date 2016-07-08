@@ -259,12 +259,23 @@ $app->group('/project', $authorize($app), function () use ($app) {
         $configs = $app->container->get('configs');
         $securityContext = json_decode($app->getCookie('securityContext'));
         $db = $app->container->get('db');
+        $id = (int) $id;
+
+        if($id > 0) {
+            $project = $db->fetchOne(
+                $configs['sql']['projects']['select_by_id'],
+                [
+                    'id' => $id,
+                    'user_id' => $securityContext->id
+                ]
+            );
+        }
 
         $templateVars = array(
             "configs" => $configs,
             'securityContext' => $securityContext,
             "section" => "project.index",
-            "project" => ['id' => 12]
+            "project" => $project
         );
 
         $app->render(

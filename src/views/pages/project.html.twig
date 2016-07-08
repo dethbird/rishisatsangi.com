@@ -7,21 +7,22 @@
     {{ parent() }}
     <div class="container col-xs-12">
         <form id="project-form">
+            <input type="hidden" name="id" value="{{project.id}}" />
             <div class="form-group row">
                 <label for="project_name" class="col-xs-2 form-control-label">Name</label>
                 <div class="col-xs-10">
-                    <input type="email" class="form-control" name="name" id="name" placeholder="Project Name">
+                    <input class="form-control" name="name" value="{{project.name}}" id="name" placeholder="Project Name">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="project_name" class="col-xs-2 form-control-label">Description</label>
                 <div class="col-xs-10">
-                    <textarea class="form-control" name="description" id="description" placeholder="Project Description" rows="10"></textarea>
+                    <textarea class="form-control" name="description" id="description" placeholder="Project Description" rows="10">{{project.description}}</textarea>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-xs-10 col-xs-offset-2">
-                    <submit class="btn btn-success">Save</submit>
+                    <a class="btn btn-success submit-button">Save</a>
                 </div>
             </div>
         </form>

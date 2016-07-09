@@ -255,6 +255,18 @@ class Projects {
             ]
         );
 
+        foreach ($storyboards as $i=>$storyboard) {
+            $panels = $this->db->fetchAll(
+                $this->configs['sql']['project_storyboard_panels']['select_by_storyboard'],
+                [
+                    'storyboard_id' => (int) $storyboard['id'],
+                    'user_id' => $this->securityContext->id
+                ]
+            );
+            $storyboard['panels'] = $panels;
+            $storyboards[$i] = $storyboard;
+        }
+
         $project['storyboards'] = $storyboards;
 
         return $project;

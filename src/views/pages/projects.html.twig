@@ -51,6 +51,22 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row container">
+                                            {% if storyboard.panels|length == 0 %}
+                                                <div class="muted container">
+                                                    <a href="/">create a panel</a>
+                                                </div>
+                                            {% else %}
+                                                <span class="lead">Panels</span><br />
+                                                {% for panel in storyboard.panels %}
+                                                <div class="col-xs-4">
+                                                    <div class="card container">
+                                                        {{panel.name}}
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </div>
                             {% endfor %}

@@ -47,6 +47,10 @@ label.tag {
     font-size: .7rem;
 }
 
+.btn-group .btn {
+    float: inherit;
+}
+
 .content {
     margin-bottom: 10px;
     padding: 25px;
@@ -63,7 +67,7 @@ a.displayed-item {
     font-weight: 300;
 }
 .dropdown-toggle {
-    height: 68px;
+    /*height: 68px;*/
 }
 .dropdown-toggle::after {
     margin-left: 1rem;

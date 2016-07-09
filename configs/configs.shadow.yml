@@ -148,3 +148,8 @@ sql:
             WHERE user_id = :user_id
             AND project_id = :project_id
             ORDER BY date_updated DESC
+        select_by_id: |
+            SELECT * FROM project_storyboards
+            WHERE user_id = :user_id
+            AND id = :id
+            ORDER BY date_updated DESC

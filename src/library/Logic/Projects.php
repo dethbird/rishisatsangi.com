@@ -114,6 +114,19 @@ class Projects {
         return $project;
     }
 
+    public function fetchStoryboardById($storyboardId)
+    {
+        $storyboard = $this->db->fetchOne(
+            $this->configs['sql']['project_storyboards']['select_by_id'],
+            [
+                'id' => $storyboardId,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $storyboard;
+    }
+
     /**
      * Builds out the project tree given project as array
      * @param  [type] $project [description]

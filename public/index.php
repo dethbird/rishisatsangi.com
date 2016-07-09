@@ -300,6 +300,33 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
 
 # project
 $app->group('/project', $authorize($app), function () use ($app) {
+    $app->get("/:id/storyboard/:storyboard_id", function (
+            $id, $storyboard_id) use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $project = $projectService->fetchOne($id);
+        if ($project) {
+
+            $storyboard = $projectService->fetchStoryboardById($storyboard_id);
+
+            $templateVars = array(
+                "configs" => $configs,
+                'securityContext' => $securityContext,
+                "section" => "project.storyboard.index",
+                "project" => $project,
+                "storyboard" => $storyboard
+            );
+
+            $app->render(
+                'pages/project/storyboard.html.twig',
+                $templateVars,
+                200
+            );
+        }
+    });
     $app->get("/:id", function ($id) use ($app) {
 
         $configs = $app->container->get('configs');

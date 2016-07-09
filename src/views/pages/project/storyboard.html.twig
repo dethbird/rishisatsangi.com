@@ -6,7 +6,7 @@
 {% block content %}
     {{ parent() }}
     <ol class="breadcrumb">
-        <li><a href="#">Project</a></li>
+        <li><a href="/projects">Projects</a></li>
         <li>{{project.name}}</li>
         <li>Storyboard</li>
         <li class="active">{{storyboard.id == "" ? " Create" : "Edit"}}</li>

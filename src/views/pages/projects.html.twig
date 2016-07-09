@@ -61,6 +61,17 @@
                                                 {% for panel in storyboard.panels %}
                                                 <div class="col-xs-4">
                                                     <div class="card container">
+                                                        {% if panel.revisions|length == 0 %}
+                                                            <div class="muted container">
+                                                                <a href="/">create a revision</a>
+                                                            </div>
+                                                        {% else %}
+                                                            {% for revision in panel.revisions %}
+                                                                {% if loop.index == 1 %}
+                                                                    {{revision.id}}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endif %}
                                                         {{panel.name}}
                                                     </div>
                                                 </div>

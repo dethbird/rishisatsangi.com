@@ -522,6 +522,8 @@ $app->get("/projects", $authorize($app), function () use ($app) {
         $projects[$i] = $projectService->hydrateProject($project);
     }
 
+	// print_r($projects); exit();
+
     $templateVars = array(
         "configs" => $configs,
         'securityContext' => $securityContext,

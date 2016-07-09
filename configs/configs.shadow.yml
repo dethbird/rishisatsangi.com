@@ -190,3 +190,9 @@ sql:
             WHERE id = :id
             AND storyboard_id = :storyboard_id
             AND user_id = :user_id
+    project_storyboard_panel_revisions:
+        select_by_panel: |
+            SELECT * FROM project_storyboard_panel_revisions
+            WHERE user_id = :user_id
+            AND panel_id = :panel_id
+            ORDER BY date_updated DESC

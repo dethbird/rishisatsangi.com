@@ -1336,8 +1336,9 @@ var ProjectFormView = Backbone.View.extend({
     },
     submit: function(e) {
         var that = this;
-        $el = $(this.el);
-        data = _.object(_.map($el.serializeArray(), _.values));
+        var $target = $(e.target);
+        var $el = $(this.el);
+        var data = _.object(_.map($el.serializeArray(), _.values));
 
         $.ajax({
             method: data['id'] == '' ? 'POST' : 'PUT',
@@ -1346,18 +1347,21 @@ var ProjectFormView = Backbone.View.extend({
             data: data,
             beforeSend: function(){
                 $el.find('.form-group').removeClass('has-danger');
+                $target.addClass('disabled');
             }
         })
         .success(function(data){
             $el.find('input[name=id]').val(data.id);
         })
         .error(function(data){
-            // console.log(data.responseJSON);
             $.each(data.responseJSON, function(i,e){
                 $el.find(
                     '[name=' +  e.property + ']').closest(
                         '.form-group').addClass('has-danger');
             });
+        })
+        .complete(function(){
+            $target.removeClass('disabled');
         });
     }
 });

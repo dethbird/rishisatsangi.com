@@ -1288,6 +1288,57 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],2:[function(require,module,exports){
+var MarkdownEditorView = require('./MarkdownEditorView');
+var BaseFormView = Backbone.View.extend({
+    baseUrl: '/api/project',
+    events: {
+        'click .submit-button': 'submit'
+    },
+    initialize: function() {
+        var that = this;
+        var $el = $(this.el);
+
+        $el.find('.markdown-edit').each(function(i,editor){
+            var markdownEditor = new MarkdownEditorView({
+                el: editor
+            });
+        });
+    },
+    submit: function(e) {
+        var that = this;
+        var $target = $(e.target);
+        var $el = $(this.el);
+        var data = _.object(_.map($el.serializeArray(), _.values));
+
+        $.ajax({
+            method: data['id'] == '' ? 'POST' : 'PUT',
+            url: this.baseUrl + (
+                data['id'] == '' ? '' : '/' + data['id']),
+            data: data,
+            beforeSend: function(){
+                $el.find('.form-group').removeClass('has-danger');
+                $target.addClass('disabled');
+            }
+        })
+        .success(function(data){
+            $el.find('input[name=id]').val(data.id);
+        })
+        .error(function(data){
+            $.each(data.responseJSON, function(i,e){
+                $el.find(
+                    '[name=' +  e.property + ']').closest(
+                        '.form-group').addClass('has-danger');
+            });
+        })
+        .complete(function(){
+            $target.removeClass('disabled');
+        });
+    }
+});
+
+module.exports = BaseFormView;
+
+},{"./MarkdownEditorView":3}],3:[function(require,module,exports){
 marked = require('marked');
 var ModalView = require('../ui/ModalView');
 
@@ -1317,58 +1368,15 @@ var MarkdownEditorView = Backbone.View.extend({
 
 module.exports = MarkdownEditorView;
 
-},{"../ui/ModalView":4,"marked":1}],3:[function(require,module,exports){
-var MarkdownEditorView = require('./MarkdownEditorView');
-var ProjectFormView = Backbone.View.extend({
-    projectUrl: '/api/project',
-    events: {
-        'click .submit-button': 'submit'
-    },
-    initialize: function() {
-        var that = this;
-        var $el = $(this.el);
-
-        $el.find('.markdown-edit').each(function(i,editor){
-            var markdownEditor = new MarkdownEditorView({
-                el: editor
-            });
-        });
-    },
-    submit: function(e) {
-        var that = this;
-        var $target = $(e.target);
-        var $el = $(this.el);
-        var data = _.object(_.map($el.serializeArray(), _.values));
-
-        $.ajax({
-            method: data['id'] == '' ? 'POST' : 'PUT',
-            url: this.projectUrl + (
-                data['id'] == '' ? '' : '/' + data['id']),
-            data: data,
-            beforeSend: function(){
-                $el.find('.form-group').removeClass('has-danger');
-                $target.addClass('disabled');
-            }
-        })
-        .success(function(data){
-            $el.find('input[name=id]').val(data.id);
-        })
-        .error(function(data){
-            $.each(data.responseJSON, function(i,e){
-                $el.find(
-                    '[name=' +  e.property + ']').closest(
-                        '.form-group').addClass('has-danger');
-            });
-        })
-        .complete(function(){
-            $target.removeClass('disabled');
-        });
-    }
+},{"../ui/ModalView":5,"marked":1}],4:[function(require,module,exports){
+var BaseFormView = require('./BaseFormView');
+var ProjectFormView = BaseFormView.extend({
+    baseUrl: '/api/project'
 });
 
 module.exports = ProjectFormView;
 
-},{"./MarkdownEditorView":2}],4:[function(require,module,exports){
+},{"./BaseFormView":2}],5:[function(require,module,exports){
 var ModalView = Backbone.View.extend({
     modal: null,
     initialize: function() {
@@ -1401,11 +1409,11 @@ var ModalView = Backbone.View.extend({
 
 module.exports = ModalView;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var ProjectFormView = require('../library/views/forms/ProjectFormView');
 
 var projectFormView = new ProjectFormView({
     el: '#project-form'
 });
 
-},{"../library/views/forms/ProjectFormView":3}]},{},[5]);
+},{"../library/views/forms/ProjectFormView":4}]},{},[6]);

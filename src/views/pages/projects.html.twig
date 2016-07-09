@@ -12,18 +12,26 @@
     <div class="row container-fluid">
         <div class="container-fluid col-xs-12">
             {% for project in projects %}
-                <div class="card col-xs-12 col-lg-6">
+                <div class="card col-xs-12 col-lg-4">
                     <div class="card-block">
                         <a class="display-5" href="/project/{{project.id}}">{{project.name}}</a>
+                        <br />
+                        <span class="date">modified {{project.date_updated|time_ago}}</span>
+                        <span class="muted">(created  {{project.date_added|time_ago}})</span>
                     </div>
                     <div class="card-block">
                         <blockquote>{{project.description|markdown}}</blockquote>
                     </div>
                     <div class="card-block">
-                        <span class="date">modified {{project.date_updated|time_ago}}</span>
-                        <span class="muted">(created  {{project.date_added|time_ago}})</span>
+                        <div class="display-5">Storyboards</div>
+                        {% if project.storyboards|length == 0 %}
+                        <a class="btn btn-sm btn-success-outline" href="/project/{{project.id}}/storyboard/ceate">New</a>
+                        {% endif %}
                     </div>
                 </div>
+                {% if loop.index is divisible by(3) %}
+                <div class="row"></div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

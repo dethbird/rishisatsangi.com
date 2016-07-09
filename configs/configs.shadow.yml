@@ -131,7 +131,7 @@ sql:
         select_by_user: |
             SELECT * FROM projects
             WHERE user_id = :user_id
-            ORDER BY name DESC
+            ORDER BY date_updated DESC
         update: |
             UPDATE projects
             SET
@@ -142,3 +142,9 @@ sql:
                 id = :id
             AND
                 user_id = :user_id
+    project_storyboards:
+        select_by_project: |
+            SELECT * FROM project_storyboards
+            WHERE user_id = :user_id
+            AND project_id = :project_id
+            ORDER BY date_updated DESC

@@ -50,7 +50,15 @@ label.tag {
 .btn-group .btn {
     float: inherit;
 }
-
+.card-block {
+    padding: 15px;
+}
+.card-block ul {
+    line-height: 1;
+}
+.card-block blockquote {
+    padding: 0px 0px 0px 15px;
+}
 .content {
     margin-bottom: 10px;
     padding: 25px;
@@ -65,6 +73,10 @@ a.displayed-item {
 .display-5 {
     font-size: 1.8rem;
     font-weight: 300;
+}
+a.display-5 {
+    color: #c9177c;
+    font-weight: bold;
 }
 .dropdown-toggle {
     /*height: 68px;*/
@@ -99,6 +111,7 @@ img.service-logo-manage {
 }
 .muted {
     color: #aaa;
+    font-size: 12px;
 }
 .hidden {
     display:none;

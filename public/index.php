@@ -22,6 +22,7 @@ require_once APPLICATION_PATH . 'src/library/ExternalData/GoogleData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/InstagramData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';
 require_once APPLICATION_PATH . 'src/library/Data/Base.php';
+require_once APPLICATION_PATH . 'src/library/Logic/Projects.php';
 require_once APPLICATION_PATH . 'src/library/Validation/Validator.php';
 
 use Aptoma\Twig\Extension\MarkdownExtension;
@@ -136,12 +137,13 @@ $app->group('/api', function () use ($app) {
         }
     });
 
-
+    # create
     $app->post('/project', function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = json_decode($app->getCookie('securityContext'));
         $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
 
         # validate
         $validator = new Validator();
@@ -154,36 +156,23 @@ $app->group('/api', function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $result = $db->perform(
-                $configs['sql']['projects']['insert'],
-                [
-                    'user_id' => $securityContext->id,
-                    'name' => $app->request->params('name'),
-                    'description' => $app->request->params('description')
-                ]
-            );
-
-            $result = $db->fetchOne(
-                $configs['sql']['projects']['select_by_id'],
-                [
-                    'id' => $db->lastInsertId(),
-                    'user_id' => $securityContext->id
-                ]
-            );
+            $project = $projectService->create($app->request->params());
 
             $app->response->setStatus(201);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($result));
+            $app->response->setBody(json_encode($project));
         }
 
     });
 
 
+    # update
     $app->put('/project/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = json_decode($app->getCookie('securityContext'));
         $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
 
         # validate
@@ -198,27 +187,11 @@ $app->group('/api', function () use ($app) {
             $app->response->setBody(json_encode($validation_response));
         } else {
 
-            $result = $db->perform(
-                $configs['sql']['projects']['update'],
-                [
-                    'id' => $id,
-                    'user_id' => $securityContext->id,
-                    'name' => $app->request->params('name'),
-                    'description' => $app->request->params('description')
-                ]
-            );
-
-            $result = $db->fetchOne(
-                $configs['sql']['projects']['select_by_id'],
-                [
-                    'id' => $id,
-                    'user_id' => $securityContext->id
-                ]
-            );
+            $project = $projectService->update($id, $app->request->params());
 
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($result));
+            $app->response->setBody(json_encode($project));
         }
 
     });
@@ -332,17 +305,12 @@ $app->group('/project', $authorize($app), function () use ($app) {
         $configs = $app->container->get('configs');
         $securityContext = json_decode($app->getCookie('securityContext'));
         $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
 
         $project = [];
         if($id > 0) {
-            $project = $db->fetchOne(
-                $configs['sql']['projects']['select_by_id'],
-                [
-                    'id' => $id,
-                    'user_id' => $securityContext->id
-                ]
-            );
+            $project = $projectService->fetchOne($id);
         }
 
         $templateVars = array(
@@ -363,16 +331,17 @@ $app->group('/project', $authorize($app), function () use ($app) {
 # projects
 $app->get("/projects", $authorize($app), function () use ($app) {
 
+
     $configs = $app->container->get('configs');
     $securityContext = json_decode($app->getCookie('securityContext'));
     $db = $app->container->get('db');
+    $projectService = new Projects($db, $configs, $securityContext);
 
-    $projects = $db->fetchAll(
-        $configs['sql']['projects']['select_by_user'],
-        [
-            'user_id' => $securityContext->id
-        ]
-    );
+    $projects = $projectService->getProjects();
+
+    foreach ($projects as $i=>$project) {
+        $projects[$i] = $projectService->hydrateProject($project);
+    }
 
     $templateVars = array(
         "configs" => $configs,

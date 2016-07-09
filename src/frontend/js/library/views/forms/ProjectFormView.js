@@ -23,13 +23,21 @@ var ProjectFormView = Backbone.View.extend({
             method: data['id'] == '' ? 'POST' : 'PUT',
             url: this.projectUrl + (
                 data['id'] == '' ? '' : '/' + data['id']),
-            data: data
+            data: data,
+            beforeSend: function(){
+                $el.find('.form-group').removeClass('has-danger');
+            }
         })
         .success(function(data){
             $el.find('input[name=id]').val(data.id);
         })
         .error(function(data){
-            console.log(data);
+            // console.log(data.responseJSON);
+            $.each(data.responseJSON, function(i,e){
+                $el.find(
+                    '[name=' +  e.property + ']').closest(
+                        '.form-group').addClass('has-danger');
+            });
         });
     }
 });

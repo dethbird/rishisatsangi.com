@@ -22,6 +22,7 @@ require_once APPLICATION_PATH . 'src/library/ExternalData/GoogleData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/InstagramData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';
 require_once APPLICATION_PATH . 'src/library/Data/Base.php';
+require_once APPLICATION_PATH . 'src/library/Validation/Validator.php';
 
 use Aptoma\Twig\Extension\MarkdownExtension;
 use Aptoma\Twig\Extension\MarkdownEngine;
@@ -142,26 +143,38 @@ $app->group('/api', function () use ($app) {
         $securityContext = json_decode($app->getCookie('securityContext'));
         $db = $app->container->get('db');
 
-        $result = $db->perform(
-            $configs['sql']['projects']['insert'],
-            [
-                'user_id' => $securityContext->id,
-                'name' => $app->request->params('name'),
-                'description' => $app->request->params('description')
-            ]
-        );
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/post_project.json");
 
-        $result = $db->fetchOne(
-            $configs['sql']['projects']['select_by_id'],
-            [
-                'id' => $db->lastInsertId(),
-                'user_id' => $securityContext->id
-            ]
-        );
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $result = $db->perform(
+                $configs['sql']['projects']['insert'],
+                [
+                    'user_id' => $securityContext->id,
+                    'name' => $app->request->params('name'),
+                    'description' => $app->request->params('description')
+                ]
+            );
 
-        $app->response->setStatus(201);
-        $app->response->headers->set('Content-Type', 'application/json');
-        $app->response->setBody(json_encode($result));
+            $result = $db->fetchOne(
+                $configs['sql']['projects']['select_by_id'],
+                [
+                    'id' => $db->lastInsertId(),
+                    'user_id' => $securityContext->id
+                ]
+            );
+
+            $app->response->setStatus(201);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($result));
+        }
 
     });
 
@@ -173,27 +186,40 @@ $app->group('/api', function () use ($app) {
         $db = $app->container->get('db');
         $id = (int) $id;
 
-        $result = $db->perform(
-            $configs['sql']['projects']['update'],
-            [
-                'id' => $id,
-                'user_id' => $securityContext->id,
-                'name' => $app->request->params('name'),
-                'description' => $app->request->params('description')
-            ]
-        );
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/post_project.json");
 
-        $result = $db->fetchOne(
-            $configs['sql']['projects']['select_by_id'],
-            [
-                'id' => $id,
-                'user_id' => $securityContext->id
-            ]
-        );
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
 
-        $app->response->setStatus(200);
-        $app->response->headers->set('Content-Type', 'application/json');
-        $app->response->setBody(json_encode($result));
+            $result = $db->perform(
+                $configs['sql']['projects']['update'],
+                [
+                    'id' => $id,
+                    'user_id' => $securityContext->id,
+                    'name' => $app->request->params('name'),
+                    'description' => $app->request->params('description')
+                ]
+            );
+
+            $result = $db->fetchOne(
+                $configs['sql']['projects']['select_by_id'],
+                [
+                    'id' => $id,
+                    'user_id' => $securityContext->id
+                ]
+            );
+
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($result));
+        }
 
     });
 });

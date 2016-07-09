@@ -7,6 +7,7 @@
         "guzzlehttp/guzzle": "~6.0",
         "jimmiw/php-time-ago": "~0.4",
         "josegonzalez/dotenv": "~2.0",
+        "justinrainbow/json-schema": "~2.0",
         "mead-steve/console": "*",
         "michelf/php-markdown": "~1.3",
         "nategood/commando": "*",

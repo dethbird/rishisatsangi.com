@@ -78,7 +78,7 @@ class TemplateHelpers extends \Twig_Extension
         return json_decode(json_encode($stdClassObject), true);
     }
     public function time_ago($date_string) {
-        $timeAgo = new TimeAgo();
+        $timeAgo = new TimeAgo('America/New_York');
         return $timeAgo->inWords($date_string);
     }
     public function slugify($str) {

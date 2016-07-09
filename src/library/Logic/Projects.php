@@ -76,6 +76,29 @@ class Projects {
         return $result;
     }
 
+    public function createProjectStoryboardPanel($data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_storyboard_panels']['insert'],
+            [
+                'user_id' => $this->securityContext->id,
+                'storyboard_id' => $data['storyboard_id'],
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_storyboard_panels']['select_by_id'],
+            [
+                'id' => $this->db->lastInsertId(),
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
 
     /**
      * [update description]
@@ -121,6 +144,30 @@ class Projects {
 
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_storyboards']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
+    public function updateProjectStoryboardPanel($id, $data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_storyboard_panels']['update'],
+            [
+                'id' => $id,
+                'storyboard_id' => $data['storyboard_id'],
+                'user_id' => $this->securityContext->id,
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_storyboard_panels']['select_by_id'],
             [
                 'id' => $id,
                 'user_id' => $this->securityContext->id

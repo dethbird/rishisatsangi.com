@@ -253,6 +253,64 @@ $app->group('/api', function () use ($app) {
         }
 
     });
+
+    # create panel
+    $app->post('/project_storyboard_panel', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_storyboard_panel.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $panel = $projectService->createProjectStoryboardPanel($app->request->params());
+
+            $app->response->setStatus(201);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($panel));
+        }
+
+    });
+
+    # update panel
+    $app->put('/project_storyboard_panel/:id', function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+        $id = (int) $id;
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_storyboard_panel.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $panel = $projectService->updateProjectStoryboardPanel(
+                $id, $app->request->params());
+
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($panel));
+        }
+
+    });
 });
 
 # likedrop

@@ -156,7 +156,6 @@ sql:
             WHERE user_id = :user_id
             AND id = :id
             ORDER BY date_updated DESC
-
         update: |
             UPDATE project_storyboards
             SET
@@ -167,8 +166,22 @@ sql:
             AND project_id = :project_id
             AND user_id = :user_id
     project_storyboard_panels:
+        insert: |
+            INSERT INTO project_storyboard_panels
+            (storyboard_id, user_id, name, description, date_added, date_updated)
+            VALUES
+            (:storyboard_id, :user_id, :name, :description,  NOW(), NOW())
         select_by_id: |
             SELECT * FROM project_storyboard_panels
             WHERE user_id = :user_id
             AND id = :id
             ORDER BY date_updated DESC
+        update: |
+            UPDATE project_storyboard_panels
+            SET
+                name = :name,
+                description = :description,
+                date_updated = NOW()
+            WHERE id = :id
+            AND storyboard_id = :storyboard_id
+            AND user_id = :user_id

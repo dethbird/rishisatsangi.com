@@ -1,0 +1,68 @@
+{% extends 'layout.html.twig' %}
+{% block title %} - LikeDrop Gdrive{% endblock %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+    <div class="container-fluid col-xs-12 content-container" data-service="gdrive">
+        <table class="table table-striped">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="col-xs-3">Modified</th>
+                    <th class="col-xs-3">Filename</th>
+                    <th class="col-xs-3">Location</th>
+                    <th class="col-xs-3">Preview</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if gdrive_user %}
+                    {% for file in gdrive_files %}
+                    {% set file_json = file.json|json_decode(true) %}
+                        <tr>
+                            <td class="col-xs-3">
+                                <span class="date">{{file_json.modifiedByMeTime|time_ago}}</span>
+                            </td>
+                            <td class="col-xs-3">
+                                <a href="{{file_json.webViewLink|raw}}" class="title"><img src="{{file_json.iconLink|raw}}" /> {{file_json.name|raw}}</a>
+                            </td>
+                            <td class="col-xs-3">
+                                <label class="tag">{{file_json.folder|raw|google_drive_foldername}}</label>
+                            </td>
+                            <td class="col-xs-3">
+                                {% if file_json.mimeType=="image/jpeg" or file_json.mimeType=="image/png" or  file_json.mimeType=="image/x-photoshop" %}
+                                <img src="http://{{hostname}}/service/gdrive/thumbnail/{{file_json|google_drive_thumbnail_filename}}" class="col-xs-12"/>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+        {# {% if gdrive_user %}
+            {% for file in gdrive_files %}
+            {% set file_json = file.json|json_decode(true) %}
+                <div class="content container col-xs-6 col-lg-2">
+                    {% if file_json.mimeType=="image/jpeg" or file_json.mimeType=="image/png" or  file_json.mimeType=="image/x-photoshop" %}
+                    <img src="http://{{hostname}}/service/gdrive/thumbnail/{{file_json|google_drive_thumbnail_filename}}" class="col-xs-12"/>
+                    {% endif %}
+                    <a href="{{file_json.webViewLink|raw}}" class="title"><img src="{{file_json.iconLink|raw}}" /> {{file_json.name|raw}}</a>
+                    <br />
+                    <span class="date">{{file_json.modifiedByMeTime|time_ago}}</span>
+                    <br />
+                    <label class="tag">{{file_json.folder|raw|google_drive_foldername}}</label><br />
+                </div>
+                {% if loop.index is divisible by(6) %}
+                <div class="row"></div>
+                {% endif %}
+            {% endfor %}
+        {% endif %} #}
+    </div>
+
+{% endblock %}
+
+
+{% block includes %}
+  <!-- js includes -->
+  <script type="text/javascript" src="/js/pages/likedrop.js"></script>
+{% endblock %}

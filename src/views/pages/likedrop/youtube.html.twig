@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+{% block title %} - LikeDrop YouTube{% endblock %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+    <div class="container-fluid col-xs-12 content-container" data-service="youtube">
+        <!-- <h1><img src="/img/service/youtube/logo_sm.png" class="service-logo"/> Youtube</h1> -->
+        {% if gdrive_user %}
+            {# }<pre>{{ gdrive_user|print_r }}</pre> #}
+            {% for video in youtube_watchlater_videos %}
+            {% set v = video.json|json_decode(true) %}
+                <div class="content container col-xs-6 col-lg-3">
+                    {# }<pre>{{v|print_r}}</pre> #}
+                    <a href="https://www.youtube.com/watch?v={{v.snippet.resourceId.videoId|raw}}" class="title">{{v.snippet.title|raw}}</a><br />
+
+                    <span class="date">{{v.snippet.publishedAt|time_ago}}</span>
+
+                    <img src="{{v.snippet.thumbnails.high.url}}" class="col-xs-12"/>
+                    <br />
+                    <blockquote>{{v.snippet.description|raw}}</blockquote>
+                </div>
+                {% if loop.index is divisible by(4) %}
+                <div class="row"></div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+{% block includes %}
+  <!-- js includes -->
+  <script type="text/javascript" src="/js/pages/likedrop.js"></script>
+{% endblock %}

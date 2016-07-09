@@ -5,6 +5,10 @@
 {% endblock %}
 {% block content %}
     {{ parent() }}
+    <ol class="breadcrumb">
+        <li><a href="#">LikeDrop</a></li>
+        <li class="active">Gdrive</li>
+    </ol>
     <div class="container-fluid col-xs-12 content-container" data-service="gdrive">
         <table class="table table-striped">
             <thead class="thead-inverse">

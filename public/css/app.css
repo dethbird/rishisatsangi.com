@@ -103,7 +103,9 @@ img.service-logo-manage {
 .hidden {
     display:none;
 }
-
+.security-context-nav {
+    margin: 5px 0px 10px 0px;
+}
 
 
 #explosioncorp-modal {

@@ -1,10 +1,14 @@
 {% extends 'layout.html.twig' %}
-{% block title %} - Project {{project.id}}{% endblock %}
+{% block title %} - Project {{project.id == "" ? " Create" : "Edit"}}{% endblock %}
 {% block head %}
     {{parent()}}
 {% endblock %}
 {% block content %}
     {{ parent() }}
+    <ol class="breadcrumb">
+        <li><a href="#">Project</a></li>
+        <li class="active">{{project.id == "" ? " Create" : "Edit"}}</li>
+    </ol>
     <div class="container col-xs-12">
         <form id="project-form">
             <input type="hidden" name="id" value="{{project.id}}" />

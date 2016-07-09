@@ -5,6 +5,10 @@
 {% endblock %}
 {% block content %}
     {{ parent() }}
+    <ol class="breadcrumb">
+        <li><a href="#">LikeDrop</a></li>
+        <li class="active">Pocket</li>
+    </ol>
     <div class="container-fluid col-xs-12 content-container" data-service="pocket">
         <!-- <h1><img src="/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</h1> -->
         {% for article in pocket_articles %}

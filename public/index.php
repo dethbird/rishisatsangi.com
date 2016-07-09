@@ -223,6 +223,36 @@ $app->group('/api', function () use ($app) {
         }
 
     });
+
+    # update storyboard
+    $app->put('/project_storyboard/:id', function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+        $id = (int) $id;
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_storyboard.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $storyboard = $projectService->updateProjectStoryboard(
+                $id, $app->request->params());
+
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($storyboard));
+        }
+
+    });
 });
 
 # likedrop

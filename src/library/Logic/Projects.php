@@ -106,6 +106,30 @@ class Projects {
         return $result;
     }
 
+    public function updateProjectStoryboard($id, $data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_storyboards']['update'],
+            [
+                'id' => $id,
+                'project_id' => $data['project_id'],
+                'user_id' => $this->securityContext->id,
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_storyboards']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
 
     /**
      * get top level project objects by user.

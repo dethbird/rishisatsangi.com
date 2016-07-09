@@ -50,6 +50,9 @@ label.tag {
 .btn-group .btn {
     float: inherit;
 }
+.card {
+    padding-bottom: 15px;
+}
 .card-block {
     padding: 15px;
 }

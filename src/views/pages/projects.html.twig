@@ -14,18 +14,44 @@
             {% for project in projects %}
                 <div class="card col-xs-12 col-lg-4">
                     <div class="card-block">
-                        <a class="display-5" href="/project/{{project.id}}">{{project.name}}</a>
-                        <br />
-                        <span class="date">modified {{project.date_updated|time_ago}}</span>
-                        <span class="muted">(created  {{project.date_added|time_ago}})</span>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <a class="display-5" href="/project/{{project.id}}">{{project.name}}</a>
+                                <br />
+                                <span class="date">modified {{project.date_updated|time_ago}}</span>
+                                <span class="muted">(created  {{project.date_added|time_ago}})</span>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="card-block">
                         <blockquote>{{project.description|markdown}}</blockquote>
                     </div>
                     <div class="card-block">
-                        <div class="display-5">Storyboards</div>
-                        {% if project.storyboards|length == 0 %}
-                        <a class="btn btn-sm btn-success-outline" href="/project/{{project.id}}/storyboard/ceate">New</a>
+                        <div class="row">
+                            <div class="display-5 col-xs-6">Storyboards</div>
+                            <div class="col-xs-6 pull-right">
+                            <a class="btn btn-sm btn-success-outline"  href="/project/{{project.id}}/storyboard/ceate">New</a></div>
+                        </div>
+                        {% if project.storyboards|length > 0 %}
+                            {% for storyboard in project.storyboards %}
+                                <div class="card col-xs-12">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                {{storyboard.name}}
+                                            </div>
+                                            <div class="col-xs-6 pull-right">
+                                                <a href="/project/{{project.id}}/storyboard/{{storyboard.id}}" class="btn btn-primary-outline btn-sm">Edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="container col-xs-12 muted">
+                                    <a   href="/project/{{project.id}}/storyboard/ceate">create a storyboard</a>
+                            </div>
                         {% endif %}
                     </div>
                 </div>

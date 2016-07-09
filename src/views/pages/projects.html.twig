@@ -15,11 +15,20 @@
                 <div class="card col-xs-12 col-lg-4">
                     <div class="card-block">
                         <div class="row">
-                            <div class="col-xs-12">
+                            <div class="col-xs-8">
                                 <a class="display-5" href="/project/{{project.id}}">{{project.name}}</a>
                                 <br />
                                 <span class="date">modified {{project.date_updated|time_ago}}</span>
-                                <span class="muted">(created  {{project.date_added|time_ago}})</span>
+                                <span class="muted">(created {{project.date_added|time_ago}})</span>
+                            </div>
+                            <div class="col-xs-4 pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/project/{{project.id}}">Edit</a>
+                                        <a class="dropdown-item" href="/project/{{project.id}}/storyboard/create">New Storyboard</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -30,8 +39,6 @@
                     <div class="card-block">
                         <div class="row">
                             <div class="display-5 col-xs-6">Storyboards</div>
-                            <div class="col-xs-6 pull-right">
-                            <a class="btn btn-sm btn-success-outline"  href="/project/{{project.id}}/storyboard/ceate">New</a></div>
                         </div>
                         {% if project.storyboards|length > 0 %}
                             {% for storyboard in project.storyboards %}
@@ -57,9 +64,9 @@
                                                     <a href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/create">create a panel</a>
                                                 </div>
                                             {% else %}
-                                                <span class="lead">Panels</span><br />
                                                 {% for panel in storyboard.panels %}
-                                                <div class="col-xs-4">
+                                                {% set current_revision_id = "" %}
+                                                <div class="col-xs-12 col-lg-4">
                                                     <div class="card container">
                                                         {% if panel.revisions|length == 0 %}
                                                             <div class="muted container">
@@ -68,11 +75,23 @@
                                                         {% else %}
                                                             {% for revision in panel.revisions %}
                                                                 {% if loop.index == 1 %}
+                                                                    {% set current_revision_id = revision.id %}
                                                                     {{revision.id}}
                                                                 {% endif %}
                                                             {% endfor %}
                                                         {% endif %}
-                                                        {{panel.name}}
+                                                        <br />
+                                                        {{panel.name}}<br />
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}}/panel/{{panel.id}}">Edit Panel</a>
+                                                                {% if current_revision_id != "" %}
+                                                                    <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/{{current_revision_id}}">Edit Current Revision</a>
+                                                                {% endif %}
+                                                                <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/create">New Panel Revision</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 {% endfor %}

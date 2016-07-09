@@ -1,6 +1,6 @@
 var BaseFormView = require('./BaseFormView');
-var ProjectFormView = BaseFormView.extend({
-    baseUrl: '/api/project'
+var StoryboardFormView = BaseFormView.extend({
+    baseUrl: '/api/project_storyboard'
 });
 
-module.exports = ProjectFormView;
+module.exports = StoryboardFormView;

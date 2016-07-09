@@ -1,30 +1,32 @@
 {% extends 'layout.html.twig' %}
-{% block title %} - Project Storyboard {{storyboard.id == "" ? " Create" : "Edit"}}{% endblock %}
+{% block title %} - Project Storyboard Panel {{panel.id == "" ? " Create" : "Edit"}}{% endblock %}
 {% block head %}
     {{parent()}}
 {% endblock %}
 {% block content %}
     {{ parent() }}
     <ol class="breadcrumb">
-        <li><a href="#">Project</a></li>
+        <li><a href="/projects">Projects</a></li>
         <li>{{project.name}}</li>
-        <li>Storyboard</li>
+        <li>Storyboards</li>
+        <li>{{storyboard.name}}</li>
+        <li>Panel</li>
         <li class="active">{{storyboard.id == "" ? " Create" : "Edit"}}</li>
     </ol>
     <div class="container col-xs-12">
-        <form id="storyboard-form">
-            <input type="hidden" name="id" value="{{storyboard.id}}" />
-            <input type="hidden" name="project_id" value="{{project.id}}" />
+        <form id="panel-form">
+            <input type="hidden" name="id" value="{{panel.id}}" />
+            <input type="hidden" name="storyboard_id" value="{{storyboard.id}}" />
             <div class="form-group row">
-                <label for="storyboard_name" class="col-xs-2 form-control-label">Name</label>
+                <label for="panel_name" class="col-xs-2 form-control-label">Name</label>
                 <div class="col-xs-10">
-                    <input class="form-control" name="name" value="{{storyboard.name}}" id="name" placeholder="Storyboard Name">
+                    <input class="form-control" name="name" value="{{panel.name}}" id="name" placeholder="Panel Name">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="storyboard_name" class="col-xs-2 form-control-label">Description</label>
+                <label for="panel_name" class="col-xs-2 form-control-label">Description</label>
                 <div class="col-xs-10 markdown-edit">
-                    <textarea class="form-control markdown-edit-editor" name="description" id="description" placeholder="Storyboard Description" rows="10">{{storyboard.description}}</textarea>
+                    <textarea class="form-control markdown-edit-editor" name="description" id="description" placeholder="Panel Description" rows="10">{{panel.description}}</textarea>
                     <a class="btn btn-sm btn-info-outline markdown-edit-btn-preview">Preview</a>
                 </div>
             </div>
@@ -40,5 +42,5 @@
 
 {% block includes %}
   <!-- js includes -->
-  <script type="text/javascript" src="/js/pages/project/storyboard.js"></script>
+  <script type="text/javascript" src="/js/pages/project/storyboard-panel.js"></script>
 {% endblock %}

@@ -166,3 +166,9 @@ sql:
             WHERE id = :id
             AND project_id = :project_id
             AND user_id = :user_id
+    project_storyboard_panels:
+        select_by_id: |
+            SELECT * FROM project_storyboard_panels
+            WHERE user_id = :user_id
+            AND id = :id
+            ORDER BY date_updated DESC

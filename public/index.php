@@ -358,6 +358,40 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
 
 # project
 $app->group('/project', $authorize($app), function () use ($app) {
+
+    # storyboard panel
+    $app->get("/:id/storyboard/:storyboard_id/panel/:panel_id", function (
+            $id, $storyboard_id, $panel_id) use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $project = $projectService->fetchOne($id);
+        if ($project) {
+            $storyboard = $projectService->fetchStoryboardById($storyboard_id);
+            if($storyboard) {
+                $panel = $projectService->fetchStoryboardPanelById($panel_id);
+
+                $templateVars = array(
+                    "configs" => $configs,
+                    'securityContext' => $securityContext,
+                    "section" => "project.storyboard.index",
+                    "project" => $project,
+                    "storyboard" => $storyboard,
+                    "panel" => $panel
+                );
+
+                $app->render(
+                    'pages/project/storyboard_panel.html.twig',
+                    $templateVars,
+                    200
+                );
+            }
+        }
+    });
+
+    # storyboard
     $app->get("/:id/storyboard/:storyboard_id", function (
             $id, $storyboard_id) use ($app) {
         $configs = $app->container->get('configs');
@@ -385,6 +419,8 @@ $app->group('/project', $authorize($app), function () use ($app) {
             );
         }
     });
+
+    # project
     $app->get("/:id", function ($id) use ($app) {
 
         $configs = $app->container->get('configs');

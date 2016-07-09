@@ -180,6 +180,19 @@ class Projects {
         return $storyboard;
     }
 
+    public function fetchStoryboardPanelById($panelId)
+    {
+        $storyboard = $this->db->fetchOne(
+            $this->configs['sql']['project_storyboard_panels']['select_by_id'],
+            [
+                'id' => $panelId,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $storyboard;
+    }
+
     /**
      * Builds out the project tree given project as array
      * @param  [type] $project [description]

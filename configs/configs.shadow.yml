@@ -143,6 +143,11 @@ sql:
             AND
                 user_id = :user_id
     project_storyboards:
+        insert: |
+            INSERT INTO project_storyboards
+            (project_id, user_id, name, description, date_added, date_updated)
+            VALUES
+            (:project_id, :user_id, :name, :description,  NOW(), NOW())
         select_by_project: |
             SELECT * FROM project_storyboards
             WHERE user_id = :user_id

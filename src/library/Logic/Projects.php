@@ -49,6 +49,35 @@ class Projects {
     }
 
     /**
+     * [createProjectStoryboard description]
+     * @param  [type] $data [description]
+     * @return [type]       [description]
+     */
+    public function createProjectStoryboard($data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_storyboards']['insert'],
+            [
+                'user_id' => $this->securityContext->id,
+                'project_id' => $data['project_id'],
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_storyboards']['select_by_id'],
+            [
+                'id' => $this->db->lastInsertId(),
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
+
+    /**
      * [update description]
      * @param  [type] $id   [description]
      * @param  [type] $data [description]

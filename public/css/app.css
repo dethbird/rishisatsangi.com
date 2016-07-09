@@ -53,6 +53,9 @@ label.tag {
 .card {
     padding-bottom: 15px;
 }
+.card img {
+    max-width: 100%;
+}
 .card-block {
     padding: 15px;
 }

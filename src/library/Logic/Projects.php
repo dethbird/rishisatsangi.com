@@ -106,7 +106,7 @@ class Projects {
             [
                 'user_id' => $this->securityContext->id,
                 'panel_id' => $data['panel_id'],
-                'name' => $data['name'],
+                'content' => $data['content'],
                 'description' => $data['description']
             ]
         );
@@ -208,7 +208,7 @@ class Projects {
                 'id' => $id,
                 'panel_id' => $data['panel_id'],
                 'user_id' => $this->securityContext->id,
-                'name' => $data['name'],
+                'content' => $data['content'],
                 'description' => $data['description']
             ]
         );

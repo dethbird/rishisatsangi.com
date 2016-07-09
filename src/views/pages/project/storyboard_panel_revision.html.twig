@@ -20,9 +20,9 @@
             <input type="hidden" name="id" value="{{revision.id}}" />
             <input type="hidden" name="panel_id" value="{{panel.id}}" />
             <div class="form-group row">
-                <label for="revision_name" class="col-xs-2 form-control-label">Name</label>
+                <label for="revision_name" class="col-xs-2 form-control-label">Content</label>
                 <div class="col-xs-10">
-                    <input class="form-control" name="name" value="{{revision.name}}" id="name" placeholder="Revision Name">
+                    <textarea class="form-control" name="content"  placeholder="Revision Content" rows="10">{{revision.content}}</textarea>
                 </div>
             </div>
             <div class="form-group row">

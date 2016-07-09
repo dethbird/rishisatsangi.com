@@ -193,9 +193,9 @@ sql:
     project_storyboard_panel_revisions:
         insert: |
             INSERT INTO project_storyboard_panel_revisions
-            (panel_id, user_id, name, description, date_added, date_updated)
+            (panel_id, user_id, content, description, date_added, date_updated)
             VALUES
-            (:panel_id, :user_id, :name, :description,  NOW(), NOW())
+            (:panel_id, :user_id, :content, :description,  NOW(), NOW())
         select_by_panel: |
             SELECT * FROM project_storyboard_panel_revisions
             WHERE user_id = :user_id
@@ -209,7 +209,7 @@ sql:
         update: |
             UPDATE project_storyboard_panel_revisions
             SET
-                name = :name,
+                content = :content,
                 description = :description,
                 date_updated = NOW()
             WHERE id = :id

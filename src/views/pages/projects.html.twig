@@ -58,6 +58,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <br />
                                         <div class="row container">
                                             {% if storyboard.panels|length == 0 %}
                                                 <div class="muted container">
@@ -76,12 +77,12 @@
                                                             {% for revision in panel.revisions %}
                                                                 {% if loop.index == 1 %}
                                                                     {% set current_revision_id = revision.id %}
-                                                                    {{revision.id}}
+                                                                    <img src="{{revision.content}}" />
                                                                 {% endif %}
                                                             {% endfor %}
                                                         {% endif %}
                                                         <br />
-                                                        {{panel.name}}<br />
+                                                        <span class="muted">{{panel.name}}</span><br />
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
                                                             <div class="dropdown-menu">

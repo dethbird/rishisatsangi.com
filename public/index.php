@@ -254,6 +254,22 @@ $app->group('/api', function () use ($app) {
 
     });
 
+
+	# order storyboards
+	$app->post('/project_storyboard_order', function () use ($app) {
+
+		$configs = $app->container->get('configs');
+		$securityContext = json_decode($app->getCookie('securityContext'));
+		$db = $app->container->get('db');
+		$projectService = new Projects($db, $configs, $securityContext);
+
+		$result = $projectService->orderProjectStoryboards($app->request->params());
+
+		$app->response->setStatus(200);
+		$app->response->headers->set('Content-Type', 'application/json');
+		$app->response->setBody(json_encode($result));
+	});
+
     # create panel
     $app->post('/project_storyboard_panel', function () use ($app) {
 

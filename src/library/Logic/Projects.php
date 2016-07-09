@@ -300,6 +300,24 @@ class Projects {
         return $revision;
     }
 
+    public function orderProjectStoryboards($params)
+    {
+        $project_id = $params['project_id'];
+        foreach ($params['items'] as $id=>$order){
+            if($order != "") {
+                $retult = $this->db->perform(
+                    $this->configs['sql']['project_storyboards']['update_order'],
+                    [
+                        'id' => $id,
+                        'project_id' => $project_id,
+                        'sort_order' => $order,
+                        'user_id' => $this->securityContext->id
+                    ]
+                );
+            }
+        }
+    }
+
     /**
      * Builds out the project tree given project as array
      * @param  [type] $project [description]

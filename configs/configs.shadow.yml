@@ -150,7 +150,7 @@ sql:
             SELECT * FROM project_storyboards
             WHERE user_id = :user_id
             AND project_id = :project_id
-            ORDER BY date_updated DESC
+            ORDER BY sort_order ASC, name DESC
         select_by_id: |
             SELECT * FROM project_storyboards
             WHERE user_id = :user_id
@@ -164,6 +164,13 @@ sql:
                 date_updated = NOW()
             WHERE id = :id
             AND project_id = :project_id
+            AND user_id = :user_id
+        update_order: |
+            UPDATE project_storyboards
+            SET
+                sort_order = :sort_order,
+                project_id = :project_id
+            WHERE id = :id
             AND user_id = :user_id
     project_storyboard_panels:
         insert: |

@@ -84,6 +84,9 @@ a.display-5 {
     color: #c9177c;
     font-weight: bold;
 }
+.fa {
+    color: #aaa;
+}
 .dropdown-toggle {
     /*height: 68px;*/
 }
@@ -98,7 +101,9 @@ a.display-5 {
     text-align: right;
 }
 
-
+.handle {
+    cursor: move;
+}
 img.service-logo {
     max-width: 32px;
     height: auto;

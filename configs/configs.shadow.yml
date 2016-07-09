@@ -191,8 +191,27 @@ sql:
             AND storyboard_id = :storyboard_id
             AND user_id = :user_id
     project_storyboard_panel_revisions:
+        insert: |
+            INSERT INTO project_storyboard_panel_revisions
+            (panel_id, user_id, name, description, date_added, date_updated)
+            VALUES
+            (:panel_id, :user_id, :name, :description,  NOW(), NOW())
         select_by_panel: |
             SELECT * FROM project_storyboard_panel_revisions
             WHERE user_id = :user_id
             AND panel_id = :panel_id
             ORDER BY date_updated DESC
+        select_by_id: |
+            SELECT * FROM project_storyboard_panel_revisions
+            WHERE user_id = :user_id
+            AND id = :id
+            ORDER BY date_updated DESC
+        update: |
+            UPDATE project_storyboard_panel_revisions
+            SET
+                name = :name,
+                description = :description,
+                date_updated = NOW()
+            WHERE id = :id
+            AND panel_id = :panel_id
+            AND user_id = :user_id

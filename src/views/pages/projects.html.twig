@@ -54,7 +54,7 @@
                                         <div class="row container">
                                             {% if storyboard.panels|length == 0 %}
                                                 <div class="muted container">
-                                                    <a href="/">create a panel</a>
+                                                    <a href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/create">create a panel</a>
                                                 </div>
                                             {% else %}
                                                 <span class="lead">Panels</span><br />
@@ -63,7 +63,7 @@
                                                     <div class="card container">
                                                         {% if panel.revisions|length == 0 %}
                                                             <div class="muted container">
-                                                                <a href="/">create a revision</a>
+                                                                <a href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/create">create a revision</a>
                                                             </div>
                                                         {% else %}
                                                             {% for revision in panel.revisions %}

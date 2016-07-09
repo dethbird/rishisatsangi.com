@@ -1,0 +1,16 @@
+{
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"properties": {
+		"panel_id": {
+			"required": true,
+		    "type": "integer"
+		},
+		"name": {
+			"required": true,
+		    "type": "string"
+		},
+		"description": {
+			"type": ["string", "null", "integer"]
+		}
+	}
+}

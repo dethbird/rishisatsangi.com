@@ -99,6 +99,29 @@ class Projects {
         return $result;
     }
 
+    public function createProjectStoryboardPanelRevision($data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_storyboard_panel_revisions']['insert'],
+            [
+                'user_id' => $this->securityContext->id,
+                'panel_id' => $data['panel_id'],
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_storyboard_panel_revisions']['select_by_id'],
+            [
+                'id' => $this->db->lastInsertId(),
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
 
     /**
      * [update description]
@@ -177,6 +200,30 @@ class Projects {
         return $result;
     }
 
+    public function updateProjectStoryboardPanelRevision($id, $data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_storyboard_panel_revisions']['update'],
+            [
+                'id' => $id,
+                'panel_id' => $data['panel_id'],
+                'user_id' => $this->securityContext->id,
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_storyboard_panel_revisions']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
 
     /**
      * get top level project objects by user.
@@ -238,6 +285,19 @@ class Projects {
         );
 
         return $storyboard;
+    }
+
+    public function fetchStoryboardPanelRevisionById($revisionId)
+    {
+        $revision = $this->db->fetchOne(
+            $this->configs['sql']['project_storyboard_panel_revisions']['select_by_id'],
+            [
+                'id' => $revisionId,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $revision;
     }
 
     /**

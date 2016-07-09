@@ -311,6 +311,64 @@ $app->group('/api', function () use ($app) {
         }
 
     });
+
+	# create revision
+    $app->post('/project_storyboard_panel_revision', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_storyboard_panel_revision.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $revision = $projectService->createProjectStoryboardPanelRevision($app->request->params());
+
+            $app->response->setStatus(201);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($revision));
+        }
+
+    });
+
+    # update revision
+    $app->put('/project_storyboard_panel_revision/:id', function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+        $id = (int) $id;
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_storyboard_panel_revision.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $revision = $projectService->updateProjectStoryboardPanelRevision(
+                $id, $app->request->params());
+
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($revision));
+        }
+
+    });
 });
 
 # likedrop
@@ -417,6 +475,44 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
 # project
 $app->group('/project', $authorize($app), function () use ($app) {
 
+	# storyboard panel revision
+    $app->get("/:id/storyboard/:storyboard_id/panel/:panel_id/revision/:revision_id", function (
+            $id, $storyboard_id, $panel_id, $revision_id) use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $project = $projectService->fetchOne($id);
+        if ($project) {
+            $storyboard = $projectService->fetchStoryboardById($storyboard_id);
+            if($storyboard) {
+                $panel = $projectService->fetchStoryboardPanelById($panel_id);
+				if ($panel) {
+
+					$revision = $projectService->fetchStoryboardPanelRevisionById($revision_id);
+
+	                $templateVars = array(
+	                    "configs" => $configs,
+	                    'securityContext' => $securityContext,
+	                    "section" => "project.storyboard.panel.revision.index",
+	                    "project" => $project,
+	                    "storyboard" => $storyboard,
+	                    "panel" => $panel,
+	                    "revision" => $revision
+	                );
+
+	                $app->render(
+	                    'pages/project/storyboard_panel_revision.html.twig',
+	                    $templateVars,
+	                    200
+	                );
+				}
+            }
+        }
+    });
+
+
     # storyboard panel
     $app->get("/:id/storyboard/:storyboard_id/panel/:panel_id", function (
             $id, $storyboard_id, $panel_id) use ($app) {
@@ -434,7 +530,7 @@ $app->group('/project', $authorize($app), function () use ($app) {
                 $templateVars = array(
                     "configs" => $configs,
                     'securityContext' => $securityContext,
-                    "section" => "project.storyboard.index",
+                    "section" => "project.storyboard.panel.index",
                     "project" => $project,
                     "storyboard" => $storyboard,
                     "panel" => $panel

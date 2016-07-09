@@ -11,6 +11,14 @@ var ProjectsView = Backbone.View.extend({
                 parentId: 'project_id'
             });
         });
+
+        $('.sortable-panels').each(function(i,e){
+            dragToOrderView = new DragToOrderView({
+                el: e,
+                endPoint: '/api/project_storyboard_panel_order',
+                parentId: 'storyboard_id'
+            });
+        });
     }
 });
 

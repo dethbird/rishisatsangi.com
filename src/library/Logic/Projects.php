@@ -302,14 +302,30 @@ class Projects {
 
     public function orderProjectStoryboards($params)
     {
-        $project_id = $params['project_id'];
         foreach ($params['items'] as $id=>$order){
             if($order != "") {
                 $retult = $this->db->perform(
                     $this->configs['sql']['project_storyboards']['update_order'],
                     [
                         'id' => $id,
-                        'project_id' => $project_id,
+                        'project_id' => $params['project_id'],
+                        'sort_order' => $order,
+                        'user_id' => $this->securityContext->id
+                    ]
+                );
+            }
+        }
+    }
+
+    public function orderProjectStoryboardPanels($params)
+    {
+        foreach ($params['items'] as $id=>$order){
+            if($order != "") {
+                $retult = $this->db->perform(
+                    $this->configs['sql']['project_storyboard_panels']['update_order'],
+                    [
+                        'id' => $id,
+                        'storyboard_id' => $params['storyboard_id'],
                         'sort_order' => $order,
                         'user_id' => $this->securityContext->id
                     ]

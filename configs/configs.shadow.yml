@@ -197,6 +197,13 @@ sql:
             WHERE id = :id
             AND storyboard_id = :storyboard_id
             AND user_id = :user_id
+        update_order: |
+            UPDATE project_storyboard_panels
+            SET
+                sort_order = :sort_order,
+                storyboard_id = :storyboard_id
+            WHERE id = :id
+            AND user_id = :user_id
     project_storyboard_panel_revisions:
         insert: |
             INSERT INTO project_storyboard_panel_revisions

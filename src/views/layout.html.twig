@@ -27,17 +27,17 @@
         {% if securityContext.username %}
             <div class="col-xs-12 text-align-right security-context-nav">
                 <div class="btn-group">
-                    {{securityContext.username}}
+                    <span class="muted">{{securityContext.username}}</span>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</button>
+                    <button type="button" class="btn btn-secondary-outline btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/projects">All Projects</a>
                         <a class="dropdown-item" href="/project/create">New Project</a>
                     </div>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">LikeDrop</button>
+                    <button type="button" class="btn btn-secondary-outline btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">LikeDrop</button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/likedrop/gdrive"><img src="/img/service/gdrive/logo_sm.png" class="service-logo"/>Google Drive</a>
                         <a class="dropdown-item" href="/likedrop/pocket"><img src="/img/service/pocket/logo_sm.png" class="service-logo"/>Pocket</a>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="btn-group">
-                    <a href="/logout" title="Logout" class="btn btn-primary-outline btn-sm">Logout</a>
+                    <a href="/logout" title="Logout" class="btn btn-secondary-outline btn-sm">Logout</a>
                 </div>
             </div>
         {% elseif section != "login" %}

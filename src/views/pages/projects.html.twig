@@ -15,7 +15,7 @@
                 <div class="card col-xs-12 col-lg-4">
                     <div class="card-block">
                         <div class="row">
-                            <div class="col-xs-8">
+                            <div class="col-xs-12">
                                 <a class="display-5" href="/project/{{project.id}}">{{project.name}}</a>
                                 <br />
                                 <span class="date">modified {{project.date_updated|time_ago}}</span>
@@ -42,7 +42,13 @@
                                                 {{storyboard.name}}
                                             </div>
                                             <div class="col-xs-6 pull-right">
-                                                <a href="/project/{{project.id}}/storyboard/{{storyboard.id}}" class="btn btn-primary-outline btn-sm">Edit</a>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-secondary-outline btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}">Edit</a>
+                                                        <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/create">New Panel</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

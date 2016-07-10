@@ -582,7 +582,7 @@ $app->group('/api', function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $comment = $projectService->createProjectStoryboardPanelRevision($app->request->params());
+            $comment = $projectService->createProjectStoryboardPanelComment($app->request->params());
 
             $app->response->setStatus(201);
             $app->response->headers->set('Content-Type', 'application/json');

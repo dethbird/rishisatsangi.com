@@ -214,6 +214,30 @@ class Projects {
         return $result;
     }
 
+    public function createProjectStoryboardPanelComment($data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['comments']['insert'],
+            [
+                'user_id' => $data['user_id'],
+                'entity_id' => $data['panel_id'],
+                'entity_table_name' => 'project_storyboard_panel',
+                'comment' => $data['comment'],
+                'status' => $data['status'],
+                'date_added' => $data['date_added']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['comments']['get_by_id'],
+            [
+                'id' => $this->db->lastInsertId()
+            ]
+        );
+
+        return $result;
+    }
+
 
     /**
      * [update description]

@@ -20,9 +20,9 @@
             <input type="hidden" name="id" value="{{comment.id}}" />
             <input type="hidden" name="panel_id" value="{{panel.id}}" />
             <div class="form-group row">
-                <label for="comment_name" class="col-xs-2 form-control-label">User</label>
+                <label for="user_id" class="col-xs-2 form-control-label">User</label>
                 <div class="col-xs-10 markdown-edit">
-                    <select name="project_user_id" id="project_user_id" class="form-control">
+                    <select name="user_id" id="project_user_id" class="form-control">
                     {% for user in users %}
                     <option value="{{user.id}}">{{user.username}}</option>
                     {% endfor %}
@@ -33,6 +33,15 @@
                 <label for="date_added" class="col-xs-2 form-control-label">Date</label>
                 <div class="col-xs-10">
                     <input class="form-control datepicker" name="date_added" value="{{comment.date_added}}" id="date_added" placeholder="Date">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="status" class="col-xs-2 form-control-label">Status</label>
+                <div class="col-xs-10 markdown-edit">
+                    <select name="status" id="status" class="form-control">
+                    <option value="new">New</option>
+                    <option value="resolved">Resolved</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group row">

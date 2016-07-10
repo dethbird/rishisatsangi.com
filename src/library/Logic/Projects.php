@@ -71,6 +71,29 @@ class Projects {
         return $result;
     }
 
+    public function createProjectCharacterRevision($data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_character_revisions']['insert'],
+            [
+                'user_id' => $this->securityContext->id,
+                'character_id' => $data['character_id'],
+                'content' => $data['content'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_character_revisions']['select_by_id'],
+            [
+                'id' => $this->db->lastInsertId(),
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
     /**
      * [createProjectStoryboard description]
      * @param  [type] $data [description]
@@ -190,6 +213,30 @@ class Projects {
 
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_characters']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
+    public function updateProjectCharacterRevision($id, $data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_character_revisions']['update'],
+            [
+                'id' => $id,
+                'character_id' => $data['character_id'],
+                'user_id' => $this->securityContext->id,
+                'content' => $data['content'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_character_revisions']['select_by_id'],
             [
                 'id' => $id,
                 'user_id' => $this->securityContext->id
@@ -321,6 +368,19 @@ class Projects {
         return $character;
     }
 
+    public function fetchCharacterRevisionById($revisionId)
+    {
+        $revision = $this->db->fetchOne(
+            $this->configs['sql']['project_character_revisions']['select_by_id'],
+            [
+                'id' => $revisionId,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $revision;
+    }
+
     public function fetchStoryboardById($storyboardId)
     {
         $storyboard = $this->db->fetchOne(
@@ -375,7 +435,7 @@ class Projects {
                 );
             }
         }
-    }    
+    }
 
     public function orderProjectStoryboards($params)
     {
@@ -426,6 +486,18 @@ class Projects {
                 'user_id' => $this->securityContext->id
             ]
         );
+
+        foreach ($characters as $characterIdx=>$character) {
+            $revisions = $this->db->fetchAll(
+                $this->configs['sql']['project_character_revisions']['select_by_character'],
+                [
+                    'character_id' => (int) $character['id'],
+                    'user_id' => $this->securityContext->id
+                ]
+            );
+            $character['revisions'] = $revisions;
+            $characters[$characterIdx] = $character;
+        }
 
         $storyboards = $this->db->fetchAll(
             $this->configs['sql']['project_storyboards']['select_by_project'],

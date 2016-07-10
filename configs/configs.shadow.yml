@@ -172,6 +172,31 @@ sql:
                 project_id = :project_id
             WHERE id = :id
             AND user_id = :user_id
+    project_character_revisions:
+        insert: |
+            INSERT INTO project_character_revisions
+            (character_id, user_id, content, description, date_added, date_updated)
+            VALUES
+            (:character_id, :user_id, :content, :description,  NOW(), NOW())
+        select_by_character: |
+            SELECT * FROM project_character_revisions
+            WHERE user_id = :user_id
+            AND character_id = :character_id
+            ORDER BY date_updated DESC
+        select_by_id: |
+            SELECT * FROM project_character_revisions
+            WHERE user_id = :user_id
+            AND id = :id
+            ORDER BY date_updated DESC
+        update: |
+            UPDATE project_character_revisions
+            SET
+                content = :content,
+                description = :description,
+                date_updated = NOW()
+            WHERE id = :id
+            AND character_id = :character_id
+            AND user_id = :user_id
     project_storyboards:
         insert: |
             INSERT INTO project_storyboards

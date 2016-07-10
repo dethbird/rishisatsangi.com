@@ -269,6 +269,67 @@ $app->group('/api', function () use ($app) {
 		$app->response->setBody(json_encode($result));
 	});
 
+
+    # create character revision
+    $app->post('/project_character_revision', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_character_revision.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $revision = $projectService->createProjectCharacterRevision($app->request->params());
+
+            $app->response->setStatus(201);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($revision));
+        }
+
+    });
+
+
+    # update character revision
+    $app->put('/project_character_revision/:id', function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+        $id = (int) $id;
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_character_revision.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $character = $projectService->updateProjectCharacterRevision(
+                $id, $app->request->params());
+
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($character));
+        }
+
+    });
+
+
     # create storyboard
     $app->post('/project_storyboard', function () use ($app) {
 
@@ -675,6 +736,38 @@ $app->group('/project', $authorize($app), function () use ($app) {
                 $templateVars,
                 200
             );
+        }
+    });
+
+    # storyboard character revision
+    $app->get("/:id/character/:character_id/revision/:revision_id", function (
+            $id, $character_id, $revision_id) use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $project = $projectService->fetchOne($id);
+        if ($project) {
+            $character = $projectService->fetchCharacterById($character_id);
+			if ($character) {
+				$revision = $projectService->fetchCharacterRevisionById($revision_id);
+
+                $templateVars = array(
+                    "configs" => $configs,
+                    'securityContext' => $securityContext,
+                    "section" => "project.storyboard.character.revision.index",
+                    "project" => $project,
+                    "character" => $character,
+                    "revision" => $revision
+                );
+
+                $app->render(
+                    'pages/project/character_revision.html.twig',
+                    $templateVars,
+                    200
+                );
+			}
         }
     });
 

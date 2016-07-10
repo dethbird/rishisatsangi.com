@@ -401,6 +401,27 @@ class Projects {
         return $project;
     }
 
+    public function fetchProjectUsers($projectId)
+    {
+        $user = $this->db->fetchOne(
+            $this->configs['sql']['users']['get_by_id'],
+            [
+                'id' => $this->securityContext->id
+            ]
+        );
+
+        $users = $this->db->fetchAll(
+            $this->configs['sql']['project_users']['get_by_project'],
+            [
+                'project_id' => $projectId,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        $users = array_merge([$user], $users);
+        return $users;
+    }
+
     public function fetchCharacterById($characterId)
     {
         $character = $this->db->fetchOne(
@@ -451,6 +472,18 @@ class Projects {
         );
 
         return $storyboard;
+    }
+
+    public function fetchStoryboardPanelCommentById($commentId)
+    {
+        $comment = $this->db->fetchOne(
+            $this->configs['sql']['comments']['get_by_id'],
+            [
+                'id' => $commentId
+            ]
+        );
+
+        return $comment;
     }
 
     public function fetchStoryboardPanelRevisionById($revisionId)

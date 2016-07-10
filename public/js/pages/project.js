@@ -1303,6 +1303,10 @@ var BaseFormView = Backbone.View.extend({
                 el: editor
             });
         });
+
+        $el.find('.datepicker').datepicker({
+            dateFormat: "yy-mm-dd"
+        });
     },
     submit: function(e) {
         var that = this;

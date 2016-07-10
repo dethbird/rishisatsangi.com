@@ -562,6 +562,34 @@ $app->group('/api', function () use ($app) {
         }
 
     });
+
+    # create panel comment
+    $app->post('/project_storyboard_panel_comment', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_storyboard_panel_comment.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $comment = $projectService->createProjectStoryboardPanelRevision($app->request->params());
+
+            $app->response->setStatus(201);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($comment));
+        }
+
+    });
 });
 
 # likedrop
@@ -667,6 +695,45 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
 
 # project
 $app->group('/project', $authorize($app), function () use ($app) {
+
+    # storyboard panel comment
+    $app->get("/:id/storyboard/:storyboard_id/panel/:panel_id/comment/:comment_id", function (
+            $id, $storyboard_id, $panel_id, $comment_id) use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $project = $projectService->fetchOne($id);
+        if ($project) {
+            $users = $projectService->fetchProjectUsers($project['id']);
+            $storyboard = $projectService->fetchStoryboardById($storyboard_id);
+            if($storyboard) {
+                $panel = $projectService->fetchStoryboardPanelById($panel_id);
+                if ($panel) {
+
+                    $comment = $projectService->fetchStoryboardPanelCommentById($comment_id);
+
+                    $templateVars = array(
+                        "configs" => $configs,
+                        'securityContext' => $securityContext,
+                        "section" => "project.storyboard.panel.comment.index",
+                        "project" => $project,
+                        "users" => $users,
+                        "storyboard" => $storyboard,
+                        "panel" => $panel,
+                        "comment" => $comment
+                    );
+
+                    $app->render(
+                        'pages/project/storyboard_panel_comment.html.twig',
+                        $templateVars,
+                        200
+                    );
+                }
+            }
+        }
+    });
 
 	# storyboard panel revision
     $app->get("/:id/storyboard/:storyboard_id/panel/:panel_id/revision/:revision_id", function (

@@ -131,6 +131,15 @@ sql:
             WHERE account_gdrive_id = :account_gdrive_id
             ORDER BY date_updated DESC
             LIMIT :limit
+    comments:
+        get_by_id: |
+            SELECT * FROM comments c
+            WHERE id = :id
+        get_by_entity: |
+            SELECT * FROM comments c
+            WHERE entity_table_name = :entity_table_name
+            AND entity_id = :entity_id
+            ORDER BY date_added DESC
     projects:
         insert: |
             INSERT INTO projects
@@ -273,6 +282,11 @@ sql:
                 storyboard_id = :storyboard_id
             WHERE id = :id
             AND user_id = :user_id
+    project_storyboard_panel_comments:
+        select_by_id: |
+            SELECT * FROM project_storyboard_panel_comments
+            WHERE panel_id = :panel_id
+            ORDER BY date_added DESC
     project_storyboard_panel_revisions:
         insert: |
             INSERT INTO project_storyboard_panel_revisions

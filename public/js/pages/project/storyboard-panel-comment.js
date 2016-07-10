@@ -1342,15 +1342,7 @@ var BaseFormView = Backbone.View.extend({
 
 module.exports = BaseFormView;
 
-},{"./MarkdownEditorView":4}],3:[function(require,module,exports){
-var BaseFormView = require('./BaseFormView');
-var CharacterRevisionFormView = BaseFormView.extend({
-    baseUrl: '/api/project_character_revision'
-});
-
-module.exports = CharacterRevisionFormView;
-
-},{"./BaseFormView":2}],4:[function(require,module,exports){
+},{"./MarkdownEditorView":3}],3:[function(require,module,exports){
 marked = require('marked');
 var ModalView = require('../ui/ModalView');
 
@@ -1380,7 +1372,15 @@ var MarkdownEditorView = Backbone.View.extend({
 
 module.exports = MarkdownEditorView;
 
-},{"../ui/ModalView":5,"marked":1}],5:[function(require,module,exports){
+},{"../ui/ModalView":5,"marked":1}],4:[function(require,module,exports){
+var BaseFormView = require('./BaseFormView');
+var StoryboardPanelCommentFormView = BaseFormView.extend({
+    baseUrl: '/api/project_storyboard_panel_comment'
+});
+
+module.exports = StoryboardPanelCommentFormView;
+
+},{"./BaseFormView":2}],5:[function(require,module,exports){
 var ModalView = Backbone.View.extend({
     modal: null,
     initialize: function() {
@@ -1414,10 +1414,10 @@ var ModalView = Backbone.View.extend({
 module.exports = ModalView;
 
 },{}],6:[function(require,module,exports){
-var CharacterRevisionFormView = require('../../library/views/forms/CharacterRevisionFormView');
+var StoryboardPanelCommentFormView = require('../../library/views/forms/StoryboardPanelCommentFormView');
 
-var characterRevisionFormView = new CharacterRevisionFormView({
-    el: '#revision-form'
+var StoryboardPanelCommentFormView = new StoryboardPanelCommentFormView({
+    el: '#comment-form'
 });
 
-},{"../../library/views/forms/CharacterRevisionFormView":3}]},{},[6]);
+},{"../../library/views/forms/StoryboardPanelCommentFormView":4}]},{},[6]);

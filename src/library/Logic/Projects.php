@@ -48,6 +48,29 @@ class Projects {
         return $result;
     }
 
+    public function createProjectCharacter($data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_characters']['insert'],
+            [
+                'user_id' => $this->securityContext->id,
+                'project_id' => $data['project_id'],
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_storyboards']['select_by_id'],
+            [
+                'id' => $this->db->lastInsertId(),
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
     /**
      * [createProjectStoryboard description]
      * @param  [type] $data [description]
@@ -152,10 +175,34 @@ class Projects {
         return $result;
     }
 
+    public function updateProjectCharacter($id, $data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_characters']['update'],
+            [
+                'id' => $id,
+                'project_id' => $data['project_id'],
+                'user_id' => $this->securityContext->id,
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_characters']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
     public function updateProjectStoryboard($id, $data)
     {
         $result = $this->db->perform(
-            $this->configs['sql']['project_storyboards']['update'],
+            $this->configs['sql']['project_characters']['update'],
             [
                 'id' => $id,
                 'project_id' => $data['project_id'],
@@ -259,6 +306,19 @@ class Projects {
         );
 
         return $project;
+    }
+
+    public function fetchCharacterById($characterId)
+    {
+        $character = $this->db->fetchOne(
+            $this->configs['sql']['project_characters']['select_by_id'],
+            [
+                'id' => $characterId,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $character;
     }
 
     public function fetchStoryboardById($storyboardId)

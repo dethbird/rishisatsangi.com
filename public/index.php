@@ -196,6 +196,64 @@ $app->group('/api', function () use ($app) {
 
     });
 
+    # create character
+    $app->post('/project_character', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_character.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $character = $projectService->createProjectCharacter($app->request->params());
+
+            $app->response->setStatus(201);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($character));
+        }
+
+    });
+
+    # update character
+    $app->put('/project_character/:id', function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+        $id = (int) $id;
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_character.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $character = $projectService->updateProjectCharacter(
+                $id, $app->request->params());
+
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($character));
+        }
+
+    });
+
     # create storyboard
     $app->post('/project_storyboard', function () use ($app) {
 
@@ -599,6 +657,35 @@ $app->group('/project', $authorize($app), function () use ($app) {
 
             $app->render(
                 'pages/project/storyboard.html.twig',
+                $templateVars,
+                200
+            );
+        }
+    });
+
+    # character
+    $app->get("/:id/character/:character_id", function (
+            $id, $character_id) use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $project = $projectService->fetchOne($id);
+        if ($project) {
+
+            $character = $projectService->fetchCharacterById($character_id);
+
+            $templateVars = array(
+                "configs" => $configs,
+                'securityContext' => $securityContext,
+                "section" => "project.character.index",
+                "project" => $project,
+                "character" => $character
+            );
+
+            $app->render(
+                'pages/project/character.html.twig',
                 $templateVars,
                 200
             );

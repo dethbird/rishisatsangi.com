@@ -38,6 +38,16 @@
                     </div>
                     <div class="card-block">
                         <div class="row">
+                            <div class="display-5 col-xs-6">Characters</div>
+                        </div>
+                        {% if project.characters|length > 0 %}
+                            characters
+                        {% else %}
+                            <div class="container col-xs-12 muted">
+                                    <a   href="/project/{{project.id}}/character/ceate">create a character</a>
+                            </div>
+                        {% endif %}
+                        <div class="row">
                             <div class="display-5 col-xs-6">Storyboards</div>
                         </div>
                         {% if project.storyboards|length > 0 %}

@@ -140,6 +140,38 @@ sql:
                 date_updated = NOW()
             WHERE id = :id
             AND user_id = :user_id
+    project_characters:
+        insert: |
+            INSERT INTO project_characters
+            (project_id, user_id, name, description, date_added, date_updated)
+            VALUES
+            (:project_id, :user_id, :name, :description,  NOW(), NOW())
+        select_by_project: |
+            SELECT * FROM project_characters
+            WHERE user_id = :user_id
+            AND project_id = :project_id
+            ORDER BY sort_order ASC, name DESC
+        select_by_id: |
+            SELECT * FROM project_characters
+            WHERE user_id = :user_id
+            AND id = :id
+            ORDER BY date_updated DESC
+        update: |
+            UPDATE project_characters
+            SET
+                name = :name,
+                description = :description,
+                date_updated = NOW()
+            WHERE id = :id
+            AND project_id = :project_id
+            AND user_id = :user_id
+        update_order: |
+            UPDATE project_characters
+            SET
+                sort_order = :sort_order,
+                project_id = :project_id
+            WHERE id = :id
+            AND user_id = :user_id
     project_storyboards:
         insert: |
             INSERT INTO project_storyboards
@@ -182,7 +214,7 @@ sql:
             SELECT * FROM project_storyboard_panels
             WHERE user_id = :user_id
             AND storyboard_id = :storyboard_id
-            ORDER BY date_updated DESC
+            ORDER BY sort_order ASC, name DESC
         select_by_id: |
             SELECT * FROM project_storyboard_panels
             WHERE user_id = :user_id

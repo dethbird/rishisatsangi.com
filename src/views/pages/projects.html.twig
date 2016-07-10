@@ -126,8 +126,11 @@
                                                                 {% endif %}
                                                             {% endfor %}
                                                         {% endif %}
-                                                        <br />
-                                                        <i class="fa fa-reorder fa-sm handle" title="reorder"> </i> <span class="muted">{{panel.name}}</span><br />
+                                                        <div class="row container">
+                                                            <i class="fa fa-reorder fa-sm handle" title="reorder"> </i>
+                                                            <i class="fa fa-comments fa-sm handle" title="comments">{{panel.comments|length > 0 ? panel.comments|length : ''}}</i>
+                                                        </div>
+                                                        <span class="muted">{{panel.name}}</span><br />
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
                                                             <div class="dropdown-menu">

@@ -221,7 +221,7 @@ class Projects {
             [
                 'user_id' => $data['user_id'],
                 'entity_id' => $data['panel_id'],
-                'entity_table_name' => 'project_storyboard_panel',
+                'entity_table_name' => 'project_storyboard_panels',
                 'comment' => $data['comment'],
                 'status' => $data['status'],
                 'date_added' => $data['date_added']
@@ -651,8 +651,16 @@ class Projects {
                     ]
                 );
 
-                $panel['revisions'] = $revisions;
+                $comments = $this->db->fetchAll(
+                    $this->configs['sql']['comments']['get_by_entity'],
+                    [
+                        'entity_id' => (int) $panel['id'],
+                        'entity_table_name' => "project_storyboard_panels"
+                    ]
+                );
 
+                $panel['comments'] = $comments;
+                $panel['revisions'] = $revisions;
                 $panels[$panelIdx] = $panel;
 
             }

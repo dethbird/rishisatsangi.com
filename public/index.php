@@ -196,6 +196,34 @@ $app->group('/api', function () use ($app) {
 
     });
 
+    # add project user
+    $app->post('/project_user', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_user.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $user = $projectService->addProjectUser($app->request->params());
+
+            $app->response->setStatus(201);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($user));
+        }
+
+    });
+
     # create character
     $app->post('/project_character', function () use ($app) {
 
@@ -794,6 +822,32 @@ $app->group('/project', $authorize($app), function () use ($app) {
 
             $app->render(
                 'pages/project/character.html.twig',
+                $templateVars,
+                200
+            );
+        }
+    });
+
+    # character
+    $app->get("/:id/user/add", function (
+            $id) use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $project = $projectService->fetchOne($id);
+        if ($project) {
+
+            $templateVars = array(
+                "configs" => $configs,
+                'securityContext' => $securityContext,
+                "section" => "project.character.index",
+                "project" => $project,
+            );
+
+            $app->render(
+                'pages/project/user.html.twig',
                 $templateVars,
                 200
             );

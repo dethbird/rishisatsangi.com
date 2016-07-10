@@ -48,6 +48,52 @@ class Projects {
         return $result;
     }
 
+    public function addProjectUser($data)
+    {
+
+        // find user by id
+        $user = $this->db->fetchOne(
+            $this->configs['sql']['users']['get_by_email'],
+            [
+                'email' => trim($data['email'])
+            ]
+        );
+
+        if (!$user) {
+            if (trim($data['username']) == "") {
+                $data['username'] = $data['email'];
+            }
+
+            $result = $this->db->perform(
+                $this->configs['sql']['users']['insert'],
+                [
+                    'username' => trim($data['username']),
+                    'email' => trim($data['email']),
+                    'password' => md5(time())
+                ]
+            );
+
+            $user = $this->db->fetchOne(
+                $this->configs['sql']['users']['get_by_id'],
+                [
+                    'id' => $this->db->lastInsertId()
+                ]
+            );
+        }
+
+        $result = $this->db->perform(
+            $this->configs['sql']['project_users']['insert'],
+            [
+                'user_id' => $this->securityContext->id,
+                'project_user_id' => $user['id'],
+                'project_id' => $data['project_id']
+            ]
+        );
+
+
+        return true;
+    }
+
     public function createProjectCharacter($data)
     {
         $result = $this->db->perform(
@@ -536,8 +582,24 @@ class Projects {
             $storyboards[$storyboardIdx] = $storyboard;
         }
 
+        $owner = $this->db->fetchOne(
+            $this->configs['sql']['users']['get_by_id'],
+            [
+                'id' => $this->securityContext->id
+            ]
+        );
+        $users = $this->db->fetchAll(
+            $this->configs['sql']['project_users']['get_by_project'],
+            [
+                'project_id' => $project['id'],
+                'user_id' => $this->securityContext->id
+            ]
+        );
+        $users = array_merge([$owner], $users);
+
         $project['characters'] = $characters;
         $project['storyboards'] = $storyboards;
+        $project['users'] = $users;
 
         return $project;
     }

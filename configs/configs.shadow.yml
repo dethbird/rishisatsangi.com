@@ -24,6 +24,12 @@ service:
         client_secret: :INSTAGRAM_CLIENT_SECRET
 sql:
     users:
+        insert: |
+            INSERT INTO users
+            (username, email, password, date_added, date_updated)
+            VALUES
+            (:username, :email, :password, NOW(), NOW())
+                ON DUPLICATE KEY UPDATE username = :username, date_updated = NOW()
         # get all
         get_all: |
             SELECT id, username, email FROM users ORDER BY id
@@ -33,6 +39,9 @@ sql:
         # get by id
         get_by_id: |
             SELECT id, username, email FROM users WHERE id = :id
+        # get by id
+        get_by_email: |
+            SELECT id, username, email FROM users WHERE email = :email
         # authorization query
         select_by_username_and_password: |
             SELECT id, email, username
@@ -127,7 +136,7 @@ sql:
             INSERT INTO projects
             (user_id, name, description, date_added, date_updated)
             VALUES
-            (:user_id, :name, :description,  NOW(), NOW())
+            (:user_id, :name, :description, NOW(), NOW())
         select_by_id: |
             SELECT * FROM projects
             WHERE id = :id AND user_id = :user_id
@@ -148,7 +157,7 @@ sql:
             INSERT INTO project_characters
             (project_id, user_id, name, description, date_added, date_updated)
             VALUES
-            (:project_id, :user_id, :name, :description,  NOW(), NOW())
+            (:project_id, :user_id, :name, :description, NOW(), NOW())
         select_by_project: |
             SELECT * FROM project_characters
             WHERE user_id = :user_id
@@ -180,7 +189,7 @@ sql:
             INSERT INTO project_character_revisions
             (character_id, user_id, content, description, date_added, date_updated)
             VALUES
-            (:character_id, :user_id, :content, :description,  NOW(), NOW())
+            (:character_id, :user_id, :content, :description, NOW(), NOW())
         select_by_character: |
             SELECT * FROM project_character_revisions
             WHERE user_id = :user_id
@@ -205,7 +214,7 @@ sql:
             INSERT INTO project_storyboards
             (project_id, user_id, name, description, date_added, date_updated)
             VALUES
-            (:project_id, :user_id, :name, :description,  NOW(), NOW())
+            (:project_id, :user_id, :name, :description, NOW(), NOW())
         select_by_project: |
             SELECT * FROM project_storyboards
             WHERE user_id = :user_id
@@ -237,7 +246,7 @@ sql:
             INSERT INTO project_storyboard_panels
             (storyboard_id, user_id, name, description, date_added, date_updated)
             VALUES
-            (:storyboard_id, :user_id, :name, :description,  NOW(), NOW())
+            (:storyboard_id, :user_id, :name, :description, NOW(), NOW())
         select_by_storyboard: |
             SELECT * FROM project_storyboard_panels
             WHERE user_id = :user_id
@@ -269,7 +278,7 @@ sql:
             INSERT INTO project_storyboard_panel_revisions
             (panel_id, user_id, content, description, date_added, date_updated)
             VALUES
-            (:panel_id, :user_id, :content, :description,  NOW(), NOW())
+            (:panel_id, :user_id, :content, :description, NOW(), NOW())
         select_by_panel: |
             SELECT * FROM project_storyboard_panel_revisions
             WHERE user_id = :user_id
@@ -289,3 +298,15 @@ sql:
             WHERE id = :id
             AND panel_id = :panel_id
             AND user_id = :user_id
+    project_users:
+        insert: |
+            INSERT INTO project_users
+            (project_id, project_user_id, user_id, date_added, date_updated)
+            VALUES
+            (:project_id, :project_user_id, :user_id, NOW(), NOW())
+        get_by_project: |
+            SELECT u.id, u.username, u.email FROM project_users pu
+            JOIN users u on pu.project_user_id = u.id
+            WHERE pu.user_id = :user_id
+            AND pu.project_id = :project_id
+            ORDER BY u.username DESC

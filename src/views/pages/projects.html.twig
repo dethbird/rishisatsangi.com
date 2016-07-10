@@ -26,6 +26,7 @@
                                     <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/project/{{project.id}}">Edit</a>
+                                        <a class="dropdown-item" href="/project/{{project.id}}/user/add">Add User</a>
                                         <a class="dropdown-item" href="/project/{{project.id}}/character/create">New Character</a>
                                         <a class="dropdown-item" href="/project/{{project.id}}/storyboard/create">New Storyboard</a>
                                     </div>
@@ -151,6 +152,16 @@
                                     <a   href="/project/{{project.id}}/storyboard/ceate">create a storyboard</a>
                             </div>
                         {% endif %}
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="display-5 col-xs-6">Users</div>
+                        </div>
+                        {% for user in project.users %}
+                            <div class="row">
+                                <div class="col-xs-6">{{user.username}}</div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
                 {% if loop.index is divisible by(3) %}

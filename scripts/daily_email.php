@@ -47,7 +47,7 @@
             ->yellow()->bold() . PHP_EOL;
 
         // get all users
-        $users = $db->fetchAll($configs['sql']['users']['get_all'],[]);
+        $users = $db->fetchAll($configs['sql']['users']['get_app_users'],[]);
         foreach ($users as $user) {
             echo $c("user: ")
                 ->white();

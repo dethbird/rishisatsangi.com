@@ -27,6 +27,9 @@ sql:
         # get all
         get_all: |
             SELECT id, username, email FROM users ORDER BY id
+        # get all
+        get_app_users: |
+            SELECT id, username, email FROM users WHERE app_user = 'Y' ORDER BY id
         # get by id
         get_by_id: |
             SELECT id, username, email FROM users WHERE id = :id

@@ -26,6 +26,7 @@
                                     <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/project/{{project.id}}">Edit</a>
+                                        <a class="dropdown-item" href="/project/{{project.id}}/character/create">New Character</a>
                                         <a class="dropdown-item" href="/project/{{project.id}}/storyboard/create">New Storyboard</a>
                                     </div>
                                 </div>
@@ -41,7 +42,19 @@
                             <div class="display-5 col-xs-6">Characters</div>
                         </div>
                         {% if project.characters|length > 0 %}
-                            characters
+                            <div class="row sortable-characters" data-id="{{project.id}}">
+                            {% for character in project.characters %}
+                                <div class="card col-xs-12 col-lg-4" data-id="{{character.id}}">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <i class="fa fa-reorder fa-lg handle" title="reorder"> </i> {{character.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
                         {% else %}
                             <div class="container col-xs-12 muted">
                                     <a   href="/project/{{project.id}}/character/ceate">create a character</a>

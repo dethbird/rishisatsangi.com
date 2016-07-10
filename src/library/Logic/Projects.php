@@ -360,6 +360,23 @@ class Projects {
         return $revision;
     }
 
+    public function orderProjectCharacters($params)
+    {
+        foreach ($params['items'] as $id=>$order){
+            if($order != "") {
+                $retult = $this->db->perform(
+                    $this->configs['sql']['project_characters']['update_order'],
+                    [
+                        'id' => $id,
+                        'project_id' => $params['project_id'],
+                        'sort_order' => $order,
+                        'user_id' => $this->securityContext->id
+                    ]
+                );
+            }
+        }
+    }    
+
     public function orderProjectStoryboards($params)
     {
         foreach ($params['items'] as $id=>$order){
@@ -401,6 +418,15 @@ class Projects {
      */
     public function hydrateProject($project)
     {
+
+        $characters = $this->db->fetchAll(
+            $this->configs['sql']['project_characters']['select_by_project'],
+            [
+                'project_id' => (int) $project['id'],
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
         $storyboards = $this->db->fetchAll(
             $this->configs['sql']['project_storyboards']['select_by_project'],
             [
@@ -438,6 +464,7 @@ class Projects {
             $storyboards[$storyboardIdx] = $storyboard;
         }
 
+        $project['characters'] = $characters;
         $project['storyboards'] = $storyboards;
 
         return $project;

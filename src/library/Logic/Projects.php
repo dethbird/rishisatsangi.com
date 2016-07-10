@@ -388,6 +388,28 @@ class Projects {
         return $result;
     }
 
+    public function updateProjectStoryboardPanelComment($id, $data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['comments']['update'],
+            [
+                'id' => $id,
+                'user_id' => $data['user_id'],
+                'comment' => $data['comment'],
+                'status' => $data['status'],
+                'date_added' => $data['date_added']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['comments']['get_by_id'],
+            [
+                'id' => $id,
+            ]
+        );
+
+        return $result;
+    }
 
     /**
      * get top level project objects by user.

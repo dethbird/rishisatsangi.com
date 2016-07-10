@@ -138,13 +138,22 @@ sql:
             VALUES
             (:entity_id, :entity_table_name, :comment, :status, :user_id, :date_added, NOW())
         get_by_id: |
-            SELECT * FROM comments c
+            SELECT * FROM comments
             WHERE id = :id
         get_by_entity: |
             SELECT * FROM comments c
             WHERE entity_table_name = :entity_table_name
             AND entity_id = :entity_id
             ORDER BY date_added DESC
+        update: |
+            UPDATE comments
+            SET
+                user_id = :user_id,
+                comment = :comment,
+                status = :status,
+                date_added = :date_added,
+                date_updated = NOW()
+            WHERE id = :id
     projects:
         insert: |
             INSERT INTO projects

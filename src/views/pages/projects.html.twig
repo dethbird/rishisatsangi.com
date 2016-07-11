@@ -137,8 +137,12 @@
                                                         {% endif %}
                                                         <div class="row container">
                                                             <i class="fa fa-reorder fa-sm handle" title="reorder"> </i>
+                                                            {% if panel.revisions|length > 1 %}
                                                             <i class="fa fa-history fa-sm" title="comments"></i>{{panel.revisions|length}}
-                                                            <i class="fa fa-comments fa-sm" title="comments"></i>{{panel.comments|length > 0 ? panel.comments|length : ''}}
+                                                            {% endif %}
+                                                            {% if panel.comments|length > 1 %}
+                                                            <i class="fa fa-comments fa-sm" title="comments"></i>{{panel.comments|length}}
+                                                            {% endif %}
                                                         </div>
                                                         <span class="muted">{{panel.name}}</span><br />
                                                         <div class="btn-group">

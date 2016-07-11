@@ -24,93 +24,87 @@
 
     $cmd = new Command();
     $cmd->beepOnError();
-    $cmd->flag('i')
-        ->boolean()
-        ->aka('import')
-        ->describedAs('Import project from yml.');
     $cmd->flag('u')
+        ->require(true)
         ->aka('user_id')
         ->describedAs('Id for the user from users table.');
     $cmd->flag('f')
+        ->require(true)
         ->aka('file')
         ->describedAs('Location of the yaml file.');
 
 
-    if ($cmd['import']) {
 
-        echo $c(
+    echo $c(
 "   ___       _ _
-  / _ \_   _| | |
- / /_)/ | | | | |
+/ _ \_   _| | |
+/ /_)/ | | | | |
 / ___/| |_| | | |
 \/     \__,_|_|_|
-                 "
-            )
-            ->white()->bold()->highlight('blue') . PHP_EOL;
+             "
+        )
+        ->white()->bold()->highlight('blue') . PHP_EOL;
 
-        echo $c("importing yml as project.")
-            ->yellow()->bold() . PHP_EOL;
+    echo $c("importing yml as project.")
+        ->yellow()->bold() . PHP_EOL;
 
-        $user = $db->fetchOne(
-            $configs['sql']['users']['get_by_id'],[
-                'id' => $cmd['u']]);
+    $user = $db->fetchOne(
+        $configs['sql']['users']['get_by_id'],[
+            'id' => $cmd['u']]);
 
-        $projectYml = Yaml::parse(
-            file_get_contents($cmd['f']));
+    $projectYml = Yaml::parse(
+        file_get_contents($cmd['f']));
 
-        $projectService = new Projects($db, $configs, (object) $user);
+    $projectService = new Projects($db, $configs, (object) $user);
 
+    $project = $projectService->create($projectYml);
 
+    foreach ($projectYml['storyboards'] as $_storyboard) {
+        $_storyboard['project_id'] = $project['id'];
+        $storyboard = $projectService->createProjectStoryboard($_storyboard);
+        array_reverse($_storyboard['boards']);
+        foreach($_storyboard['boards'] as $i=>$_board){
+            $_board['name'] = $_board['id'];
+            $_board['description'] = $_board['notes'];
+            $_board['storyboard_id'] = $storyboard['id'];
+            $panel = $projectService->createProjectStoryboardPanel($_board, $i);
 
-        $project = $projectService->create($projectYml);
-
-        foreach ($projectYml['storyboards'] as $_storyboard) {
-            $_storyboard['project_id'] = $project['id'];
-            $storyboard = $projectService->createProjectStoryboard($_storyboard);
-            print_r($storyboard);
-            array_reverse($_storyboard['boards']);
-            foreach($_storyboard['boards'] as $i=>$_board){
-                $_board['name'] = $_board['id'];
-                $_board['description'] = $_board['notes'];
-                $_board['storyboard_id'] = $storyboard['id'];
-                $panel = $projectService->createProjectStoryboardPanel($_board, $i);
-
-                array_reverse($_board['images']);
-                foreach ($_board['images'] as $_revision) {
-                    $_revision['content'] = $_revision['display'];
-                    $_revision['panel_id'] = $panel['id'];
-                    $revision = $projectService->createProjectStoryboardPanelRevision($_revision);
-                }
-                if(is_array($_board['comments'])){
-                    foreach ($_board['comments'] as $_comment) {
-
-                        $_user = $db->fetchOne(
-                            $configs['sql']['users']['get_by_username'],
-                            [
-                                'username' => $_comment['user']
-                            ]
-                        );
-
-                        $_comment['panel_id'] = $panel['id'];
-                        $_comment['user_id'] = $_user['id'];
-                        $_comment['status'] = $_comment['status'] ? $_comment['status'] : 'new';
-                        $_comment['date_added'] = $_comment['date'];
-                        $comment = $projectService->createProjectStoryboardPanelComment($_comment);
-                    }
-                }
-            }
-        }
-
-        foreach ($projectYml['characters']['list'] as $_character) {
-            $_character['project_id'] = $project['id'];
-            print_r($_character);
-            $character = $projectService->createProjectCharacter($_character);
-            print_r($character);
-            foreach ($_character['images'] as $_revision){
+            array_reverse($_board['images']);
+            foreach ($_board['images'] as $_revision) {
                 $_revision['content'] = $_revision['display'];
-                $_revision['character_id'] = $character['id'];
-                $revision = $projectService->createProjectCharacterRevision($_revision);
+                $_revision['panel_id'] = $panel['id'];
+                $revision = $projectService->createProjectStoryboardPanelRevision($_revision);
+            }
+            if(is_array($_board['comments'])){
+                foreach ($_board['comments'] as $_comment) {
+
+                    $_user = $db->fetchOne(
+                        $configs['sql']['users']['get_by_username'],
+                        [
+                            'username' => $_comment['user']
+                        ]
+                    );
+
+                    $_comment['panel_id'] = $panel['id'];
+                    $_comment['user_id'] = $_user['id'];
+                    $_comment['status'] = $_comment['status'] ? $_comment['status'] : 'new';
+                    $_comment['comment'] = iconv('UTF-8', 'ASCII//TRANSLIT', $_comment['comment']);
+                    $_comment['date_added'] = date("Y-m-d h:i:s", $_comment['date']);
+                    $comment = $projectService->createProjectStoryboardPanelComment($_comment);
+                }
             }
         }
-
     }
+
+    foreach ($projectYml['characters']['list'] as $_character) {
+        $_character['project_id'] = $project['id'];
+        $character = $projectService->createProjectCharacter($_character);
+        foreach ($_character['images'] as $_revision){
+            $_revision['content'] = $_revision['display'];
+            $_revision['character_id'] = $character['id'];
+            $revision = $projectService->createProjectCharacterRevision($_revision);
+        }
+    }
+
+    echo $c("Created project ".$project['id'].".")
+        ->yellow()->bold() . PHP_EOL;

@@ -83,7 +83,6 @@
         'ALTER TABLE comments AUTO_INCREMENT = 1',
         []
     );
-    print_r($result);
 
     $result = $db->perform(
         'ALTER TABLE projects AUTO_INCREMENT = 1',

@@ -119,7 +119,6 @@ class Projects {
 
     public function createProjectCharacterRevision($data)
     {
-        print_r($data);
         $result = $this->db->perform(
             $this->configs['sql']['project_character_revisions']['insert'],
             [

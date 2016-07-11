@@ -126,5 +126,15 @@
         }
     }
 
+    if (is_array($projectYml['reference_images']['list'])) {
+        foreach ($projectYml['reference_images']['list'] as $idx=>$_img) {
+            $_img['project_id'] = $project['id'];
+            $_img['name'] = $_img['id'];
+            $_img['description'] = $_img['note'];
+            $_img['content'] = $_img['url'];
+            $img = $projectService->createProjectReferenceImage($_img, $idx);
+        }
+    }
+
     echo $c("Created project ".$project['id'].".")
         ->yellow()->bold() . PHP_EOL;

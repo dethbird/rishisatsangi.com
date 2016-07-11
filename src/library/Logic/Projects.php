@@ -213,6 +213,31 @@ class Projects {
         return $result;
     }
 
+    public function createProjectLocation($data, $sort_order = 0)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_locations']['insert'],
+            [
+                'user_id' => $this->securityContext->id,
+                'project_id' => $data['project_id'],
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'content' => $data['content'],
+                'sort_order' => $sort_order
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_locations']['select_by_id'],
+            [
+                'id' => $this->db->lastInsertId(),
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
     /**
      * [createProjectStoryboard description]
      * @param  [type] $data [description]

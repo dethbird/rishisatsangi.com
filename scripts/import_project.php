@@ -136,5 +136,12 @@
         }
     }
 
+    if (is_array($projectYml['locations']['list'])) {
+        foreach ($projectYml['locations']['list'] as $idx=>$_loc) {
+            $_loc['project_id'] = $project['id'];
+            $img = $projectService->createProjectLocation($_loc, $idx);
+        }
+    }
+
     echo $c("Created project ".$project['id'].".")
         ->yellow()->bold() . PHP_EOL;

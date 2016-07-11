@@ -94,7 +94,7 @@ class Projects {
         return true;
     }
 
-    public function createProjectCharacter($data)
+    public function createProjectCharacter($data, $sort_order = 0)
     {
         $result = $this->db->perform(
             $this->configs['sql']['project_characters']['insert'],
@@ -102,7 +102,8 @@ class Projects {
                 'user_id' => $this->securityContext->id,
                 'project_id' => $data['project_id'],
                 'name' => $data['name'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'sort_order' => $data['sort_order']
             ]
         );
 
@@ -131,6 +132,52 @@ class Projects {
 
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_character_revisions']['select_by_id'],
+            [
+                'id' => $this->db->lastInsertId(),
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
+    public function createProjectConceptArt($data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_concept_art']['insert'],
+            [
+                'user_id' => $this->securityContext->id,
+                'project_id' => $data['project_id'],
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_concept_art']['select_by_id'],
+            [
+                'id' => $this->db->lastInsertId(),
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
+    public function createProjectConceptArtRevision($data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_concept_art_revisions']['insert'],
+            [
+                'user_id' => $this->securityContext->id,
+                'concept_art_id' => $data['concept_art_id'],
+                'content' => $data['content'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_concept_art_revisions']['select_by_id'],
             [
                 'id' => $this->db->lastInsertId(),
                 'user_id' => $this->securityContext->id

@@ -59,50 +59,71 @@
 
     $project = $projectService->create($projectYml);
 
-    foreach ($projectYml['storyboards'] as $_storyboard) {
-        $_storyboard['project_id'] = $project['id'];
-        $storyboard = $projectService->createProjectStoryboard($_storyboard);
-        array_reverse($_storyboard['boards']);
-        foreach($_storyboard['boards'] as $i=>$_board){
-            $_board['name'] = $_board['id'];
-            $_board['description'] = $_board['notes'];
-            $_board['storyboard_id'] = $storyboard['id'];
-            $panel = $projectService->createProjectStoryboardPanel($_board, $i);
+    if(is_array($projectYml['storyboards'])){
+        foreach ($projectYml['storyboards'] as $_storyboard) {
+            $_storyboard['project_id'] = $project['id'];
+            $storyboard = $projectService->createProjectStoryboard($_storyboard);
+            array_reverse($_storyboard['boards']);
+            foreach($_storyboard['boards'] as $i=>$_board){
+                $_board['name'] = $_board['id'];
+                $_board['description'] = $_board['notes'];
+                $_board['storyboard_id'] = $storyboard['id'];
+                $panel = $projectService->createProjectStoryboardPanel($_board, $i);
 
-            array_reverse($_board['images']);
-            foreach ($_board['images'] as $_revision) {
-                $_revision['content'] = $_revision['display'];
-                $_revision['panel_id'] = $panel['id'];
-                $revision = $projectService->createProjectStoryboardPanelRevision($_revision);
-            }
-            if(is_array($_board['comments'])){
-                foreach ($_board['comments'] as $_comment) {
+                array_reverse($_board['images']);
+                foreach ($_board['images'] as $_revision) {
+                    $_revision['content'] = $_revision['display'];
+                    $_revision['panel_id'] = $panel['id'];
+                    $revision = $projectService->createProjectStoryboardPanelRevision($_revision);
+                }
+                if(is_array($_board['comments'])){
+                    foreach ($_board['comments'] as $_comment) {
 
-                    $_user = $db->fetchOne(
-                        $configs['sql']['users']['get_by_username'],
-                        [
-                            'username' => $_comment['user']
-                        ]
-                    );
+                        $_user = $db->fetchOne(
+                            $configs['sql']['users']['get_by_username'],
+                            [
+                                'username' => $_comment['user']
+                            ]
+                        );
 
-                    $_comment['panel_id'] = $panel['id'];
-                    $_comment['user_id'] = $_user['id'];
-                    $_comment['status'] = $_comment['status'] ? $_comment['status'] : 'new';
-                    $_comment['comment'] = iconv('UTF-8', 'ASCII//TRANSLIT', $_comment['comment']);
-                    $_comment['date_added'] = date("Y-m-d h:i:s", $_comment['date']);
-                    $comment = $projectService->createProjectStoryboardPanelComment($_comment);
+                        $_comment['panel_id'] = $panel['id'];
+                        $_comment['user_id'] = $_user['id'];
+                        $_comment['status'] = $_comment['status'] ? $_comment['status'] : 'new';
+                        $_comment['comment'] = iconv('UTF-8', 'ASCII//TRANSLIT', $_comment['comment']);
+                        $_comment['date_added'] = date("Y-m-d h:i:s", $_comment['date']);
+                        $comment = $projectService->createProjectStoryboardPanelComment($_comment);
+                    }
                 }
             }
         }
     }
 
-    foreach ($projectYml['characters']['list'] as $_character) {
-        $_character['project_id'] = $project['id'];
-        $character = $projectService->createProjectCharacter($_character);
-        foreach ($_character['images'] as $_revision){
-            $_revision['content'] = $_revision['display'];
-            $_revision['character_id'] = $character['id'];
-            $revision = $projectService->createProjectCharacterRevision($_revision);
+    if (is_array($projectYml['characters']['list'])) {
+        foreach ($projectYml['characters']['list'] as $idx=>$_character) {
+            $_character['project_id'] = $project['id'];
+            $_character['sort_order'] = $idx;
+            $character = $projectService->createProjectCharacter($_character, $idx);
+            if (is_array($_character['images'])) {
+                foreach ($_character['images'] as $_revision){
+                    $_revision['content'] = $_revision['display'];
+                    $_revision['character_id'] = $character['id'];
+                    $revision = $projectService->createProjectCharacterRevision($_revision);
+                }
+            }
+        }
+    }
+
+    if (is_array($projectYml['concept_art']['list'])) {
+        foreach ($projectYml['concept_art']['list'] as $_concept_art) {
+            $_concept_art['project_id'] = $project['id'];
+            $concept_art = $projectService->createProjectConceptArt($_concept_art);
+            if (is_array($_concept_art['images'])) {
+                foreach ($_concept_art['images'] as $_revision){
+                    $_revision['content'] = $_revision['display'];
+                    $_revision['concept_art_id'] = $concept_art['id'];
+                    $revision = $projectService->createProjectConceptArtRevision($_revision);
+                }
+            }
         }
     }
 

@@ -30,19 +30,16 @@ sql:
             VALUES
             (:username, :email, :password, NOW(), NOW())
                 ON DUPLICATE KEY UPDATE username = :username, date_updated = NOW()
-        # get all
         get_all: |
             SELECT id, username, email FROM users ORDER BY id
-        # get all
         get_app_users: |
             SELECT id, username, email FROM users WHERE app_user = 'Y' ORDER BY id
-        # get by id
         get_by_id: |
             SELECT id, username, email FROM users WHERE id = :id
-        # get by id
         get_by_email: |
             SELECT id, username, email FROM users WHERE email = :email
-        # authorization query
+        get_by_username: |
+            SELECT id, username, email FROM users WHERE username = :username
         select_by_username_and_password: |
             SELECT id, email, username
             FROM `users`
@@ -267,9 +264,9 @@ sql:
     project_storyboard_panels:
         insert: |
             INSERT INTO project_storyboard_panels
-            (storyboard_id, user_id, name, description, date_added, date_updated)
+            (storyboard_id, user_id, name, description, sort_order, date_added, date_updated)
             VALUES
-            (:storyboard_id, :user_id, :name, :description, NOW(), NOW())
+            (:storyboard_id, :user_id, :name, :description, :sort_order, NOW(), NOW())
         select_by_storyboard: |
             SELECT * FROM project_storyboard_panels
             WHERE user_id = :user_id

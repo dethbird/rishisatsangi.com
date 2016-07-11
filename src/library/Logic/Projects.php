@@ -107,7 +107,7 @@ class Projects {
         );
 
         $result = $this->db->fetchOne(
-            $this->configs['sql']['project_storyboards']['select_by_id'],
+            $this->configs['sql']['project_characters']['select_by_id'],
             [
                 'id' => $this->db->lastInsertId(),
                 'user_id' => $this->securityContext->id
@@ -119,6 +119,7 @@ class Projects {
 
     public function createProjectCharacterRevision($data)
     {
+        print_r($data);
         $result = $this->db->perform(
             $this->configs['sql']['project_character_revisions']['insert'],
             [
@@ -168,15 +169,17 @@ class Projects {
         return $result;
     }
 
-    public function createProjectStoryboardPanel($data)
+    public function createProjectStoryboardPanel($data, $sortOrder = 0)
     {
         $result = $this->db->perform(
             $this->configs['sql']['project_storyboard_panels']['insert'],
             [
                 'user_id' => $this->securityContext->id,
+                'sort_order' => $i,
                 'storyboard_id' => $data['storyboard_id'],
                 'name' => $data['name'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'sort_order' => $sortOrder
             ]
         );
 

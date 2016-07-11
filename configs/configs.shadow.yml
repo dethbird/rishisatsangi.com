@@ -232,9 +232,9 @@ sql:
     project_concept_art:
         insert: |
             INSERT INTO project_concept_art
-            (project_id, user_id, name, description, date_added, date_updated)
+            (project_id, user_id, name, description, sort_order,  date_added, date_updated)
             VALUES
-            (:project_id, :user_id, :name, :description, NOW(), NOW())
+            (:project_id, :user_id, :name, :description, :sort_order, NOW(), NOW())
         select_by_project: |
             SELECT * FROM project_concept_art
             WHERE user_id = :user_id

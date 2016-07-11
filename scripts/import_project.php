@@ -101,7 +101,6 @@
     if (is_array($projectYml['characters']['list'])) {
         foreach ($projectYml['characters']['list'] as $idx=>$_character) {
             $_character['project_id'] = $project['id'];
-            $_character['sort_order'] = $idx;
             $character = $projectService->createProjectCharacter($_character, $idx);
             if (is_array($_character['images'])) {
                 foreach ($_character['images'] as $_revision){
@@ -114,9 +113,9 @@
     }
 
     if (is_array($projectYml['concept_art']['list'])) {
-        foreach ($projectYml['concept_art']['list'] as $_concept_art) {
+        foreach ($projectYml['concept_art']['list'] as $idx=>$_concept_art) {
             $_concept_art['project_id'] = $project['id'];
-            $concept_art = $projectService->createProjectConceptArt($_concept_art);
+            $concept_art = $projectService->createProjectConceptArt($_concept_art, $idx);
             if (is_array($_concept_art['images'])) {
                 foreach ($_concept_art['images'] as $_revision){
                     $_revision['content'] = $_revision['display'];

@@ -103,7 +103,7 @@ class Projects {
                 'project_id' => $data['project_id'],
                 'name' => $data['name'],
                 'description' => $data['description'],
-                'sort_order' => $data['sort_order']
+                'sort_order' => $sort_order
             ]
         );
 
@@ -141,7 +141,7 @@ class Projects {
         return $result;
     }
 
-    public function createProjectConceptArt($data)
+    public function createProjectConceptArt($data, $sort_order)
     {
         $result = $this->db->perform(
             $this->configs['sql']['project_concept_art']['insert'],
@@ -149,7 +149,8 @@ class Projects {
                 'user_id' => $this->securityContext->id,
                 'project_id' => $data['project_id'],
                 'name' => $data['name'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'sort_order' => $sort_order
             ]
         );
 

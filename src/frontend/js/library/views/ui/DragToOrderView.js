@@ -34,13 +34,14 @@ var DragToOrderView = Backbone.View.extend({
             $el.packery();
         });
 
-        $el.on( 'dragItemPositioned', function(e){
-            that.orderItems(
+        $el.on( 'dragItemPositioned', function(e, trigger){
+            that.orderItems(trigger,
                 $el.packery('getItemElements'));
         });
 
     },
-    orderItems: function(items) {
+    orderItems: function(trigger,items) {
+
         var that = this;
         var $el = $(this.el);
 
@@ -53,6 +54,7 @@ var DragToOrderView = Backbone.View.extend({
             if($e.data('id')!="") {
                 data['items'][$e.data('id')] = i;
             }
+            $e.find('.sort_order').html(i+1);
         });
 
         // make the request
@@ -62,11 +64,11 @@ var DragToOrderView = Backbone.View.extend({
             data: data
         })
         .success(function(data){
-            $el.notify('Saved order.', {
+            $(trigger.element).notify('Saved order.', {
                 className: 'success'});
         })
         .error(function(data){
-            $el.notify('Error saving order.', {
+            $(trigger.element).notify('Error saving order.', {
                 className: 'error'});
         });
     }

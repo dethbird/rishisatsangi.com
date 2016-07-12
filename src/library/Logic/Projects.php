@@ -724,6 +724,42 @@ class Projects {
             $characters[$characterIdx] = $character;
         }
 
+        $concept_art = $this->db->fetchAll(
+            $this->configs['sql']['project_concept_art']['select_by_project'],
+            [
+                'project_id' => (int) $project['id'],
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        foreach ($concept_art as $idx=>$art) {
+            $revisions = $this->db->fetchAll(
+                $this->configs['sql']['project_concept_art_revisions']['select_by_concept_art'],
+                [
+                    'concept_art_id' => (int) $art['id'],
+                    'user_id' => $this->securityContext->id
+                ]
+            );
+            $art['revisions'] = $revisions;
+            $concept_art[$idx] = $art;
+        }
+
+        $locations = $this->db->fetchAll(
+            $this->configs['sql']['project_locations']['select_by_project'],
+            [
+                'project_id' => (int) $project['id'],
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        $reference_images = $this->db->fetchAll(
+            $this->configs['sql']['project_reference_images']['select_by_project'],
+            [
+                'project_id' => (int) $project['id'],
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
         $storyboards = $this->db->fetchAll(
             $this->configs['sql']['project_storyboards']['select_by_project'],
             [
@@ -785,6 +821,9 @@ class Projects {
         $users = array_merge([$owner], $users);
 
         $project['characters'] = $characters;
+        $project['concept_art'] = $concept_art;
+        $project['locations'] = $locations;
+        $project['reference_images'] = $reference_images;
         $project['storyboards'] = $storyboards;
         $project['users'] = $users;
 

@@ -113,6 +113,10 @@ img.service-logo-manage {
     max-width: 24px;
     height: auto;
 }
+input[name=name] {
+    font-weight: bold;
+    font-size: 1.8em;
+}
 .date {
     font-weight: bold;
     font-size: 0.9rem;

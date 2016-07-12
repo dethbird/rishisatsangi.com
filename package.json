@@ -4,7 +4,8 @@
     "fountain-js": "0.0.1",
     "jquery": "^2.1.4",
     "timeago": "^1.4.3",
-    "uglify-js": "^2.5.0"
+    "uglify-js": "^2.5.0",
+    "simplemde": "~1.11.2"
   },
   "scripts": {
     "deploy": "php scripts/build.php --cache --php --configs --npm --javascript",

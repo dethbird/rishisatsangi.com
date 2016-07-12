@@ -962,6 +962,7 @@ $app->group('/project', $authorize($app), function () use ($app) {
         $project = [];
         if($id > 0) {
             $project = $projectService->fetchOne($id);
+            $project = $projectService->hydrateProject($project);
         }
 
         $templateVars = array(

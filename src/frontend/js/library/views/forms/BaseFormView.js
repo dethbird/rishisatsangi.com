@@ -1,4 +1,4 @@
-var MarkdownEditorView = require('./MarkdownEditorView');
+var simplemde = require('simplemde');
 var BaseFormView = Backbone.View.extend({
     baseUrl: '/api/project',
     events: {
@@ -8,15 +8,19 @@ var BaseFormView = Backbone.View.extend({
         var that = this;
         var $el = $(this.el);
 
-        $el.find('.markdown-edit').each(function(i,editor){
-            var markdownEditor = new MarkdownEditorView({
-                el: editor
+        $el.find('.markdown-edit .markdown-edit-editor').each(function(i,editor){
+            $editor = $(editor);
+            var markdownEditor = new simplemde({
+                element: $editor[0],
+                forceSync: true,
+                tabSize: 4
             });
         });
 
         $el.find('.datepicker').datepicker({
             dateFormat: "yy-mm-dd"
         });
+
     },
     submit: function(e) {
         var that = this;

@@ -62,8 +62,9 @@
                                                         {% endif %}
                                                     {% endfor %}
                                                 {% endif %}
-                                                <div class="row container">
-                                                    <i class="fa fa-reorder fa-sm handle" title="reorder"> </i>
+                                                <div class="row container card-controls">
+                                                    {% set sort_order = character.sort_order + 1%}
+                                                    <i class="fa fa-reorder fa-sm handle" title="reorder"></i><span class="sort-order">{{sort_order}}</span>
                                                     {% if character.revisions|length > 1 %}
                                                         <i class="fa fa-history fa-sm" title="comments"></i>{{character.revisions|length}}
                                                     {% endif %}
@@ -97,7 +98,7 @@
                                     <div class="card-block">
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <i class="fa fa-reorder fa-lg handle" title="reorder"> </i> {{storyboard.name}}
+                                                <i class="fa fa-reorder fa-lg handle" title="reorder"></i> {{storyboard.name}}
                                             </div>
                                             <div class="col-xs-6 pull-right">
                                                 <div class="btn-group">
@@ -132,8 +133,9 @@
                                                                 {% endif %}
                                                             {% endfor %}
                                                         {% endif %}
-                                                        <div class="row container">
-                                                            <i class="fa fa-reorder fa-sm handle" title="reorder"> </i>
+                                                        <div class="row container card-controls">
+                                                            {% set sort_order = panel.sort_order + 1 %}
+                                                            <i class="fa fa-reorder fa-sm handle" title="reorder"></i><span class="sort_order">{{sort_order}}</span>
                                                             {% if panel.revisions|length > 1 %}
                                                             <i class="fa fa-history fa-sm" title="comments"></i>{{panel.revisions|length}}
                                                             {% endif %}

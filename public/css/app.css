@@ -65,6 +65,10 @@ label.tag {
 .card-block blockquote {
     padding: 0px 0px 0px 15px;
 }
+.card-controls {
+    color: #aaa;
+    font-size: 10px;
+}
 .content {
     margin-bottom: 10px;
     padding: 25px;
@@ -85,7 +89,12 @@ a.display-5 {
     font-weight: bold;
 }
 .fa {
+    font-size: 12px;
     color: #CCC;
+    margin-right: 1px;
+}
+.fa-history, .fa-comments {
+    margin-left: 2px;
 }
 .dropdown-toggle {
     /*height: 68px;*/

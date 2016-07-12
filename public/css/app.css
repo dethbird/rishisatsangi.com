@@ -97,12 +97,12 @@ a.display-5 {
 .dropdown-menu {
     left: inherit;
 }
-.pull-right, .text-align-right {
-    text-align: right;
-}
 
 .handle {
     cursor: move;
+}
+.hidden {
+    display:none;
 }
 img.service-logo {
     max-width: 32px;
@@ -121,15 +121,15 @@ input[name=name] {
     font-weight: bold;
     font-size: 0.9rem;
 }
-.number {
-    font-weight: bold;
-}
 .muted {
     color: #aaa;
     font-size: 12px;
 }
-.hidden {
-    display:none;
+.number {
+    font-weight: bold;
+}
+.pull-right, .text-align-right {
+    text-align: right;
 }
 .security-context-nav {
     margin: 5px 0px 10px 0px;

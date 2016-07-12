@@ -35,6 +35,9 @@
         ->boolean()
         ->aka('uglify')
         ->describedAs('Uglify the compiled js (leave empty in dev)');
+    $cmd->option('js-page')
+        ->aka('javascript-page')
+        ->describedAs('File in "src/frontend/js/pages/<page>.js" to build');
     $c = new Color();
     $dotenv = (new Loader('.env'))
               ->parse()
@@ -216,11 +219,15 @@
            )
             ->white()->bold()->highlight('blue') . PHP_EOL;
 
-        $frontendFiles = $shell->executeCommand('find', array(
-            "src/frontend/js/pages/",
-            "-name",
-            "'*.js'"
-        ));
+        if($cmd['js-page']){
+            $frontendFiles = ["src/frontend/js/pages/" . $cmd['js-page'] . ".js"];
+        } else {
+            $frontendFiles = $shell->executeCommand('find', array(
+                "src/frontend/js/pages/",
+                "-name",
+                "'*.js'"
+            ));
+        }
 
         foreach($frontendFiles as $file){
             if($file) {

@@ -3,7 +3,6 @@ var ProjectsView = Backbone.View.extend({
     initialize: function(options) {
         var that = this;
         var $el = $(this.el);
-
         $('.sortable-characters').each(function(i,e){
             dragToOrderView = new DragToOrderView({
                 el: e,

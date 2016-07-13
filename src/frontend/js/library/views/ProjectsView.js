@@ -4,12 +4,13 @@ var ProjectsView = Backbone.View.extend({
         var that = this;
         var $el = $(this.el);
         $el.imagesLoaded(function(){
+
             $('.sortable-characters').each(function(i,e){
                 dragToOrderView = new DragToOrderView({
                     el: e,
                     endPoint: '/api/project_character_order',
                     parentId: 'project_id',
-                    grid: true
+                    columnCount: $(this).data('column-count')
                 });
             });
 
@@ -18,7 +19,7 @@ var ProjectsView = Backbone.View.extend({
                     el: e,
                     endPoint: '/api/project_storyboard_order',
                     parentId: 'project_id',
-                    grid: false
+                    columnCount: $(this).data('column-count')
                 });
             });
 
@@ -27,7 +28,7 @@ var ProjectsView = Backbone.View.extend({
                     el: e,
                     endPoint: '/api/project_storyboard_panel_order',
                     parentId: 'storyboard_id',
-                    grid: true
+                    columnCount: $(this).data('column-count')
                 });
             });
         });

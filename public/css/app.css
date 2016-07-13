@@ -146,6 +146,9 @@ input[name=name] {
 .sortable-storyboards, .sortable-panels {
     position: relative;
 }
+.sortable-row-divider {
+    clear: both;
+}
 
 #explosioncorp-modal {
     display:none;

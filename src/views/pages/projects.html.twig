@@ -43,7 +43,7 @@
                             <div class="display-5 col-xs-6">Characters</div>
                         </div>
                         {% if project.characters|length > 0 %}
-                            <div class="row sortable-characters" data-id="{{project.id}}">
+                            <div class="row sortable-characters" data-id="{{project.id}}" data-column-count="3">
                             {% for character in project.characters %}
                             {% set current_revision_id = "" %}
                                 <div class="card col-xs-12 col-lg-3 sortable" data-id="{{character.id}}">
@@ -81,6 +81,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% if loop.index is divisible by(3) %}
+                                <div class="sortable-row-divider"></div>
+                                {% endif %}
                             {% endfor %}
                             </div>
                         {% else %}
@@ -92,7 +95,7 @@
                             <div class="display-5 col-xs-6">Storyboards</div>
                         </div>
                         {% if project.storyboards|length > 0 %}
-                            <div class="row sortable-storyboards" data-id="{{project.id}}">
+                            <div class="row sortable-storyboards" data-id="{{project.id}}" data-column-count="1">
                             {% for storyboard in project.storyboards %}
                                 <div class="card col-xs-12 sortable" data-id="{{storyboard.id}}">
                                     <div class="card-block">
@@ -111,7 +114,7 @@
                                             </div>
                                         </div>
                                         <br />
-                                        <div class="row container sortable-panels" data-id="{{storyboard.id}}">
+                                        <div class="row container sortable-panels" data-id="{{storyboard.id}}" data-column-count="2">
                                             {% if storyboard.panels|length == 0 %}
                                                 <div class="muted container">
                                                     <a href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/create">create a panel</a>
@@ -155,11 +158,19 @@
                                                             </div>
                                                         </div>
                                                 </div>
+
+                                                {% if loop.index is divisible by(2) %}
+                                                <div class="sortable-row-divider"></div>
+                                                {% endif %}
                                                 {% endfor %}
                                             {% endif %}
                                         </div>
                                     </div>
                                 </div>
+
+                                {% if loop.index is divisible by(1) %}
+                                <div class="sortable-row-divider"></div>
+                                {% endif %}
                             {% endfor %}
                             </div>
                         {% else %}

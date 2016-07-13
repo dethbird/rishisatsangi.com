@@ -2,13 +2,16 @@ var Draggabilly = require('draggabilly');
 var DragToOrderView = Backbone.View.extend({
     endPoint: null,
     parentId: null,
-    grid: true, // use grid functionality? keeps items heights at max(elems.height)
+    columnCount: false, // use grid functionality? keeps items heights at max(elems.height)
     initialize: function(options) {
+
         var that = this;
         var $el = $(this.el);
         that.endPoint = options.endPoint;
         that.parentId = options.parentId;
         that.grid = options.grid;
+        that.columnCount = options.columnCount;
+
 
         $.notify.defaults({
             autoHideDelay: 2500,
@@ -18,73 +21,51 @@ var DragToOrderView = Backbone.View.extend({
             hideAnimation: 'fadeOut'
         });
 
-        $el.packery({
-            itemSelector: '.sortable',
-            gutter: 5,
-            percentPosition: true
-        });
+        $el.sortable({
+            handle: '.handle',
+            cursor: 'move',
+            stop: function(e,ui){
 
-        $el.find('.sortable').each(function(i,e){
-            var draggie = new Draggabilly(e, {
-                containment: $(e).parent()[0],
-                handle: '.handle'
-            });
-            $el.packery( 'bindDraggabillyEvents', draggie );
-        });
-        //
-        // $el.imagesLoaded( function() {
-        console.log(that.grid);
-        if (that.grid == true) {
-            var maxHeight = 0;
-            $el.find('.sortable').each(function(i,e){
-                $e = $(e);
-                if($e.height() > maxHeight){
-                    maxHeight = $e.height();
-                }
-            })
-            $el.find('.sortable').css('height', maxHeight);
-        }
-        $el.packery();
-        // });
+                var $item = $(ui.item);
 
-        $el.on( 'dragItemPositioned', function(e, trigger){
-            that.orderItems(trigger,
-                $el.packery('getItemElements'));
+                $item.notify('Saving order ...', {
+                    autoHide: false
+                });
+
+                data = {};
+                data[that.parentId] = $el.data('id');
+                data['items'] = [];
+
+                $el.find('.sortable-row-divider').remove();
+                $el.find('.sortable').each( function(i,e) {
+                    var $e = $(e);
+                    if((i+1) % that.columnCount == 0){
+                        $('<div class="sortable-row-divider"></div>').insertAfter($e);
+                    }
+                    if($e.data('id')!="") {
+                        data['items'][$e.data('id')] = i;
+                    }
+                    $e.find('.sort_order').html(i+1);
+                });
+
+                // make the request
+                $.ajax({
+                    method: 'POST',
+                    url: that.endPoint,
+                    data: data
+                })
+                .success(function(data){
+                    $item.notify('Saved order.', {
+                        className: 'success'});
+                })
+                .error(function(data){
+                    $item.notify('Error', {
+                        className: 'error'});
+                });
+            }
         });
 
     },
-    orderItems: function(trigger,items) {
-
-        var that = this;
-        var $el = $(this.el);
-
-        data = {};
-        data[that.parentId] = $el.data('id');
-        data['items'] = [];
-
-        $(items).each(function(i,e){
-            var $e = $(e);
-            if($e.data('id')!="") {
-                data['items'][$e.data('id')] = i;
-            }
-            $e.find('.sort_order').html(i+1);
-        });
-
-        // make the request
-        $.ajax({
-            method: 'POST',
-            url: that.endPoint,
-            data: data
-        })
-        .success(function(data){
-            $(trigger.element).notify('Saved order.', {
-                className: 'success'});
-        })
-        .error(function(data){
-            $(trigger.element).notify('Error saving order.', {
-                className: 'error'});
-        });
-    }
 
 });
 

@@ -143,7 +143,9 @@ input[name=name] {
 .security-context-nav {
     margin: 5px 0px 10px 0px;
 }
-
+.sortable-storyboards, .sortable-panels {
+    position: relative;
+}
 
 #explosioncorp-modal {
     display:none;

@@ -272,7 +272,7 @@ class Projects {
             $this->configs['sql']['project_storyboard_panels']['insert'],
             [
                 'user_id' => $this->securityContext->id,
-                'sort_order' => $i,
+                'sort_order' => $sortOrder,
                 'storyboard_id' => $data['storyboard_id'],
                 'name' => $data['name'],
                 'description' => $data['description'],

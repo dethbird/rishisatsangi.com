@@ -2,11 +2,13 @@ var Draggabilly = require('draggabilly');
 var DragToOrderView = Backbone.View.extend({
     endPoint: null,
     parentId: null,
+    grid: true, // use grid functionality? keeps items heights at max(elems.height)
     initialize: function(options) {
         var that = this;
         var $el = $(this.el);
         that.endPoint = options.endPoint;
         that.parentId = options.parentId;
+        that.grid = options.grid;
 
         $.notify.defaults({
             autoHideDelay: 2500,
@@ -17,12 +19,12 @@ var DragToOrderView = Backbone.View.extend({
         });
 
         $el.packery({
-            itemSelector: '.card',
+            itemSelector: '.sortable',
             gutter: 5,
             percentPosition: true
         });
 
-        $el.find('.card').each(function(i,e){
+        $el.find('.sortable').each(function(i,e){
             var draggie = new Draggabilly(e, {
                 containment: $(e).parent()[0],
                 handle: '.handle'
@@ -30,9 +32,20 @@ var DragToOrderView = Backbone.View.extend({
             $el.packery( 'bindDraggabillyEvents', draggie );
         });
         //
-        $el.imagesLoaded().progress( function() {
-            $el.packery();
-        });
+        // $el.imagesLoaded( function() {
+        console.log(that.grid);
+        if (that.grid == true) {
+            var maxHeight = 0;
+            $el.find('.sortable').each(function(i,e){
+                $e = $(e);
+                if($e.height() > maxHeight){
+                    maxHeight = $e.height();
+                }
+            })
+            $el.find('.sortable').css('height', maxHeight);
+        }
+        $el.packery();
+        // });
 
         $el.on( 'dragItemPositioned', function(e, trigger){
             that.orderItems(trigger,

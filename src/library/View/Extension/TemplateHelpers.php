@@ -23,6 +23,7 @@ class TemplateHelpers extends \Twig_Extension
             new \Twig_SimpleFilter('to_array', array($this, 'to_array')),
             new \Twig_SimpleFilter('slugify', array($this, 'slugify')),
             new \Twig_SimpleFilter('time_ago', array($this, 'time_ago')),
+            new \Twig_SimpleFilter('truncate', array($this, 'truncate')),
             new \Twig_SimpleFilter('url_hostname', array($this, 'url_hostname')),
             new \Twig_SimpleFilter('md5', array($this, 'md5'))
         );
@@ -80,6 +81,13 @@ class TemplateHelpers extends \Twig_Extension
     public function time_ago($date_string) {
         $timeAgo = new TimeAgo('America/New_York');
         return $timeAgo->inWords($date_string);
+    }
+    public function truncate($string, $length = 150, $append = " ...") {
+        if (strlen($string) > $length) {
+            return substr($string, 0, $length) . $append;
+        } else {
+            return $string;
+        }
     }
     public function slugify($str) {
         $slugify = new Slugify();

@@ -950,6 +950,35 @@ $app->group('/project', $authorize($app), function () use ($app) {
         }
     });
 
+    # project detail
+    $app->get("/:id/detail", function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+        $id = (int) $id;
+
+        $project = [];
+        if($id > 0) {
+            $project = $projectService->fetchOne($id);
+            $project = $projectService->hydrateProject($project);
+        }
+
+        $templateVars = array(
+            "configs" => $configs,
+            'securityContext' => $securityContext,
+            "section" => "project.detail",
+            "project" => $project
+        );
+
+        $app->render(
+            'pages/project_detail.html.twig',
+            $templateVars,
+            200
+        );
+    });
+
     # project
     $app->get("/:id", function ($id) use ($app) {
 

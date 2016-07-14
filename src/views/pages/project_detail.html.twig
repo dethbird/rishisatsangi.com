@@ -6,7 +6,7 @@
 {% block content %}
     {{ parent() }}
     <ol class="breadcrumb">
-        <li class="active">Projects</li>
+        <li class="active"><a href="/projects">Projects</a></li>
     </ol>
     <br />
     <div class="row container-fluid">
@@ -89,6 +89,8 @@
                                     <a   href="/project/{{project.id}}/character/ceate">create a character</a>
                             </div>
                         {% endif %}
+                    </div>
+                    <div class="card-block">
                         <div class="row">
                             <div class="display-5 col-xs-6">Storyboards</div>
                         </div>
@@ -177,6 +179,53 @@
                             </div>
                         {% endif %}
                     </div>
+
+                    <!-- REFERENCE IMAGES -->
+
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="display-5 col-xs-6">Reference Images</div>
+                        </div>
+                        {% if project.reference_images|length > 0 %}
+                            <div class="row sortable-reference_images" data-id="{{project.id}}" data-column-count="6">
+                            {% for reference_image in project.reference_images %}
+                            {% set current_revision_id = "" %}
+                                <div class="card col-xs-12 col-lg-2 sortable" data-id="{{reference_image.id}}">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <img src="{{reference_image.content}}" />
+                                                <div class="row container card-controls">
+                                                    {% set sort_order = reference_image.sort_order + 1%}
+                                                    <i class="fa fa-reorder fa-sm handle" title="reorder"></i><span class="sort_order">{{sort_order}}</span>
+                                                    {% if reference_image.revisions|length > 1 %}
+                                                        <i class="fa fa-history fa-sm" title="comments"></i>{{reference_image.revisions|length}}
+                                                    {% endif %}
+                                                </div>
+                                                 {{reference_image.name}}
+                                            </div>
+                                        </div>
+                                        <div class="btn-group col-xs-12">
+                                            <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="/project/{{project.id}}/reference_image/{{reference_image.id}}">Edit reference_image</a>
+                                                <a class="dropdown-item" href="/project/{{project.id}}/reference_image/{{reference_image.id}}/revision/create">New reference_image Revision</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if loop.index is divisible by(6) %}
+                                <div class="sortable-row-divider"></div>
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="container col-xs-12 muted">
+                                    <a   href="/project/{{project.id}}/reference_image/ceate">create a reference image</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
                     <div class="card-block">
                         <div class="row">
                             <div class="display-5 col-xs-6">Users</div>

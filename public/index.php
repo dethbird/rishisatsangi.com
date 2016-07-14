@@ -415,6 +415,64 @@ $app->group('/api', function () use ($app) {
 
     });
 
+    # create concept_art
+    $app->post('/project_concept_art_revision', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_concept_art_revision.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $result = $projectService->createProjectConceptArtRevision($app->request->params());
+
+            $app->response->setStatus(201);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($result));
+        }
+
+    });
+
+    # update concept art revision
+    $app->put('/project_concept_art_revision/:id', function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+        $id = (int) $id;
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_concept_art_revision.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $result = $projectService->updateProjectConceptArtRevision(
+                $id, $app->request->params());
+
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($result));
+        }
+
+    });
+
     # create location
     $app->post('/project_location', function () use ($app) {
 
@@ -1095,9 +1153,9 @@ $app->group('/project', $authorize($app), function () use ($app) {
         }
     });
 
-    # storyboard character revision
-    $app->get("/:id/character/:character_id/revision/:revision_id", function (
-            $id, $character_id, $revision_id) use ($app) {
+    # concept art revision
+    $app->get("/:id/concept_art/:concept_art_id/revision/:revision_id", function (
+            $id, $concept_art_id, $revision_id) use ($app) {
         $configs = $app->container->get('configs');
         $securityContext = json_decode($app->getCookie('securityContext'));
         $db = $app->container->get('db');
@@ -1105,25 +1163,25 @@ $app->group('/project', $authorize($app), function () use ($app) {
 
         $project = $projectService->fetchOne($id);
         if ($project) {
-            $character = $projectService->fetchCharacterById($character_id);
-			if ($character) {
-				$revision = $projectService->fetchCharacterRevisionById($revision_id);
+            $concept_art = $projectService->fetchConceptArtById($concept_art_id);
+            if ($concept_art) {
+                $revision = $projectService->fetchConceptArtRevisionById($revision_id);
 
                 $templateVars = array(
                     "configs" => $configs,
                     'securityContext' => $securityContext,
-                    "section" => "project.storyboard.character.revision.index",
+                    "section" => "project.concept_art.revision.index",
                     "project" => $project,
-                    "character" => $character,
+                    "concept_art" => $concept_art,
                     "revision" => $revision
                 );
 
                 $app->render(
-                    'pages/project/character_revision.html.twig',
+                    'pages/project/concept_art_revision.html.twig',
                     $templateVars,
                     200
                 );
-			}
+            }
         }
     });
 
@@ -1153,6 +1211,38 @@ $app->group('/project', $authorize($app), function () use ($app) {
                 $templateVars,
                 200
             );
+        }
+    });
+
+    # character revision
+    $app->get("/:id/character/:character_id/revision/:revision_id", function (
+            $id, $character_id, $revision_id) use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $project = $projectService->fetchOne($id);
+        if ($project) {
+            $character = $projectService->fetchCharacterById($character_id);
+			if ($character) {
+				$revision = $projectService->fetchCharacterRevisionById($revision_id);
+
+                $templateVars = array(
+                    "configs" => $configs,
+                    'securityContext' => $securityContext,
+                    "section" => "project.character.revision.index",
+                    "project" => $project,
+                    "character" => $character,
+                    "revision" => $revision
+                );
+
+                $app->render(
+                    'pages/project/character_revision.html.twig',
+                    $templateVars,
+                    200
+                );
+			}
         }
     });
 

@@ -130,11 +130,11 @@
     );
 
     $result = $db->perform(
-        'ALTER TABLE project_storyboard_panel_revisions AUTO_INCREMENT = 0',
+        'ALTER TABLE project_storyboard_panel_revisions AUTO_INCREMENT = 1',
         []
     );
 
     $result = $db->perform(
-        'ALTER TABLE project_users AUTO_INCREMENT = 0',
+        'ALTER TABLE project_users AUTO_INCREMENT = 1',
         []
     );

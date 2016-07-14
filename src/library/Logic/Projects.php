@@ -440,6 +440,30 @@ class Projects {
         return $result;
     }
 
+    public function updateProjectConceptArtRevision($id, $data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_concept_art_revisions']['update'],
+            [
+                'id' => $id,
+                'concept_art_id' => $data['concept_art_id'],
+                'user_id' => $this->securityContext->id,
+                'content' => $data['content'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_concept_art_revisions']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }    
+
     public function updateProjectLocation($id, $data)
     {
         $result = $this->db->perform(
@@ -642,12 +666,12 @@ class Projects {
         return $users;
     }
 
-    public function fetchCharacterById($characterId)
+    public function fetchCharacterById($id)
     {
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_characters']['select_by_id'],
             [
-                'id' => $characterId,
+                'id' => $id,
                 'user_id' => $this->securityContext->id
             ]
         );
@@ -655,12 +679,12 @@ class Projects {
         return $result;
     }
 
-    public function fetchCharacterRevisionById($revisionId)
+    public function fetchCharacterRevisionById($id)
     {
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_character_revisions']['select_by_id'],
             [
-                'id' => $revisionId,
+                'id' => $id,
                 'user_id' => $this->securityContext->id
             ]
         );
@@ -668,12 +692,12 @@ class Projects {
         return $result;
     }
 
-    public function fetchConceptArtById($characterId)
+    public function fetchConceptArtById($id)
     {
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_concept_art']['select_by_id'],
             [
-                'id' => $characterId,
+                'id' => $id,
                 'user_id' => $this->securityContext->id
             ]
         );
@@ -681,12 +705,25 @@ class Projects {
         return $result;
     }
 
-    public function fetchLocationById($locationId)
+    public function fetchConceptArtRevisionById($id)
+    {
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_concept_art_revisions']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
+    public function fetchLocationById($id)
     {
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_locations']['select_by_id'],
             [
-                'id' => $locationId,
+                'id' => $id,
                 'user_id' => $this->securityContext->id
             ]
         );
@@ -694,12 +731,12 @@ class Projects {
         return $result;
     }
 
-    public function fetchReferenceImageById($referenceImageId)
+    public function fetchReferenceImageById($id)
     {
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_reference_images']['select_by_id'],
             [
-                'id' => $referenceImageId,
+                'id' => $id,
                 'user_id' => $this->securityContext->id
             ]
         );
@@ -707,12 +744,12 @@ class Projects {
         return $result;
     }
 
-    public function fetchStoryboardById($storyboardId)
+    public function fetchStoryboardById($id)
     {
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_storyboards']['select_by_id'],
             [
-                'id' => $storyboardId,
+                'id' => $id,
                 'user_id' => $this->securityContext->id
             ]
         );
@@ -720,12 +757,12 @@ class Projects {
         return $result;
     }
 
-    public function fetchStoryboardPanelById($panelId)
+    public function fetchStoryboardPanelById($id)
     {
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_storyboard_panels']['select_by_id'],
             [
-                'id' => $panelId,
+                'id' => $id,
                 'user_id' => $this->securityContext->id
             ]
         );
@@ -733,24 +770,24 @@ class Projects {
         return $result;
     }
 
-    public function fetchStoryboardPanelCommentById($commentId)
+    public function fetchStoryboardPanelCommentById($id)
     {
         $result = $this->db->fetchOne(
             $this->configs['sql']['comments']['get_by_id'],
             [
-                'id' => $commentId
+                'id' => $id
             ]
         );
 
         return $result;
     }
 
-    public function fetchStoryboardPanelRevisionById($revisionId)
+    public function fetchStoryboardPanelRevisionById($id)
     {
         $result = $this->db->fetchOne(
             $this->configs['sql']['project_storyboard_panel_revisions']['select_by_id'],
             [
-                'id' => $revisionId,
+                'id' => $id,
                 'user_id' => $this->securityContext->id
             ]
         );

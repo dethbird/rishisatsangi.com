@@ -231,6 +231,9 @@
                                             <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="/project/{{project.id}}/concept_art/{{concept_art.id}}">Edit Concept Art</a>
+                                                {% if current_revision_id != "" %}
+                                                    <a class="dropdown-item" href="/project/{{project.id}}/concept_art/{{concept_art.id}}/revision/{{current_revision_id}}">Edit Current Revision</a>
+                                                {% endif %}
                                                 <a class="dropdown-item" href="/project/{{project.id}}/concept_art/{{concept_art.id}}/revision/create">New Concept Art Revision</a>
                                             </div>
                                         </div>

@@ -141,7 +141,7 @@ class Projects {
         return $result;
     }
 
-    public function createProjectConceptArt($data, $sort_order)
+    public function createProjectConceptArt($data, $sort_order = 0)
     {
         $result = $this->db->perform(
             $this->configs['sql']['project_concept_art']['insert'],
@@ -416,6 +416,30 @@ class Projects {
         return $result;
     }
 
+    public function updateProjectConceptArt($id, $data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_concept_art']['update'],
+            [
+                'id' => $id,
+                'project_id' => $data['project_id'],
+                'user_id' => $this->securityContext->id,
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_concept_art']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
     public function updateProjectLocation($id, $data)
     {
         $result = $this->db->perform(
@@ -637,6 +661,19 @@ class Projects {
             $this->configs['sql']['project_character_revisions']['select_by_id'],
             [
                 'id' => $revisionId,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
+    public function fetchConceptArtById($characterId)
+    {
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_concept_art']['select_by_id'],
+            [
+                'id' => $characterId,
                 'user_id' => $this->securityContext->id
             ]
         );

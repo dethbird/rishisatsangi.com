@@ -100,6 +100,26 @@
     );
 
     $result = $db->perform(
+        'ALTER TABLE project_concept_art AUTO_INCREMENT = 1',
+        []
+    );
+
+    $result = $db->perform(
+        'ALTER TABLE project_concept_art_revisions AUTO_INCREMENT = 1',
+        []
+    );
+
+    $result = $db->perform(
+        'ALTER TABLE project_locations AUTO_INCREMENT = 1',
+        []
+    );
+
+    $result = $db->perform(
+        'ALTER TABLE project_reference_images AUTO_INCREMENT = 1',
+        []
+    );
+
+    $result = $db->perform(
         'ALTER TABLE project_storyboards AUTO_INCREMENT = 1',
         []
     );

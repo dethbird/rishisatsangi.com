@@ -416,6 +416,31 @@ class Projects {
         return $result;
     }
 
+    public function updateProjectLocation($id, $data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_locations']['update'],
+            [
+                'id' => $id,
+                'project_id' => $data['project_id'],
+                'user_id' => $this->securityContext->id,
+                'content' => $data['content'],
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_locations']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
     public function updateProjectReferenceImage($id, $data)
     {
         $result = $this->db->perform(
@@ -542,14 +567,14 @@ class Projects {
      */
     public function getProjects()
     {
-        $projects = $this->db->fetchAll(
+        $result = $this->db->fetchAll(
             $this->configs['sql']['projects']['select_by_user'],
             [
                 'user_id' => $this->securityContext->id
             ]
         );
 
-        return $projects;
+        return $result;
 
     }
 
@@ -561,7 +586,7 @@ class Projects {
      */
     public function fetchOne($id)
     {
-        $project = $this->db->fetchOne(
+        $result = $this->db->fetchOne(
             $this->configs['sql']['projects']['select_by_id'],
             [
                 'id' => $id,
@@ -569,7 +594,7 @@ class Projects {
             ]
         );
 
-        return $project;
+        return $result;
     }
 
     public function fetchProjectUsers($projectId)
@@ -595,7 +620,7 @@ class Projects {
 
     public function fetchCharacterById($characterId)
     {
-        $character = $this->db->fetchOne(
+        $result = $this->db->fetchOne(
             $this->configs['sql']['project_characters']['select_by_id'],
             [
                 'id' => $characterId,
@@ -603,12 +628,12 @@ class Projects {
             ]
         );
 
-        return $character;
+        return $result;
     }
 
     public function fetchCharacterRevisionById($revisionId)
     {
-        $revision = $this->db->fetchOne(
+        $result = $this->db->fetchOne(
             $this->configs['sql']['project_character_revisions']['select_by_id'],
             [
                 'id' => $revisionId,
@@ -616,12 +641,25 @@ class Projects {
             ]
         );
 
-        return $revision;
+        return $result;
+    }
+
+    public function fetchLocationById($locationId)
+    {
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_locations']['select_by_id'],
+            [
+                'id' => $locationId,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
     }
 
     public function fetchReferenceImageById($referenceImageId)
     {
-        $revision = $this->db->fetchOne(
+        $result = $this->db->fetchOne(
             $this->configs['sql']['project_reference_images']['select_by_id'],
             [
                 'id' => $referenceImageId,
@@ -629,12 +667,12 @@ class Projects {
             ]
         );
 
-        return $revision;
+        return $result;
     }
 
     public function fetchStoryboardById($storyboardId)
     {
-        $storyboard = $this->db->fetchOne(
+        $result = $this->db->fetchOne(
             $this->configs['sql']['project_storyboards']['select_by_id'],
             [
                 'id' => $storyboardId,
@@ -642,12 +680,12 @@ class Projects {
             ]
         );
 
-        return $storyboard;
+        return $result;
     }
 
     public function fetchStoryboardPanelById($panelId)
     {
-        $storyboard = $this->db->fetchOne(
+        $result = $this->db->fetchOne(
             $this->configs['sql']['project_storyboard_panels']['select_by_id'],
             [
                 'id' => $panelId,
@@ -655,24 +693,24 @@ class Projects {
             ]
         );
 
-        return $storyboard;
+        return $result;
     }
 
     public function fetchStoryboardPanelCommentById($commentId)
     {
-        $comment = $this->db->fetchOne(
+        $result = $this->db->fetchOne(
             $this->configs['sql']['comments']['get_by_id'],
             [
                 'id' => $commentId
             ]
         );
 
-        return $comment;
+        return $result;
     }
 
     public function fetchStoryboardPanelRevisionById($revisionId)
     {
-        $revision = $this->db->fetchOne(
+        $result = $this->db->fetchOne(
             $this->configs['sql']['project_storyboard_panel_revisions']['select_by_id'],
             [
                 'id' => $revisionId,
@@ -680,7 +718,7 @@ class Projects {
             ]
         );
 
-        return $revision;
+        return $result;
     }
 
     public function orderProjectCharacters($params)

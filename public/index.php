@@ -357,6 +357,64 @@ $app->group('/api', function () use ($app) {
 
     });
 
+    # create location
+    $app->post('/project_location', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_location.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $location = $projectService->createProjectLocation($app->request->params());
+
+            $app->response->setStatus(201);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($location));
+        }
+
+    });
+
+    # update location
+    $app->put('/project_location/:id', function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+        $id = (int) $id;
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            (object) $app->request->params(),
+            APPLICATION_PATH . "configs/validation_schemas/project_location.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+            $location = $projectService->updateProjectLocation(
+                $id, $app->request->params());
+
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($location));
+        }
+
+    });
+
     # create reference image
     $app->post('/project_reference_image', function () use ($app) {
 
@@ -915,6 +973,35 @@ $app->group('/project', $authorize($app), function () use ($app) {
 
             $app->render(
                 'pages/project/storyboard.html.twig',
+                $templateVars,
+                200
+            );
+        }
+    });
+
+    # location
+    $app->get("/:id/location/:location_id", function (
+            $id, $location_id) use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $project = $projectService->fetchOne($id);
+        if ($project) {
+
+            $location = $projectService->fetchLocationById($location_id);
+
+            $templateVars = array(
+                "configs" => $configs,
+                'securityContext' => $securityContext,
+                "section" => "project.location.index",
+                "project" => $project,
+                "location" => $location
+            );
+
+            $app->render(
+                'pages/project/location.html.twig',
                 $templateVars,
                 200
             );

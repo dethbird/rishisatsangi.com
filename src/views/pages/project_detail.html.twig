@@ -36,6 +36,9 @@
                     <div class="card-block">
                         <blockquote>{{project.description|markdown}}</blockquote>
                     </div>
+
+                    <!-- CHARACTERS -->
+
                     <div class="card-block">
                         <div class="row">
                             <div class="display-5 col-xs-6">Characters</div>
@@ -90,6 +93,9 @@
                             </div>
                         {% endif %}
                     </div>
+
+                    <!-- STOEYBOARDS -->
+
                     <div class="card-block">
                         <div class="row">
                             <div class="display-5 col-xs-6">Storyboards</div>
@@ -180,6 +186,63 @@
                         {% endif %}
                     </div>
 
+                    <!-- CONCEPT ART -->
+
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="display-5 col-xs-6">Concept Art</div>
+                        </div>
+                        {% if project.concept_art|length > 0 %}
+                            <div class="row sortable-concept_arts" data-id="{{project.id}}" data-column-count="6">
+                            {% for concept_art in project.concept_art %}
+                            {% set current_revision_id = "" %}
+                                <div class="card col-xs-12 col-lg-2 sortable" data-id="{{concept_art.id}}">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                {% if concept_art.revisions|length == 0 %}
+                                                    <div class="muted container">
+                                                        <a href="/project/{{project.id}}/concept_art/{{concept_art.id}}/revision/create">create a revision</a>
+                                                    </div>
+                                                {% else %}
+                                                    {% for revision in concept_art.revisions %}
+                                                        {% if loop.index == 1 %}
+                                                            {% set current_revision_id = revision.id %}
+                                                            <img src="{{revision.content}}" />
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <div class="row container card-controls">
+                                                    {% set sort_order = concept_art.sort_order + 1%}
+                                                    <i class="fa fa-reorder fa-sm handle" title="reorder"></i><span class="sort_order">{{sort_order}}</span>
+                                                    {% if concept_art.revisions|length > 1 %}
+                                                        <i class="fa fa-history fa-sm" title="comments"></i>{{concept_art.revisions|length}}
+                                                    {% endif %}
+                                                </div>
+                                                 {{concept_art.name}}
+                                            </div>
+                                        </div>
+                                        <div class="btn-group col-xs-12">
+                                            <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="/project/{{project.id}}/concept_art/{{concept_art.id}}">Edit concept_art</a>
+                                                <a class="dropdown-item" href="/project/{{project.id}}/concept_art/{{concept_art.id}}/revision/create">New concept art Revision</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if loop.index is divisible by(6) %}
+                                <div class="sortable-row-divider"></div>
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="container col-xs-12 muted">
+                                    <a   href="/project/{{project.id}}/concept_art/ceate">create concept art</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
                     <!-- REFERENCE IMAGES -->
 
                     <div class="card-block">
@@ -225,6 +288,8 @@
                             </div>
                         {% endif %}
                     </div>
+
+                    <!-- USERS -->
 
                     <div class="card-block">
                         <div class="row">

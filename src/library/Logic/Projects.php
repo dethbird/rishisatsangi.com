@@ -829,6 +829,24 @@ class Projects {
         }
     }
 
+
+    public function orderProjectLocations($params)
+    {
+        foreach ($params['items'] as $id=>$order){
+            if($order != "") {
+                $result = $this->db->perform(
+                    $this->configs['sql']['project_locations']['update_order'],
+                    [
+                        'id' => $id,
+                        'project_id' => $params['project_id'],
+                        'sort_order' => $order,
+                        'user_id' => $this->securityContext->id
+                    ]
+                );
+            }
+        }
+    }
+
     public function orderProjectReferenceImages($params)
     {
         foreach ($params['items'] as $id=>$order){

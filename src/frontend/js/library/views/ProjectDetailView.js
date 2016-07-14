@@ -50,6 +50,15 @@ var ProjectDetailView = Backbone.View.extend({
                 });
             });
 
+            $('.sortable-locations').each(function(i,e){
+                dragToOrderView = new DragToOrderView({
+                    el: e,
+                    endPoint: '/api/project_location_order',
+                    parentId: 'project_id',
+                    columnCount: $(this).data('column-count')
+                });
+            });
+
         });
     }
 });

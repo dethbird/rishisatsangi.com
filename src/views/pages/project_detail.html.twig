@@ -6,7 +6,9 @@
 {% block content %}
     {{ parent() }}
     <ol class="breadcrumb">
-        <li class="active"><a href="/projects">Projects</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li class="active"><a href="/project/{{project.id}}/detail">{{project.name}}</a></li>
+        <li class="active">Detail</li>
     </ol>
     <br />
     <div class="row container-fluid">
@@ -27,6 +29,7 @@
                                         <a class="dropdown-item" href="/project/{{project.id}}/user/add">Add User</a>
                                         <a class="dropdown-item" href="/project/{{project.id}}/character/create">New Character</a>
                                         <a class="dropdown-item" href="/project/{{project.id}}/storyboard/create">New Storyboard</a>
+                                        <a class="dropdown-item" href="/project/{{project.id}}/reference_image/create">New Reference Image</a>
                                     </div>
                                 </div>
                             </div>
@@ -271,8 +274,8 @@
                                         <div class="btn-group col-xs-12">
                                             <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="/project/{{project.id}}/reference_image/{{reference_image.id}}">Edit reference_image</a>
-                                                <a class="dropdown-item" href="/project/{{project.id}}/reference_image/{{reference_image.id}}/revision/create">New reference_image Revision</a>
+                                                <a class="dropdown-item" href="/project/{{project.id}}/reference_image/{{reference_image.id}}">Edit Reference Image</a>
+                                                <a class="dropdown-item" href="/project/{{project.id}}/reference_image/{{reference_image.id}}/revision/create">New Reference Image Revision</a>
                                             </div>
                                         </div>
                                     </div>

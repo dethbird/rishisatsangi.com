@@ -416,6 +416,31 @@ class Projects {
         return $result;
     }
 
+    public function updateProjectReferenceImage($id, $data)
+    {
+        $result = $this->db->perform(
+            $this->configs['sql']['project_reference_images']['update'],
+            [
+                'id' => $id,
+                'project_id' => $data['project_id'],
+                'user_id' => $this->securityContext->id,
+                'content' => $data['content'],
+                'name' => $data['name'],
+                'description' => $data['description']
+            ]
+        );
+
+        $result = $this->db->fetchOne(
+            $this->configs['sql']['project_reference_images']['select_by_id'],
+            [
+                'id' => $id,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $result;
+    }
+
     public function updateProjectStoryboard($id, $data)
     {
         $result = $this->db->perform(
@@ -587,6 +612,19 @@ class Projects {
             $this->configs['sql']['project_character_revisions']['select_by_id'],
             [
                 'id' => $revisionId,
+                'user_id' => $this->securityContext->id
+            ]
+        );
+
+        return $revision;
+    }
+
+    public function fetchReferenceImageById($referenceImageId)
+    {
+        $revision = $this->db->fetchOne(
+            $this->configs['sql']['project_reference_images']['select_by_id'],
+            [
+                'id' => $referenceImageId,
                 'user_id' => $this->securityContext->id
             ]
         );

@@ -462,7 +462,7 @@ class Projects {
         );
 
         return $result;
-    }    
+    }
 
     public function updateProjectLocation($id, $data)
     {
@@ -801,6 +801,23 @@ class Projects {
             if($order != "") {
                 $retult = $this->db->perform(
                     $this->configs['sql']['project_characters']['update_order'],
+                    [
+                        'id' => $id,
+                        'project_id' => $params['project_id'],
+                        'sort_order' => $order,
+                        'user_id' => $this->securityContext->id
+                    ]
+                );
+            }
+        }
+    }
+
+    public function orderProjectConceptArt($params)
+    {
+        foreach ($params['items'] as $id=>$order){
+            if($order != "") {
+                $retult = $this->db->perform(
+                    $this->configs['sql']['project_concept_art']['update_order'],
                     [
                         'id' => $id,
                         'project_id' => $params['project_id'],

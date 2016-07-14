@@ -415,7 +415,22 @@ $app->group('/api', function () use ($app) {
 
     });
 
-    # create concept_art
+    # order concept art
+    $app->post('/project_concept_art_order', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $result = $projectService->orderProjectConceptArt($app->request->params());
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->setBody(json_encode($result));
+    });
+
+    # create concept art revision
     $app->post('/project_concept_art_revision', function () use ($app) {
 
         $configs = $app->container->get('configs');

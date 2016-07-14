@@ -198,7 +198,7 @@
                             <div class="display-5 col-xs-6">Concept Art</div>
                         </div>
                         {% if project.concept_art|length > 0 %}
-                            <div class="row sortable-concept_arts" data-id="{{project.id}}" data-column-count="6">
+                            <div class="row sortable-concept_art" data-id="{{project.id}}" data-column-count="6">
                             {% for concept_art in project.concept_art %}
                             {% set current_revision_id = "" %}
                                 <div class="card col-xs-12 col-lg-2 sortable" data-id="{{concept_art.id}}">

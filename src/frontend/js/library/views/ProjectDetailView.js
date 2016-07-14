@@ -31,6 +31,16 @@ var ProjectDetailView = Backbone.View.extend({
                     columnCount: $(this).data('column-count')
                 });
             });
+
+            $('.sortable-concept_art').each(function(i,e){
+                dragToOrderView = new DragToOrderView({
+                    el: e,
+                    endPoint: '/api/project_concept_art_order',
+                    parentId: 'project_id',
+                    columnCount: $(this).data('column-count')
+                });
+            });
+
         });
     }
 });

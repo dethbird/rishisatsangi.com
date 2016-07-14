@@ -799,7 +799,7 @@ class Projects {
     {
         foreach ($params['items'] as $id=>$order){
             if($order != "") {
-                $retult = $this->db->perform(
+                $result = $this->db->perform(
                     $this->configs['sql']['project_characters']['update_order'],
                     [
                         'id' => $id,
@@ -816,8 +816,25 @@ class Projects {
     {
         foreach ($params['items'] as $id=>$order){
             if($order != "") {
-                $retult = $this->db->perform(
+                $result = $this->db->perform(
                     $this->configs['sql']['project_concept_art']['update_order'],
+                    [
+                        'id' => $id,
+                        'project_id' => $params['project_id'],
+                        'sort_order' => $order,
+                        'user_id' => $this->securityContext->id
+                    ]
+                );
+            }
+        }
+    }
+
+    public function orderProjectReferenceImages($params)
+    {
+        foreach ($params['items'] as $id=>$order){
+            if($order != "") {
+                $result = $this->db->perform(
+                    $this->configs['sql']['project_reference_images']['update_order'],
                     [
                         'id' => $id,
                         'project_id' => $params['project_id'],
@@ -833,7 +850,7 @@ class Projects {
     {
         foreach ($params['items'] as $id=>$order){
             if($order != "") {
-                $retult = $this->db->perform(
+                $result = $this->db->perform(
                     $this->configs['sql']['project_storyboards']['update_order'],
                     [
                         'id' => $id,
@@ -850,7 +867,7 @@ class Projects {
     {
         foreach ($params['items'] as $id=>$order){
             if($order != "") {
-                $retult = $this->db->perform(
+                $result = $this->db->perform(
                     $this->configs['sql']['project_storyboard_panels']['update_order'],
                     [
                         'id' => $id,

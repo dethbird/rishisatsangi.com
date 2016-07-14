@@ -346,7 +346,7 @@ sql:
             AND project_id = :project_id
             AND user_id = :user_id
         update_order: |
-            UPDATE project_characters
+            UPDATE project_reference_images
             SET
                 sort_order = :sort_order,
                 project_id = :project_id

@@ -604,6 +604,20 @@ $app->group('/api', function () use ($app) {
 
     });
 
+    # order reference image
+    $app->post('/project_reference_image_order', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = json_decode($app->getCookie('securityContext'));
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $result = $projectService->orderProjectReferenceImages($app->request->params());
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->setBody(json_encode($result));
+    });
 
     # create storyboard
     $app->post('/project_storyboard', function () use ($app) {

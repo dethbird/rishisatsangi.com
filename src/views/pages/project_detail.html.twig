@@ -94,7 +94,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- STOEYBOARDS -->
+                    <!-- STORYBOARDS -->
 
                     <div class="card-block">
                         <div class="row">
@@ -285,6 +285,52 @@
                         {% else %}
                             <div class="container col-xs-12 muted">
                                     <a   href="/project/{{project.id}}/reference_image/ceate">create a reference image</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- LOCATIONS -->
+
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="display-5 col-xs-6">Locations</div>
+                        </div>
+                        {% if project.locations|length > 0 %}
+                            <div class="row sortable-locations" data-id="{{project.id}}" data-column-count="6">
+                            {% for location in project.locations %}
+                            {% set current_revision_id = "" %}
+                                <div class="card col-xs-12 col-lg-2 sortable" data-id="{{location.id}}">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <img src="{{location.content}}" />
+                                                <div class="row container card-controls">
+                                                    {% set sort_order = location.sort_order + 1%}
+                                                    <i class="fa fa-reorder fa-sm handle" title="reorder"></i><span class="sort_order">{{sort_order}}</span>
+                                                    {% if location.revisions|length > 1 %}
+                                                        <i class="fa fa-history fa-sm" title="comments"></i>{{location.revisions|length}}
+                                                    {% endif %}
+                                                </div>
+                                                 {{location.name}}
+                                            </div>
+                                        </div>
+                                        <div class="btn-group col-xs-12">
+                                            <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="/project/{{project.id}}/location/{{location.id}}">Edit location</a>
+                                                <a class="dropdown-item" href="/project/{{project.id}}/location/{{location.id}}/revision/create">New location Revision</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if loop.index is divisible by(6) %}
+                                <div class="sortable-row-divider"></div>
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="container col-xs-12 muted">
+                                    <a   href="/project/{{project.id}}/location/ceate">create a location</a>
                             </div>
                         {% endif %}
                     </div>

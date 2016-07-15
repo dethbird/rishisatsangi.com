@@ -15,7 +15,7 @@ $app->group('/service', function () use ($app) {
         $app->get('/redirect', function () use ($app) {
             $configs = $app->container->get('configs');
             $db = $app->container->get('db');
-            $securityContext = json_decode($app->getCookie('securityContext'));
+            $securityContext = $_SESSION['securityContext'];
 
             $googleData = new GoogleData(
                 "LikeDrop",
@@ -66,7 +66,7 @@ $app->group('/service', function () use ($app) {
         $app->get('/redirect', function () use ($app) {
             $configs = $app->container->get('configs');
             $db = $app->container->get('db');
-            $securityContext = json_decode($app->getCookie('securityContext'));
+            $securityContext = $_SESSION['securityContext'];
             $instagramData = new InstagramData(
                 $configs['service']['instagram']['client_id'],
                 $configs['service']['instagram']['client_secret']);
@@ -105,7 +105,7 @@ $app->group('/service', function () use ($app) {
         $app->get('/redirect', function () use ($app) {
             $configs = $app->container->get('configs');
             $db = $app->container->get('db');
-            $securityContext = json_decode($app->getCookie('securityContext'));
+            $securityContext = $_SESSION['securityContext'];
             $pocketData = new PocketData(
                 $configs['service']['pocket']['consumer_key']);
 

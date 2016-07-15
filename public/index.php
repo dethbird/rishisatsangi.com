@@ -43,6 +43,15 @@ $app = new \Slim\Slim(
         'cookies.cipher_mode' => MCRYPT_MODE_CBC
     )
 );
+// $app->add(new \Slim\Middleware\SessionCookie(array(
+//     'expires' => '1 day',
+//     'path' => '/',
+//     'domain' => $configs['server']['hostname'],
+//     'secure' => true,
+//     'httponly' => false,
+//     'name' => 'explosioncorp_session',
+//     'secret' => $configs['security']['secret']
+// )));
 $markdownEngine = new MarkdownEngine\MichelfMarkdownEngine();
 $view = $app->view();
 $view->parserExtensions = array(
@@ -68,12 +77,37 @@ $authorize = function ($app) {
         $_SESSION['redirectTo'] = $app->request->getPathInfo();
 
         # check cookie for securityContext
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
 
         if (!isset($securityContext->username)) {
             $app->redirect("/login");
         }
 
+    };
+};
+
+# authorize the user by header auth token
+$authorizeByHeaders = function ($app) {
+
+    return function () use ($app) {
+
+        # check cookie for securityContext
+        if (!isset($_SESSION['securityContext'])) {
+            $authToken = $app->request->headers->get('Auth-Token');
+            if ($authToken == "") {
+                $app->halt(400);
+            } else {
+                $configs = $app->container->get('configs');
+                $db = $app->container->get('db');
+                $result = $db->fetchOne(
+                    $configs['sql']['users']['get_by_auth_token'],
+                    [
+                        'auth_token' => $authToken
+                    ]
+                );
+                $_SESSION['securityContext'] = (object) $result;
+            }
+        }
     };
 };
 

@@ -1,47 +1,61 @@
 <?php
 
 # api
-$app->group('/api', function () use ($app) {
+$app->post('/api/login', function () use ($app) {
+
+    $configs = $app->container->get('configs');
+    $db = $app->container->get('db');
+
+    $result = $db->fetchAll(
+        $configs['sql']['users']['select_by_username_and_password'],
+        [
+            'username' => $app->request->params('username'),
+            'password' => md5($app->request->params('password'))
+        ]
+    );
+
+    $app->response->setStatus(404);
+    if (isset($result[0])) {
+        if ($result[0]['username'] == $app->request->params('username')){
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $_SESSION['securityContext'] = (object) $result[0];
+            if (isset($_SESSION['redirectTo'])) {
+                $result[0]['redirectTo'] = $_SESSION['redirectTo'];
+            } else {
+                $result[0]['redirectTo'] = '/likedrop';
+            }
+            $app->response->setBody(json_encode($result[0]));
+        }
+    }
+});
+
+$app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
 
-    $app->post('/login', function () use ($app) {
+    # get
+    $app->get('/project/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+        $id = (int) $id;
 
-        $result = $db->fetchAll(
-            $configs['sql']['users']['select_by_username_and_password'],
-            [
-                'username' => $app->request->params('username'),
-                'password' => md5($app->request->params('password'))
-            ]
-        );
+        $project = $projectService->fetchOne($id);
+        $project = $projectService->hydrateProject($project);
 
-        $app->response->setStatus(404);
-        if (isset($result[0])) {
-            if ($result[0]['username'] == $app->request->params('username')){
-                $app->response->setStatus(200);
-                $app->response->headers->set('Content-Type', 'application/json');
-                $app->setCookie(
-                    "securityContext",
-                    json_encode($result[0]),
-                    "1 days"
-                );
-                if (isset($_SESSION['redirectTo'])) {
-                    $result[0]['redirectTo'] = $_SESSION['redirectTo'];
-                } else {
-                    $result[0]['redirectTo'] = '/likedrop';
-                }
-                $app->response->setBody(json_encode($result[0]));
-            }
-        }
+        $app->response->setStatus(200);
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->setBody(json_encode($project));
+
     });
 
     # create
     $app->post('/project', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -70,7 +84,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
@@ -100,7 +114,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_user', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -128,7 +142,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_character', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -156,7 +170,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project_character/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
@@ -186,7 +200,7 @@ $app->group('/api', function () use ($app) {
 	$app->post('/project_character_order', function () use ($app) {
 
 		$configs = $app->container->get('configs');
-		$securityContext = json_decode($app->getCookie('securityContext'));
+		$securityContext = $_SESSION['securityContext'];
 		$db = $app->container->get('db');
 		$projectService = new Projects($db, $configs, $securityContext);
 
@@ -202,7 +216,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_character_revision', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -231,7 +245,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project_character_revision/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
@@ -261,7 +275,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_concept_art', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -289,7 +303,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project_concept_art/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
@@ -319,7 +333,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_concept_art_order', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -334,7 +348,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_concept_art_revision', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -362,7 +376,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project_concept_art_revision/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
@@ -392,7 +406,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_location', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -420,7 +434,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project_location/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
@@ -450,7 +464,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_location_order', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -465,7 +479,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_reference_image', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -493,7 +507,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project_reference_image/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
@@ -523,7 +537,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_reference_image_order', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -538,7 +552,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_storyboard', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -566,7 +580,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project_storyboard/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
@@ -597,7 +611,7 @@ $app->group('/api', function () use ($app) {
 	$app->post('/project_storyboard_order', function () use ($app) {
 
 		$configs = $app->container->get('configs');
-		$securityContext = json_decode($app->getCookie('securityContext'));
+		$securityContext = $_SESSION['securityContext'];
 		$db = $app->container->get('db');
 		$projectService = new Projects($db, $configs, $securityContext);
 
@@ -612,7 +626,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_storyboard_panel', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -640,7 +654,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project_storyboard_panel/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
@@ -670,7 +684,7 @@ $app->group('/api', function () use ($app) {
 	$app->post('/project_storyboard_panel_order', function () use ($app) {
 
 		$configs = $app->container->get('configs');
-		$securityContext = json_decode($app->getCookie('securityContext'));
+		$securityContext = $_SESSION['securityContext'];
 		$db = $app->container->get('db');
 		$projectService = new Projects($db, $configs, $securityContext);
 
@@ -685,7 +699,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_storyboard_panel_revision', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -713,7 +727,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project_storyboard_panel_revision/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
@@ -743,7 +757,7 @@ $app->group('/api', function () use ($app) {
     $app->post('/project_storyboard_panel_comment', function () use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
 
@@ -771,7 +785,7 @@ $app->group('/api', function () use ($app) {
     $app->put('/project_storyboard_panel_comment/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
         $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;

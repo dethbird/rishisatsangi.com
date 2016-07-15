@@ -5,7 +5,7 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
 
     $app->get('/gdrive', function () use ($app) {
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
 
         $gdrive_user = $db->fetchOne(
@@ -37,7 +37,7 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
 
     $app->get('/pocket', function () use ($app) {
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
 
         $pocket_user = $db->fetchOne(
@@ -69,7 +69,7 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
 
     $app->get('/youtube', function () use ($app) {
         $configs = $app->container->get('configs');
-        $securityContext = json_decode($app->getCookie('securityContext'));
+        $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
 
         $gdrive_user = $db->fetchOne(

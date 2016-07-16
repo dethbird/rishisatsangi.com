@@ -79,8 +79,11 @@
                                 {% if character.revisions|length > 1 %}
                                     <div class="row thumbnails sortable-character_revisions container-fluid" data-id="{{character.id}}" data-column-count="3">
                                     {% for revision in character.revisions %}
-                                        <div class="col-xs-4 sortable thumbnail {% if loop.index==1 %}active{% endif %}" data-id="revision.id">
-                                            <img src="{{revision.content}}" class="handle" />
+                                        <div class="col-xs-4 sortable thumbnail btn-group {% if loop.index==1 %}active{% endif %}" data-id="{{revision.id}}">
+                                            <img src="{{revision.content}}" class="handle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="/project/{{project.id}}/character/{{character.id}}/revision/{{revision.id}}">Edit Revision</a>
+                                            </div>
                                         </div>
                                     {% endfor %}
                                     </div>
@@ -166,8 +169,11 @@
                                             {% if panel.revisions|length > 1 %}
                                                 <div class="row thumbnails sortable-storyboard_panel_revisions container-fluid" data-id={{panel.id}} data-column-count="4">
                                                 {% for revision in panel.revisions %}
-                                                    <div class="col-xs-3 sortable thumbnail {% if loop.index==1 %}active{% endif %}" data-id={{revision.id}}>
-                                                        <img src="{{revision.content}}" class="handle"/>
+                                                    <div class="col-xs-4 sortable thumbnail btn-group {% if loop.index==1 %}active{% endif %}" data-id="{{revision.id}}">
+                                                        <img src="{{revision.content}}" class="handle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/{{revision.id}}">Edit Revision</a>
+                                                        </div>
                                                     </div>
                                                 {% endfor %}
                                                 </div>
@@ -180,7 +186,7 @@
                                                     <div class="comment col-xs-12">{{comment.comment|markdown}}</div>
                                                     <div class="comment-annotation col-xs-12 pull-right">
                                                         <span class="username">{{comment.username}}</span>
-                                                        <span class="timestamp">{{comment.date_added|time_ago}}</span>
+                                                        <span class="timestamp"><a href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/comment/{{comment.id}}">{{comment.date_added|time_ago}}</a></span>
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -322,7 +328,7 @@
                     </div>
                 {% else %}
                     <div class="container col-xs-12 muted">
-                            <a   href="/project/{{project.id}}/reference_image/ceate">create a reference image</a>
+                        <a href="/project/{{project.id}}/reference_image/ceate">create a reference image</a>
                     </div>
                 {% endif %}
             </div>

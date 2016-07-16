@@ -217,12 +217,11 @@ sql:
             SELECT * FROM project_character_revisions
             WHERE user_id = :user_id
             AND character_id = :character_id
-            ORDER BY date_updated DESC
+            ORDER BY sort_order ASC
         select_by_id: |
             SELECT * FROM project_character_revisions
             WHERE user_id = :user_id
             AND id = :id
-            ORDER BY date_updated DESC
         update: |
             UPDATE project_character_revisions
             SET

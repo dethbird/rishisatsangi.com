@@ -24,7 +24,7 @@
                 <div class="col-xs-10 markdown-edit">
                     <select name="user_id" id="project_user_id" class="form-control">
                     {% for user in users %}
-                    <option value="{{user.id}}" {% if user.id == comment.user_id %}select="selected"{% endif %}>{{user.username}}</option>
+                    <option value="{{user.id}}" {% if user.id == comment.user_id %}selected="selected"{% endif %}>{{user.username}}</option>
                     {% endfor %}
                     </select>
                 </div>

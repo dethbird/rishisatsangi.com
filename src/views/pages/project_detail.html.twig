@@ -64,7 +64,7 @@
                                                     {% for revision in character.revisions %}
                                                         {% if loop.index == 1 %}
                                                             {% set current_revision_id = revision.id %}
-                                                            <img src="{{revision.content}}" />
+                                                            <img src="{{revision.content}}" class="{{revision.orientation}}"/>
                                                         {% endif %}
                                                     {% endfor %}
                                                 {% endif %}
@@ -82,6 +82,9 @@
                                             <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="/project/{{project.id}}/character/{{character.id}}">Edit Character</a>
+                                                {% if current_revision_id != "" %}
+                                                    <a class="dropdown-item" href="/project/{{project.id}}/character/{{character.id}}/revision/{{current_revision_id}}">Edit Current Revision</a>
+                                                {% endif %}
                                                 <a class="dropdown-item" href="/project/{{project.id}}/character/{{character.id}}/revision/create">New Character Revision</a>
                                             </div>
                                         </div>
@@ -142,7 +145,7 @@
                                                             {% for revision in panel.revisions %}
                                                                 {% if loop.index == 1 %}
                                                                     {% set current_revision_id = revision.id %}
-                                                                    <img src="{{revision.content}}" />
+                                                                    <img src="{{revision.content}}" class="{{revision.orientation}}"/>
                                                                 {% endif %}
                                                             {% endfor %}
                                                         {% endif %}
@@ -213,7 +216,7 @@
                                                     {% for revision in concept_art.revisions %}
                                                         {% if loop.index == 1 %}
                                                             {% set current_revision_id = revision.id %}
-                                                            <img src="{{revision.content}}" />
+                                                            <img src="{{revision.content}}" class="{{revision.orientation}}"/>
                                                         {% endif %}
                                                     {% endfor %}
                                                 {% endif %}
@@ -265,7 +268,7 @@
                                     <div class="card-block">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <img src="{{reference_image.content}}" />
+                                                <img src="{{reference_image.content}}"  class="{{reference_image.orientation}}" />
                                                 <div class="row container card-controls">
                                                     {% set sort_order = reference_image.sort_order + 1%}
                                                     <i class="fa fa-reorder fa-sm handle" title="reorder"></i><span class="sort_order">{{sort_order}}</span>
@@ -311,7 +314,7 @@
                                     <div class="card-block">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <img src="{{location.content}}" />
+                                                <img src="{{location.content}}"  class="{{location.orientation}}"/>
                                                 <div class="row container card-controls">
                                                     {% set sort_order = location.sort_order + 1%}
                                                     <i class="fa fa-reorder fa-sm handle" title="reorder"></i><span class="sort_order">{{sort_order}}</span>

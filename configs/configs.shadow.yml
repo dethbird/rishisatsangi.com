@@ -22,6 +22,9 @@ service:
     instagram:
         client_id: :INSTAGRAM_CLIENT_ID
         client_secret: :INSTAGRAM_CLIENT_SECRET
+    vimeo:
+        client_key: :VIMEO_CLIENT_ID
+        client_secret: :VIMEO_CLIENT_SECRET
 sql:
     users:
         insert: |
@@ -48,7 +51,6 @@ sql:
             WHERE username = :username
             AND password = :password
     account_instagram:
-        # insert-update instagram account
         insert_update_instagram_user: |
             INSERT INTO account_instagram
             (user_id, access_token, date_added, date_updated)
@@ -60,7 +62,6 @@ sql:
         get_by_user_id: |
             SELECT * FROM account_instagram WHERE user_id = :user_id
     account_pocket:
-        # insert-update pocket account
         insert_update_pocket_user: |
             INSERT INTO account_pocket
             (user_id, username, access_token, date_added, date_updated)
@@ -72,7 +73,6 @@ sql:
         get_by_user_id: |
             SELECT * FROM account_pocket WHERE user_id = :user_id
     account_gdrive:
-        # insert-update gdrive account
         insert_update_gdrive_user: |
             INSERT INTO account_gdrive
             (user_id, access_token, refresh_token, date_added, date_updated)
@@ -83,6 +83,17 @@ sql:
             SELECT * FROM account_gdrive
         get_by_user_id: |
             SELECT * FROM account_gdrive WHERE user_id = :user_id
+    account_vimeo:
+        insert_update: |
+            INSERT INTO account_vimeo
+            (user_id, username, access_token, date_added, date_updated)
+            VALUES
+            (:user_id, :username, :access_token, NOW(), NOW())
+                ON DUPLICATE KEY UPDATE access_token = :access_token, date_updated = NOW()
+        get_all: |
+            SELECT * FROM account_vimeo
+        get_by_user_id: |
+            SELECT * FROM account_vimeo WHERE user_id = :user_id
     content_pocket:
         insert_update_pocket_content_for_user: |
             INSERT INTO content_pocket
@@ -99,7 +110,6 @@ sql:
             ORDER BY date_added DESC
             LIMIT :limit
     content_gdrive_files:
-        # insert / update file modification data from user's drive
         insert_update_files_for_user: |
             INSERT INTO content_gdrive_files
             (account_gdrive_id, user_id, item_id, json, date_added, date_updated)

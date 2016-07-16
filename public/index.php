@@ -21,6 +21,7 @@ require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php'
 require_once APPLICATION_PATH . 'src/library/ExternalData/GoogleData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/InstagramData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';
+require_once APPLICATION_PATH . 'src/library/ExternalData/VimeoData.php';
 require_once APPLICATION_PATH . 'src/library/Data/Base.php';
 require_once APPLICATION_PATH . 'src/library/Logic/Projects.php';
 require_once APPLICATION_PATH . 'src/library/Validation/Validator.php';
@@ -77,6 +78,9 @@ $authorize = function ($app) {
         $_SESSION['redirectTo'] = $app->request->getPathInfo();
 
         # check cookie for securityContext
+        if(!isset( $_SESSION['securityContext'])) {
+            $app->redirect("/login");
+        }
         $securityContext = $_SESSION['securityContext'];
 
         if (!isset($securityContext->username)) {

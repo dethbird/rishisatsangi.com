@@ -123,4 +123,44 @@ $app->group('/service', function () use ($app) {
             $app->redirect('/likedrop');
         });
     });
+
+    $app->group('/vimeo', function () use ($app) {
+
+        $app->get('/authorize', function () use ($app) {
+            $configs = $app->container->get('configs');
+            $vimeoData = new VimeoData(
+                $configs['service']['vimeo']['client_key'],
+                $configs['service']['vimeo']['client_secret']);
+            $client_token = $vimeoData->fetchClientToken();
+
+            $_SESSION['vimeoClientToken'] = $client_token;
+            $app->redirect($vimeoData->getAuthorizeScreenUri(
+                "farts",
+                "http://".$_SERVER['HTTP_HOST']."/service/vimeo/redirect"
+            ));
+        });
+
+        $app->get('/redirect', function () use ($app) {
+            $configs = $app->container->get('configs');
+            $db = $app->container->get('db');
+            $securityContext = $_SESSION['securityContext'];
+            $vimeoData = new VimeoData(
+                $configs['service']['vimeo']['client_key'],
+                $configs['service']['vimeo']['client_secret']);
+
+            $accessTokenData = $vimeoData->fetchAccessTokenData(
+                $app->request->params('code'),
+                "http://".$_SERVER['HTTP_HOST']."/service/vimeo/redirect");
+
+            $result = $db->perform(
+                $configs['sql']['account_vimeo']['insert_update'],
+                [
+                    'user_id' => $securityContext->id,
+                    'username' => $accessTokenData->user->name,
+                    'access_token' => $accessTokenData->access_token
+                ]
+            );
+            $app->redirect('/likedrop');
+        });
+    });
 });

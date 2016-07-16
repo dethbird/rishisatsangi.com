@@ -140,7 +140,8 @@ sql:
             SELECT * FROM comments
             WHERE id = :id
         get_by_entity: |
-            SELECT * FROM comments c
+            SELECT c.*, u.username, u.email FROM comments c
+            JOIN users u ON c.user_id = u.id
             WHERE entity_table_name = :entity_table_name
             AND entity_id = :entity_id
             ORDER BY date_added DESC
@@ -418,10 +419,6 @@ sql:
                 storyboard_id = :storyboard_id
             WHERE id = :id
             AND user_id = :user_id
-    project_storyboard_panel_comments:
-        select_by_id: |
-            SELECT * FROM project_storyboard_panel_comments
-            WHERE panel_id = :panel_id
             ORDER BY date_added DESC
     project_storyboard_panel_revisions:
         insert: |

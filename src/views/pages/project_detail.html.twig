@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 {% if character.revisions|length > 1 %}
-                                    <div class="row thumbnails sortable-character_revisions container-fluid" data-id="{{character.id}}" data-column-count="3">
+                                    <div class="row thumbnails sortable-character_revisions container-fluid" data-id="{{character.id}}" data-column-count="4">
                                     {% for revision in character.revisions %}
                                         <div class="col-xs-4 sortable thumbnail btn-group {% if loop.index==1 %}active{% endif %}" data-id="{{revision.id}}">
                                             <img src="{{revision.content}}" class="handle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>

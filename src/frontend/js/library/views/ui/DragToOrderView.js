@@ -36,8 +36,10 @@ var DragToOrderView = Backbone.View.extend({
                 data[that.parentId] = $el.data('id');
                 data['items'] = [];
 
-                $el.find('.sortable-row-divider').remove();
-                $el.find('.sortable').each( function(i,e) {
+                // console.log();
+
+                $el.children('.sortable-row-divider').remove();
+                $el.children('.sortable').each( function(i,e) {
                     var $e = $(e);
                     if((i+1) % that.columnCount == 0){
                         $('<div class="sortable-row-divider"></div>').insertAfter($e);

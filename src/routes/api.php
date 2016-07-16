@@ -271,6 +271,22 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
     });
 
+    # order panel revision
+    $app->post('/project_character_revision_order', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $result = $projectService->orderProjectCharacterRevisions($app->request->params());
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->setBody(json_encode($result));
+    });
+
+
     # create concept_art
     $app->post('/project_concept_art', function () use ($app) {
 
@@ -329,6 +345,7 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
     });
 
+
     # order concept art
     $app->post('/project_concept_art_order', function () use ($app) {
 
@@ -343,6 +360,7 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
         $app->response->headers->set('Content-Type', 'application/json');
         $app->response->setBody(json_encode($result));
     });
+
 
     # create concept art revision
     $app->post('/project_concept_art_revision', function () use ($app) {
@@ -371,6 +389,7 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
         }
 
     });
+
 
     # update concept art revision
     $app->put('/project_concept_art_revision/:id', function ($id) use ($app) {
@@ -752,6 +771,22 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
         }
 
     });
+
+    # order panel revision
+    $app->post('/project_storyboard_panel_revision_order', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $result = $projectService->orderProjectStoryboardPanelRevisions($app->request->params());
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->setBody(json_encode($result));
+    });
+
 
     # create panel comment
     $app->post('/project_storyboard_panel_comment', function () use ($app) {

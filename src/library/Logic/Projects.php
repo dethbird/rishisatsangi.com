@@ -820,6 +820,23 @@ class Projects {
         }
     }
 
+    public function orderProjectCharacterRevisions($params)
+    {
+        foreach ($params['items'] as $id=>$order){
+            if($order != "") {
+                $result = $this->db->perform(
+                    $this->configs['sql']['project_character_revisions']['update_order'],
+                    [
+                        'id' => $id,
+                        'character_id' => $params['character_id'],
+                        'sort_order' => $order,
+                        'user_id' => $this->securityContext->id
+                    ]
+                );
+            }
+        }
+    }
+
     public function orderProjectConceptArt($params)
     {
         foreach ($params['items'] as $id=>$order){
@@ -898,6 +915,23 @@ class Projects {
                     [
                         'id' => $id,
                         'storyboard_id' => $params['storyboard_id'],
+                        'sort_order' => $order,
+                        'user_id' => $this->securityContext->id
+                    ]
+                );
+            }
+        }
+    }
+
+    public function orderProjectStoryboardPanelRevisions($params)
+    {
+        foreach ($params['items'] as $id=>$order){
+            if($order != "") {
+                $result = $this->db->perform(
+                    $this->configs['sql']['project_storyboard_panel_revisions']['update_order'],
+                    [
+                        'id' => $id,
+                        'panel_id' => $params['panel_id'],
                         'sort_order' => $order,
                         'user_id' => $this->securityContext->id
                     ]

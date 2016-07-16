@@ -60,6 +60,21 @@ var ProjectDetailView = Backbone.View.extend({
             });
 
         });
+
+        $('.card-ui').each(function(i,card){
+            var $card = $(card);
+            $card.find('.thumbnail').on('mouseup', function(e){
+                var $currentTarget = $(e.currentTarget);
+                $card.find('.thumbnail').removeClass('active');
+                $currentTarget.addClass('active');
+
+                var thumbnailImage =  $currentTarget.find('img');
+                var displayImage = $card.find('img.display');
+                displayImage.removeClass('portrait').removeClass('landscape');
+                displayImage.attr('src', thumbnailImage.attr('src'));
+                displayImage.attr('data-image-index', displayImage.attr('data-image-index'));
+            });
+        });
     }
 });
 

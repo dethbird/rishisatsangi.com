@@ -50,6 +50,9 @@ label.tag {
 .btn-group .btn {
     float: inherit;
 }
+.btn.float-right {
+    float: right;
+}
 .card {
     padding-bottom: 15px;
 }
@@ -67,7 +70,7 @@ label.tag {
 }
 .card-controls {
     color: #aaa;
-    font-size: 10px;
+    font-size: 0.9rem;
 }
 .content {
     margin-bottom: 10px;
@@ -88,6 +91,10 @@ a.display-5 {
     color: #c9177c;
     font-weight: bold;
 }
+.display-6 {
+    font-size: 1.2rem;
+    font-weight: 400;
+}
 .fa {
     font-size: 12px;
     color: #CCC;
@@ -106,7 +113,10 @@ a.display-5 {
 .dropdown-menu {
     left: inherit;
 }
-
+.float-left {
+    float: left;
+    margin-right: 10px;
+}
 .handle {
     cursor: move;
 }

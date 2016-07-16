@@ -7,7 +7,7 @@
     {{ parent() }}
     <ol class="breadcrumb">
         <li><a href="/projects">Projects</a></li>
-        <li>{{project.name}}</li>
+        <li><a href="/project/{{project.id}}/detail">{{project.name}}</a></li>
         <li>Character</li>
         <li class="active">{{character.id == "" ? " Create" : "Edit"}}</li>
     </ol>

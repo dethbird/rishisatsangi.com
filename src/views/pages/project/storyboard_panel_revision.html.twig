@@ -7,11 +7,11 @@
     {{ parent() }}
     <ol class="breadcrumb">
         <li><a href="/projects">Projects</a></li>
-        <li>{{project.name}}</li>
+        <li><a href="/project/{{project.id}}/detail">{{project.name}}</a></li>
         <li>Storyboards</li>
-        <li>{{storyboard.name}}</li>
+        <li><a href="/project/{{project.id}}/storyboard/{{storyboard.id}}">{{storyboard.name}}</a></li>
         <li>Panels</li>
-        <li>{{panel.name}}</li>
+        <li><li><a href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}">{{panel.name}}</a></li>
         <li>Revision</li>
         <li class="active">{{revision.id == "" ? "Create" : "Edit"}}</li>
     </ol>

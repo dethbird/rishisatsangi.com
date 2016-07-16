@@ -126,7 +126,8 @@ class Projects {
                 'user_id' => $this->securityContext->id,
                 'character_id' => $data['character_id'],
                 'content' => $data['content'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'orientation' => $data['orientation']
             ]
         );
 
@@ -173,7 +174,8 @@ class Projects {
                 'user_id' => $this->securityContext->id,
                 'concept_art_id' => $data['concept_art_id'],
                 'content' => $data['content'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'orientation' => $data['orientation']
             ]
         );
 
@@ -198,6 +200,7 @@ class Projects {
                 'name' => $data['name'],
                 'description' => $data['description'],
                 'content' => $data['content'],
+                'orientation' => $data['orientation'],
                 'sort_order' => $sort_order
             ]
         );
@@ -299,7 +302,8 @@ class Projects {
                 'user_id' => $this->securityContext->id,
                 'panel_id' => $data['panel_id'],
                 'content' => $data['content'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'orientation' => $data['orientation']
             ]
         );
 
@@ -401,7 +405,8 @@ class Projects {
                 'character_id' => $data['character_id'],
                 'user_id' => $this->securityContext->id,
                 'content' => $data['content'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'orientation' => $data['orientation']
             ]
         );
 
@@ -449,7 +454,8 @@ class Projects {
                 'concept_art_id' => $data['concept_art_id'],
                 'user_id' => $this->securityContext->id,
                 'content' => $data['content'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'orientation' => $data['orientation']
             ]
         );
 
@@ -499,7 +505,8 @@ class Projects {
                 'user_id' => $this->securityContext->id,
                 'content' => $data['content'],
                 'name' => $data['name'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'orientation' => $data['orientation']
             ]
         );
 
@@ -571,7 +578,8 @@ class Projects {
                 'panel_id' => $data['panel_id'],
                 'user_id' => $this->securityContext->id,
                 'content' => $data['content'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'orientation' => $data['orientation']
             ]
         );
 

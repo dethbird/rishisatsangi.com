@@ -210,9 +210,9 @@ sql:
     project_character_revisions:
         insert: |
             INSERT INTO project_character_revisions
-            (character_id, user_id, content, description, date_added, date_updated)
+            (character_id, user_id, content, description, orientation, date_added, date_updated)
             VALUES
-            (:character_id, :user_id, :content, :description, NOW(), NOW())
+            (:character_id, :user_id, :content, :description, :orientation, NOW(), NOW())
         select_by_character: |
             SELECT * FROM project_character_revisions
             WHERE user_id = :user_id
@@ -228,6 +228,7 @@ sql:
             SET
                 content = :content,
                 description = :description,
+                orientation = :orientation,
                 date_updated = NOW()
             WHERE id = :id
             AND character_id = :character_id
@@ -267,9 +268,9 @@ sql:
     project_concept_art_revisions:
         insert: |
             INSERT INTO project_concept_art_revisions
-            (concept_art_id, user_id, content, description, date_added, date_updated)
+            (concept_art_id, user_id, content, description, orientation, date_added, date_updated)
             VALUES
-            (:concept_art_id, :user_id, :content, :description, NOW(), NOW())
+            (:concept_art_id, :user_id, :content, :description, :orientation, NOW(), NOW())
         select_by_concept_art: |
             SELECT * FROM project_concept_art_revisions
             WHERE user_id = :user_id
@@ -285,6 +286,7 @@ sql:
             SET
                 content = :content,
                 description = :description,
+                orientation = :orientation,
                 date_updated = NOW()
             WHERE id = :id
             AND concept_art_id = :concept_art_id
@@ -325,9 +327,9 @@ sql:
     project_reference_images:
         insert: |
             INSERT INTO project_reference_images
-            (project_id, user_id, name, description, content, sort_order, date_added, date_updated)
+            (project_id, user_id, name, description, content, sort_order, orientation, date_added, date_updated)
             VALUES
-            (:project_id, :user_id, :name, :description, :content, :sort_order, NOW(), NOW())
+            (:project_id, :user_id, :name, :description, :content, :sort_order, :orientation, NOW(), NOW())
         select_by_project: |
             SELECT * FROM project_reference_images
             WHERE user_id = :user_id
@@ -344,6 +346,7 @@ sql:
                 name = :name,
                 content = :content,
                 description = :description,
+                orientation = :orientation,
                 date_updated = NOW()
             WHERE id = :id
             AND project_id = :project_id
@@ -423,9 +426,9 @@ sql:
     project_storyboard_panel_revisions:
         insert: |
             INSERT INTO project_storyboard_panel_revisions
-            (panel_id, user_id, content, description, date_added, date_updated)
+            (panel_id, user_id, content, description, orientation, date_added, date_updated)
             VALUES
-            (:panel_id, :user_id, :content, :description, NOW(), NOW())
+            (:panel_id, :user_id, :content, :description, :orientation, NOW(), NOW())
         select_by_panel: |
             SELECT * FROM project_storyboard_panel_revisions
             WHERE user_id = :user_id
@@ -441,6 +444,7 @@ sql:
             SET
                 content = :content,
                 description = :description,
+                orientation = :orientation,
                 date_updated = NOW()
             WHERE id = :id
             AND panel_id = :panel_id

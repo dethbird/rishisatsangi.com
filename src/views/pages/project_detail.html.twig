@@ -79,7 +79,7 @@
                                 {% if character.revisions|length > 1 %}
                                     <div class="row thumbnails container-fluid">
                                     {% for revision in character.revisions %}
-                                        <div class="col-xs-4 thumbnail">
+                                        <div class="col-xs-4 thumbnail {% if loop.index==1 %}active{% endif %}">
                                             <img src="{{revision.content}}" />
                                         </div>
                                     {% endfor %}
@@ -144,41 +144,49 @@
                                     {% else %}
                                         {% for panel in storyboard.panels %}
                                         {% set current_revision_id = "" %}
-                                        <div class="card col-xs-12 col-lg-6 sortable" data-id="{{panel.id}}">
-                                                {% if panel.revisions|length == 0 %}
-                                                    <div class="muted container col-xs-12">
-                                                        <a href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/create">create a revision</a>
-                                                    </div>
-                                                {% else %}
-                                                    {% for revision in panel.revisions %}
-                                                        {% if loop.index == 1 %}
-                                                            {% set current_revision_id = revision.id %}
-                                                            <img src="{{revision.content}}" class="{{revision.orientation}}"/>
-                                                        {% endif %}
-                                                    {% endfor %}
+                                        <div class="card card-ui col-xs-12 col-lg-6 sortable" data-id="{{panel.id}}">
+                                            <div class="float-left card-controls">
+                                                {% set sort_order = panel.sort_order + 1%}
+                                                <i class="fa fa-reorder fa-sm handle" title="reorder"></i><span class="sort_order">{{sort_order}}</span>
+                                            </div>
+                                            {% if panel.revisions|length == 0 %}
+                                                <div class="muted container col-xs-12">
+                                                    <a href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/create">create a revision</a>
+                                                </div>
+                                            {% else %}
+                                                {% for revision in panel.revisions %}
+                                                    {% if loop.index == 1 %}
+                                                        {% set current_revision_id = revision.id %}
+                                                        <img src="{{revision.content}}" class="display {{revision.orientation}}"/>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            <div class="row container card-controls">
+                                                {% if panel.comments|length > 1 %}
+                                                <i class="fa fa-comments fa-sm" title="comments"></i>{{panel.comments|length}}
                                                 {% endif %}
-                                                <div class="row container card-controls">
-                                                    {% set sort_order = panel.sort_order + 1 %}
-                                                    <i class="fa fa-reorder fa-sm handle" title="reorder"></i><span class="sort_order">{{sort_order}}</span>
-                                                    {% if panel.revisions|length > 1 %}
-                                                    <i class="fa fa-history fa-sm" title="comments"></i>{{panel.revisions|length}}
-                                                    {% endif %}
-                                                    {% if panel.comments|length > 1 %}
-                                                    <i class="fa fa-comments fa-sm" title="comments"></i>{{panel.comments|length}}
-                                                    {% endif %}
-                                                </div>
-                                                <span class="muted">{{panel.name}}</span><br />
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}}/panel/{{panel.id}}">Edit Panel</a>
-                                                        {% if current_revision_id != "" %}
-                                                            <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/{{current_revision_id}}">Edit Current Revision</a>
-                                                        {% endif %}
-                                                        <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/create">New Panel Revision</a>
-                                                        <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/comment/create">New Panel Comment</a>
+                                            </div>
+                                            {% if panel.revisions|length > 1 %}
+                                                <div class="row thumbnails container-fluid">
+                                                {% for revision in panel.revisions %}
+                                                    <div class="col-xs-3 thumbnail {% if loop.index==1 %}active{% endif %}">
+                                                        <img src="{{revision.content}}" />
                                                     </div>
+                                                {% endfor %}
                                                 </div>
+                                            {% endif %}
+                                            <span class="muted">{{panel.name}}</span><br />
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-secondary-outline btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}}/panel/{{panel.id}}">Edit Panel</a>
+                                                    {% if current_revision_id != "" %}
+                                                        <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/{{current_revision_id}}">Edit Current Revision</a>
+                                                    {% endif %}
+                                                    <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/create">New Panel Revision</a>
+                                                    <a class="dropdown-item" href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/comment/create">New Panel Comment</a>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         {% if loop.index is divisible by(2) %}

@@ -144,7 +144,7 @@ sql:
             JOIN users u ON c.user_id = u.id
             WHERE entity_table_name = :entity_table_name
             AND entity_id = :entity_id
-            ORDER BY date_added DESC
+            ORDER BY date_added ASC
         update: |
             UPDATE comments
             SET

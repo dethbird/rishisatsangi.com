@@ -1406,6 +1406,15 @@ var ProjectDetailView = Backbone.View.extend({
                 });
             });
 
+            $('.sortable-character_revisions').each(function(i,e){
+                dragToOrderView = new DragToOrderView({
+                    el: e,
+                    endPoint: '/api/project_character_revision_order',
+                    parentId: 'character_id',
+                    columnCount: $(this).data('column-count')
+                });
+            });
+
             $('.sortable-storyboards').each(function(i,e){
                 dragToOrderView = new DragToOrderView({
                     el: e,
@@ -1432,6 +1441,16 @@ var ProjectDetailView = Backbone.View.extend({
                     columnCount: $(this).data('column-count')
                 });
             });
+
+            $('.sortable-storyboard_panel_revisions').each(function(i,e){
+                dragToOrderView = new DragToOrderView({
+                    el: e,
+                    endPoint: '/api/project_storyboard_panel_revision_order',
+                    parentId: 'panel_id',
+                    columnCount: $(this).data('column-count')
+                });
+            });
+
 
             $('.sortable-reference_images').each(function(i,e){
                 dragToOrderView = new DragToOrderView({

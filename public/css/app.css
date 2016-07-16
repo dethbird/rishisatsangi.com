@@ -72,6 +72,31 @@ label.tag {
     color: #aaa;
     font-size: 0.9rem;
 }
+.comments {
+    margin: 10px 0px 10px 0px;
+}
+.comment {
+    font-size: .85rem;
+}
+.comment-annotation {
+    text-align: right;
+    font-size: .75rem;
+}
+.comment-container {
+    background-color: #F0F0F0;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.comment-container:nth-child(even) {
+    background-color: #FAFAFA;
+}
+.comment-status-resolved {
+    opacity: 0.55;
+}
+.comment-status-resolved .comment {
+    text-decoration: line-through;
+}
 .content {
     margin-bottom: 10px;
     padding: 25px;
@@ -159,9 +184,20 @@ input[name=name] {
 .sortable-row-divider {
     clear: both;
 }
+.thumbnails {
+    margin: 10px 0px 10px 0px;
+}
+.thumbnail {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.thumbnail img {
+    opacity: 0.5;
+}
 .thumbnail.active img {
-  box-shadow: 0px 0px 4px 4px rgba(201,23,124, 0.9);
+  box-shadow: 0px 0px 4px 4px rgba(2,117,216, 0.6);
   padding: 0;
+  opacity: 1;
 }
 
 #explosioncorp-modal {

@@ -1,0 +1,46 @@
+{% extends 'layout.html.twig' %}
+{% block title %} - LikeDrop Spotify{% endblock %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+    <ol class="breadcrumb">
+        <li><a href="#">LikeDrop</a></li>
+        <li class="active"><img src="/img/service/spotify/logo_sm.png" class="service-logo"/> Spotify</li>
+    </ol>
+    <div class="container-fluid col-xs-12 content-container" data-service="spotify">
+        {% if spotify_user %}
+            {% for track in spotify_tracks %}
+            {% set t = track.json|json_decode(true) %}
+                <div class="card col-xs-6 col-lg-2">
+                    <div class="card-block">
+                        <div class="display-6">{{t.track.name}}</div>
+                        {% for artist in t.track.artists %}
+                            <div>by {{artist.name}}</div>
+                        {% endfor %}
+                        <div class="muted">from {{t.track.album.name}}</div>
+                        {% for pic in t.track.album.images %}
+                            {% if pic.width >= 600 and pic.width < 900 %}
+                                <a href="{{t.track.href}}" target="_blank" title="Listen"><img src="{{pic.url}}" /></a>
+                            {% endif %}
+                        {% endfor %}
+                        <a class="btn btn-secondary-outline btn-sm" target="_blank" href="{{t.track.href}}"><img src="/img/service/spotify/logo_sm.png" class="service-logo"/></a>
+                        <div class="date text-align-right">{{track.date_added|time_ago}}</div>
+                    </div>
+                </div>
+
+                {% if loop.index is divisible by(6) %}
+                    <div class="row"></div>
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+{% block includes %}
+  <!-- js includes -->
+  <script type="text/javascript" src="/js/pages/likedrop.js"></script>
+{% endblock %}

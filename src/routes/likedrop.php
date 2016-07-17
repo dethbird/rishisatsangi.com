@@ -67,6 +67,39 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
         );
     });
 
+    $app->get('/spotify', function () use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+        $db = $app->container->get('db');
+
+        $spotify_user = $db->fetchOne(
+            $configs['sql']['account_spotify']['get_by_user_id'],[
+                'user_id' => $securityContext->id]);
+
+        if ($spotify_user) {
+            $spotify_tracks = $db->fetchAll(
+                $configs['sql']['content_spotify']['get_by_account_spotify_id'],[
+                    'limit' => 250,
+                    'account_spotify_id' => $spotify_user['id']]);
+        }
+
+
+        $templateVars = array(
+            "configs" => $configs,
+            'securityContext' => $securityContext,
+                'spotify_user' => $spotify_user,
+                'spotify_tracks' => $spotify_tracks,
+            "section" => "likedrop.spotify",
+            'hostname' => $configs['server']['hostname']
+        );
+
+        $app->render(
+            'pages/likedrop/spotify.html.twig',
+            $templateVars,
+            200
+        );
+    });
+
     $app->get('/youtube', function () use ($app) {
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];

@@ -21,10 +21,8 @@ a.title {
     word-wrap: break-word;
 }
 blockquote {
-    margin:0;
-    padding: 15px 10px 10px 15px;
+    margin: 20px;
     border: none;
-    max-width: 520px;
     color: #333;
     font-size: 0.9rem;
     white-space: pre-wrap;
@@ -40,11 +38,19 @@ img {
 }
 
 label.tag {
-    background-color: #c9177c;
+    margin: 3px 3px 3px 0px;
+    border: 1px solid #c9177c;
     padding: 3px;
-    color: #fff;
-    border-radius: 5px;
+    border-radius: .2rem;
     font-size: .7rem;
+    color: #c9177c;
+    background-color: transparent;
+    background-image: none;
+}
+label.tag:hover {
+    color: #fff;
+    background-color: #c9177c;
+    border-color: #c9177c;
 }
 
 .btn-group .btn {

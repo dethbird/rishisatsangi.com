@@ -23,8 +23,9 @@
                             {% endif %}
                         {% endfor %}
                         <blockquote>{{v.description|truncate(200)|markdown}}</blockquote>
-                        <span class="date">{{video.date_added|time_ago}}</span>
                         <a class="btn btn-secondary-outline btn-sm" target="_blank" href="{{v.link}}"><img src="/img/service/vimeo/logo_sm.png" class="service-logo"/></a>
+
+                        <div class="date text-align-right">{{video.date_added|time_ago}}</div>
                     </div>
                 </div>
 

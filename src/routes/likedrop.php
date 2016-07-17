@@ -15,7 +15,7 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
         if ($gdrive_user) {
             $gdrive_files = $db->fetchAll(
                 $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
-                    'limit' => 50,
+                    'limit' => 100,
                     'account_gdrive_id' => $gdrive_user['id']]);
         }
 
@@ -47,7 +47,7 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
         if ($pocket_user) {
             $pocket_articles = $db->fetchAll(
                 $configs['sql']['content_pocket']['get_by_account_pocket_id'],[
-                    'limit' => 50,
+                    'limit' => 100,
                     'account_pocket_id' => $pocket_user['id']]);
         }
 
@@ -80,7 +80,7 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
 
             $youtube_watchlater_videos = $db->fetchAll(
                 $configs['sql']['content_youtube']['get_by_account_gdrive_id'],[
-                    'limit' => 50,
+                    'limit' => 100,
                     'account_gdrive_id' => $gdrive_user['id']]);
         }
 

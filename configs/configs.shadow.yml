@@ -140,6 +140,21 @@ sql:
             WHERE account_gdrive_id = :account_gdrive_id
             ORDER BY date_updated DESC
             LIMIT :limit
+    content_vimeo:
+        insert_update: |
+            INSERT INTO content_vimeo
+            (account_vimeo_id, user_id, item_id, json, date_added, date_updated)
+            VALUES
+            (:account_vimeo_id, :user_id, :item_id, :json, :date_added, :date_updated)
+                ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated
+        delete_content: |
+            DELETE FROM content_vimeo
+            WHERE account_vimeo_id = :account_vimeo_id
+        get_by_id: |
+            SELECT * FROM content_vimeo
+            WHERE account_vimeo_id = :account_vimeo_id
+            ORDER BY date_added DESC
+            LIMIT :limit
     comments:
         insert: |
             INSERT INTO comments

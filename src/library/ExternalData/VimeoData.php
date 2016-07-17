@@ -1,12 +1,14 @@
 <?php
 
 require_once("Base.php");
+use Vimeo\Vimeo;
 
 class VimeoData extends ExternalDataBase {
 
     private $clientKey;
     private $clientSecret;
     private $accessToken;
+    private $client;
 
     public function __construct($clientKey, $clientSecret, $accessToken = null)
     {
@@ -66,21 +68,29 @@ class VimeoData extends ExternalDataBase {
     }
 
 
-    public function getArticles()
+    public function getWatchLaterVideos()
     {
-        $response = $this->httpClient->post(
-            'https://getpocket.com/v3/get',[
-            'headers' => [
-                'X-Accept' => 'application/json'
-            ],
-            'json' => [
-                'consumer_key' => $this->consumerKey,
-                'access_token' => $this->accessToken,
-                'state' => 'all',
-                'sort' => 'newest',
-                'detailType' => 'complete'
-            ]
-        ]);
-        return json_decode($response->getBody()->getContents());
+        $vimeo = new Vimeo(
+            $this->clientKey,
+            $this->clientSecret,
+            $this->accessToken
+        );
+        $done = false;
+        $page = 1;
+        $per_page = 50;
+        $data = [];
+        while (!$done) {
+            $response = $vimeo->request('/me/watchlater', [
+                'per_page' => $per_page, 'page' => $page ],
+                'GET');
+            if(!$response['body']['data']) {
+                $done = true;
+            } else {
+                $data = array_merge($data, $response['body']['data']);
+                $page++;
+            }
+        }
+
+        return $data;
     }
 }

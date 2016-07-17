@@ -154,6 +154,21 @@ sql:
             WHERE account_gdrive_id = :account_gdrive_id
             ORDER BY date_updated DESC
             LIMIT :limit
+    content_spotify:
+        insert_update: |
+            INSERT INTO content_spotify
+            (account_spotify_id, user_id, item_id, json, date_added, date_updated)
+            VALUES
+            (:account_spotify_id, :user_id, :item_id, :json, :date_added, :date_updated)
+                ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated
+        delete_content: |
+            DELETE FROM content_spotify
+            WHERE account_spotify_id = :account_spotify_id
+        get_by_account_spotify_id: |
+            SELECT * FROM content_spotify
+            WHERE account_spotify_id = :account_spotify_id
+            ORDER BY date_added DESC
+            LIMIT :limit
     content_vimeo:
         insert_update: |
             INSERT INTO content_vimeo

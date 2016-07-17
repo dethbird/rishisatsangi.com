@@ -134,7 +134,8 @@ $app->group('/service', function () use ($app) {
                 "http://".$_SERVER['HTTP_HOST']."/service/spotify/redirect");
             $scopes = array(
                 'playlist-read-private',
-                'user-read-private'
+                'user-read-private',
+                'user-library-read'
             );
             $authorizeUrl = $session->getAuthorizeUrl(array(
                 'scope' => $scopes

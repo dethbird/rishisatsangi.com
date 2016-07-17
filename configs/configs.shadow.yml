@@ -150,7 +150,7 @@ sql:
         delete_content: |
             DELETE FROM content_vimeo
             WHERE account_vimeo_id = :account_vimeo_id
-        get_by_id: |
+        get_by_account_vimeo_id: |
             SELECT * FROM content_vimeo
             WHERE account_vimeo_id = :account_vimeo_id
             ORDER BY date_added DESC

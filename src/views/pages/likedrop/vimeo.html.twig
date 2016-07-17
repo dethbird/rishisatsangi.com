@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+{% block title %} - LikeDrop Vimeo{% endblock %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+    <ol class="breadcrumb">
+        <li><a href="#">LikeDrop</a></li>
+        <li class="active"><img src="/img/service/vimeo/logo_sm.png" class="service-logo"/> Vimeo</li>
+    </ol>
+    <div class="container-fluid col-xs-12 content-container" data-service="vimeo">
+        {% if vimeo_user %}
+            {% for video in vimeo_videos %}
+            {% set v = video.json|json_decode(true) %}
+
+                <div class="card col-xs-6 col-lg-3">
+                    <div class="card-block">
+                        <div class="display-6">{{v.name}}</div>
+                        {% for pic in v.pictures.sizes %}
+                            {% if pic.width >= 600 and pic.width < 900 %}
+                                <img src="{{pic.link}}" />
+                            {% endif %}
+                        {% endfor %}
+                        <blockquote>{{v.description|truncate(200)|markdown}}</blockquote>
+                        <span class="date">{{video.date_added|time_ago}}</span>
+                        <a class="btn btn-secondary-outline btn-sm" target="_blank" href="{{v.link}}"><img src="/img/service/vimeo/logo_sm.png" class="service-logo"/></a>
+                    </div>
+                </div>
+
+                {% if loop.index is divisible by(4) %}
+                    <div class="row"></div>
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+{% block includes %}
+  <!-- js includes -->
+  <script type="text/javascript" src="/js/pages/likedrop.js"></script>
+{% endblock %}

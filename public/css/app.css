@@ -72,6 +72,10 @@ label.tag {
     color: #aaa;
     font-size: 0.9rem;
 }
+.card .btn .service-logo {
+    max-width: 20px;
+    height: auto;
+}
 .comments {
     margin: 10px 0px 10px 0px;
 }

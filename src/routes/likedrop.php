@@ -99,4 +99,36 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
             200
         );
     });
+
+    $app->get('/vimeo', function () use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+        $db = $app->container->get('db');
+
+        $vimeo_user = $db->fetchOne(
+            $configs['sql']['account_vimeo']['get_by_user_id'],[
+                'user_id' => $securityContext->id]);
+
+        if ($vimeo_user) {
+            $vimeo_videos = $db->fetchAll(
+                $configs['sql']['content_vimeo']['get_by_account_vimeo_id'],[
+                    'limit' => 100,
+                    'account_vimeo_id' => $vimeo_user['id']]);
+        }
+
+        $templateVars = array(
+            "configs" => $configs,
+            'securityContext' => $securityContext,
+            'vimeo_user' => $vimeo_user,
+            'vimeo_videos' => $vimeo_videos,
+            "section" => "likedrop.vimeo",
+            'hostname' => $configs['server']['hostname']
+        );
+
+        $app->render(
+            'pages/likedrop/vimeo.html.twig',
+            $templateVars,
+            200
+        );
+    });
 });

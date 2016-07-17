@@ -19,6 +19,7 @@
         "tijsverkoyen/css-to-inline-styles": "~2.0",
         "twig/twig": "~1.2",
         "xrstf/fountain": "~1.0",
-        "vimeo/vimeo-api": "~1.2"
+        "vimeo/vimeo-api": "~1.2",
+        "jwilsson/spotify-web-api-php": "~1.3"
     }
 }

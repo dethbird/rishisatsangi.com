@@ -22,6 +22,9 @@ service:
     instagram:
         client_id: :INSTAGRAM_CLIENT_ID
         client_secret: :INSTAGRAM_CLIENT_SECRET
+    spotify:
+        client_id: :SPOTIFY_CLIENT_ID
+        client_secret: :SPOTIFY_CLIENT_SECRET
     vimeo:
         client_key: :VIMEO_CLIENT_ID
         client_secret: :VIMEO_CLIENT_SECRET
@@ -83,6 +86,17 @@ sql:
             SELECT * FROM account_gdrive
         get_by_user_id: |
             SELECT * FROM account_gdrive WHERE user_id = :user_id
+    account_spotify:
+        insert_update: |
+            INSERT INTO account_spotify
+            (user_id, access_token, refresh_token, date_added, date_updated)
+            VALUES
+            (:user_id, :access_token, :refresh_token, NOW(), NOW())
+                ON DUPLICATE KEY UPDATE access_token = :access_token, refresh_token = :refresh_token, date_updated = NOW()
+        get_all: |
+            SELECT * FROM account_spotify
+        get_by_user_id: |
+            SELECT * FROM account_spotify WHERE user_id = :user_id
     account_vimeo:
         insert_update: |
             INSERT INTO account_vimeo

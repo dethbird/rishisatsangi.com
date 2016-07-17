@@ -124,6 +124,51 @@ $app->group('/service', function () use ($app) {
         });
     });
 
+    $app->group('/spotify', function () use ($app) {
+
+        $app->get('/authorize', function () use ($app) {
+            $configs = $app->container->get('configs');
+            $session = new SpotifyWebAPI\Session(
+                $configs['service']['spotify']['client_id'],
+                $configs['service']['spotify']['client_secret'],
+                "http://".$_SERVER['HTTP_HOST']."/service/spotify/redirect");
+            $scopes = array(
+                'playlist-read-private',
+                'user-read-private'
+            );
+            $authorizeUrl = $session->getAuthorizeUrl(array(
+                'scope' => $scopes
+            ));
+            $app->redirect($authorizeUrl);
+
+        });
+
+        $app->get('/redirect', function () use ($app) {
+            $configs = $app->container->get('configs');
+            $db = $app->container->get('db');
+            $securityContext = $_SESSION['securityContext'];
+            $session = new SpotifyWebAPI\Session(
+                $configs['service']['spotify']['client_id'],
+                $configs['service']['spotify']['client_secret'],
+                "http://".$_SERVER['HTTP_HOST']."/service/spotify/redirect");
+            $api = new SpotifyWebAPI\SpotifyWebAPI();
+
+            $session->requestAccessToken($app->request->params('code'));
+            $accessToken = $session->getAccessToken();
+            $refreshToken = $session->getRefreshToken();
+
+            $result = $db->perform(
+                $configs['sql']['account_spotify']['insert_update'],
+                [
+                    'user_id' => $securityContext->id,
+                    'access_token' => $accessToken,
+                    'refresh_token' => $refreshToken
+                ]
+            );
+            $app->redirect('/likedrop');
+        });
+    });
+
     $app->group('/vimeo', function () use ($app) {
 
         $app->get('/authorize', function () use ($app) {

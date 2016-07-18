@@ -39,7 +39,7 @@ sql:
         get_all: |
             SELECT id, username, email FROM users ORDER BY id
         get_app_users: |
-            SELECT id, username, email FROM users WHERE app_user = 'Y' ORDER BY id
+            SELECT id, username, email, notifications FROM users WHERE app_user = 'Y' ORDER BY id
         get_by_auth_token: |
             SELECT id, username, email FROM users WHERE auth_token = :auth_token
         get_by_id: |

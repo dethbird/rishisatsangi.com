@@ -49,81 +49,82 @@
         // get all users
         $users = $db->fetchAll($configs['sql']['users']['get_app_users'],[]);
         foreach ($users as $user) {
-            echo $c("user: ")
-                ->white();
-            echo $c($user['username'])
-                ->yellow()->bold() . PHP_EOL;
+            if($user['notifications'] == "Y") {
+                echo $c("user: ")
+                    ->white();
+                echo $c($user['username'])
+                    ->yellow()->bold() . PHP_EOL;
 
 
-            // gather data
-            $pocket_user = $db->fetchOne(
-                $configs['sql']['account_pocket']['get_by_user_id'],[
-                    'user_id' => $user['id']]);
+                // gather data
+                $pocket_user = $db->fetchOne(
+                    $configs['sql']['account_pocket']['get_by_user_id'],[
+                        'user_id' => $user['id']]);
 
-            $pocket_articles = $db->fetchAll(
-                $configs['sql']['content_pocket']['get_by_account_pocket_id'],[
-                    'limit' => (int) $cmd['limit'],
-                    'account_pocket_id' => $pocket_user['id']]);
+                $pocket_articles = $db->fetchAll(
+                    $configs['sql']['content_pocket']['get_by_account_pocket_id'],[
+                        'limit' => (int) $cmd['limit'],
+                        'account_pocket_id' => $pocket_user['id']]);
 
-            $gdrive_user = $db->fetchOne(
-                $configs['sql']['account_gdrive']['get_by_user_id'],[
-                    'user_id' => $user['id']]);
+                $gdrive_user = $db->fetchOne(
+                    $configs['sql']['account_gdrive']['get_by_user_id'],[
+                        'user_id' => $user['id']]);
 
-            $gdrive_files = $db->fetchAll(
-                $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
-                    'limit' => (int) $cmd['limit'],
-                    'account_gdrive_id' => $gdrive_user['id']]);
+                $gdrive_files = $db->fetchAll(
+                    $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
+                        'limit' => (int) $cmd['limit'],
+                        'account_gdrive_id' => $gdrive_user['id']]);
 
-            $youtube_watchlater_videos = $db->fetchAll(
-                $configs['sql']['content_youtube']['get_by_account_gdrive_id'],[
-                    'limit' => (int) $cmd['limit'],
-                    'account_gdrive_id' => $gdrive_user['id']]);
+                $youtube_watchlater_videos = $db->fetchAll(
+                    $configs['sql']['content_youtube']['get_by_account_gdrive_id'],[
+                        'limit' => (int) $cmd['limit'],
+                        'account_gdrive_id' => $gdrive_user['id']]);
 
-            // render html
-            $html = $twig->render(
-                'emails/daily_email.html.twig',
-                [
-                    'hostname' => $configs['server']['hostname'],
-                    'user' => $user,
-                    'from' => $until,
-                    'until' => $cmd['time'],
-                    'pocket_articles' => $pocket_articles,
-                    'gdrive_files' => $gdrive_files,
-                    'youtube_watchlater_videos' => $youtube_watchlater_videos
-                ]);
+                // render html
+                $html = $twig->render(
+                    'emails/daily_email.html.twig',
+                    [
+                        'hostname' => $configs['server']['hostname'],
+                        'user' => $user,
+                        'from' => $until,
+                        'until' => $cmd['time'],
+                        'pocket_articles' => $pocket_articles,
+                        'gdrive_files' => $gdrive_files,
+                        'youtube_watchlater_videos' => $youtube_watchlater_videos
+                    ]);
 
-            // build css
-            $css = file_get_contents('https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css');
+                // build css
+                $css = file_get_contents('https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css');
 
-            $css .= PHP_EOL . file_get_contents(
-                APPLICATION_PATH . 'src/views/css/email.css');
+                $css .= PHP_EOL . file_get_contents(
+                    APPLICATION_PATH . 'src/views/css/email.css');
 
-            // compile html
-            $cssToInlineStyles = new CssToInlineStyles();
-            $mergedHtml = $cssToInlineStyles->convert($html, $css);
+                // compile html
+                $cssToInlineStyles = new CssToInlineStyles();
+                $mergedHtml = $cssToInlineStyles->convert($html, $css);
 
-            // send
-            $mail = new PHPMailer;
-            $mail->Subject = $configs['email']['daily_email']['subject'] . " " . time();
-            $mail->setFrom(
-                $configs['email']['daily_email']['from'],
-                $configs['email']['daily_email']['from_name']
-            );
-            $mail->addAddress($user['email'], $user['username']);
-            $mail->isHTML(true);
-            $mail->Body = $mergedHtml;
+                // send
+                $mail = new PHPMailer;
+                $mail->Subject = $configs['email']['daily_email']['subject'] . " " . time();
+                $mail->setFrom(
+                    $configs['email']['daily_email']['from'],
+                    $configs['email']['daily_email']['from_name']
+                );
+                $mail->addAddress($user['email'], $user['username']);
+                $mail->isHTML(true);
+                $mail->Body = $mergedHtml;
 
-            if ($cmd['output']) {
-                echo PHP_EOL . $html . PHP_EOL;
-            } else {
-                if(!$mail->send()) {
-                    echo 'Message could not be sent.';
-                    echo 'Mailer Error: ' . $mail->ErrorInfo;
+                if ($cmd['output']) {
+                    echo PHP_EOL . $html . PHP_EOL;
                 } else {
-                    echo 'Message has been sent';
+                    if(!$mail->send()) {
+                        echo 'Message could not be sent.';
+                        echo 'Mailer Error: ' . $mail->ErrorInfo;
+                    } else {
+                        echo 'Message has been sent';
+                    }
                 }
+                echo PHP_EOL;
             }
-            echo PHP_EOL;
-
         }
     }

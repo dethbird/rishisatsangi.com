@@ -14,7 +14,7 @@
             {% for video in vimeo_videos %}
             {% set v = video.json|json_decode(true) %}
 
-                <div class="card col-xs-6 col-lg-2">
+                <div class="card col-xs-6 col-lg-3 col-xl-2">
                     <div class="card-block">
                         <div class="display-6">{{v.name}}</div>
                         {% for pic in v.pictures.sizes %}
@@ -28,10 +28,6 @@
                         <div class="date text-align-right">{{video.date_added|time_ago}}</div>
                     </div>
                 </div>
-
-                {% if loop.index is divisible by(6) %}
-                    <div class="row"></div>
-                {% endif %}
 
             {% endfor %}
         {% endif %}

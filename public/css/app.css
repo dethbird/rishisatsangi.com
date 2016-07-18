@@ -232,7 +232,7 @@ input[name=name] {
 
 @media screen and (max-width: 1024px) {
     body {
-      font-size: 0.5rem;
+      font-size: 0.65rem;
     }
     h1 {
       font-size: 1.2rem;
@@ -289,7 +289,7 @@ input[name=name] {
 }
 @media screen and (max-width: 768px) {
     body {
-      font-size: 0.5rem;
+      font-size: 0.6rem;
     }
     h1 {
       font-size: 1.2rem;

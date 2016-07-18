@@ -36,7 +36,7 @@
         ->describedAs('Output mode -- don\'t actually send an email, output HTML instead');
     $cmd->flag('l')
         ->aka('limit')
-        ->default(10)
+        ->default(5)
         ->describedAs('Limit the number of results from each service content.');
 
     if ($cmd['send']) {
@@ -55,17 +55,7 @@
                 echo $c($user['username'])
                     ->yellow()->bold() . PHP_EOL;
 
-
-                // gather data
-                $pocket_user = $db->fetchOne(
-                    $configs['sql']['account_pocket']['get_by_user_id'],[
-                        'user_id' => $user['id']]);
-
-                $pocket_articles = $db->fetchAll(
-                    $configs['sql']['content_pocket']['get_by_account_pocket_id'],[
-                        'limit' => (int) $cmd['limit'],
-                        'account_pocket_id' => $pocket_user['id']]);
-
+                # google
                 $gdrive_user = $db->fetchOne(
                     $configs['sql']['account_gdrive']['get_by_user_id'],[
                         'user_id' => $user['id']]);
@@ -80,6 +70,37 @@
                         'limit' => (int) $cmd['limit'],
                         'account_gdrive_id' => $gdrive_user['id']]);
 
+                # pocket
+                $pocket_user = $db->fetchOne(
+                    $configs['sql']['account_pocket']['get_by_user_id'],[
+                        'user_id' => $user['id']]);
+
+                $pocket_articles = $db->fetchAll(
+                    $configs['sql']['content_pocket']['get_by_account_pocket_id'],[
+                        'limit' => (int) $cmd['limit'],
+                        'account_pocket_id' => $pocket_user['id']]);
+
+                # spotify
+                $spotify_user = $db->fetchOne(
+                    $configs['sql']['account_spotify']['get_by_user_id'],[
+                        'user_id' => $user['id']]);
+
+                $spotify_tracks = $db->fetchAll(
+                    $configs['sql']['content_spotify']['get_by_account_spotify_id'],[
+                        'limit' => (int) $cmd['limit'],
+                        'account_spotify_id' => $spotify_user['id']]);
+
+                # vimeo
+                $vimeo_user = $db->fetchOne(
+                    $configs['sql']['account_vimeo']['get_by_user_id'],[
+                        'user_id' => $securityContext->id]);
+
+                $vimeo_watch_later_videos = $db->fetchAll(
+                    $configs['sql']['content_vimeo']['get_by_account_vimeo_id'],[
+                        'limit' => (int) $cmd['limit'],
+                        'account_vimeo_id' => $vimeo_user['id']]);
+
+
                 // render html
                 $html = $twig->render(
                     'emails/daily_email.html.twig',
@@ -90,11 +111,16 @@
                         'until' => $cmd['time'],
                         'pocket_articles' => $pocket_articles,
                         'gdrive_files' => $gdrive_files,
-                        'youtube_watchlater_videos' => $youtube_watchlater_videos
+                        'youtube_watchlater_videos' => $youtube_watchlater_videos,
+                        'spotify_tracks' => $spotify_tracks,
+                        'vimeo_watch_later_videos' => $vimeo_watch_later_videos
                     ]);
 
                 // build css
                 $css = file_get_contents('https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css');
+
+                $css .= PHP_EOL . file_get_contents(
+                    APPLICATION_PATH . 'public/css/app.css');
 
                 $css .= PHP_EOL . file_get_contents(
                     APPLICATION_PATH . 'src/views/css/email.css');

@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="display-5"><img src="{{hostname}}/img/service/vimeo/logo_sm.png" class="service-logo"/> Vimeo Watch Later</div>
+</div>
+<div class="row">
+    {% for video in vimeo_watchlater_videos %}
+    {% set v = video.json|json_decode(true) %}
+        <div class="card col-xs-10">
+            <div class="card-block">
+                <div class="display-5">{{v.name}}</div>
+                {% for pic in v.pictures.sizes %}
+                    {% if pic.width >= 600 and pic.width < 900 %}
+                        <img src="{{pic.link}}" />
+                    {% endif %}
+                {% endfor %}
+                <br />
+                <blockquote>{{v.description|truncate(200)|raw}}</blockquote>
+                <div class="row col-xs-12">
+                    <a href="{{v.link}}" class="btn btn-secondary col-xs-11"><img src="{{hostname}}/img/service/vimeo/logo_sm.png" class="service-logo-manage"/></a>
+                </div>
+                <br />
+                <div class="date row text-align-right">{{video.date_added|time_ago}}</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

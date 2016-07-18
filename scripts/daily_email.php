@@ -93,9 +93,9 @@
                 # vimeo
                 $vimeo_user = $db->fetchOne(
                     $configs['sql']['account_vimeo']['get_by_user_id'],[
-                        'user_id' => $securityContext->id]);
+                        'user_id' => $user['id']]);
 
-                $vimeo_watch_later_videos = $db->fetchAll(
+                $vimeo_watchlater_videos = $db->fetchAll(
                     $configs['sql']['content_vimeo']['get_by_account_vimeo_id'],[
                         'limit' => (int) $cmd['limit'],
                         'account_vimeo_id' => $vimeo_user['id']]);
@@ -113,7 +113,7 @@
                         'gdrive_files' => $gdrive_files,
                         'youtube_watchlater_videos' => $youtube_watchlater_videos,
                         'spotify_tracks' => $spotify_tracks,
-                        'vimeo_watch_later_videos' => $vimeo_watch_later_videos
+                        'vimeo_watchlater_videos' => $vimeo_watchlater_videos
                     ]);
 
                 // build css

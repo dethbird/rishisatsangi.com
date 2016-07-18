@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="display-5"><img src="{{hostname}}/img/service/spotify/logo_sm.png" class="service-logo"/> Spotify Tracks</div>
+</div>
+<div class="row">
+    {% for track in spotify_tracks %}
+    {% set t = track.json|json_decode(true) %}
+        <div class="card col-xs-10">
+            <div class="card-block">
+                <div class="display-5">{{t.track.name}}</div>
+                {% for artist in t.track.artists %}
+                    <div>by {{artist.name}}</div>
+                {% endfor %}
+                <div class="muted">from {{t.track.album.name}}</div>
+                {% for pic in t.track.album.images %}
+                    {% if pic.width >= 600 and pic.width < 900 %}
+                        <a href="{{t.track.external_urls.spotify}}" target="_blank" title="Listen"><img src="{{pic.url}}" /></a>
+                    {% endif %}
+                {% endfor %}
+                <div class="row col-xs-12">
+                    <a href="{{t.track.external_urls.spotify}}" class="btn btn-secondary col-xs-11"><img src="{{hostname}}/img/service/spotify/logo_sm.png" class="service-logo-manage"/></a>
+                </div>
+                <br />
+                <div class="date row text-align-right">{{track.date_added|time_ago}}</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

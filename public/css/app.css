@@ -232,27 +232,119 @@ input[name=name] {
 
 @media screen and (max-width: 1024px) {
     body {
-      font-size: 0.8rem;
+      font-size: 0.5rem;
     }
     h1 {
-      font-size: 2rem;
+      font-size: 1.2rem;
     }
     h5 {
-      font-size: 1.05rem;
+      font-size: 0.7rem;
+    }
+    blockquote {
+        margin: 15px;
+        font-size: .65rem;
+    }
+    .btn {
+      font-size: 0.55rem;
+    }
+    .btn-sm {
+      padding: .2rem .55rem;
+    }
+    a.btn {
+        font-size: 0.6rem;
+    }
+    a.title {
+        font-size: .6rem;
+    }
+    .content {
+        padding: 10px;
+    }
+    .card-block blockquote {
+        padding: 0px 0px 0px 15px;
+        margin: 10px 0px 10px 0px;
+    }
+    .date {
+        font-size: .75rem;
+    }
+    .display-5 {
+        font-size: 1.4rem;
+        font-weight: 300;
+    }
+    .display-6 {
+        font-size: .9rem;
+        font-weight: 400;
+    }
+    label.tag {
+        font-size: .6rem;
+    }
+    img.service-logo {
+        max-width: 18px;
+        height: auto;
+    }
+
+    img.service-logo-manage {
+        max-width: 16px;
+        height: auto;
     }
 }
 @media screen and (max-width: 768px) {
     body {
-      font-size: 0.7rem;
+      font-size: 0.5rem;
     }
     h1 {
-      font-size: 1.7rem;
+      font-size: 1.2rem;
     }
     h5 {
-      font-size: 1.0rem;
+      font-size: 0.7rem;
+    }
+    blockquote {
+        margin: 15px;
+        font-size: .65rem;
+    }
+    .btn {
+      font-size: 0.55rem;
+    }
+    .btn-sm {
+      padding: .2rem .55rem;
+    }
+    a.btn {
+        font-size: 0.6rem;
+    }
+    a.title {
+        font-size: .6rem;
+    }
+    .content {
+        padding: 10px;
+    }
+    .card-block blockquote {
+        padding: 0px 0px 0px 15px;
+        margin: 10px 0px 10px 0px;
+    }
+    .date {
+        font-size: .75rem;
+    }
+    .display-5 {
+        font-size: 1.4rem;
+        font-weight: 300;
+    }
+    .display-6 {
+        font-size: .9rem;
+        font-weight: 400;
+    }
+    label.tag {
+        font-size: .6rem;
+    }
+    img.service-logo {
+        max-width: 18px;
+        height: auto;
+    }
+
+    img.service-logo-manage {
+        max-width: 16px;
+        height: auto;
     }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 480px) and (min-width: 0px) {
     body {
       font-size: 0.5rem;
     }
@@ -279,9 +371,6 @@ input[name=name] {
     }
     .content {
         padding: 10px;
-    }
-    .card-block {
-        8px;
     }
     .card-block blockquote {
         padding: 0px 0px 0px 15px;

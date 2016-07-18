@@ -262,6 +262,9 @@ input[name=name] {
     h5 {
       font-size: 0.7rem;
     }
+    blockquote {
+        font-size: .55rem;
+    }
     .btn {
       font-size: 0.55rem;
     }
@@ -277,16 +280,34 @@ input[name=name] {
     .content {
         padding: 10px;
     }
+    .card-block {
+        8px;
+    }
+    .card-block blockquote {
+        padding: 0px 0px 0px 15px;
+        margin: 10px 0px 10px 0px;
+    }
+    .date {
+        font-size: .6rem;
+    }
+    .display-5 {
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+    .display-6 {
+        font-size: .75rem;
+        font-weight: 400;
+    }
     label.tag {
         font-size: .45rem;
     }
     img.service-logo {
-        max-width: 32px;
+        max-width: 18px;
         height: auto;
     }
 
     img.service-logo-manage {
-        max-width: 16px;
+        max-width: 12px;
         height: auto;
     }
 }

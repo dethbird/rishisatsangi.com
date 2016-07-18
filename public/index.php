@@ -166,6 +166,7 @@ $app->get("/logout", function () use ($app) {
 
 
 require_once APPLICATION_PATH . 'src/routes/api.php';
+require_once APPLICATION_PATH . 'src/routes/boards.php';
 require_once APPLICATION_PATH . 'src/routes/likedrop.php';
 require_once APPLICATION_PATH . 'src/routes/projects.php';
 require_once APPLICATION_PATH . 'src/routes/service.php';

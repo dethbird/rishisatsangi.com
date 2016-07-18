@@ -9,154 +9,97 @@
         <li class="active">Projects</li>
     </ol>
     <br />
-    <div class="row container-fluid">
-        <div class="container-fluid col-xs-12">
-            {% for project in projects %}
-                <div class="card col-xs-12 col-lg-6">
-                    <div class="card-block">
-                        <div class="row">
-                            <div class="col-xs-9">
-                                <a class="display-5" href="/project/{{project.id}}/detail">{{project.name}}</a>
-                                <br />
-                                <span class="date">modified {{project.date_updated|time_ago}}</span>
-                                <span class="muted">(created {{project.date_added|time_ago}})</span>
-                            </div>
+    <div class="row container-fluid content-container">
+        {% for project in projects %}
+            <div class="card col-xs-6 col-lg-4">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <div class="display-6">{{project.name}}</div>
+                        </div>
+                        <div class="col-xs-3 pull-right">
+                            <a href="/project/{{project.id}}/detail" class="btn btn-secondary-outline btn-sm">Details</a>
                         </div>
                     </div>
-                    <div class="card-block">
+                    <div class="row">
                         <blockquote>{{project.description|truncate|markdown}}</blockquote>
                     </div>
-                    <div class="card-block">
+                    <div class="row">
+                        <div class="col-xs-12"><strong>Characters</strong></div>
+                    </div>
+                    {% if project.characters|length > 0 %}
                         <div class="row">
-                            <div class="display-5 col-xs-6">Characters</div>
-                        </div>
-                        {% if project.characters|length > 0 %}
-                            <div class="row">
                             {% for character in project.characters %}
                                 {% if loop.index < 6 %}
-                                <div class="card col-xs-12 col-lg-2">
-                                    <div class="card-block">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                    {% if character.revisions|length == 0 %}
-                                                        <div class="muted container">
-                                                            <!-- <a href="/project/{{project.id}}/character/{{character.id}}/revision/create">create a revision</a> -->
-                                                        </div>
+                                    <div class="col-xs-12 col-lg-2">
+                                        {% if character.revisions|length == 0 %}
+                                            no revisions
+                                        {% else %}
+                                            {% for revision in character.revisions %}
+                                                {% if loop.index == 1 %}
+                                                    {% set current_revision_id = revision.id %}
+                                                    <img src="{{revision.content}}" />
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        <div class="muted">{{character.name}}</div>
+                                    </div>
+                                {% elseif loop.index == 6 %}
+                                    <div class="col-xs-12 col-lg-2">
+                                        {% set remainder = (project.characters|length - 5) %}
+                                        + {{remainder}} more
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-xs-12"><strong>Storyboards</strong></div>
+                    </div>
+                    {% if project.storyboards|length > 0 %}
+                        <div class="row" >
+                        {% for storyboard in project.storyboards %}
+                            <div class="card col-xs-12">
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            {{storyboard.name}}
+                                        </div>
+                                    </div>
+                                    <div class="row container">
+                                        {% if storyboard.panels|length > 1 %}
+                                            {% for panel in storyboard.panels %}
+                                                {% if loop.index < 6 %}
+                                                <div class="col-xs-12 col-lg-2">
+                                                    {% if panel.revisions|length == 0 %}
+                                                        no revisions
                                                     {% else %}
-                                                        {% for revision in character.revisions %}
+                                                        {% for revision in panel.revisions %}
                                                             {% if loop.index == 1 %}
                                                                 {% set current_revision_id = revision.id %}
                                                                 <img src="{{revision.content}}" />
                                                             {% endif %}
                                                         {% endfor %}
                                                     {% endif %}
-                                                    <div class="row container card-controls">
-                                                        {% if character.revisions|length > 1 %}
-                                                            <i class="fa fa-history fa-sm" title="comments"></i>{{character.revisions|length}}
-                                                        {% endif %}
-                                                    </div>
-                                                    <span class="muted">{{character.name}}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% elseif loop.index == 6 %}
-                                <div class="card col-xs-12 col-lg-2">
-                                    <div class="card-block muted">
-                                        {% set remainder = (project.characters|length - 5) %}
-                                        + {{remainder}} more
-                                    </div>
-                                </div>
-                                {% endif %}
-                                {% if loop.index is divisible by(6) %}
-                                <div class="sortable-row-divider"></div>
-                                {% endif %}
-                            {% endfor %}
-                            </div>
-                        {% else %}
-                            <div class="container col-xs-12 muted">
-                                    <!-- <a href="/project/{{project.id}}/character/ceate">create a character</a> -->
-                            </div>
-                        {% endif %}
-                        <div class="row">
-                            <div class="display-5 col-xs-6">Storyboards</div>
-                        </div>
-                        {% if project.storyboards|length > 0 %}
-                            <div class="row" >
-                            {% for storyboard in project.storyboards %}
-                                <div class="card col-xs-12">
-                                    <div class="card-block">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                {{storyboard.name}}
-                                            </div>
-                                        </div>
-                                        <br />
-                                        <div class="row container sortable-panels" data-id="{{storyboard.id}}" data-column-count="2">
-                                            {% if storyboard.panels|length == 0 %}
-                                                <div class="muted container">
-                                                    <!-- <a href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/create">create a panel</a> -->
-                                                </div>
-                                            {% else %}
-                                                {% for panel in storyboard.panels %}
-                                                {% if loop.index < 6 %}
-                                                <div class="card col-xs-12 col-lg-2">
-                                                        {% if panel.revisions|length == 0 %}
-                                                            <div class="muted container col-xs-12">
-                                                                <!-- <a href="/project/{{project.id}}/storyboard/{{storyboard.id}}/panel/{{panel.id}}/revision/create">create a revision</a> -->
-                                                            </div>
-                                                        {% else %}
-                                                            {% for revision in panel.revisions %}
-                                                                {% if loop.index == 1 %}
-                                                                    {% set current_revision_id = revision.id %}
-                                                                    <img src="{{revision.content}}" />
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        {% endif %}
-                                                        <div class="row container card-controls">
-                                                            {% if panel.revisions|length > 1 %}
-                                                            <i class="fa fa-history fa-sm" title="comments"></i>{{panel.revisions|length}}
-                                                            {% endif %}
-                                                            {% if panel.comments|length > 1 %}
-                                                            <i class="fa fa-comments fa-sm" title="comments"></i>{{panel.comments|length}}
-                                                            {% endif %}
-                                                        </div>
-                                                        <span class="muted">{{panel.name}}</span><br />
                                                 </div>
                                                 {% elseif loop.index == 6 %}
-                                                <div class="card col-xs-12 col-lg-2">
-                                                    <div class="card-block muted">
-                                                        {% set remainder = (storyboard.panels|length - 5) %}
-                                                        + {{remainder}} more
-                                                    </div>
+                                                <div class="col-xs-12 col-lg-2">
+                                                    {% set remainder = (storyboard.panels|length - 5) %}
+                                                    + {{remainder}} more
                                                 </div>
                                                 {% endif %}
-                                                {% if loop.index is divisible by(6) %}
-                                                <div class="sortable-row-divider"></div>
-                                                {% endif %}
-                                                {% endfor %}
-                                            {% endif %}
-                                        </div>
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
                                 </div>
-
-                                {% if loop.index is divisible by(1) %}
-                                <div class="sortable-row-divider"></div>
-                                {% endif %}
-                            {% endfor %}
                             </div>
-                        {% else %}
-                            <div class="container col-xs-12 muted">
-                                    <!-- <a   href="/project/{{project.id}}/storyboard/ceate">create a storyboard</a> -->
-                            </div>
-                        {% endif %}
-                    </div>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
-                {% if loop.index is divisible by(2) %}
-                <div class="row"></div>
-                {% endif %}
-            {% endfor %}
-        </div>
+                <div class="date text-align-right">{{project.date_updated|time_ago}}</div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
 

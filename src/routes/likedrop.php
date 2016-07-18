@@ -3,6 +3,45 @@
 # likedrop
 $app->group("/likedrop", $authorize($app), function () use ($app) {
 
+    $app->get('/', function () use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+        $db = $app->container->get('db');
+
+        $gdrive_user = $db->fetchOne(
+            $configs['sql']['account_gdrive']['get_by_user_id'],[
+                'user_id' => $securityContext->id]);
+
+        $pocket_user = $db->fetchOne(
+            $configs['sql']['account_pocket']['get_by_user_id'],[
+                'user_id' => $securityContext->id]);
+
+        $spotify_user = $db->fetchOne(
+            $configs['sql']['account_spotify']['get_by_user_id'],[
+                'user_id' => $securityContext->id]);
+
+        $vimeo_user = $db->fetchOne(
+            $configs['sql']['account_vimeo']['get_by_user_id'],[
+                'user_id' => $securityContext->id]);
+
+        $templateVars = array(
+            "configs" => $configs,
+            'securityContext' => $securityContext,
+            'gdrive_user' => $gdrive_user,
+            'pocket_user' => $pocket_user,
+            'spotify_user' => $spotify_user,
+            'vimeo_user' => $vimeo_user,
+            "section" => "likedrop.gdrive",
+            'hostname' => $configs['server']['hostname']
+        );
+
+        $app->render(
+            'pages/likedrop.html.twig',
+            $templateVars,
+            200
+        );
+    });
+
     $app->get('/gdrive', function () use ($app) {
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
@@ -17,6 +56,8 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
                 $configs['sql']['content_gdrive_files']['get_by_account_gdrive_id'],[
                     'limit' => 250,
                     'account_gdrive_id' => $gdrive_user['id']]);
+        } else {
+            $app->redirect('/likedrop');
         }
 
         $templateVars = array(
@@ -49,6 +90,8 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
                 $configs['sql']['content_pocket']['get_by_account_pocket_id'],[
                     'limit' => 250,
                     'account_pocket_id' => $pocket_user['id']]);
+        } else {
+            $app->redirect('/likedrop');
         }
 
         $templateVars = array(
@@ -81,6 +124,8 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
                 $configs['sql']['content_spotify']['get_by_account_spotify_id'],[
                     'limit' => 250,
                     'account_spotify_id' => $spotify_user['id']]);
+        } else {
+            $app->redirect('/likedrop');
         }
 
 
@@ -115,6 +160,8 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
                 $configs['sql']['content_youtube']['get_by_account_gdrive_id'],[
                     'limit' => 100,
                     'account_gdrive_id' => $gdrive_user['id']]);
+        } else {
+            $app->redirect('/likedrop');
         }
 
         $templateVars = array(
@@ -147,6 +194,8 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
                 $configs['sql']['content_vimeo']['get_by_account_vimeo_id'],[
                     'limit' => 100,
                     'account_vimeo_id' => $vimeo_user['id']]);
+        } else {
+            $app->redirect('/likedrop');
         }
 
         $templateVars = array(

@@ -78,6 +78,9 @@ label.tag:hover {
     color: #aaa;
     font-size: 0.9rem;
 }
+.card-row-divider {
+    clear: both;
+}
 .card .btn .service-logo {
     max-width: 20px;
     height: auto;

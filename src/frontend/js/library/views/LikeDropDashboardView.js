@@ -1,28 +1,29 @@
-var DropdownButtonView = require('./buttons/DropdownButtonView');
-var DashboardView = Backbone.View.extend({
-    model: null,
-    dropdownButtonView: null,
-    currentService: null,
+var LikeDropDashboardView = Backbone.View.extend({
     initialize: function(options) {
         var that = this;
-        that.$el = $(that.el);
-        that.currentService = $(that.$el.find(
-            '.content-container')[0]).data('service');
-        that.dropdownButtonView = new DropdownButtonView({
-            el: '#contentSelector'
-        });
-        that.dropdownButtonView.on('serviceChange', function(serviceName){
-            that.currentService = serviceName;
+
+        $(that.el).ready(function(){
             that.render();
         });
-        that.render();
+
+        $(window).resize( $.debounce( 250, function(){
+            that.render();
+        }));
     },
     render: function() {
         var that = this;
-        $(that.$el.find('.content-container')).hide();
-        $(that.$el.find(
-            '.content-container[data-service=' + that.currentService + ']')).show();
+        var $el = $(that.el);
+        var $window = $(window);
+
+        var firstCard = $el.find('.content-container').find('.card:first-child');
+        var rowCount = Math.floor($window.width() / $(firstCard).outerWidth());
+        $el.find('.content-container').children('.card-row-divider').remove();
+        $el.find('.content-container').children('.card').each(function(i,e){
+            if (((i + 1) % rowCount) == 0) {
+                $('<div class="card-row-divider"></div>').insertAfter($(e));
+            }
+        });
     }
 });
 
-module.exports = DashboardView;
+module.exports = LikeDropDashboardView;

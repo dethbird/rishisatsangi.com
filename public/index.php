@@ -18,6 +18,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require '../vendor/autoload.php';
 require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php';
+require_once APPLICATION_PATH . 'src/library/ExternalData/FlickrData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/GoogleData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/InstagramData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';

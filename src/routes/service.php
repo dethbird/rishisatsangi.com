@@ -1,4 +1,5 @@
 <?php
+
 # service
 $app->group('/service', function () use ($app) {
 
@@ -50,6 +51,50 @@ $app->group('/service', function () use ($app) {
             exit();
         });
     });
+
+
+    $app->group('/flickr', function () use ($app) {
+
+        $app->get('/authorize', function () use ($app) {
+            $configs = $app->container->get('configs');
+
+            $flickrData = new FlickrData(
+                $configs['service']['flickr']['key'],
+                $configs['service']['flickr']['secret'],
+                "http://".$_SERVER['HTTP_HOST']."/service/flickr/redirect"
+            );
+
+            $app->redirect($flickrData->getAuthorizationUri());
+
+        });
+
+        $app->get('/redirect', function () use ($app) {
+            $configs = $app->container->get('configs');
+            $db = $app->container->get('db');
+            $securityContext = $_SESSION['securityContext'];
+
+            $flickrData = new FlickrData(
+                $configs['service']['flickr']['key'],
+                $configs['service']['flickr']['secret'],
+                "http://".$_SERVER['HTTP_HOST']."/service/flickr/redirect"
+            );
+
+            $token = $flickrData->getAccessToken(
+                $app->request->params('oauth_token'),
+                $app->request->params('oauth_verifier'));
+
+
+            $result = $db->perform(
+                $configs['sql']['account_flickr']['insert_update'],
+                [
+                    'user_id' => $securityContext->id,
+                    'token' => serialize($token)
+                ]
+            );
+            $app->redirect('/likedrop');
+        });
+    });
+
 
     $app->group('/instagram', function () use ($app) {
 

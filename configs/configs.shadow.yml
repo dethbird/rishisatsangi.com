@@ -15,14 +15,16 @@ mysql:
 service:
     pocket:
         consumer_key: :POCKET_CONSUMER_KEY
+    flickr:
+        key: :FLICKR_KEY
+        secret: :FLICKR_SECRET
     gdrive:
-        # filename of the .json file that the google client needs to work
         client_json_config_filename: gdrive_client.json
         thumbnail_cache_folder: cache/gdrive/thumbnails
     instagram:
         client_id: :INSTAGRAM_CLIENT_ID
         client_secret: :INSTAGRAM_CLIENT_SECRET
-    spotify:
+    flickr:
         client_id: :SPOTIFY_CLIENT_ID
         client_secret: :SPOTIFY_CLIENT_SECRET
     vimeo:
@@ -53,6 +55,17 @@ sql:
             FROM `users`
             WHERE username = :username
             AND password = :password
+    account_flickr:
+        insert_update: |
+            INSERT INTO account_flickr
+            (user_id, token, date_added, date_updated)
+            VALUES
+            (:user_id, :token, NOW(), NOW())
+                ON DUPLICATE KEY UPDATE token = :token, date_updated = NOW()
+        get_all: |
+            SELECT * FROM account_flickr
+        get_by_user_id: |
+            SELECT * FROM account_flickr WHERE user_id = :user_id
     account_instagram:
         insert_update_instagram_user: |
             INSERT INTO account_instagram
@@ -154,19 +167,19 @@ sql:
             WHERE account_gdrive_id = :account_gdrive_id
             ORDER BY date_updated DESC
             LIMIT :limit
-    content_spotify:
+    content_flickr:
         insert_update: |
-            INSERT INTO content_spotify
-            (account_spotify_id, user_id, item_id, json, date_added, date_updated)
+            INSERT INTO content_flickr
+            (account_flickr_id, user_id, item_id, json, date_added, date_updated)
             VALUES
-            (:account_spotify_id, :user_id, :item_id, :json, :date_added, :date_updated)
+            (:account_flickr_id, :user_id, :item_id, :json, :date_added, :date_updated)
                 ON DUPLICATE KEY UPDATE json = :json, date_updated = :date_updated
         delete_content: |
-            DELETE FROM content_spotify
-            WHERE account_spotify_id = :account_spotify_id
-        get_by_account_spotify_id: |
-            SELECT * FROM content_spotify
-            WHERE account_spotify_id = :account_spotify_id
+            DELETE FROM content_flickr
+            WHERE account_flickr_id = :account_flickr_id
+        get_by_account_flickr_id: |
+            SELECT * FROM content_flickr
+            WHERE account_flickr_id = :account_flickr_id
             ORDER BY date_added DESC
             LIMIT :limit
     content_vimeo:

@@ -8,6 +8,10 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
         $securityContext = $_SESSION['securityContext'];
         $db = $app->container->get('db');
 
+        $flickr_user = $db->fetchOne(
+            $configs['sql']['account_flickr']['get_by_user_id'],[
+                'user_id' => $securityContext->id]);
+
         $gdrive_user = $db->fetchOne(
             $configs['sql']['account_gdrive']['get_by_user_id'],[
                 'user_id' => $securityContext->id]);
@@ -27,6 +31,7 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
         $templateVars = array(
             "configs" => $configs,
             'securityContext' => $securityContext,
+            'flickr_user' => $flickr_user,
             'gdrive_user' => $gdrive_user,
             'pocket_user' => $pocket_user,
             'spotify_user' => $spotify_user,

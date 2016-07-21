@@ -83,12 +83,12 @@ $app->group('/service', function () use ($app) {
                 $app->request->params('oauth_token'),
                 $app->request->params('oauth_verifier'));
 
-
             $result = $db->perform(
                 $configs['sql']['account_flickr']['insert_update'],
                 [
                     'user_id' => $securityContext->id,
-                    'token' => serialize($token)
+                    'access_token' => $token->getAccessToken(),
+                    'access_token_secret' => $token->getAccessTokenSecret()
                 ]
             );
             $app->redirect('/likedrop');

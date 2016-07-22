@@ -64,11 +64,16 @@ $app->group('/service', function () use ($app) {
                 "http://".$_SERVER['HTTP_HOST']."/service/flickr/redirect"
             );
 
-            $app->redirect($flickrData->getAuthorizationUri());
+            $request_token = $flickrData->getRequestToken();
+            $_SESSION['flickr_request_token'] = $request_token;
+
+            $app->redirect($flickrData->getAuthorizationUri(
+                $request_token['oauth_token']));
 
         });
 
         $app->get('/redirect', function () use ($app) {
+
             $configs = $app->container->get('configs');
             $db = $app->container->get('db');
             $securityContext = $_SESSION['securityContext'];
@@ -79,6 +84,10 @@ $app->group('/service', function () use ($app) {
                 "http://".$_SERVER['HTTP_HOST']."/service/flickr/redirect"
             );
 
+            $flickrData->setRequestToken(
+                $_SESSION['flickr_request_token']['oauth_token'],
+                $_SESSION['flickr_request_token']['oauth_token_secret']);
+
             $token = $flickrData->getAccessToken(
                 $app->request->params('oauth_token'),
                 $app->request->params('oauth_verifier'));
@@ -87,8 +96,9 @@ $app->group('/service', function () use ($app) {
                 $configs['sql']['account_flickr']['insert_update'],
                 [
                     'user_id' => $securityContext->id,
-                    'access_token' => $token->getAccessToken(),
-                    'access_token_secret' => $token->getAccessTokenSecret()
+                    'flickr_user_id' => $token['user_nsid'],
+                    'access_token' => $token['oauth_token'],
+                    'access_token_secret' => $token['oauth_token_secret']
                 ]
             );
             $app->redirect('/likedrop');

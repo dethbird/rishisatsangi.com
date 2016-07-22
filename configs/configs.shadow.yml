@@ -58,10 +58,10 @@ sql:
     account_flickr:
         insert_update: |
             INSERT INTO account_flickr
-            (user_id, access_token, access_token_secret, date_added, date_updated)
+            (user_id, flickr_user_id, access_token, access_token_secret, date_added, date_updated)
             VALUES
-            (:user_id, :access_token, :access_token_secret,  NOW(), NOW())
-                ON DUPLICATE KEY UPDATE access_token = :access_token, access_token_secret = :access_token_secret, date_updated = NOW()
+            (:user_id, :flickr_user_id, :access_token, :access_token_secret,  NOW(), NOW())
+                ON DUPLICATE KEY UPDATE flickr_user_id = :flickr_user_id, access_token = :access_token, access_token_secret = :access_token_secret, date_updated = NOW()
         get_all: |
             SELECT * FROM account_flickr
         get_by_user_id: |

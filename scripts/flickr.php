@@ -63,13 +63,9 @@
                 $flickr_user['access_token_secret']
             );
 
-            $data = $flickrData->getRecent();
-            // $data = $flickrData->testLogin();
-            print_r($data); exit();
+            $data = json_decode($flickrData->getRecent($flickr_user['flickr_user_id']));
 
-            $liked = $flickrData->getRecentLikedMedia();
-
-            var_dump($liked); exit();
+            print_r($data);
 
         }
     }

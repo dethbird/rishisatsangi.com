@@ -8,70 +8,67 @@ use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Http\Client\CurlClient;
 use OAuth\Common\Http\Uri\UriFactory;
 use OAuth\ServiceFactory;
-require_once APPLICATION_PATH . 'src/library/Vendor/phpflickr/phpFlickr.php';
 
-class FlickrData extends ExternalDataBase {
+class FlickrData {
 
     private $client;
     private $clientId;
     private $clientSecret;
-    private $converter;
-    private $credentials;
-    private $storage;
-    private $access_token;
-    private $access_token_secret;
+    private $oauth;
+    private $oauthToken;
+    private $oauthTokenSecret;
+    private $accessToken;
+    private $accessTokenSecret;
 
-    public function __construct($clientId, $clientSecret, $redirectUri)
+
+    public function __construct(
+        $clientId, $clientSecret, $redirectUri, $accessToken = null, $accessTokenSecret = null)
     {
 
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
+        $this->redirectUri = $redirectUri;
+        $this->accessToken = $accessToken;
+        $this->accessTokenSecret = $accessTokenSecret;
 
-        $this->converter = new XmlToJsonConverter();
+        $this->oauth = new \Oauth(
+            $this->clientId,
+            $this->clientSecret);
+        $this->oauth->enableSSLChecks();
 
-        $this->credentials = new Credentials(
-            $clientId,
-            $clientSecret,
-            $redirectUri
-        );
-
-        $this->storage = new Session();
-
-        $serviceFactory = new ServiceFactory();
-        $this->client = $serviceFactory->createService(
-            'Flickr', $this->credentials, $this->storage);
-
-        parent::__construct();
     }
 
-    public function getAuthorizationUri()
+
+    public function getRequestToken()
     {
-        $token = $this->client->requestRequestToken();
-        $oauth_token = $token->getAccessToken();
-
-        return $this->client->getAuthorizationUri(
-            ['oauth_token' => $oauth_token, 'perms' => 'read']);
+        return $this->oauth->getRequestToken(
+            "https://www.flickr.com/services/oauth/request_token",
+            $this->redirectUri);
     }
 
-    /**
-     * [getAccessToken description]
-     * @param  [type] $oauth_token    [description]
-     * @param  [type] $oauth_verifier [description]
-     * @return \OAuth\OAuth1\Token\StdOAuth1Token                 The token
-     */
+
+    public function setRequestToken($oauthToken, $oauthTokenSecret)
+    {
+        $this->oauthToken = $oauthToken;
+        $this->oauthTokenSecret = $oauthTokenSecret;
+        $this->oauth->setToken($this->oauthToken, $this->oauthTokenSecret);
+    }
+
+
+    public function getAuthorizationUri($oauth_token, $perms = 'read')
+    {
+        return 'https://www.flickr.com/services/oauth/authorize?oauth_token=' . $oauth_token . '&perms=' . $perms;
+
+    }
+
+
     public function getAccessToken($oauth_token, $oauth_verifier)
     {
-        $token = $this->storage->retrieveAccessToken('Flickr');
-        $secret = $token->getAccessTokenSecret();
-
-        $token = $this->client->requestAccessToken(
-            $oauth_token,
-            $oauth_verifier,
-            $secret);
-
-        $this->storage->storeAccessToken('Flickr', $token);
-
-        return $token;
+        return $this->oauth->getAccessToken(
+            'https://www.flickr.com/services/oauth/access_token',
+            null,
+            $oauth_verifier
+        );
     }
 
 
@@ -81,46 +78,22 @@ class FlickrData extends ExternalDataBase {
     }
 
 
-    public function getRecent()
+    public function getRecent($flickr_user_id, $per_page = 250)
     {
 
-        $f = new phpFlickr($this->clientId, $this->clientSecret, true);
-        $f->setToken($this->access_token);
-        $response = $f->people_getPhotos("me", ["per_page" => 3]);
-        print_r($response); exit();
+        $params = [
+            "method" => "flickr.people.getPhotos",
+            "user_id" => $flickr_user_id,
+            "per_page" => $per_page,
+            "format" => "json",
+            "nojsoncallback" => 1,
+        ];
 
+        $this->oauth->fetch(
+            'https://api.flickr.com/services/rest',
+            $params);
 
-        // $params = [
-        //     "method" => "flickr.people.getPhotos",
-        //     "api_key" => $this->credentials->getConsumerId(),
-        //     "user_id" => "me",
-        //     "per_page" => 3,
-        //     "format" => "json",
-        //     "nojsoncallback" => 1,
-        //     "auth_token" => $this->access_token
-        // ];
-        //
-        // $args = $params;
-        //
-        // ksort($args);
-        //
-        // $sig = null;
-        // foreach ($args as $k=>$v){
-        //     $sig .= $k . $v;
-        // }
-        // // echo $this->access_token_secret . $sig . PHP_EOL;
-        // $params['api_sig'] = md5($this->access_token_secret . $sig);
-        //
-        // echo 'https://api.flickr.com/services/rest/?' . http_build_query($params) . PHP_EOL;
-        //
-        // $response = $this->httpClient->get(
-        //     'https://api.flickr.com/services/rest/?' . http_build_query($params));
-        //
-        // $body = $response->getBody()->getContents();
-        //
-        // print_r($body); exit();
-
-
+        return $this->oauth->getLastResponse();
 
 
     }

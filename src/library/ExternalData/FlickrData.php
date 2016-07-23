@@ -1,14 +1,5 @@
 <?php
 
-require_once("Base.php");
-use MarkWilson\XmlToJson\XmlToJsonConverter;
-use OAuth\OAuth1\Service\Flickr;
-use OAuth\Common\Storage\Session;
-use OAuth\Common\Consumer\Credentials;
-use OAuth\Common\Http\Client\CurlClient;
-use OAuth\Common\Http\Uri\UriFactory;
-use OAuth\ServiceFactory;
-
 class FlickrData {
 
     private $client;
@@ -35,6 +26,7 @@ class FlickrData {
             $this->clientId,
             $this->clientSecret);
         $this->oauth->enableSSLChecks();
+        $this->oauth->enableDebug();
 
     }
 
@@ -51,11 +43,10 @@ class FlickrData {
     {
         $this->oauthToken = $oauthToken;
         $this->oauthTokenSecret = $oauthTokenSecret;
-        $this->oauth->setToken($this->oauthToken, $this->oauthTokenSecret);
     }
 
 
-    public function getAuthorizationUri($oauth_token, $perms = 'read')
+    public function getAuthorizationUri($oauth_token, $perms = 'delete')
     {
         return 'https://www.flickr.com/services/oauth/authorize?oauth_token=' . $oauth_token . '&perms=' . $perms;
 
@@ -75,6 +66,7 @@ class FlickrData {
     public function setAccessToken($access_token, $access_token_secret) {
         $this->access_token = $access_token;
         $this->access_token_secret = $access_token_secret;
+        $this->oauth->setToken($access_token, $access_token_secret);
     }
 
 
@@ -82,19 +74,27 @@ class FlickrData {
     {
 
         $params = [
+            "api_key" => $this->clientId,
             "method" => "flickr.people.getPhotos",
             "user_id" => $flickr_user_id,
             "per_page" => $per_page,
+            "privacy_filter" => 5,
+            "extras" => "description,date_upload,date_taken,last_update,url_t,url_m,url_l,url_o",
             "format" => "json",
-            "nojsoncallback" => 1,
+            "nojsoncallback" => 1
         ];
 
         $this->oauth->fetch(
             'https://api.flickr.com/services/rest',
             $params);
 
-        return $this->oauth->getLastResponse();
+        $response_info = $this->oauth->getLastResponseInfo();
+        $response_headers = $this->oauth->getLastResponseHeaders();
 
+        // print_r($response_info);
+
+        $response = $this->oauth->getLastResponse();
+        return $response;
 
     }
 

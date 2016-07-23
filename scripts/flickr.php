@@ -63,9 +63,31 @@
                 $flickr_user['access_token_secret']
             );
 
-            $data = json_decode($flickrData->getRecent($flickr_user['flickr_user_id']));
+            $data = json_decode(
+                $flickrData->getRecent($flickr_user['flickr_user_id']));
 
-            print_r($data);
+
+            $db->perform(
+                $configs['sql']['content_flickr']['delete_content'],
+                [
+                    'account_flickr_id' => $flickr_user['id']
+                ]
+            );
+
+            foreach($data->photos->photo as $photo){
+
+                $db->perform(
+                    $configs['sql']['content_flickr']['insert_update'],
+                    [
+                        'account_flickr_id' => $flickr_user['id'],
+                        'user_id' => $user['id'],
+                        'item_id' => $photo->id,
+                        'json' => json_encode($photo),
+                        'date_added' => date('Y-m-d H:i:s', $photo->dateupload),
+                        'date_updated' => date('Y-m-d H:i:s', $photo->lastupdate)
+                    ]
+                );
+            }
 
         }
     }

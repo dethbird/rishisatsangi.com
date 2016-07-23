@@ -2079,7 +2079,7 @@ if (typeof module !== 'undefined') {
 	module.exports = Typo;
 }
 }).call(this,require("buffer").Buffer,"/node_modules/simplemde/node_modules/codemirror-spell-checker/node_modules/typo-js")
-},{"buffer":20,"fs":19}],3:[function(require,module,exports){
+},{"buffer":21,"fs":20}],3:[function(require,module,exports){
 // Use strict mode (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
 "use strict";
 
@@ -15104,6 +15104,7 @@ SimpleMDE.prototype.toTextArea = function() {
 module.exports = SimpleMDE;
 },{"./codemirror/tablist":14,"codemirror":9,"codemirror-spell-checker":3,"codemirror/addon/display/fullscreen.js":4,"codemirror/addon/display/placeholder.js":5,"codemirror/addon/edit/continuelist.js":6,"codemirror/addon/mode/overlay.js":7,"codemirror/addon/selection/mark-selection.js":8,"codemirror/mode/gfm/gfm.js":10,"codemirror/mode/markdown/markdown.js":11,"codemirror/mode/xml/xml.js":13,"marked":1}],16:[function(require,module,exports){
 var simplemde = require('simplemde');
+var ExternalContentSelectorView = require('../ui/ExternalContentSelectorView');
 var BaseFormView = Backbone.View.extend({
     baseUrl: '/api/project',
     events: {
@@ -15136,8 +15137,13 @@ var BaseFormView = Backbone.View.extend({
         });
 
         // external content flickr
-        $el.find('.external-content-source').click(function(){
-            console.log('click');
+        $el.find('.external-content-source').each(function(i,e){
+            var $e = $(e);
+            var externalContentSelectorView = new ExternalContentSelectorView({
+                el: e,
+                contentSource: $e.data('content-source'),
+                contentTarget: $e.data('content-target')
+            });
         });
 
     },
@@ -15183,7 +15189,7 @@ var BaseFormView = Backbone.View.extend({
 
 module.exports = BaseFormView;
 
-},{"simplemde":15}],17:[function(require,module,exports){
+},{"../ui/ExternalContentSelectorView":18,"simplemde":15}],17:[function(require,module,exports){
 var BaseFormView = require('./BaseFormView');
 var CharacterFormView = BaseFormView.extend({
     baseUrl: '/api/project_character'
@@ -15192,15 +15198,73 @@ var CharacterFormView = BaseFormView.extend({
 module.exports = CharacterFormView;
 
 },{"./BaseFormView":16}],18:[function(require,module,exports){
+var ExternalContentSelectorView = Backbone.View.extend({
+    contentSource: null,
+    contentTarget: null,
+    urls: {
+        'flickr' : '/flickr?method=flickr.people.getPhotos'
+    },
+    initialize: function(options) {
+        var that = this;
+        this.contentSource = options.contentSource;
+        this.contentTarget = options.contentTarget;
+        $(this.el).click(function(){
+            that.load();
+        });
+    },
+    load: function() {
+        var that = this;
+        $('#modal').find('.modal-title').html('Select from ' + that.contentSource);
+        $('#modal').find('.modal-body').html('Loading ...');
+        $('#modal').modal('show');
+
+        $.ajax({
+            method: 'GET',
+            url: '/api/external-content-source' + that.urls[that.contentSource]
+        })
+        .success(function(data){
+            $('#modal').find('.modal-body').html('');
+            var card = _.template($('#' + that.contentSource + 'Card').html());
+            $.each(data, function(i,d){
+                $('#modal').find('.modal-body').append(card({'p':d}));
+            });
+            that.render();
+        })
+        .error(function(data){
+            console.log(data);
+        });
+    },
+    render: function() {
+        var that = this;
+        var $el = $('#modal').find('.modal-body');
+
+        var firstCard = $el.find('.card:first-child');
+        var rowCount = Math.floor($el.width() / $(firstCard).outerWidth());
+        $el.children('.card-row-divider').remove();
+        $el.children('.card').each(function(i,e){
+            $(e).click(function(){
+                $('#' + that.contentTarget).val($(this).data('content'));
+                $('#modal').modal('hide');
+            });
+            if (((i + 1) % rowCount) == 0) {
+                $('<div class="card-row-divider"></div>').insertAfter($(e));
+            }
+        });
+    }
+});
+
+module.exports = ExternalContentSelectorView;
+
+},{}],19:[function(require,module,exports){
 var CharacterFormView = require('../../library/views/forms/CharacterFormView');
 
 var characterFormView = new CharacterFormView({
     el: '#character-form'
 });
 
-},{"../../library/views/forms/CharacterFormView":17}],19:[function(require,module,exports){
+},{"../../library/views/forms/CharacterFormView":17}],20:[function(require,module,exports){
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -16915,7 +16979,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":21,"ieee754":22,"isarray":23}],21:[function(require,module,exports){
+},{"base64-js":22,"ieee754":23,"isarray":24}],22:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -17026,7 +17090,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -17112,11 +17176,11 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}]},{},[18]);
+},{}]},{},[19]);

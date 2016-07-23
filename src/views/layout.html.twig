@@ -69,6 +69,28 @@
             </div>
         </div>
     </div>
+    <div id="modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="modalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary hidden">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <script type="text/template" id="flickrCard">
+        <div class='card col-xs-6 col-lg-4' data-content="https://farm<%= p.farm %>.staticflickr.com/<%= p.server %>/<%= p.id %>_<%= p.secret %>_b.jpg">
+            <div class="card-block">
+                <img src="https://farm<%= p.farm %>.staticflickr.com/<%= p.server %>/<%= p.id %>_<%= p.secret %>_m.jpg" />
+            </div>
+        </div>
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>

@@ -32,6 +32,37 @@ $app->post('/api/login', function () use ($app) {
 
 $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
+    # get
+    $app->get('/external-content-source/:service_name', function ($service_name) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+        $db = $app->container->get('db');
+
+        $flickr_user = $db->fetchOne(
+            $configs['sql']['account_flickr']['get_by_user_id'],[
+                'user_id' => $securityContext->id]);
+
+        $flickrData = new FlickrData(
+            $configs['service']['flickr']['key'],
+            $configs['service']['flickr']['secret'],
+            "http://".$configs['server']['hostname'] . "/service/flickr/redirect"
+        );
+
+        $flickrData->setAccessToken(
+            $flickr_user['access_token'],
+            $flickr_user['access_token_secret']
+        );
+
+        $data = json_decode(
+            $flickrData->getRecent($flickr_user['flickr_user_id']));
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->setBody(json_encode($data->photos->photo));
+
+    });
+
 
     # get
     $app->get('/project/:id', function ($id) use ($app) {

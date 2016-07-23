@@ -1,4 +1,5 @@
 var simplemde = require('simplemde');
+var ExternalContentSelectorView = require('../ui/ExternalContentSelectorView');
 var BaseFormView = Backbone.View.extend({
     baseUrl: '/api/project',
     events: {
@@ -28,6 +29,16 @@ var BaseFormView = Backbone.View.extend({
             position: 'right',
             showAnimation: 'fadeIn',
             hideAnimation: 'fadeOut'
+        });
+
+        // external content flickr
+        $el.find('.external-content-source').each(function(i,e){
+            var $e = $(e);
+            var externalContentSelectorView = new ExternalContentSelectorView({
+                el: e,
+                contentSource: $e.data('content-source'),
+                contentTarget: $e.data('content-target')
+            });
         });
 
     },

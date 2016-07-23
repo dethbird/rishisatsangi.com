@@ -1402,7 +1402,6 @@ var ProjectsView = Backbone.View.extend({
                     el: e,
                     endPoint: '/api/project_character_order',
                     parentId: 'project_id',
-                    grid: true,
                     columnCount: $(this).data('column-count')
                 });
             });
@@ -1412,7 +1411,6 @@ var ProjectsView = Backbone.View.extend({
                     el: e,
                     endPoint: '/api/project_storyboard_order',
                     parentId: 'project_id',
-                    grid: false,
                     columnCount: $(this).data('column-count')
                 });
             });
@@ -1422,7 +1420,6 @@ var ProjectsView = Backbone.View.extend({
                     el: e,
                     endPoint: '/api/project_storyboard_panel_order',
                     parentId: 'storyboard_id',
-                    grid: true,
                     columnCount: $(this).data('column-count')
                 });
             });
@@ -1437,9 +1434,9 @@ var Draggabilly = require('draggabilly');
 var DragToOrderView = Backbone.View.extend({
     endPoint: null,
     parentId: null,
-    grid: false, // use grid functionality? keeps items heights at max(elems.height)
     columnCount: false, // use grid functionality? keeps items heights at max(elems.height)
     initialize: function(options) {
+
         var that = this;
         var $el = $(this.el);
         that.endPoint = options.endPoint;
@@ -1470,9 +1467,11 @@ var DragToOrderView = Backbone.View.extend({
                 data = {};
                 data[that.parentId] = $el.data('id');
                 data['items'] = [];
-                console.log(that.columnCount);
-                $el.find('.sortable-row-divider').remove();
-                $el.find('.sortable').each( function(i,e) {
+
+                // console.log();
+
+                $el.children('.sortable-row-divider').remove();
+                $el.children('.sortable').each( function(i,e) {
                     var $e = $(e);
                     if((i+1) % that.columnCount == 0){
                         $('<div class="sortable-row-divider"></div>').insertAfter($e);

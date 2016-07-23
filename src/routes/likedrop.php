@@ -47,6 +47,40 @@ $app->group("/likedrop", $authorize($app), function () use ($app) {
         );
     });
 
+    $app->get('/flickr', function () use ($app) {
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+        $db = $app->container->get('db');
+
+        $flickr_user = $db->fetchOne(
+            $configs['sql']['account_flickr']['get_by_user_id'],[
+                'user_id' => $securityContext->id]);
+
+        if ($flickr_user) {
+            $flickr_photos = $db->fetchAll(
+                $configs['sql']['content_flickr']['get_by_account_flickr_id'],[
+                    'limit' => 250,
+                    'account_flickr_id' => $flickr_user['id']]);
+        } else {
+            $app->redirect('/likedrop');
+        }
+
+        $templateVars = array(
+            "configs" => $configs,
+            'securityContext' => $securityContext,
+            'flickr_user' => $flickr_user,
+            'flickr_photos' => $flickr_photos,
+            "section" => "likedrop.flickr",
+            'hostname' => $configs['server']['hostname']
+        );
+
+        $app->render(
+            'pages/likedrop/flickr.html.twig',
+            $templateVars,
+            200
+        );
+    });
+
     $app->get('/gdrive', function () use ($app) {
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];

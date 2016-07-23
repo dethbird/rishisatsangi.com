@@ -197,6 +197,9 @@ input[name=name] {
 .sortable-row-divider {
     clear: both;
 }
+.text-align-center {
+    text-align: center;
+}
 .thumbnails {
     margin: 10px 0px 10px 0px;
 }

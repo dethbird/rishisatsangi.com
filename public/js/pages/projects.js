@@ -1395,34 +1395,27 @@ var ProjectsView = Backbone.View.extend({
     initialize: function(options) {
         var that = this;
         var $el = $(this.el);
-        $el.imagesLoaded(function(){
 
-            $('.sortable-characters').each(function(i,e){
-                dragToOrderView = new DragToOrderView({
-                    el: e,
-                    endPoint: '/api/project_character_order',
-                    parentId: 'project_id',
-                    columnCount: $(this).data('column-count')
-                });
-            });
+        $(that.el).ready(function(){
+            that.render();
+        });
 
-            $('.sortable-storyboards').each(function(i,e){
-                dragToOrderView = new DragToOrderView({
-                    el: e,
-                    endPoint: '/api/project_storyboard_order',
-                    parentId: 'project_id',
-                    columnCount: $(this).data('column-count')
-                });
-            });
+        $(window).resize( $.debounce( 250, function(){
+            that.render();
+        }));
+    },
+    render: function(){
+        var that = this;
 
-            $('.sortable-panels').each(function(i,e){
-                dragToOrderView = new DragToOrderView({
-                    el: e,
-                    endPoint: '/api/project_storyboard_panel_order',
-                    parentId: 'storyboard_id',
-                    columnCount: $(this).data('column-count')
-                });
-            });
+        var $el = $('.content-container');
+        console.log($el);
+        var firstCard = $el.find('.card:first-child');
+        var rowCount = Math.floor($el.width() / $(firstCard).outerWidth());
+        $el.children('.card-row-divider').remove();
+        $el.children('.card').each(function(i,e){
+            if (((i + 1) % rowCount) == 0) {
+                $('<div class="card-row-divider"></div>').insertAfter($(e));
+            }
         });
     }
 });

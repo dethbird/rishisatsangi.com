@@ -139,6 +139,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-xs-12"><blockquote>{{storyboard.description|markdown}}</blockquote></div>
+                                </div>
                                 <br />
                                 <div class="row container-fluid sortable-panels" data-id="{{storyboard.id}}" data-column-count="2">
                                     {% if storyboard.panels|length == 0 %}

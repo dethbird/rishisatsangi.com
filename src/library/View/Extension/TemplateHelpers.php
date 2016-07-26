@@ -34,6 +34,9 @@ class TemplateHelpers extends \Twig_Extension
     }
     public function date_format_string($string, $format = "Y-m-d h:i:sa")
     {
+        if ($string == '') {
+            return date($format, time());
+        }
         return date($format, strtotime($string));
     }
     public function print_r($output)

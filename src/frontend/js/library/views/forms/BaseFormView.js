@@ -1,5 +1,6 @@
 var simplemde = require('simplemde');
 var ExternalContentSelectorView = require('../ui/ExternalContentSelectorView');
+var FountainEditorView = require('./FountainEditorView');
 var BaseFormView = Backbone.View.extend({
     baseUrl: '/api/project',
     events: {
@@ -16,6 +17,12 @@ var BaseFormView = Backbone.View.extend({
                 element: $editor[0],
                 forceSync: true,
                 tabSize: 4
+            });
+        });
+
+        $el.find('.fountain-edit').each(function(i,editor){
+            var fountainEditor = new FountainEditorView({
+                el: editor
             });
         });
 

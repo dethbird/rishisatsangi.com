@@ -254,7 +254,8 @@ class Projects {
                 'user_id' => $this->securityContext->id,
                 'project_id' => $data['project_id'],
                 'name' => $data['name'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'script' => $data['script']
             ]
         );
 
@@ -524,13 +525,14 @@ class Projects {
     public function updateProjectStoryboard($id, $data)
     {
         $result = $this->db->perform(
-            $this->configs['sql']['project_characters']['update'],
+            $this->configs['sql']['project_storyboards']['update'],
             [
                 'id' => $id,
                 'project_id' => $data['project_id'],
                 'user_id' => $this->securityContext->id,
                 'name' => $data['name'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'script' => $data['script']
             ]
         );
 

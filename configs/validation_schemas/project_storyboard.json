@@ -11,6 +11,9 @@
 		},
 		"description": {
 			"type": ["string", "null", "integer"]
+		},
+		"script": {
+			"type": ["string", "null", "integer"]
 		}
 	}
 }

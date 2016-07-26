@@ -449,9 +449,9 @@ sql:
     project_storyboards:
         insert: |
             INSERT INTO project_storyboards
-            (project_id, user_id, name, description, date_added, date_updated)
+            (project_id, user_id, name, description, script, date_added, date_updated)
             VALUES
-            (:project_id, :user_id, :name, :description, NOW(), NOW())
+            (:project_id, :user_id, :name, :description, :script, NOW(), NOW())
         select_by_project: |
             SELECT * FROM project_storyboards
             WHERE user_id = :user_id
@@ -467,6 +467,7 @@ sql:
             SET
                 name = :name,
                 description = :description,
+                script = :script,
                 date_updated = NOW()
             WHERE id = :id
             AND project_id = :project_id

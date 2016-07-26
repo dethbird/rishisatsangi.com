@@ -1408,7 +1408,6 @@ var ProjectsView = Backbone.View.extend({
         var that = this;
 
         var $el = $('.content-container');
-        console.log($el);
         var firstCard = $el.find('.card:first-child');
         var rowCount = Math.floor($el.width() / $(firstCard).outerWidth());
         $el.children('.card-row-divider').remove();

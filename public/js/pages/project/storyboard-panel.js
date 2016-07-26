@@ -2079,7 +2079,7 @@ if (typeof module !== 'undefined') {
 	module.exports = Typo;
 }
 }).call(this,require("buffer").Buffer,"/node_modules/simplemde/node_modules/codemirror-spell-checker/node_modules/typo-js")
-},{"buffer":21,"fs":20}],3:[function(require,module,exports){
+},{"buffer":22,"fs":21}],3:[function(require,module,exports){
 // Use strict mode (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
 "use strict";
 
@@ -15105,6 +15105,7 @@ module.exports = SimpleMDE;
 },{"./codemirror/tablist":14,"codemirror":9,"codemirror-spell-checker":3,"codemirror/addon/display/fullscreen.js":4,"codemirror/addon/display/placeholder.js":5,"codemirror/addon/edit/continuelist.js":6,"codemirror/addon/mode/overlay.js":7,"codemirror/addon/selection/mark-selection.js":8,"codemirror/mode/gfm/gfm.js":10,"codemirror/mode/markdown/markdown.js":11,"codemirror/mode/xml/xml.js":13,"marked":1}],16:[function(require,module,exports){
 var simplemde = require('simplemde');
 var ExternalContentSelectorView = require('../ui/ExternalContentSelectorView');
+var FountainEditorView = require('./FountainEditorView');
 var BaseFormView = Backbone.View.extend({
     baseUrl: '/api/project',
     events: {
@@ -15121,6 +15122,12 @@ var BaseFormView = Backbone.View.extend({
                 element: $editor[0],
                 forceSync: true,
                 tabSize: 4
+            });
+        });
+
+        $el.find('.fountain-edit').each(function(i,editor){
+            var fountainEditor = new FountainEditorView({
+                el: editor
             });
         });
 
@@ -15189,7 +15196,29 @@ var BaseFormView = Backbone.View.extend({
 
 module.exports = BaseFormView;
 
-},{"../ui/ExternalContentSelectorView":18,"simplemde":15}],17:[function(require,module,exports){
+},{"../ui/ExternalContentSelectorView":19,"./FountainEditorView":17,"simplemde":15}],17:[function(require,module,exports){
+var FountainEditorView = Backbone.View.extend({
+    events: {
+        'click .fountain-edit-preview-button': 'showPreview'
+    },
+    initialize: function() {
+        var that = this;
+    },
+    showPreview: function() {
+        var that = this;
+        var parsed = fountain.parse(
+            $(that.el).find('.fountain-edit-editor').val(),
+            true
+        );
+        $('#modal').find('.modal-title').html('Script Preview');
+        $('#modal').find('.modal-body').html('<div class="fountain">' + parsed.html.script + '</div>');
+        $('#modal').modal('show');
+    }
+});
+
+module.exports = FountainEditorView;
+
+},{}],18:[function(require,module,exports){
 var BaseFormView = require('./BaseFormView');
 var StoryboardPanelFormView = BaseFormView.extend({
     baseUrl: '/api/project_storyboard_panel'
@@ -15197,7 +15226,7 @@ var StoryboardPanelFormView = BaseFormView.extend({
 
 module.exports = StoryboardPanelFormView;
 
-},{"./BaseFormView":16}],18:[function(require,module,exports){
+},{"./BaseFormView":16}],19:[function(require,module,exports){
 var ExternalContentSelectorView = Backbone.View.extend({
     contentSource: null,
     contentTarget: null,
@@ -15255,16 +15284,16 @@ var ExternalContentSelectorView = Backbone.View.extend({
 
 module.exports = ExternalContentSelectorView;
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 var StoryboardPanelFormView = require('../../library/views/forms/StoryboardPanelFormView');
 
 var storyboardPanelFormView = new StoryboardPanelFormView({
     el: '#panel-form'
 });
 
-},{"../../library/views/forms/StoryboardPanelFormView":17}],20:[function(require,module,exports){
+},{"../../library/views/forms/StoryboardPanelFormView":18}],21:[function(require,module,exports){
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -16979,7 +17008,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":22,"ieee754":23,"isarray":24}],22:[function(require,module,exports){
+},{"base64-js":23,"ieee754":24,"isarray":25}],23:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -17090,7 +17119,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -17176,11 +17205,11 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}]},{},[19]);
+},{}]},{},[20]);

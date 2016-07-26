@@ -143,6 +143,13 @@ a.display-5 {
 .fa-history, .fa-comments {
     margin-left: 2px;
 }
+.fountain {
+    padding: 15px;
+}
+.fountain .dialogue {
+    margin: 0px 50px 0px 50px;
+    padding: 10px;
+}
 .dropdown-toggle {
     /*height: 68px;*/
 }

@@ -26,7 +26,6 @@ blockquote {
     color: #333;
     font-size: 0.9rem;
     white-space: pre-wrap;
-    max-height: 350px;
     overflow: auto;
 }
 form {
@@ -196,6 +195,9 @@ input[name=name] {
 }
 .sortable-storyboards, .sortable-panels {
     position: relative;
+}
+.sortable-panels .card {
+    max-width: 600px;
 }
 .sortable-row-divider {
     clear: both;

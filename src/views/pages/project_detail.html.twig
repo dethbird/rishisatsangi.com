@@ -182,6 +182,9 @@
                                                 </div>
                                             {% endif %}
 
+                                            {% if panel.description != '' %}
+                                            <div class="row"><blockquote>{{panel.description|markdown}}</blockquote></div>
+                                            {% endif %}
 
                                             <div class="row comments">
                                             {% for comment in panel.comments %}

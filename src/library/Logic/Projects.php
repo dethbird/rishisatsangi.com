@@ -279,7 +279,7 @@ class Projects {
                 'sort_order' => $sortOrder,
                 'storyboard_id' => $data['storyboard_id'],
                 'name' => $data['name'],
-                'description' => $data['description'],
+                'script' => $data['script'],
                 'sort_order' => $sortOrder
             ]
         );
@@ -556,7 +556,7 @@ class Projects {
                 'storyboard_id' => $data['storyboard_id'],
                 'user_id' => $this->securityContext->id,
                 'name' => $data['name'],
-                'description' => $data['description']
+                'script' => $data['script']
             ]
         );
 

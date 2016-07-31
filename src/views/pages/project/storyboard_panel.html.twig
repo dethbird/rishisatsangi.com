@@ -7,9 +7,9 @@
     {{ parent() }}
     <ol class="breadcrumb">
         <li><a href="/projects">Projects</a></li>
-        <li>{{project.name}}</li>
+        <li><a href="/project/{{project.id}}/detail">{{project.name}}</a></li>
         <li>Storyboards</li>
-        <li>{{storyboard.name}}</li>
+        <li><a href="/project/{{project.id}}/storyboard/{{storyboard.id}}">{{storyboard.name}}</a></li>
         <li>Panel</li>
         <li class="active">{{panel.id == "" ? " Create" : "Edit"}}</li>
     </ol>
@@ -24,9 +24,10 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="panel_name" class="col-xs-2 form-control-label">Description</label>
-                <div class="col-xs-10 markdown-edit">
-                    <textarea class="form-control markdown-edit-editor" name="description" id="description" placeholder="Panel Description" rows="10">{{panel.description}}</textarea>
+                <label for="script" class="col-xs-2 form-control-label">Script</label>
+                <div class="col-xs-10 fountain-edit">
+                    <a class="btn btn-secondary btn-sm fountain-edit-preview-button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <textarea class="form-control fountain-edit-editor" name="script" id="script" placeholder="Storyboard Script" rows="10">{{panel.script}}</textarea>
                 </div>
             </div>
             <div class="form-group row">

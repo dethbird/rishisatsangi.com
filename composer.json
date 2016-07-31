@@ -21,6 +21,6 @@
         "xrstf/fountain": "~1.0",
         "vimeo/vimeo-api": "~1.2",
         "jwilsson/spotify-web-api-php": "~1.3",
-        "markwilson/xml-to-json": "0.1.4"
+        "xrstf/fountain": "~1.0"
     }
 }

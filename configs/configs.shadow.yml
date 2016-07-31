@@ -482,9 +482,9 @@ sql:
     project_storyboard_panels:
         insert: |
             INSERT INTO project_storyboard_panels
-            (storyboard_id, user_id, name, description, sort_order, date_added, date_updated)
+            (storyboard_id, user_id, name, script, sort_order, date_added, date_updated)
             VALUES
-            (:storyboard_id, :user_id, :name, :description, :sort_order, NOW(), NOW())
+            (:storyboard_id, :user_id, :name, :script, :sort_order, NOW(), NOW())
         select_by_storyboard: |
             SELECT * FROM project_storyboard_panels
             WHERE user_id = :user_id
@@ -499,7 +499,7 @@ sql:
             UPDATE project_storyboard_panels
             SET
                 name = :name,
-                description = :description,
+                script = :script,
                 date_updated = NOW()
             WHERE id = :id
             AND storyboard_id = :storyboard_id

@@ -24,7 +24,7 @@ service:
     instagram:
         client_id: :INSTAGRAM_CLIENT_ID
         client_secret: :INSTAGRAM_CLIENT_SECRET
-    flickr:
+    spotify:
         client_id: :SPOTIFY_CLIENT_ID
         client_secret: :SPOTIFY_CLIENT_SECRET
     vimeo:

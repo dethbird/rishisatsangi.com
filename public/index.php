@@ -25,6 +25,7 @@ require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';
 require_once APPLICATION_PATH . 'src/library/ExternalData/VimeoData.php';
 require_once APPLICATION_PATH . 'src/library/Data/Base.php';
 require_once APPLICATION_PATH . 'src/library/Logic/Projects.php';
+require_once APPLICATION_PATH . 'src/library/Logic/Scripts.php';
 require_once APPLICATION_PATH . 'src/library/Validation/Validator.php';
 
 use Aptoma\Twig\Extension\MarkdownExtension;

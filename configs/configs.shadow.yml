@@ -558,3 +558,24 @@ sql:
             WHERE pu.user_id = :user_id
             AND pu.project_id = :project_id
             ORDER BY u.username DESC
+    scripts:
+        insert: |
+            INSERT INTO scripts
+            (user_id, title, script, date_added, date_updated)
+            VALUES
+            (:user_id, :title, :script, NOW(), NOW())
+        select_by_id: |
+            SELECT * FROM scripts
+            WHERE id = :id AND user_id = :user_id
+        select_by_user: |
+            SELECT * FROM scripts
+            WHERE user_id = :user_id
+            ORDER BY date_updated DESC
+        update: |
+            UPDATE scripts
+            SET
+                title = :title,
+                script = :script,
+                date_updated = NOW()
+            WHERE id = :id
+            AND user_id = :user_id

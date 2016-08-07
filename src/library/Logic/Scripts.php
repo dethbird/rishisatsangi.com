@@ -1,6 +1,6 @@
 <?php
 
-class Projects {
+class Scripts {
 
 
     protected $db;
@@ -29,7 +29,7 @@ class Projects {
     public function create($data)
     {
         $result = $this->db->perform(
-            $this->configs['sql']['projects']['insert'],
+            $this->configs['sql']['scripts']['insert'],
             [
                 'user_id' => $this->securityContext->id,
                 'name' => $data['name'],
@@ -38,7 +38,7 @@ class Projects {
         );
 
         $result = $this->db->fetchOne(
-            $this->configs['sql']['projects']['select_by_id'],
+            $this->configs['sql']['scripts']['select_by_id'],
             [
                 'id' => $this->db->lastInsertId(),
                 'user_id' => $this->securityContext->id
@@ -57,7 +57,7 @@ class Projects {
     public function update($id, $data)
     {
         $result = $this->db->perform(
-            $this->configs['sql']['projects']['update'],
+            $this->configs['sql']['scripts']['update'],
             [
                 'id' => $id,
                 'user_id' => $this->securityContext->id,
@@ -67,7 +67,7 @@ class Projects {
         );
 
         $result = $this->db->fetchOne(
-            $this->configs['sql']['projects']['select_by_id'],
+            $this->configs['sql']['scripts']['select_by_id'],
             [
                 'id' => $id,
                 'user_id' => $this->securityContext->id
@@ -102,7 +102,7 @@ class Projects {
     public function fetchOne($id)
     {
         $result = $this->db->fetchOne(
-            $this->configs['sql']['projects']['select_by_id'],
+            $this->configs['sql']['scripts']['select_by_id'],
             [
                 'id' => $id,
                 'user_id' => $this->securityContext->id

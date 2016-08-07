@@ -32,8 +32,8 @@ class Scripts {
             $this->configs['sql']['scripts']['insert'],
             [
                 'user_id' => $this->securityContext->id,
-                'name' => $data['name'],
-                'description' => $data['description']
+                'title' => $data['title'],
+                'script' => $data['script']
             ]
         );
 
@@ -61,8 +61,8 @@ class Scripts {
             [
                 'id' => $id,
                 'user_id' => $this->securityContext->id,
-                'name' => $data['name'],
-                'description' => $data['description']
+                'title' => $data['title'],
+                'script' => $data['script']
             ]
         );
 

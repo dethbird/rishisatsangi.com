@@ -10,7 +10,9 @@
     </ol>
     <br />
     <div class="row container-fluid content-container">
-        scripts
+        {% for script in scripts %}
+            <a href="/script/{{script.id}}">{{script.title}}</a><br />
+        {% endfor %}
     </div>
 {% endblock %}
 

@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+{% block title %} - Scripts{% endblock %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+    <ol class="breadcrumb">
+        <li class="active">Scripts</li>
+    </ol>
+    <br />
+    <div class="row container-fluid content-container">
+        scripts
+    </div>
+{% endblock %}
+
+
+{% block includes %}
+  <!-- js includes -->
+  <script type="text/javascript" src="/js/pages/scripts.js"></script>
+{% endblock %}

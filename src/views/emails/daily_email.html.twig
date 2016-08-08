@@ -5,9 +5,6 @@
 {% block content %}
     {{ parent() }}
         <div class="container col-xs-12">
-            <div class="row container col-xs-12">
-                <h1>ExplosionCorp // LikeDrop Update</h1><br />
-            </div>
             <div class="row col-xs-12">
                 {% include 'emails/partials/pocket_articles.html.twig' with {'pocket_articles': pocket_articles} %}
             </div>
@@ -15,10 +12,10 @@
                 {% include 'emails/partials/gdrive_files.html.twig' with {'gdrive_files': gdrive_files} %}
             </div>
             <div class="row col-xs-12">
-                {% include 'emails/partials/youtube_videos.html.twig' with {'youtube_watchlater_videos': youtube_watchlater_videos} %}
+                {% include 'emails/partials/spotify_tracks.html.twig' with {'spotify_tracks': spotify_tracks} %}
             </div>
             <div class="row col-xs-12">
-                {% include 'emails/partials/spotify_tracks.html.twig' with {'spotify_tracks': spotify_tracks} %}
+                {% include 'emails/partials/youtube_videos.html.twig' with {'youtube_watchlater_videos': youtube_watchlater_videos} %}
             </div>
             <div class="row col-xs-12">
                 {% include 'emails/partials/vimeo_videos.html.twig' with {'vimeo_watchlater_videos': vimeo_watchlater_videos} %}

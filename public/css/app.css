@@ -179,6 +179,9 @@ img.service-logo-manage {
     max-width: 24px;
     height: auto;
 }
+img.img-email-main {
+    max-width: 180px;
+}
 input[name=name] {
     font-weight: bold;
     font-size: 1.8em;

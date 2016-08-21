@@ -1,21 +1,29 @@
-# likedrop
+# ExplosionCorp Workstation
+In house client and project management web app and API.
 
-### initialize
-
-composer install required composer libs for the build script to function:
-
+## clone from GIT
 ```bash
-    curl -sS https://getcomposer.org/installer | php
-    php composer.phar install
+git clone git@github.com:dethbird/explosioncorp-workstation.git workstation
+cd workstation
 ```
 
-copy .env from .env.shadow and edit values
+## Initialize
+###Composer install base required libs for the build script to function:
+
 ```bash
-cp .env.shadow .#!/usr/bin/env
+curl -sS https://getcomposer.org/installer | php
+php composer.phar install
+```
+
+###Copy .env from .env.shadow and edit values
+```bash
+cp .env.shadow .env
 vim .env
 ```
 
-### build help
+## Build script
+
+### Help
 
 ```bash
 php scripts/build.php --help
@@ -54,15 +62,19 @@ displays help:
 
 ```
 
-
 ### build
 
-build production:
+#### build production:
+All the options for the first time build.
 ```bash
-php scripts/build.php -cache -configs -js -npm -php -ugly
+php scripts/build.php --cache --configs --npm --js --php --ugly
 ```
 
-build dev js:
+## Permissions
+
 ```bash
-php scripts/build.php -js
+chmod 755 workstation
+cd workstation
+chmod 755 public/
+chmod 644 public/index.php public/.htaccess
 ```

@@ -1,16 +1,15 @@
 {% extends 'layout.html.twig' %}
+{% block title %}{% endblock %}
 {% block head %}
     {{parent()}}
 {% endblock %}
 {% block content %}
     {{ parent() }}
-    <div class="col-xs-12">
-        index
-    </div>
+    <div class="row container-fluid content-container" id="mount"></div>
 {% endblock %}
 
 
 {% block includes %}
   <!-- js includes -->
-  <script type="text/javascript" src="/js/pages/index.js"></script>
+  <script type="text/javascript" src="/js/pages/app.js"></script>
 {% endblock %}

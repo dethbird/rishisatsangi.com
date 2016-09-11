@@ -118,18 +118,18 @@ $authorizeByHeaders = function ($app) {
 };
 
 $app->notFound(function () use ($app) {
-    $app->render(
-        'pages/404.html.twig'
-    );
+    $app->redirect("/");
 });
 
 # index
 $app->get("/", function () use ($app) {
 
     $configs = $app->container->get('configs');
+    $securityContext = $_SESSION['securityContext'];
 
     $templateVars = array(
         "configs" => $configs,
+        'securityContext' => $securityContext,
         "section" => "index"
     );
 
@@ -168,8 +168,8 @@ $app->get("/logout", function () use ($app) {
 
 
 require_once APPLICATION_PATH . 'src/routes/api.php';
-require_once APPLICATION_PATH . 'src/routes/likedrop.php';
-require_once APPLICATION_PATH . 'src/routes/projects.php';
+// require_once APPLICATION_PATH . 'src/routes/likedrop.php';
+// require_once APPLICATION_PATH . 'src/routes/projects.php';
 require_once APPLICATION_PATH . 'src/routes/scripts.php';
 require_once APPLICATION_PATH . 'src/routes/service.php';
 

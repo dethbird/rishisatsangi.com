@@ -111,7 +111,7 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
     });
 
 
-    # update
+    # update project
     $app->put('/project/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
@@ -140,6 +140,27 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
         }
 
     });
+
+    # get projects
+    $app->get('/projects', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+        $db = $app->container->get('db');
+        $projectService = new Projects($db, $configs, $securityContext);
+
+        $projects = $projectService->getProjects();
+
+        foreach ($projects as $i=>$project) {
+            $projects[$i] = $projectService->hydrateProject($project);
+        }
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->setBody(json_encode($projects));
+
+    });
+
 
     # add project user
     $app->post('/project_user', function () use ($app) {

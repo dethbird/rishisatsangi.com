@@ -240,13 +240,17 @@
                     $file,
                     "-o",
                     $outputFile,
+                    "-t",
+                    "[ babelify --presets [ es2015 react ] ]",
                     "--list"
                 ));
 
                 $browserifyResponse = $shell->executeCommand('browserify', array(
                     $file,
                     "-o",
-                    $outputFile
+                    $outputFile,
+                    "-t",
+                    "[ babelify --presets [ es2015 react ] ]"
                 ));
 
                 foreach($browserifyList as $builtFrom) {

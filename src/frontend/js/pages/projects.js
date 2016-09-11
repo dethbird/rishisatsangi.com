@@ -1,5 +1,3 @@
-var ProjectsView = require('../library/views/ProjectsView');
+import { Router, Route, Link } from 'react-router';
 
-var projectsView = new ProjectsView({
-    el: 'body'
-});
+console.log(Router);

@@ -9,103 +9,14 @@
         <li class="active">Projects</li>
     </ol>
     <br />
-    <div class="row container-fluid content-container">
-        {% for project in projects %}
-            <div class="card col-xs-6 col-lg-4">
-                <div class="card-block">
-                    <div class="row">
-                        <div class="col-xs-9">
-                            <div class="display-6">{{project.name}}</div>
-                        </div>
-                        <div class="col-xs-3 pull-right">
-                            <a href="/project/{{project.id}}/detail" class="btn btn-secondary-outline btn-sm">Details</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <blockquote>{{project.description|truncate|markdown}}</blockquote>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12"><strong>Characters</strong></div>
-                    </div>
-                    {% if project.characters|length > 0 %}
-                        <div class="row">
-                            {% for character in project.characters %}
-                                {% if loop.index < 6 %}
-                                    <div class="col-xs-12 col-lg-2">
-                                        {% if character.revisions|length == 0 %}
-                                            no revisions
-                                        {% else %}
-                                            {% for revision in character.revisions %}
-                                                {% if loop.index == 1 %}
-                                                    {% set current_revision_id = revision.id %}
-                                                    <img src="{{revision.content}}" />
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}
-                                        <div class="muted">{{character.name}}</div>
-                                    </div>
-                                {% elseif loop.index == 6 %}
-                                    <div class="col-xs-12 col-lg-2">
-                                        {% set remainder = (project.characters|length - 5) %}
-                                        + {{remainder}} more
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                    <div class="row">
-                        <div class="col-xs-12"><strong>Storyboards</strong></div>
-                    </div>
-                    {% if project.storyboards|length > 0 %}
-                        <div class="row" >
-                        {% for storyboard in project.storyboards %}
-                            <div class="card col-xs-12">
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            {{storyboard.name}}
-                                            <blockquote>{{storyboard.description|truncate(300)|markdown}}</blockquote>
-                                        </div>
-                                    </div>
-                                    <div class="row container">
-                                        {% if storyboard.panels|length > 1 %}
-                                            {% for panel in storyboard.panels %}
-                                                {% if loop.index < 6 %}
-                                                <div class="col-xs-12 col-lg-2">
-                                                    {% if panel.revisions|length == 0 %}
-                                                        no revisions
-                                                    {% else %}
-                                                        {% for revision in panel.revisions %}
-                                                            {% if loop.index == 1 %}
-                                                                {% set current_revision_id = revision.id %}
-                                                                <img src="{{revision.content}}" />
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    {% endif %}
-                                                </div>
-                                                {% elseif loop.index == 6 %}
-                                                <div class="col-xs-12 col-lg-2">
-                                                    {% set remainder = (storyboard.panels|length - 5) %}
-                                                    + {{remainder}} more
-                                                </div>
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="date text-align-right">{{project.date_updated|time_ago}}</div>
-            </div>
-        {% endfor %}
-    </div>
+    <div class="row container-fluid content-container" id="appContainer"></div>
 {% endblock %}
 
 
 {% block includes %}
   <!-- js includes -->
+  <script type="text/javascript">
+    var projects = {{projects|json_encode|raw}};
+  </script>
   <script type="text/javascript" src="/js/pages/projects.js"></script>
 {% endblock %}

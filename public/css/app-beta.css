@@ -1,0 +1,7 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #2075A0;
+}
+.clickable {
+  cursor: pointer;
+}

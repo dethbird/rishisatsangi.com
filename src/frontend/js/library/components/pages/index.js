@@ -1,5 +1,5 @@
 import React from 'react'
-import { browserHistory, Link } from 'react-router'
+import { browserHistory } from 'react-router'
 
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
@@ -16,21 +16,21 @@ const Index = React.createClass({
                     onClick = { this.handleClick.bind(this, '/notes') }
                 >
                     <CardBlock>
-                        <p>Notes</p>
+                        <p>Notebook</p>
                     </CardBlock>
                 </CardClickable>
                 <CardClickable
-                    onClick = { this.handleClick.bind(this, '/concepts') }
+                    onClick = { this.handleClick.bind(this, '/scripts') }
                 >
                     <CardBlock>
-                        <p>Concepts</p>
+                        <p>Quick Scripts</p>
                     </CardBlock>
                 </CardClickable>
                 <CardClickable
                     onClick = { this.handleClick.bind(this, '/projects') }
                 >
                     <CardBlock>
-                        <p>Projects</p>
+                        <p>Full Projects</p>
                     </CardBlock>
                 </CardClickable>
             </div>

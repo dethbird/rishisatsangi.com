@@ -4,15 +4,9 @@ import { IndexRoute, Router, Route, browserHistory } from 'react-router'
 
 import { App } from '../library/components/app'
 import { Index } from '../library/components/pages/index'
+import { Project } from '../library/components/pages/project'
 import { Projects } from '../library/components/pages/projects'
 
-const Project = React.createClass({
-  render() {
-    return (
-      <div>Project</div>
-    )
-  }
-})
 const NoMatch = React.createClass({
   render() {
     return (
@@ -20,8 +14,6 @@ const NoMatch = React.createClass({
     )
   }
 })
-
-
 
 render((
     <Router history={browserHistory}>

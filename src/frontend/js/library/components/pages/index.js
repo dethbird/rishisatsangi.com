@@ -4,6 +4,7 @@ import { browserHistory, Link } from 'react-router'
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
 
+
 const Index = React.createClass({
     handleClick(path) {
         browserHistory.push(path);

@@ -28,9 +28,7 @@ render((
         <Route path="/" component={App}>
             <IndexRoute component={Index}/>
             <Route path="projects" component={Projects}/>
-            <Route path="project" component={Projects}>
-                <Route path=":projectId" component={Project}/>
-            </Route>
+            <Route path="project/:projectId" component={Project}/>
             <Route path="*" component={NoMatch}/>
         </Route>
     </Router>

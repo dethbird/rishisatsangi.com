@@ -8,3 +8,10 @@ body {
 .card.clickable:hover {
   background-color: #e5e5e5;
 }
+.card.col-lg-6:nth-child(2n+1) {
+  clear: both;
+}
+.card img {
+  max-width: 100%;
+  height: auto;
+}

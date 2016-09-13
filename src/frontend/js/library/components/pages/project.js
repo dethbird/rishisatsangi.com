@@ -25,7 +25,6 @@ const Project = React.createClass({
     render() {
         if(this.state) {
             let project = this.state.project;
-            console.log(project);
             return (
                 <div className="projectPage">
                     <ProjectDetails project={ project }></ProjectDetails>

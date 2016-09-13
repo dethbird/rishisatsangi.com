@@ -5,11 +5,13 @@ import classNames from 'classnames';
 const CardClickable = React.createClass({
     propTypes: {
       children: React.PropTypes.element.isRequired,
-      onClick: React.PropTypes.func.isRequired
+      onClick: React.PropTypes.func.isRequired,
+      className: React.PropTypes.string
     },
 
     render: function() {
-        let className = classNames(['card', 'clickable'])
+        let className = classNames([this.props.className, 'card', 'clickable'])
+
         return (
             <div
                 className={ className }

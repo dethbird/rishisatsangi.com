@@ -18,6 +18,10 @@ body {
 .container {
   position: relative;
 }
+.text-align-center {
+  text-align: center;
+}
+/** CSS LOADER **/
 #cssload-loader {
   position: absolute;
   margin: auto;

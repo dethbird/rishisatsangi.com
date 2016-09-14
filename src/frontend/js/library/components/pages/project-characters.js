@@ -44,16 +44,16 @@ const ProjectCharacters = React.createClass({
                             )
                         }
                     >
-                        <div>
-                            <h3 className="card-header">{ character.name }</h3>
+                        <h3 className="card-header">{ character.name }</h3>
+                        <div className="text-align-center">
                             <img className="card-img-top" src={ src } />
-                            <CardBlock>
-                                <div>
-                                    <blockquote>{ character.description }</blockquote>
-                                    <span>{ character.revisions.length } revision(s)</span>
-                                </div>
-                            </CardBlock>
                         </div>
+                        <CardBlock>
+                            <div>
+                                <blockquote>{ character.description }</blockquote>
+                                <span>{ character.revisions.length } revision(s)</span>
+                            </div>
+                        </CardBlock>
                     </CardClickable>
                 );
             });

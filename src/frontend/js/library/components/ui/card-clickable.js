@@ -4,9 +4,12 @@ import classNames from 'classnames';
 
 const CardClickable = React.createClass({
     propTypes: {
-      children: React.PropTypes.element.isRequired,
-      onClick: React.PropTypes.func.isRequired,
-      className: React.PropTypes.string
+        children: React.PropTypes.oneOfType([
+            React.PropTypes.element,
+            React.PropTypes.array
+        ]).isRequired,
+        onClick: React.PropTypes.func.isRequired,
+        className: React.PropTypes.string
     },
 
     render: function() {

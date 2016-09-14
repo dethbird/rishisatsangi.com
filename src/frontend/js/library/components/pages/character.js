@@ -42,7 +42,9 @@ const Character = React.createClass({
                     <Card>
                         <h3 className="card-header">{ this.state.character.name }</h3>
                         <CardBlock>
-                            <img className="card-img-top" src={ src } />
+                            <div className="text-align-center">
+                                <img className="card-img-top" src={ src } />
+                            </div>
                         </CardBlock>
                     </Card>
                 </div>

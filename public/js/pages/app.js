@@ -26128,7 +26128,11 @@ var Character = _react2.default.createClass({
                     _react2.default.createElement(
                         _cardBlock.CardBlock,
                         null,
-                        _react2.default.createElement('img', { className: 'card-img-top', src: src })
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'text-align-center' },
+                            _react2.default.createElement('img', { className: 'card-img-top', src: src })
+                        )
                     )
                 )
             );
@@ -26190,31 +26194,31 @@ var ProjectCharacters = _react2.default.createClass({
                         onClick: that.handleClick.bind(that, that.state.project.id, character.id)
                     },
                     _react2.default.createElement(
+                        'h3',
+                        { className: 'card-header' },
+                        character.name
+                    ),
+                    _react2.default.createElement(
                         'div',
+                        { className: 'text-align-center' },
+                        _react2.default.createElement('img', { className: 'card-img-top', src: src })
+                    ),
+                    _react2.default.createElement(
+                        _cardBlock.CardBlock,
                         null,
                         _react2.default.createElement(
-                            'h3',
-                            { className: 'card-header' },
-                            character.name
-                        ),
-                        _react2.default.createElement('img', { className: 'card-img-top', src: src }),
-                        _react2.default.createElement(
-                            _cardBlock.CardBlock,
+                            'div',
                             null,
                             _react2.default.createElement(
-                                'div',
+                                'blockquote',
                                 null,
-                                _react2.default.createElement(
-                                    'blockquote',
-                                    null,
-                                    character.description
-                                ),
-                                _react2.default.createElement(
-                                    'span',
-                                    null,
-                                    character.revisions.length,
-                                    ' revision(s)'
-                                )
+                                character.description
+                            ),
+                            _react2.default.createElement(
+                                'span',
+                                null,
+                                character.revisions.length,
+                                ' revision(s)'
                             )
                         )
                     )
@@ -26728,7 +26732,7 @@ var CardClickable = _react2.default.createClass({
     displayName: 'CardClickable',
 
     propTypes: {
-        children: _react2.default.PropTypes.element.isRequired,
+        children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.element, _react2.default.PropTypes.array]).isRequired,
         onClick: _react2.default.PropTypes.func.isRequired,
         className: _react2.default.PropTypes.string
     },
@@ -26759,19 +26763,21 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Card = _react2.default.createClass({
-  displayName: "Card",
+    displayName: "Card",
 
-  propTypes: {
-    children: _react2.default.PropTypes.element.isRequired
-  },
 
-  render: function render() {
-    return _react2.default.createElement(
-      "div",
-      { className: "card" },
-      this.props.children
-    );
-  }
+    propTypes: {
+        children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.element, _react2.default.PropTypes.array]).isRequired
+    },
+
+    render: function render() {
+        return _react2.default.createElement(
+            "div",
+            { className: "card" },
+            this.props.children
+        );
+    }
+
 });
 
 module.exports.Card = Card;

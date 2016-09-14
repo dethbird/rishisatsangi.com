@@ -26788,38 +26788,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Spinner = _react2.default.createClass({
     displayName: "Spinner",
 
-
     render: function render() {
         return _react2.default.createElement(
             "div",
             { className: "container" },
             _react2.default.createElement(
                 "div",
-                { className: "cssload-bell" },
+                { id: "cssload-loader" },
                 _react2.default.createElement(
-                    "div",
-                    { className: "cssload-circle" },
-                    _react2.default.createElement("div", { className: "cssload-inner" })
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "cssload-circle" },
-                    _react2.default.createElement("div", { className: "cssload-inner" })
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "cssload-circle" },
-                    _react2.default.createElement("div", { className: "cssload-inner" })
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "cssload-circle" },
-                    _react2.default.createElement("div", { className: "cssload-inner" })
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "cssload-circle" },
-                    _react2.default.createElement("div", { className: "cssload-inner" })
+                    "ul",
+                    null,
+                    _react2.default.createElement("li", null),
+                    _react2.default.createElement("li", null),
+                    _react2.default.createElement("li", null),
+                    _react2.default.createElement("li", null),
+                    _react2.default.createElement("li", null),
+                    _react2.default.createElement("li", null)
                 )
             )
         );

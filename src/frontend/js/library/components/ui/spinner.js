@@ -1,29 +1,21 @@
 import React from 'react'
 
 const Spinner = React.createClass({
-
     render: function() {
-      return (
-          <div className="container">
-              <div className="cssload-bell">
-                <div className="cssload-circle">
-                  <div className="cssload-inner"></div>
+        return (
+            <div className="container">
+                <div id="cssload-loader">
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                	</ul>
                 </div>
-                <div className="cssload-circle">
-            	  <div className="cssload-inner"></div>
-                </div>
-                <div className="cssload-circle">
-            	  <div className="cssload-inner"></div>
-                </div>
-                <div className="cssload-circle">
-            	  <div className="cssload-inner"></div>
-                </div>
-                <div className="cssload-circle">
-            	  <div className="cssload-inner"></div>
-                </div>
-              </div>
-           </div>
-      );
+            </div>
+        );
     }
 })
 

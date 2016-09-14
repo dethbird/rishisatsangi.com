@@ -123,7 +123,7 @@ $app->notFound(function () use ($app) {
 });
 
 # index
-$app->get("/", function () use ($app) {
+$app->get("/", $authorize($app), function () use ($app) {
 
     $configs = $app->container->get('configs');
     $securityContext = $_SESSION['securityContext'];
@@ -165,7 +165,7 @@ $app->get("/login", function () use ($app) {
 
 # logout
 $app->get("/logout", function () use ($app) {
-  $app->deleteCookie('securityContext');
+  $_SESSION['securityContext'] = null;
   $app->redirect("/");
 });
 

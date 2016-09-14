@@ -26792,31 +26792,35 @@ var Spinner = _react2.default.createClass({
     render: function render() {
         return _react2.default.createElement(
             "div",
-            { className: "cssload-bell" },
+            { className: "container" },
             _react2.default.createElement(
                 "div",
-                { className: "cssload-circle" },
-                _react2.default.createElement("div", { className: "cssload-inner" })
-            ),
-            _react2.default.createElement(
-                "div",
-                { className: "cssload-circle" },
-                _react2.default.createElement("div", { className: "cssload-inner" })
-            ),
-            _react2.default.createElement(
-                "div",
-                { className: "cssload-circle" },
-                _react2.default.createElement("div", { className: "cssload-inner" })
-            ),
-            _react2.default.createElement(
-                "div",
-                { className: "cssload-circle" },
-                _react2.default.createElement("div", { className: "cssload-inner" })
-            ),
-            _react2.default.createElement(
-                "div",
-                { className: "cssload-circle" },
-                _react2.default.createElement("div", { className: "cssload-inner" })
+                { className: "cssload-bell" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "cssload-circle" },
+                    _react2.default.createElement("div", { className: "cssload-inner" })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "cssload-circle" },
+                    _react2.default.createElement("div", { className: "cssload-inner" })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "cssload-circle" },
+                    _react2.default.createElement("div", { className: "cssload-inner" })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "cssload-circle" },
+                    _react2.default.createElement("div", { className: "cssload-inner" })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "cssload-circle" },
+                    _react2.default.createElement("div", { className: "cssload-inner" })
+                )
             )
         );
     }

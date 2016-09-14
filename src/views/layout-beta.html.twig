@@ -15,9 +15,9 @@
         {% block head %}{% endblock %}
     </head>
 <body>
-    <div class="container-fluid">
+    <div class="container">
         {% if securityContext.username %}
-            <div class="col-xs-12 text-align-right security-context-nav">
+            <div class="container pull-right">
                 <div class="btn-group">
                     <span class="muted">{{securityContext.username}}</span>
                 </div>
@@ -31,7 +31,8 @@
             </div>
         {% endif %}
     </div>
-    <div class="container-fluid">
+    <br />
+    <div class="container">
         {% block content %}{% endblock %}
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

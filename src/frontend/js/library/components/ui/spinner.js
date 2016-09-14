@@ -4,23 +4,25 @@ const Spinner = React.createClass({
 
     render: function() {
       return (
-          <div className="cssload-bell">
-            <div className="cssload-circle">
-              <div className="cssload-inner"></div>
-            </div>
-            <div className="cssload-circle">
-        	  <div className="cssload-inner"></div>
-            </div>
-            <div className="cssload-circle">
-        	  <div className="cssload-inner"></div>
-            </div>
-            <div className="cssload-circle">
-        	  <div className="cssload-inner"></div>
-            </div>
-            <div className="cssload-circle">
-        	  <div className="cssload-inner"></div>
-            </div>
-          </div>
+          <div className="container">
+              <div className="cssload-bell">
+                <div className="cssload-circle">
+                  <div className="cssload-inner"></div>
+                </div>
+                <div className="cssload-circle">
+            	  <div className="cssload-inner"></div>
+                </div>
+                <div className="cssload-circle">
+            	  <div className="cssload-inner"></div>
+                </div>
+                <div className="cssload-circle">
+            	  <div className="cssload-inner"></div>
+                </div>
+                <div className="cssload-circle">
+            	  <div className="cssload-inner"></div>
+                </div>
+              </div>
+           </div>
       );
     }
 })

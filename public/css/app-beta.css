@@ -15,6 +15,9 @@ body {
   max-width: 100%;
   height: auto;
 }
+.container {
+  position: relative;
+}
 .cssload-bell {
   width: 97px;
   height: 99px;

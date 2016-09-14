@@ -16,6 +16,10 @@ const NoMatch = React.createClass({
   }
 })
 
+if (lastRequestUri) {
+    browserHistory.push(lastRequestUri);
+}
+
 render((
     <Router history={browserHistory}>
         <Route path="/" component={App}>
@@ -24,7 +28,7 @@ render((
             <Route path="project/:projectId" component={Project}/>
             <Route path="project/:projectId/characters" component={ProjectCharacters}/>
             <Route path="project/:projectId/character/:characterId" component={Character}/>
-            <Route path="*" component={NoMatch}/>
+            <Route path="*" component={Projects}/>
         </Route>
     </Router>
 ), document.getElementById('mount'))

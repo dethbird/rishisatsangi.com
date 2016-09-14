@@ -26858,6 +26858,10 @@ var NoMatch = _react2.default.createClass({
     }
 });
 
+if (lastRequestUri) {
+    _reactRouter.browserHistory.push(lastRequestUri);
+}
+
 (0, _reactDom.render)(_react2.default.createElement(
     _reactRouter.Router,
     { history: _reactRouter.browserHistory },
@@ -26869,7 +26873,7 @@ var NoMatch = _react2.default.createClass({
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId', component: _project.Project }),
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/characters', component: _projectCharacters.ProjectCharacters }),
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/character/:characterId', component: _character.Character }),
-        _react2.default.createElement(_reactRouter.Route, { path: '*', component: NoMatch })
+        _react2.default.createElement(_reactRouter.Route, { path: '*', component: _projects.Projects })
     )
 ), document.getElementById('mount'));
 

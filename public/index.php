@@ -118,6 +118,7 @@ $authorizeByHeaders = function ($app) {
 };
 
 $app->notFound(function () use ($app) {
+    $_SESSION['lastRequestUri'] = $_SERVER['REQUEST_URI'];
     $app->redirect("/");
 });
 
@@ -126,10 +127,12 @@ $app->get("/", function () use ($app) {
 
     $configs = $app->container->get('configs');
     $securityContext = $_SESSION['securityContext'];
+    $lastRequestUri = $_SESSION['lastRequestUri'];
 
     $templateVars = array(
         "configs" => $configs,
         'securityContext' => $securityContext,
+        'lastRequestUri' => $lastRequestUri,
         "section" => "index"
     );
 

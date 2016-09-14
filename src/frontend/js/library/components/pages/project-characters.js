@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router'
 
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import { Spinner } from "../ui/spinner"
 
 
 const ProjectCharacters = React.createClass({
@@ -24,10 +25,9 @@ const ProjectCharacters = React.createClass({
             '/project/' + project_id + '/character/' + character_id);
     },
     render() {
-        var characterNodes;
-        var that = this;
         if (this.state) {
-            characterNodes = this.state.project.characters.map(function(character) {
+            var that = this;
+            var characterNodes = this.state.project.characters.map(function(character) {
                 let src;
                 if (character.revisions.length) {
                     src = character.revisions[0].content;
@@ -57,11 +57,14 @@ const ProjectCharacters = React.createClass({
                     </CardClickable>
                 );
             });
+            return (
+                <div className="projectCharactersList">
+                    { characterNodes }
+                </div>
+            )
         }
         return (
-            <div className="projectCharactersList">
-                { characterNodes }
-            </div>
+            <Spinner />
         )
     }
 })

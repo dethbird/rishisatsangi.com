@@ -1,8 +1,10 @@
 import React from 'react'
-// import { browserHistory } from 'react-router'
-//
-// import { CardClickable } from "../ui/card-clickable"
-// import { CardBlock } from "../ui/card-block"
+import { browserHistory } from 'react-router'
+
+import { Card } from "../ui/card"
+import { CardClickable } from "../ui/card-clickable"
+import { CardBlock } from "../ui/card-block"
+import { Spinner } from "../ui/spinner"
 
 
 const Character = React.createClass({
@@ -26,15 +28,30 @@ const Character = React.createClass({
         });
     },
     render() {
+
         if (this.state) {
+            const { character } = this.state
+            let src;
+
+            if (character.revisions.length) {
+                src = character.revisions[0].content;
+            }
+
             return (
                 <div className="CharacterContainer">
-                    { this.state.character.name }
+                    <Card>
+                        <h3 className="card-header">{ this.state.character.name }</h3>
+                        <CardBlock>
+                            <img className="card-img-top" src={ src } />
+                        </CardBlock>
+                    </Card>
                 </div>
             );
 
         }
-        return null;
+        return (
+            <Spinner />
+        )
     }
 })
 

@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
 import { ProjectItem } from "../lists/project-item"
+import { Spinner } from "../ui/spinner"
 
 const Projects = React.createClass({
     handleClick(project_id) {
@@ -23,10 +24,9 @@ const Projects = React.createClass({
         });
     },
     render() {
-        var projectNodes;
-        var that = this;
         if (this.state) {
-            projectNodes = this.state.projects.map(function(project) {
+            var that = this;
+            var projectNodes = this.state.projects.map(function(project) {
                 return (
                     <CardClickable
                         onClick={ that.handleClick.bind(that, project.id) }
@@ -38,11 +38,16 @@ const Projects = React.createClass({
                     </CardClickable>
                 );
             });
+
+            return (
+                <div className="projectsList">
+                    { projectNodes }
+                </div>
+            )
+
         }
         return (
-            <div className="projectsList">
-                { projectNodes }
-            </div>
+            <Spinner />
         )
     }
 })

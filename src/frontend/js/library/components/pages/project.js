@@ -6,6 +6,7 @@ import { ProjectDetails } from "./project/project-details"
 import { ProjectLocations } from "./project/project-locations"
 import { ProjectReferenceImages } from "./project/project-reference_images"
 import { ProjectStoryboards } from "./project/project-storyboards"
+import { Spinner } from "../ui/spinner"
 
 
 const Project = React.createClass({
@@ -36,7 +37,9 @@ const Project = React.createClass({
                 </div>
             )
         }
-        return null;
+        return (
+            <Spinner />
+        )
     }
 })
 

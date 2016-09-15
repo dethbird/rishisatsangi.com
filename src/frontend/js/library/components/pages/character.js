@@ -48,9 +48,9 @@ const Character = React.createClass({
                         className="col-lg-4"
                         key={ revision.id }
                     >
-                        <div className="text-align-center">
+                        <CardBlock className="text-align-center">
                             <img className="card-img-top" src={ revision.content } />
-                        </div>
+                        </CardBlock>
                     </Card>
                 );
             });

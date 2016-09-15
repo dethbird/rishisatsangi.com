@@ -31778,7 +31778,7 @@ var Character = _react2.default.createClass({
                         key: revision.id
                     },
                     _react2.default.createElement(
-                        'div',
+                        _cardBlock.CardBlock,
                         { className: 'text-align-center' },
                         _react2.default.createElement('img', { className: 'card-img-top', src: revision.content })
                     )
@@ -32544,33 +32544,39 @@ var Projects = _react2.default.createClass({
 module.exports.Projects = Projects;
 
 },{"../lists/project-item":262,"../ui/card-block":276,"../ui/card-clickable":277,"../ui/spinner":279,"react":256,"react-router":105}],276:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CardBlock = _react2.default.createClass({
-  displayName: "CardBlock",
+    displayName: 'CardBlock',
 
-  propTypes: {
-    children: _react2.default.PropTypes.element.isRequired
-  },
+    propTypes: {
+        children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.element, _react2.default.PropTypes.array]).isRequired,
+        className: _react2.default.PropTypes.string
+    },
 
-  render: function render() {
-    return _react2.default.createElement(
-      "div",
-      { className: "card-block" },
-      this.props.children
-    );
-  }
+    render: function render() {
+        var className = (0, _classnames2.default)([this.props.className, 'card-block']);
+        return _react2.default.createElement(
+            'div',
+            { className: className },
+            this.props.children
+        );
+    }
 });
 
 module.exports.CardBlock = CardBlock;
 
-},{"react":256}],277:[function(require,module,exports){
+},{"classnames":1,"react":256}],277:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');

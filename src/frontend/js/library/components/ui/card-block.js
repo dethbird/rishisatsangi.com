@@ -1,17 +1,24 @@
 import React from 'react'
 
+import classNames from 'classnames';
+
 const CardBlock = React.createClass({
     propTypes: {
-      children: React.PropTypes.element.isRequired
+        children: React.PropTypes.oneOfType([
+            React.PropTypes.element,
+            React.PropTypes.array
+        ]).isRequired,
+        className: React.PropTypes.string
     },
 
     render: function() {
-      return (
-        <div className="card-block">
-            { this.props.children }
-        </div>
-      );
-    }
+        let className = classNames([this.props.className, 'card-block'])
+        return (
+            <div className={ className }>
+                { this.props.children }
+                </div>
+            );
+        }
 })
 
 module.exports.CardBlock = CardBlock

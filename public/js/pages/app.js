@@ -31769,35 +31769,60 @@ var Character = _react2.default.createClass({
                 src = character.revisions[0].content;
             }
 
+            var that = this;
+            var characterRevisionNodes = this.state.character.revisions.map(function (revision) {
+                return _react2.default.createElement(
+                    _card.Card,
+                    {
+                        className: 'col-lg-4',
+                        key: revision.id
+                    },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'text-align-center' },
+                        _react2.default.createElement('img', { className: 'card-img-top', src: revision.content })
+                    )
+                );
+            });
+
             return _react2.default.createElement(
                 'div',
-                { className: 'CharacterContainer' },
+                null,
                 _react2.default.createElement(_characterBreadcrumb.CharacterBreadcrumb, {
                     project: this.state.project,
                     character: this.state.character
                 }),
                 _react2.default.createElement(
-                    _card.Card,
-                    null,
+                    'div',
+                    { className: 'CharacterDetailsContainer' },
                     _react2.default.createElement(
-                        'h3',
-                        { className: 'card-header' },
-                        this.state.character.name
-                    ),
-                    _react2.default.createElement(
-                        _cardBlock.CardBlock,
+                        _card.Card,
                         null,
                         _react2.default.createElement(
-                            'div',
-                            { className: 'text-align-center' },
-                            _react2.default.createElement('img', { className: 'card-img-top', src: src })
+                            'h3',
+                            { className: 'card-header' },
+                            this.state.character.name
+                        ),
+                        _react2.default.createElement(
+                            _cardBlock.CardBlock,
+                            null,
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'text-align-center' },
+                                _react2.default.createElement('img', { className: 'card-img-top', src: src })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _cardBlock.CardBlock,
+                            null,
+                            _react2.default.createElement(_reactMarkdown2.default, { source: this.state.character.description })
                         )
-                    ),
-                    _react2.default.createElement(
-                        _cardBlock.CardBlock,
-                        null,
-                        _react2.default.createElement(_reactMarkdown2.default, { source: this.state.character.description })
                     )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'CharacterRevisionsContainer' },
+                    characterRevisionNodes
                 )
             );
         }
@@ -32584,35 +32609,40 @@ var CardClickable = _react2.default.createClass({
 module.exports.CardClickable = CardClickable;
 
 },{"classnames":1,"react":256}],278:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Card = _react2.default.createClass({
-    displayName: "Card",
+    displayName: 'Card',
 
 
     propTypes: {
-        children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.element, _react2.default.PropTypes.array]).isRequired
+        children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.element, _react2.default.PropTypes.array]).isRequired,
+        className: _react2.default.PropTypes.string
     },
 
     render: function render() {
+        var className = (0, _classnames2.default)([this.props.className, 'card']);
         return _react2.default.createElement(
-            "div",
-            { className: "card" },
+            'div',
+            { className: className },
             this.props.children
         );
     }
-
 });
 
 module.exports.Card = Card;
 
-},{"react":256}],279:[function(require,module,exports){
+},{"classnames":1,"react":256}],279:[function(require,module,exports){
 "use strict";
 
 var _react = require("react");

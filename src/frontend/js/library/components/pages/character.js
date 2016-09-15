@@ -41,24 +41,43 @@ const Character = React.createClass({
                 src = character.revisions[0].content;
             }
 
+            var that = this;
+            var characterRevisionNodes = this.state.character.revisions.map(function(revision) {
+                return (
+                    <Card
+                        className="col-lg-4"
+                        key={ revision.id }
+                    >
+                        <div className="text-align-center">
+                            <img className="card-img-top" src={ revision.content } />
+                        </div>
+                    </Card>
+                );
+            });
+
             return (
-                <div className="CharacterContainer">
+                <div>
                     <CharacterBreadcrumb
                         project={ this.state.project }
                         character={ this.state.character }
                     >
                     </CharacterBreadcrumb>
-                    <Card>
-                        <h3 className="card-header">{ this.state.character.name }</h3>
-                        <CardBlock>
-                            <div className="text-align-center">
-                                <img className="card-img-top" src={ src } />
-                            </div>
-                        </CardBlock>
-                        <CardBlock>
-                            <ReactMarkdown source={ this.state.character.description } />
-                        </CardBlock>
-                    </Card>
+                    <div className="CharacterDetailsContainer">
+                        <Card>
+                            <h3 className="card-header">{ this.state.character.name }</h3>
+                            <CardBlock>
+                                <div className="text-align-center">
+                                    <img className="card-img-top" src={ src } />
+                                </div>
+                            </CardBlock>
+                            <CardBlock>
+                                <ReactMarkdown source={ this.state.character.description } />
+                            </CardBlock>
+                        </Card>
+                    </div>
+                    <div className="CharacterRevisionsContainer">
+                        { characterRevisionNodes }
+                    </div>
                 </div>
             );
 

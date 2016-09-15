@@ -5,6 +5,9 @@ import { browserHistory } from 'react-router'
 import { Card } from "../ui/card"
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import {
+    CharacterBreadcrumb
+} from "./character/character-breadcrumb"
 import { Spinner } from "../ui/spinner"
 
 
@@ -40,6 +43,11 @@ const Character = React.createClass({
 
             return (
                 <div className="CharacterContainer">
+                    <CharacterBreadcrumb
+                        project={ this.state.project }
+                        character={ this.state.character }
+                    >
+                    </CharacterBreadcrumb>
                     <Card>
                         <h3 className="card-header">{ this.state.character.name }</h3>
                         <CardBlock>

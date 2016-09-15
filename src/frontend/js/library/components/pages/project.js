@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { ProjectBreadcrumb } from "./project/project-breadcrumb"
 import { ProjectCharacters } from "./project/project-characters"
 import { ProjectConceptArts } from "./project/project-concept_arts"
 import { ProjectDetails } from "./project/project-details"
@@ -28,6 +29,7 @@ const Project = React.createClass({
             let project = this.state.project;
             return (
                 <div className="projectPage">
+                    <ProjectBreadcrumb project={ project }></ProjectBreadcrumb>
                     <ProjectDetails project={ project }></ProjectDetails>
                     <ProjectCharacters project={ project }></ProjectCharacters>
                     <ProjectStoryboards project={ project }></ProjectStoryboards>

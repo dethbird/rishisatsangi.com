@@ -3,6 +3,9 @@ import { browserHistory } from 'react-router'
 
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import {
+    ProjectCharactersBreadcrumb
+} from "./project-characters/project-characters-breadcrumb"
 import { Spinner } from "../ui/spinner"
 
 
@@ -58,8 +61,12 @@ const ProjectCharacters = React.createClass({
                 );
             });
             return (
-                <div className="projectCharactersList">
-                    { characterNodes }
+                <div>
+                    <ProjectCharactersBreadcrumb project={ this.state.project }>
+                    </ProjectCharactersBreadcrumb>
+                    <div className="projectCharactersList">
+                        { characterNodes }
+                    </div>
                 </div>
             )
         }

@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import { browserHistory } from 'react-router'
 
 import { Card } from "../ui/card"
@@ -45,6 +46,9 @@ const Character = React.createClass({
                             <div className="text-align-center">
                                 <img className="card-img-top" src={ src } />
                             </div>
+                        </CardBlock>
+                        <CardBlock>
+                            <ReactMarkdown source={ this.state.character.description } />
                         </CardBlock>
                     </Card>
                 </div>

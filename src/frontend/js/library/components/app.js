@@ -3,7 +3,10 @@ import { Link } from 'react-router'
 
 const App = React.createClass({
     propTypes: {
-      children: React.PropTypes.element.isRequired
+        children: React.PropTypes.oneOfType([
+            React.PropTypes.element,
+            React.PropTypes.array
+        ]).isRequired
     },
 
     render: function() {

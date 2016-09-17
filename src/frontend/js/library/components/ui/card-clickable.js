@@ -13,6 +13,7 @@ const CardClickable = React.createClass({
     },
 
     render: function() {
+
         let className = classNames([this.props.className, 'card', 'clickable'])
 
         return (

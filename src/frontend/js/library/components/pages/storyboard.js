@@ -3,10 +3,10 @@ import ReactMarkdown from 'react-markdown'
 import { browserHistory } from 'react-router'
 
 import { Card } from "../ui/card"
-import { SectionHeader } from "../ui/section-header"
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
 import { ImagePanelRevision } from "../ui/image-panel-revision"
+import { SectionHeader } from "../ui/section-header"
 import {
     StoryboardBreadcrumb
 } from "./storyboard/storyboard-breadcrumb"

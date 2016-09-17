@@ -33,6 +33,13 @@ const Storyboard = React.createClass({
             }.bind(this)
         });
     },
+    handleClick(panel_id) {
+        browserHistory.push(
+            '/project/' + this.props.params.projectId
+            + '/storyboard/' + this.props.params.storyboardId
+            + '/panel/' + panel_id
+        )
+    },
     render() {
 
         if (this.state) {
@@ -45,14 +52,18 @@ const Storyboard = React.createClass({
                 if (panel.revisions.length > 0)
                     props.src = panel.revisions[0].content
                 return (
-                    <Card className="col-lg-4" key={ panel.id }>
+                    <CardClickable
+                        className="col-lg-4"
+                        key={ panel.id }
+                        onClick={ that.handleClick.bind(that, panel.id) }
+                    >
                         <h4 className="card-header">{ panel.name }</h4>
                         <ImagePanelRevision { ...props } ></ImagePanelRevision>
                         <CardBlock>
                             <div>{ panel.comments.length } comment(s)</div>
                             <div>{ panel.revisions.length } revision(s)</div>
                         </CardBlock>
-                    </Card>
+                    </CardClickable>
                 );
             });
 

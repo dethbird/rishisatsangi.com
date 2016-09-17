@@ -6,7 +6,8 @@ const CardBlock = React.createClass({
     propTypes: {
         children: React.PropTypes.oneOfType([
             React.PropTypes.element,
-            React.PropTypes.array
+            React.PropTypes.array,
+            React.PropTypes.string
         ]).isRequired,
         className: React.PropTypes.string
     },

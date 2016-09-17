@@ -9,6 +9,7 @@ import { ProjectCharacters } from '../library/components/pages/project-character
 import { ProjectStoryboards } from '../library/components/pages/project-storyboards'
 import { Projects } from '../library/components/pages/projects'
 import { Storyboard } from '../library/components/pages/storyboard'
+import { StoryboardPanel } from '../library/components/pages/storyboard-panel'
 
 const NoMatch = React.createClass({
   render() {
@@ -32,6 +33,7 @@ render((
             <Route path="project/:projectId/character/:characterId" component={Character}/>
             <Route path="project/:projectId/storyboards" component={ProjectStoryboards}/>
             <Route path="project/:projectId/storyboard/:storyboardId" component={Storyboard}/>
+            <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId" component={StoryboardPanel}/>
             <Route path="*" component={Projects}/>
         </Route>
     </Router>

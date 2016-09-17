@@ -10,7 +10,7 @@ const ProjectConceptArts = React.createClass({
       project: React.PropTypes.object.isRequired
     },
     handleClick(project_id) {
-        browserHistory.push('/project/' + project_id + '/concept_arts');
+        browserHistory.push('/project/' + project_id + '/concept_art');
     },
     render: function() {
       return (

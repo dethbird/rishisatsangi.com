@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router'
 
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import { Description } from "../ui/description"
 import {
     ProjectLocationsBreadcrumb
 } from "./project-locations/project-locations-breadcrumb"
@@ -28,11 +29,9 @@ const ProjectLocations = React.createClass({
             '/project/' + project_id + '/location/' + location_id);
     },
     render() {
-        console.log(this.state)
         if (this.state) {
             var that = this;
             var locationNodes = this.state.project.locations.map(function(location) {
-                console.log(location)
                 return (
                     <CardClickable
                         className="col-lg-6"
@@ -46,7 +45,9 @@ const ProjectLocations = React.createClass({
                         }
                     >
                         <h3 className="card-header">{ location.name }</h3>
-                        <CardBlock>{ location.description }</CardBlock>
+                        <CardBlock>
+                            <Description source={ location.description }></Description>
+                        </CardBlock>
                     </CardClickable>
                 );
             });

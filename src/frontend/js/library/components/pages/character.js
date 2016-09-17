@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import { browserHistory } from 'react-router'
 
 import { Card } from "../ui/card"
@@ -8,6 +7,7 @@ import { CardBlock } from "../ui/card-block"
 import {
     CharacterBreadcrumb
 } from "./character/character-breadcrumb"
+import { Description } from "../ui/description"
 import { SectionHeader } from "../ui/section-header"
 import { Spinner } from "../ui/spinner"
 
@@ -72,7 +72,7 @@ const Character = React.createClass({
                                 </div>
                             </CardBlock>
                             <CardBlock>
-                                <ReactMarkdown source={ this.state.character.description } />
+                                <Description source={ this.state.character.description }></Description>
                             </CardBlock>
                         </Card>
                     </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 
-const ProjectLocationsBreadcrumb = React.createClass({
+const ProjectConceptArtBreadcrumb = React.createClass({
     propTypes: {
         project: React.PropTypes.object.isRequired
     },
@@ -16,10 +16,10 @@ const ProjectLocationsBreadcrumb = React.createClass({
                         { this.props.project.name }
                     </Link>
                 </li>
-                <li className="breadcrumb-item">Locations</li>
+                <li className="breadcrumb-item">Concept Art</li>
             </ol>
         );
     }
 })
 
-module.exports.ProjectLocationsBreadcrumb = ProjectLocationsBreadcrumb
+module.exports.ProjectConceptArtBreadcrumb = ProjectConceptArtBreadcrumb

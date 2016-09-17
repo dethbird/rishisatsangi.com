@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Card } from "../../ui/card"
 import { CardBlock } from "../../ui/card-block"
+import { Description } from "../../ui/description"
 
 
 const ProjectDetails = React.createClass({
@@ -17,7 +18,7 @@ const ProjectDetails = React.createClass({
                 <CardBlock>
                     <div>
                         <h5>{ this.props.project.name }</h5>
-                        <blockquote>{ this.props.project.description }</blockquote>
+                        <Description source={ this.props.project.description }></Description>
                     </div>
                 </CardBlock>
             </div>

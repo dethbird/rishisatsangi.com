@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router'
 
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import { Description } from "../ui/description"
 import {
     ProjectReferenceImagesBreadcrumb
 } from "./project-reference_images/project-reference_images-breadcrumb"
@@ -48,7 +49,9 @@ const ProjectReferenceImages = React.createClass({
                         <div className="text-align-center">
                             <img className="card-img-top" src={ reference_image.content } />
                         </div>
-                        <CardBlock>{ reference_image.description }</CardBlock>
+                        <CardBlock>
+                            <Description source={ reference_image.description }></Description>
+                        </CardBlock>
                     </CardClickable>
                 );
             });

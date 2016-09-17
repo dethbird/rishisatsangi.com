@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router'
 
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import { Description } from "../ui/description"
 import {
     ProjectConceptArtBreadcrumb
 } from "./project-concept_art/project-concept_art-breadcrumb"
@@ -31,7 +32,6 @@ const ProjectConceptArt = React.createClass({
         if (this.state) {
             var that = this;
             var conceptArtNodes = this.state.project.concept_art.map(function(concept_art) {
-                console.log(concept_art);
                 let src;
                 if (concept_art.revisions.length) {
                     src = concept_art.revisions[0].content;
@@ -54,7 +54,7 @@ const ProjectConceptArt = React.createClass({
                         </div>
                         <CardBlock>
                             <div>
-                                <blockquote>{ concept_art.description }</blockquote>
+                                <Description source={ concept_art.description }></Description>
                                 <span>{ concept_art.revisions.length } revision(s)</span>
                             </div>
                         </CardBlock>

@@ -1,12 +1,13 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
 
-import { CardClickable } from "../ui/card-clickable"
-import { CardBlock } from "../ui/card-block"
+import { CardClickable } from '../ui/card-clickable'
+import { CardBlock } from '../ui/card-block'
+import { Description } from '../ui/description'
 import {
     ProjectCharactersBreadcrumb
-} from "./project-characters/project-characters-breadcrumb"
-import { Spinner } from "../ui/spinner"
+} from './project-characters/project-characters-breadcrumb'
+import { Spinner } from '../ui/spinner'
 
 
 const ProjectCharacters = React.createClass({
@@ -53,7 +54,7 @@ const ProjectCharacters = React.createClass({
                         </div>
                         <CardBlock>
                             <div>
-                                <blockquote>{ character.description }</blockquote>
+                                <Description source={ character.description }></Description>
                                 <span>{ character.revisions.length } revision(s)</span>
                             </div>
                         </CardBlock>

@@ -19,10 +19,6 @@ const Project = React.createClass({
                 key={ this.props.project.id }
             >
                 <h3 className="card-header">{ this.props.project.name }</h3>
-                <CardBlock>
-                    <Description source={ this.props.project.description }>
-                    </Description>
-                </CardBlock>
             </CardClickable>
         );
     }

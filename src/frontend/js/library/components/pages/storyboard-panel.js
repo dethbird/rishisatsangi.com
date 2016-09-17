@@ -1,12 +1,11 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import { browserHistory } from 'react-router'
-import fountainJs from 'fountain-js'
 
 import { Card } from "../ui/card"
 import { SectionHeader } from "../ui/section-header"
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import { Fountain } from "../ui/fountain"
 import { ImagePanelRevision } from "../ui/image-panel-revision"
 import {
     StoryboardPanelBreadcrumb
@@ -81,15 +80,6 @@ const StoryboardPanel = React.createClass({
             if (this.state.panel.revisions.length > 0)
                 props.src = this.state.panel.revisions[0].content
 
-
-            let script = { __html: '<div></div>' }
-            if (this.state.panel.script) {
-                script = {
-                    __html: fountainJs.parse(
-                        this.state.panel.script).script_html
-                }
-            }
-
             return (
                 <div>
                     <StoryboardPanelBreadcrumb { ...this.state }></StoryboardPanelBreadcrumb>
@@ -98,8 +88,7 @@ const StoryboardPanel = React.createClass({
                             <h3 className="card-header">{ this.state.panel.name }</h3>
                             <ImagePanelRevision { ...props } ></ImagePanelRevision>
                             <CardBlock>
-                                <div dangerouslySetInnerHTML={ script }>
-                                </div>
+                                <Fountain source={ this.state.panel.script }></Fountain>
                             </CardBlock>
                         </Card>
                     </div>

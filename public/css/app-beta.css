@@ -15,8 +15,15 @@ body {
   max-width: 100%;
   height: auto;
 }
+[class^=col-lg] {
+  padding-left: 0;
+  padding-right: 0;
+}
 .container {
   position: relative;
+}
+.section-header {
+  color: #58A3C9;
 }
 .text-align-center {
   text-align: center;

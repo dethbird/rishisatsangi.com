@@ -1,4 +1,6 @@
 @baseBlue: #2075A0;
+@lighterBlue: #58A3C9;
+
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: @baseBlue;
@@ -20,8 +22,17 @@ body {
     height: auto;
 }
 
+[class^=col-lg] {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .container {
     position: relative;
+}
+
+.section-header {
+    color: @lighterBlue;
 }
 
 .text-align-center {
@@ -60,7 +71,7 @@ body {
 	position: absolute;
 	width: 3px;
 	height: 0;
-	background-color: #58A3C9;
+	background-color: @lighterBlue;
 	bottom: 0;
 }
 

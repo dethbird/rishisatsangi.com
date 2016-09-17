@@ -16,9 +16,9 @@ const CardBlock = React.createClass({
         return (
             <div className={ className }>
                 { this.props.children }
-                </div>
-            );
-        }
+            </div>
+        );
+    }
 })
 
 module.exports.CardBlock = CardBlock

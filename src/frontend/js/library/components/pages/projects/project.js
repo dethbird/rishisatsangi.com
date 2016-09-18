@@ -25,13 +25,9 @@ const Project = React.createClass({
                 key={ this.props.project.id }
             >
                 <h3 className="card-header">{ this.props.project.name }</h3>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item">{ this.props.project.characters.length } Character(s)</li>
-                    <li className="list-group-item">{ this.props.project.storyboards.length } Storyboard(s)</li>
-                </ul>
-                <div className="card-footer text-muted">
+                <CardBlock>
                     <TimeAgo date={ this.props.project.date_updated } />
-                </div>
+                </CardBlock>
             </CardClickable>
         );
     }

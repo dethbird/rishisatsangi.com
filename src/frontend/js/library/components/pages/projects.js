@@ -30,7 +30,6 @@ const Projects = React.createClass({
             let projectNodes = this.state.projects.map(function(project) {
                 return (
                     <Project
-                        className="col-lg-6"
                         handleClick={ that.handleClick.bind(that, project.id) }
                         project={ project }
                         key={ project.id }

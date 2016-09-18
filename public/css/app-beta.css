@@ -1,3 +1,6 @@
+blockquote {
+  padding: 15px;
+}
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #2075A0;
@@ -6,7 +9,11 @@ body {
   cursor: pointer;
 }
 .card.clickable:hover {
-  background-color: #e5e5e5;
+  background-color: #eeeeee;
+}
+.card.clickable:hover .card-header,
+.card.clickable:hover .card-footer {
+  background-color: #e4e4e4;
 }
 .card.col-lg-6:nth-child(2n+1) {
   clear: both;
@@ -19,14 +26,26 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
+.comment.resolved {
+  opacity: 0.9;
+  background-color: #eeeeee;
+  color: #818a91;
+}
+.comment.resolved blockquote {
+  text-decoration: line-through;
+}
 .container {
   position: relative;
 }
 .section-header {
-  color: #58A3C9;
+  color: #e5e5e5;
+  font-weight: bold;
 }
 .text-align-center {
   text-align: center;
+}
+.text-align-right {
+  text-align: right;
 }
 /** CSS LOADER **/
 #cssload-loader {

@@ -1,10 +1,13 @@
+import classNames from 'classnames'
 import React from 'react'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import { Card } from "../ui/card"
 import { SectionHeader } from "../ui/section-header"
 import { CardClickable } from "../ui/card-clickable"
+import { CardComment } from "../ui/card-comment"
 import { CardBlock } from "../ui/card-block"
+import { CardStoryboardPanel } from "../ui/card-storyboard-panel"
 import { Fountain } from "../ui/fountain"
 import { ImagePanelRevision } from "../ui/image-panel-revision"
 import {
@@ -61,44 +64,31 @@ const StoryboardPanel = React.createClass({
 
             let panelCommentNodes = this.state.panel.comments.map(function(comment) {
                 return (
-                    <Card
+                    <CardComment
+                        comment={ comment }
                         key={ comment.id }
                     >
-                        <CardBlock
-                            className={ comment.status }
-                        >
-                            {comment.comment}
-                        </CardBlock>
-                        <div className="card-footer text-muted">
-                            by { comment.username } on { comment.date_added }
-                        </div>
-                    </Card>
+                    </CardComment>
                 );
             });
-
-            let props = {};
-            if (this.state.panel.revisions.length > 0)
-                props.src = this.state.panel.revisions[0].content
 
             return (
                 <div>
                     <StoryboardPanelBreadcrumb { ...this.state }></StoryboardPanelBreadcrumb>
                     <div className="StoryboardPanelDetailsContainer">
-                        <Card>
-                            <h3 className="card-header">{ this.state.panel.name }</h3>
-                            <ImagePanelRevision { ...props } ></ImagePanelRevision>
-                            <CardBlock>
-                                <Fountain source={ this.state.panel.script }></Fountain>
-                            </CardBlock>
-                        </Card>
+                        <CardStoryboardPanel
+                            projectId={ this.props.params.projectId }
+                            storyboardId={ this.props.params.storyboardId }
+                            panel={ this.state.panel }
+                        ></CardStoryboardPanel>
                     </div>
-                    <SectionHeader>{ this.state.panel.revisions.length } Revisions(s)</SectionHeader>
-                    <div className="clearfix PanelRevisionsContainer">
-                        { panelRevisionNodes }
-                    </div>
-                    <SectionHeader>{ this.state.panel.comments.length } Comments(s)</SectionHeader>
+                    <SectionHeader>{ this.state.panel.comments.length } Comment(s)</SectionHeader>
                     <div className="clearfix PanelCommentsContainer">
                         { panelCommentNodes }
+                    </div>
+                    <SectionHeader>{ this.state.panel.revisions.length } Revision(s)</SectionHeader>
+                    <div className="clearfix PanelRevisionsContainer">
+                        { panelRevisionNodes }
                     </div>
                 </div>
             );

@@ -9,10 +9,8 @@
 			"required": true,
 		    "type": "string"
 		},
-		"description": {
-			"type": ["string", "null", "integer"]
-		},
 		"script": {
+            "minLength": 1,
 			"type": ["string", "null", "integer"]
 		}
 	}

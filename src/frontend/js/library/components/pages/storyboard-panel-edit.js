@@ -1,4 +1,5 @@
 import React from 'react'
+import { browserHistory } from 'react-router'
 
 import { Card } from "../ui/card"
 import { SectionHeader } from "../ui/section-header"
@@ -40,15 +41,61 @@ const StoryboardPanelEdit = React.createClass({
     },
     handleFieldChange(event) {
         let panel = this.state.panel;
+        let panelChangedFields = this.state.panelChangedFields || {};
+
         panel[event.target.id] = event.target.value
+        panelChangedFields[event.target.id] = event.target.value
+
         this.setState({
-            panel: panel
+            panel: panel,
+            panelChangedFields: panelChangedFields
         })
+    },
+    handleClickCancel(event) {
+        event.preventDefault()
+        browserHistory.push(
+            '/project/' + this.props.params.projectId
+            + '/storyboard/' + this.props.params.storyboardId
+            + '/panel/' + this.props.params.panelId
+        )
+    },
+    handleClickSubmit(event) {
+        event.preventDefault()
+        var that = this
+        let data = that.state.panelChangedFields
+        data.storyboard_id = this.props.params.storyboardId
+        $.ajax({
+            url: '/api/project_storyboard_panel/' + this.props.params.panelId,
+            dataType: 'json',
+            cache: false,
+            data: data,
+            method: "PUT",
+            success: function(data) {
+                console.log(data)
+                // let storyboard = _.findWhere(data.storyboards, {
+                //     'id': this.props.params.storyboardId
+                // });
+                // let panel = _.findWhere(storyboard.panels, {
+                //     'id': this.props.params.panelId
+                // });
+                //
+                // this.setState({
+                //     project: data,
+                //     storyboard: storyboard,
+                //     panel: panel
+                // });
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.log(xhr)
+                console.log(status)
+                console.log(err)
+            }.bind(this)
+        });
     },
     render() {
         let that = this
         if (this.state){
-
+            console.log(this.state)
             let panelRevisionNodes = this.state.panel.revisions.map(function(revision) {
                 let props = {};
                     props.src = revision.content
@@ -94,12 +141,21 @@ const StoryboardPanelEdit = React.createClass({
                             </Card>
                         </div>
                         <SectionHeader>revisions:</SectionHeader>
-                        <div className="panelRevisionsContainer">
-                            { panelRevisionNodes }
+                        <div className="form-group">
+                            <div className="panelRevisionsContainer clearfix">
+                                { panelRevisionNodes }
+                            </div>
                         </div>
-                        <div className="form-group text-align-right clearfix">
-                            <button className="btn btn-secondary">Cancel</button>
-                            <button className="btn btn-success">Save</button>
+                        <div className="form-group text-align-center">
+                            <button
+                                className="btn btn-secondary"
+                                onClick={ that.handleClickCancel }
+                            >Cancel</button>
+                            <button
+                                className="btn btn-success"
+                                onClick={ that.handleClickSubmit }
+                                disabled={ !that.state.panelChangedFields }
+                            >Save</button>
                         </div>
                     </form>
                 </div>

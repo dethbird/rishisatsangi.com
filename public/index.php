@@ -27,6 +27,7 @@ require_once APPLICATION_PATH . 'src/library/Data/Base.php';
 require_once APPLICATION_PATH . 'src/library/Logic/Projects.php';
 require_once APPLICATION_PATH . 'src/library/Logic/Scripts.php';
 require_once APPLICATION_PATH . 'src/library/Validation/Validator.php';
+require_once APPLICATION_PATH . 'vendor/php-activerecord/php-activerecord/ActiveRecord.php';
 
 use Aptoma\Twig\Extension\MarkdownExtension;
 use Aptoma\Twig\Extension\MarkdownEngine;
@@ -46,30 +47,42 @@ $app = new \Slim\Slim(
         'cookies.cipher_mode' => MCRYPT_MODE_CBC
     )
 );
-// $app->add(new \Slim\Middleware\SessionCookie(array(
-//     'expires' => '1 day',
-//     'path' => '/',
-//     'domain' => $configs['server']['hostname'],
-//     'secure' => true,
-//     'httponly' => false,
-//     'name' => 'explosioncorp_session',
-//     'secret' => $configs['security']['secret']
-// )));
+
 $markdownEngine = new MarkdownEngine\MichelfMarkdownEngine();
+
 $view = $app->view();
 $view->parserExtensions = array(
     new \Slim\Views\TwigExtension(),
     new TemplateHelpers(),
     new MarkdownExtension($markdownEngine)
 );
+
 $db = new DataBase(
     $configs['mysql']['host'],
     $configs['mysql']['database'],
     $configs['mysql']['user'],
     $configs['mysql']['password']);
 
+
 $app->container->set('configs', $configs);
 $app->container->set('db', $db);
+
+
+ActiveRecord\Config::initialize(function($cfg)
+{
+    global $configs;
+
+    $cfg->set_model_directory(APPLICATION_PATH . '/src/library/Models');
+    $cfg->set_connections(
+        [
+            'development' =>
+                'mysql://'.$configs['mysql']['user']
+                .':'.$configs['mysql']['password']
+                .'@'.$configs['mysql']['host'].'/'
+                .$configs['mysql']['database']
+        ]
+    );
+});
 
 # authorize the user by session (middleware)
 $authorize = function ($app) {

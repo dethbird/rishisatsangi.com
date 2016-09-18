@@ -33905,32 +33905,34 @@ var ProjectsBreadcrumb = _react2.default.createClass({
 module.exports.ProjectsBreadcrumb = ProjectsBreadcrumb;
 
 },{"react":261}],292:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _card = require("../ui/card");
+var _reactRouter = require('react-router');
 
-var _sectionHeader = require("../ui/section-header");
+var _card = require('../ui/card');
 
-var _cardClickable = require("../ui/card-clickable");
+var _sectionHeader = require('../ui/section-header');
 
-var _cardBlock = require("../ui/card-block");
+var _cardClickable = require('../ui/card-clickable');
 
-var _fountain = require("../ui/fountain");
+var _cardBlock = require('../ui/card-block');
 
-var _imagePanelRevision = require("../ui/image-panel-revision");
+var _fountain = require('../ui/fountain');
 
-var _storyboardPanelBreadcrumb = require("./storyboard-panel/storyboard-panel-breadcrumb");
+var _imagePanelRevision = require('../ui/image-panel-revision');
 
-var _spinner = require("../ui/spinner");
+var _storyboardPanelBreadcrumb = require('./storyboard-panel/storyboard-panel-breadcrumb');
+
+var _spinner = require('../ui/spinner');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var StoryboardPanelEdit = _react2.default.createClass({
-    displayName: "StoryboardPanelEdit",
+    displayName: 'StoryboardPanelEdit',
     componentDidMount: function componentDidMount() {
         $.ajax({
             url: '/api/project/' + this.props.params.projectId,
@@ -33958,22 +33960,64 @@ var StoryboardPanelEdit = _react2.default.createClass({
     },
     handleFieldChange: function handleFieldChange(event) {
         var panel = this.state.panel;
+        var panelChangedFields = this.state.panelChangedFields || {};
+
         panel[event.target.id] = event.target.value;
+        panelChangedFields[event.target.id] = event.target.value;
+
         this.setState({
-            panel: panel
+            panel: panel,
+            panelChangedFields: panelChangedFields
+        });
+    },
+    handleClickCancel: function handleClickCancel(event) {
+        event.preventDefault();
+        _reactRouter.browserHistory.push('/project/' + this.props.params.projectId + '/storyboard/' + this.props.params.storyboardId + '/panel/' + this.props.params.panelId);
+    },
+    handleClickSubmit: function handleClickSubmit(event) {
+        event.preventDefault();
+        var that = this;
+        var data = that.state.panelChangedFields;
+        data.storyboard_id = this.props.params.storyboardId;
+        $.ajax({
+            url: '/api/project_storyboard_panel/' + this.props.params.panelId,
+            dataType: 'json',
+            cache: false,
+            data: data,
+            method: "PUT",
+            success: function (data) {
+                console.log(data);
+                // let storyboard = _.findWhere(data.storyboards, {
+                //     'id': this.props.params.storyboardId
+                // });
+                // let panel = _.findWhere(storyboard.panels, {
+                //     'id': this.props.params.panelId
+                // });
+                //
+                // this.setState({
+                //     project: data,
+                //     storyboard: storyboard,
+                //     panel: panel
+                // });
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.log(xhr);
+                console.log(status);
+                console.log(err);
+            }.bind(this)
         });
     },
     render: function render() {
         var that = this;
         if (this.state) {
-
+            console.log(this.state);
             var panelRevisionNodes = this.state.panel.revisions.map(function (revision) {
                 var props = {};
                 props.src = revision.content;
                 return _react2.default.createElement(
                     _card.Card,
                     {
-                        className: "col-xs-4",
+                        className: 'col-xs-4',
                         key: revision.id
                     },
                     _react2.default.createElement(_imagePanelRevision.ImagePanelRevision, props)
@@ -33981,25 +34025,25 @@ var StoryboardPanelEdit = _react2.default.createClass({
             });
 
             return _react2.default.createElement(
-                "div",
+                'div',
                 null,
                 _react2.default.createElement(_storyboardPanelBreadcrumb.StoryboardPanelBreadcrumb, this.state),
                 _react2.default.createElement(
-                    "form",
+                    'form',
                     null,
                     _react2.default.createElement(
                         _sectionHeader.SectionHeader,
                         null,
-                        "name:"
+                        'name:'
                     ),
                     _react2.default.createElement(
-                        "div",
-                        { className: "form-group" },
-                        _react2.default.createElement("input", {
-                            type: "text",
-                            className: "form-control",
-                            id: "name",
-                            placeholder: "Name",
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement('input', {
+                            type: 'text',
+                            className: 'form-control',
+                            id: 'name',
+                            placeholder: 'Name',
                             value: this.state.panel.name,
                             onChange: this.handleFieldChange
                         })
@@ -34007,19 +34051,19 @@ var StoryboardPanelEdit = _react2.default.createClass({
                     _react2.default.createElement(
                         _sectionHeader.SectionHeader,
                         null,
-                        "script:"
+                        'script:'
                     ),
                     _react2.default.createElement(
-                        "div",
-                        { className: "form-group" },
-                        _react2.default.createElement("textarea", {
-                            className: "form-control",
-                            id: "script",
-                            rows: "3",
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement('textarea', {
+                            className: 'form-control',
+                            id: 'script',
+                            rows: '3',
                             value: this.state.panel.script || '',
                             onChange: this.handleFieldChange
                         }),
-                        _react2.default.createElement("br", null),
+                        _react2.default.createElement('br', null),
                         _react2.default.createElement(
                             _card.Card,
                             null,
@@ -34033,25 +34077,36 @@ var StoryboardPanelEdit = _react2.default.createClass({
                     _react2.default.createElement(
                         _sectionHeader.SectionHeader,
                         null,
-                        "revisions:"
+                        'revisions:'
                     ),
                     _react2.default.createElement(
-                        "div",
-                        { className: "panelRevisionsContainer" },
-                        panelRevisionNodes
-                    ),
-                    _react2.default.createElement(
-                        "div",
-                        { className: "form-group text-align-right clearfix" },
+                        'div',
+                        { className: 'form-group' },
                         _react2.default.createElement(
-                            "button",
-                            { className: "btn btn-secondary" },
-                            "Cancel"
+                            'div',
+                            { className: 'panelRevisionsContainer clearfix' },
+                            panelRevisionNodes
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group text-align-center' },
+                        _react2.default.createElement(
+                            'button',
+                            {
+                                className: 'btn btn-secondary',
+                                onClick: that.handleClickCancel
+                            },
+                            'Cancel'
                         ),
                         _react2.default.createElement(
-                            "button",
-                            { className: "btn btn-success" },
-                            "Save"
+                            'button',
+                            {
+                                className: 'btn btn-success',
+                                onClick: that.handleClickSubmit,
+                                disabled: !that.state.panelChangedFields
+                            },
+                            'Save'
                         )
                     )
                 )
@@ -34063,7 +34118,7 @@ var StoryboardPanelEdit = _react2.default.createClass({
 
 module.exports.StoryboardPanelEdit = StoryboardPanelEdit;
 
-},{"../ui/card":301,"../ui/card-block":297,"../ui/card-clickable":298,"../ui/fountain":303,"../ui/image-panel-revision":304,"../ui/section-header":305,"../ui/spinner":306,"./storyboard-panel/storyboard-panel-breadcrumb":294,"react":261}],293:[function(require,module,exports){
+},{"../ui/card":301,"../ui/card-block":297,"../ui/card-clickable":298,"../ui/fountain":303,"../ui/image-panel-revision":304,"../ui/section-header":305,"../ui/spinner":306,"./storyboard-panel/storyboard-panel-breadcrumb":294,"react":261,"react-router":109}],293:[function(require,module,exports){
 'use strict';
 
 var _classnames = require('classnames');

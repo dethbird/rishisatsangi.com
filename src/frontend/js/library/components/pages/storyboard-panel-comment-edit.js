@@ -80,7 +80,7 @@ const StoryboardPanelCommentEdit = React.createClass({
         event.preventDefault()
         var that = this
         $.ajax({
-            url: '/api/project_storyboard_panel_comment/' + this.props.params.commentId,
+            url: '/api/comment/' + this.props.params.commentId,
             dataType: 'json',
             cache: false,
             data: that.state.changedFields,
@@ -102,7 +102,6 @@ const StoryboardPanelCommentEdit = React.createClass({
     render() {
         let that = this
         if (this.state){
-            console.log(this.state)
 
             let userOptionsNodes = this.state.project.users.map(function(user) {
                 return (

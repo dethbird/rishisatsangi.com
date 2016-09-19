@@ -32,6 +32,47 @@ $app->post('/api/login', function () use ($app) {
 
 $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
+    # update comment
+    $app->put('/comment/:id', function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+        $db = $app->container->get('db');
+        $id = (int) $id;
+
+        /**
+         * @todo use a different column to store the commenting user id
+         */
+        $model = Comment::find_by_id($id);
+
+        if(!$model) {
+            $app->halt(404);
+        }
+
+        foreach($app->request->params() as $key=>$value) {
+            $model->$key = $value;
+        }
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            json_decode($model->to_json()),
+            APPLICATION_PATH . "configs/validation_schemas/comment.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+
+            $model->save();
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody($model->to_json());
+        }
+
+    });
+
     # get
     $app->get('/external-content-source/:service_name', function ($service_name) use ($app) {
 
@@ -871,35 +912,6 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $comment = $projectService->createProjectStoryboardPanelComment($app->request->params());
 
             $app->response->setStatus(201);
-            $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($comment));
-        }
-
-    });
-
-    # update panel comment
-    $app->put('/project_storyboard_panel_comment/:id', function ($id) use ($app) {
-
-        $configs = $app->container->get('configs');
-        $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
-        $id = (int) $id;
-
-        # validate
-        $validator = new Validator();
-        $validation_response = $validator->validate(
-            (object) $app->request->params(),
-            APPLICATION_PATH . "configs/validation_schemas/project_storyboard_panel_comment.json");
-
-        if (is_array($validation_response)) {
-            $app->response->setStatus(400);
-            $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($validation_response));
-        } else {
-            $comment = $projectService->updateProjectStoryboardPanelComment($id, $app->request->params());
-
-            $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($comment));
         }

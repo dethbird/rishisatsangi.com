@@ -38374,7 +38374,7 @@ var StoryboardPanelCommentEdit = _react2.default.createClass({
         event.preventDefault();
         var that = this;
         $.ajax({
-            url: '/api/project_storyboard_panel_comment/' + this.props.params.commentId,
+            url: '/api/comment/' + this.props.params.commentId,
             dataType: 'json',
             cache: false,
             data: that.state.changedFields,
@@ -38396,7 +38396,6 @@ var StoryboardPanelCommentEdit = _react2.default.createClass({
     render: function render() {
         var that = this;
         if (this.state) {
-            console.log(this.state);
 
             var userOptionsNodes = this.state.project.users.map(function (user) {
                 return _react2.default.createElement(

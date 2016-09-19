@@ -33977,13 +33977,11 @@ var StoryboardPanelEdit = _react2.default.createClass({
     handleClickSubmit: function handleClickSubmit(event) {
         event.preventDefault();
         var that = this;
-        var data = that.state.panelChangedFields;
-        data.storyboard_id = this.props.params.storyboardId;
         $.ajax({
             url: '/api/project_storyboard_panel/' + this.props.params.panelId,
             dataType: 'json',
             cache: false,
-            data: data,
+            data: that.state.panelChangedFields,
             method: "PUT",
             success: function (data) {
                 console.log(data);

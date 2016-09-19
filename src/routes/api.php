@@ -729,14 +729,22 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
         $db = $app->container->get('db');
         $id = (int) $id;
 
-        $data = (object) $app->request->params();
-        $data->id = $id;
+        $model = ProjectStoryboardPanel::find_by_id_and_user_id(
+            $id, $securityContext->id);
+
+        if(!$model) {
+            $app->halt(404);
+        }
+
+        foreach($app->request->params() as $key=>$value) {
+            $model->$key = $value;
+        }
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            $data,
-            APPLICATION_PATH . "configs/validation_schemas/project_storyboard_panel_put.json");
+            json_decode($model->to_json()),
+            APPLICATION_PATH . "configs/validation_schemas/project_storyboard_panel.json");
 
         if (is_array($validation_response)) {
             $app->response->setStatus(400);
@@ -744,11 +752,7 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->setBody(json_encode($validation_response));
         } else {
 
-            $model = ProjectStoryboardPanel::find_by_id_and_user_id(
-                $id, $securityContext->id);
-
-            $model->update_attributes($app->request->params());
-
+            $model->save();
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody($model->to_json());

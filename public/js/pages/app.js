@@ -34080,11 +34080,10 @@ var StoryboardPanelCommentEdit = _react2.default.createClass({
                         { className: 'form-group' },
                         _react2.default.createElement('input', {
                             type: 'text',
-                            className: 'form-control',
+                            value: that.state.comment.date_added,
+                            onChange: that.handleFieldChange,
                             id: 'date_added',
-                            placeholder: 'Date Added',
-                            value: this.state.comment.date_added,
-                            onChange: this.handleFieldChange
+                            className: 'form-control'
                         })
                     ),
                     _react2.default.createElement(

@@ -137,14 +137,13 @@ const StoryboardPanelCommentEdit = React.createClass({
 
                         <SectionHeader>date:</SectionHeader>
                         <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="date_added"
-                            placeholder="Date Added"
-                            value={ this.state.comment.date_added }
-                            onChange= { this.handleFieldChange }
-                        />
+                            <input
+                                type="text"
+                                value={ that.state.comment.date_added }
+                                onChange={ that.handleFieldChange }
+                                id="date_added"
+                                className="form-control"
+                            />
                         </div>
 
                         <SectionHeader>status:</SectionHeader>

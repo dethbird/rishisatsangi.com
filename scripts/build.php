@@ -245,13 +245,17 @@
                     "--list"
                 ));
 
-                $browserifyResponse = $shell->executeCommand('browserify', array(
-                    $file,
-                    "-o",
-                    $outputFile,
-                    "-t",
-                    "[ babelify --presets [ es2015 react ] ]"
-                ));
+                try {
+                    $browserifyResponse = $shell->executeCommand('browserify', array(
+                        $file,
+                        "-o",
+                        $outputFile,
+                        "-t",
+                        "[ babelify --presets [ es2015 react ] ]"
+                    ));
+                } catch (Exception $e) {
+                    print_r($e); die();
+                }
 
                 foreach($browserifyList as $builtFrom) {
                     echo $c("   " . $builtFrom)

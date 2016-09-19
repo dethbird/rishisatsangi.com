@@ -1,5 +1,7 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
+var DatePicker = require('react-datepicker');
+var moment = require('moment');
 
 import { Alert } from "../ui/alert"
 import { Card } from "../ui/card"
@@ -46,7 +48,15 @@ const StoryboardPanelCommentEdit = React.createClass({
             }.bind(this)
         });
     },
-    handleFieldChange(event, field) {
+    handleDateFieldChange(field, moment) {
+        this.handleFieldChange({
+            target: {
+                id: field,
+                value: moment.format("YYYY-MM-DD")
+            }
+        });
+    },
+    handleFieldChange(event) {
         let comment = this.state.comment;
         let changedFields = this.state.changedFields || {};
 
@@ -137,10 +147,10 @@ const StoryboardPanelCommentEdit = React.createClass({
 
                         <SectionHeader>date:</SectionHeader>
                         <div className="form-group">
-                            <input
-                                type="text"
-                                value={ that.state.comment.date_added }
-                                onChange={ that.handleFieldChange }
+                            <DatePicker
+                                selected={ moment(that.state.comment.date_added) }
+                                onChange={ this.handleDateFieldChange.bind(this, 'date_added') }
+                                dateFormat="YYYY-MM-DD"
                                 id="date_added"
                                 className="form-control"
                             />

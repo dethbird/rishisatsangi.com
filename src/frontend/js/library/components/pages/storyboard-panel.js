@@ -53,7 +53,7 @@ const StoryboardPanel = React.createClass({
                     props.src = revision.content
                 return (
                     <CardClickable
-                        className="col-lg-4"
+                        className="col-xs-4"
                         key={ revision.id }
                         onClick={ that.handleClickRevision.bind(that, revision.id) }
                     >
@@ -66,6 +66,13 @@ const StoryboardPanel = React.createClass({
                 return (
                     <CardComment
                         comment={ comment }
+                        link= {
+                            '/project/' + that.props.params.projectId
+                            + '/storyboard/' + that.props.params.storyboardId
+                            + '/panel/' + that.props.params.panelId
+                            + '/comment/' + comment.id
+                            + '/edit'
+                        }
                         key={ comment.id }
                     >
                     </CardComment>
@@ -82,13 +89,13 @@ const StoryboardPanel = React.createClass({
                             panel={ this.state.panel }
                         ></CardStoryboardPanel>
                     </div>
-                    <SectionHeader>{ this.state.panel.comments.length } Comment(s)</SectionHeader>
-                    <div className="clearfix PanelCommentsContainer">
-                        { panelCommentNodes }
-                    </div>
                     <SectionHeader>{ this.state.panel.revisions.length } Revision(s)</SectionHeader>
                     <div className="clearfix PanelRevisionsContainer">
                         { panelRevisionNodes }
+                    </div>
+                    <SectionHeader>{ this.state.panel.comments.length } Comment(s)</SectionHeader>
+                    <div className="clearfix PanelCommentsContainer">
+                        { panelCommentNodes }
                     </div>
                 </div>
             );

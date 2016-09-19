@@ -15,6 +15,7 @@ import { Projects } from '../library/components/pages/projects'
 import { Storyboard } from '../library/components/pages/storyboard'
 import { StoryboardPanel } from '../library/components/pages/storyboard-panel'
 import { StoryboardPanelEdit } from '../library/components/pages/storyboard-panel-edit'
+import { StoryboardPanelCommentEdit } from '../library/components/pages/storyboard-panel-comment-edit'
 
 const NoMatch = React.createClass({
   render() {
@@ -44,6 +45,7 @@ render((
             <Route path="project/:projectId/storyboard/:storyboardId" component={Storyboard}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId" component={StoryboardPanel}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId/edit" component={StoryboardPanelEdit}/>
+            <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId/comment/:commentId/edit" component={StoryboardPanelCommentEdit}/>
             <Route path="*" component={Projects}/>
         </Route>
     </Router>

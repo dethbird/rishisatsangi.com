@@ -6,7 +6,7 @@ import { Card } from "../ui/card"
 import { SectionHeader } from "../ui/section-header"
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
-import { Fountain } from "../ui/fountain"
+import { Description } from "../ui/description"
 import { ImagePanelRevision } from "../ui/image-panel-revision"
 import {
     StoryboardPanelBreadcrumb
@@ -14,7 +14,7 @@ import {
 import { Spinner } from "../ui/spinner"
 
 
-const StoryboardPanelEdit = React.createClass({
+const StoryboardPanelCommentEdit = React.createClass({
     componentDidMount() {
         $.ajax({
             url: '/api/project/' + this.props.params.projectId,
@@ -28,11 +28,15 @@ const StoryboardPanelEdit = React.createClass({
                 let panel = _.findWhere(storyboard.panels, {
                     'id': this.props.params.panelId
                 });
+                let comment = _.findWhere(panel.comments, {
+                    'id': this.props.params.commentId
+                });
 
                 this.setState({
                     project: data,
                     storyboard: storyboard,
                     panel: panel,
+                    comment: comment,
                     formState: null,
                     formMessage: null
                 });
@@ -42,16 +46,16 @@ const StoryboardPanelEdit = React.createClass({
             }.bind(this)
         });
     },
-    handleFieldChange(event) {
-        let panel = this.state.panel;
-        let panelChangedFields = this.state.panelChangedFields || {};
+    handleFieldChange(event, field) {
+        let comment = this.state.comment;
+        let changedFields = this.state.changedFields || {};
 
-        panel[event.target.id] = event.target.value
-        panelChangedFields[event.target.id] = event.target.value
+        comment[event.target.id] = event.target.value
+        changedFields[event.target.id] = event.target.value
 
         this.setState({
-            panel: panel,
-            panelChangedFields: panelChangedFields
+            comment: comment,
+            changedFields: changedFields
         })
     },
     handleClickCancel(event) {
@@ -66,10 +70,10 @@ const StoryboardPanelEdit = React.createClass({
         event.preventDefault()
         var that = this
         $.ajax({
-            url: '/api/project_storyboard_panel/' + this.props.params.panelId,
+            url: '/api/project_storyboard_panel_comment/' + this.props.params.commentId,
             dataType: 'json',
             cache: false,
-            data: that.state.panelChangedFields,
+            data: that.state.changedFields,
             method: "PUT",
             success: function(data) {
                 this.setState({
@@ -88,16 +92,11 @@ const StoryboardPanelEdit = React.createClass({
     render() {
         let that = this
         if (this.state){
-            let panelRevisionNodes = this.state.panel.revisions.map(function(revision) {
-                let props = {};
-                    props.src = revision.content
+            console.log(this.state)
+
+            let userOptionsNodes = this.state.project.users.map(function(user) {
                 return (
-                    <Card
-                        className="col-xs-4"
-                        key={ revision.id }
-                    >
-                        <ImagePanelRevision { ...props } ></ImagePanelRevision>
-                    </Card>
+                    <option value={ user.id } key={ user.id }>{ user.username }</option>
                 );
             });
 
@@ -109,39 +108,57 @@ const StoryboardPanelEdit = React.createClass({
                         message={ this.state.formMessage }
                     />
                     <form>
-                        <SectionHeader>name:</SectionHeader>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="name"
-                                placeholder="Name"
-                                value={ this.state.panel.name }
-                                onChange= { this.handleFieldChange }
-                            />
-                        </div>
-                        <SectionHeader>script:</SectionHeader>
+                        <SectionHeader>user:</SectionHeader>
+                        <select
+                            id="user_id"
+                            className="form-control"
+                            value={ this.state.comment.user_id }
+                            onChange={ that.handleFieldChange }
+                        >
+                            { userOptionsNodes }
+                        </select>
+
+                        <SectionHeader>comment:</SectionHeader>
                         <div className="form-group">
                             <textarea
                                 className="form-control"
-                                id="script"
+                                id="comment"
                                 rows="3"
-                                value={ this.state.panel.script || '' }
+                                value={ this.state.comment.comment || '' }
                                 onChange= { this.handleFieldChange }
                             />
                             <br />
                             <Card>
                                 <CardBlock>
-                                    <Fountain source={ this.state.panel.script } />
+                                    <Description source={ this.state.comment.comment } />
                                 </CardBlock>
                             </Card>
                         </div>
-                        <SectionHeader>revisions:</SectionHeader>
+
+                        <SectionHeader>date:</SectionHeader>
                         <div className="form-group">
-                            <div className="panelRevisionsContainer clearfix">
-                                { panelRevisionNodes }
-                            </div>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="date_added"
+                            placeholder="Date Added"
+                            value={ this.state.comment.date_added }
+                            onChange= { this.handleFieldChange }
+                        />
                         </div>
+
+                        <SectionHeader>status:</SectionHeader>
+                        <select
+                            id="status"
+                            className="form-control"
+                            value={ this.state.comment.status }
+                            onChange={ that.handleFieldChange }
+                        >
+                            <option value="new">New</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+
+                        <br />
                         <div className="form-group text-align-center">
                             <button
                                 className="btn btn-secondary"
@@ -150,7 +167,7 @@ const StoryboardPanelEdit = React.createClass({
                             <button
                                 className="btn btn-success"
                                 onClick={ that.handleClickSubmit }
-                                disabled={ !that.state.panelChangedFields }
+                                disabled={ !that.state.changedFields }
                             >Save</button>
                         </div>
                     </form>
@@ -163,4 +180,4 @@ const StoryboardPanelEdit = React.createClass({
     }
 })
 
-module.exports.StoryboardPanelEdit = StoryboardPanelEdit
+module.exports.StoryboardPanelCommentEdit = StoryboardPanelCommentEdit

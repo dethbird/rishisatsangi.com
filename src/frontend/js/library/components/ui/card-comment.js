@@ -9,7 +9,8 @@ import { CardBlock } from "../ui/card-block"
 const CardComment = React.createClass({
 
     propTypes: {
-        comment: React.PropTypes.object.isRequired
+        comment: React.PropTypes.object.isRequired,
+        link: React.PropTypes.string.isRequired
     },
 
     render: function() {
@@ -23,7 +24,7 @@ const CardComment = React.createClass({
                     <blockquote>{ this.props.comment.comment }</blockquote>
                 </CardBlock>
                 <div className="card-footer text-muted clearfix">
-                    <Link to={ '/comment/' + this.props.comment.id }>
+                    <Link to={ this.props.link }>
                         <TimeAgo date={ this.props.comment.date_added } />
                     </Link>
                 </div>

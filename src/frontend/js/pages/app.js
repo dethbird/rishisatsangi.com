@@ -43,6 +43,7 @@ render((
             <Route path="project/:projectId/reference_images" component={ProjectReferenceImages}/>
             <Route path="project/:projectId/storyboards" component={ProjectStoryboards}/>
             <Route path="project/:projectId/storyboard/:storyboardId" component={Storyboard}/>
+            <Route path="project/:projectId/storyboard/:storyboardId/panel/add" component={StoryboardPanelEdit}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId" component={StoryboardPanel}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId/edit" component={StoryboardPanelEdit}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId/comment/:commentId/edit" component={StoryboardPanelCommentEdit}/>

@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router'
 
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import { Description } from "../ui/description"
 import {
     ProjectStoryboardsBreadcrumb
 } from "./project-storyboards/project-storyboards-breadcrumb"
@@ -44,10 +45,8 @@ const ProjectStoryboards = React.createClass({
                     >
                         <h3 className="card-header">{ storyboard.name }</h3>
                         <CardBlock>
-                            <div>
-                                <blockquote>{ storyboard.description }</blockquote>
-                                <span>{ storyboard.panels.length } panel(s)</span>
-                            </div>
+                            <Description source={ storyboard.description } />
+                            <span>{ storyboard.panels.length } panel(s)</span>
                         </CardBlock>
                     </CardClickable>
                 );

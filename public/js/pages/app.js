@@ -37575,6 +37575,8 @@ var _cardClickable = require('../ui/card-clickable');
 
 var _cardBlock = require('../ui/card-block');
 
+var _description = require('../ui/description');
+
 var _projectStoryboardsBreadcrumb = require('./project-storyboards/project-storyboards-breadcrumb');
 
 var _spinner = require('../ui/spinner');
@@ -37617,20 +37619,12 @@ var ProjectStoryboards = _react2.default.createClass({
                     _react2.default.createElement(
                         _cardBlock.CardBlock,
                         null,
+                        _react2.default.createElement(_description.Description, { source: storyboard.description }),
                         _react2.default.createElement(
-                            'div',
+                            'span',
                             null,
-                            _react2.default.createElement(
-                                'blockquote',
-                                null,
-                                storyboard.description
-                            ),
-                            _react2.default.createElement(
-                                'span',
-                                null,
-                                storyboard.panels.length,
-                                ' panel(s)'
-                            )
+                            storyboard.panels.length,
+                            ' panel(s)'
                         )
                     )
                 );
@@ -37652,7 +37646,7 @@ var ProjectStoryboards = _react2.default.createClass({
 
 module.exports.ProjectStoryboards = ProjectStoryboards;
 
-},{"../ui/card-block":302,"../ui/card-clickable":303,"../ui/spinner":311,"./project-storyboards/project-storyboards-breadcrumb":283,"react":264,"react-router":112}],283:[function(require,module,exports){
+},{"../ui/card-block":302,"../ui/card-clickable":303,"../ui/description":307,"../ui/spinner":311,"./project-storyboards/project-storyboards-breadcrumb":283,"react":264,"react-router":112}],283:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -38573,12 +38567,31 @@ var StoryboardPanelEdit = _react2.default.createClass({
                     'id': this.props.params.panelId
                 });
 
+                var changedFields = null;
+                var submitUrl = '/api/project_storyboard_panel/' + this.props.params.panelId;
+                var submitMethod = 'PUT';
+
+                if (!panel) {
+                    panel = {
+                        name: '',
+                        revisions: []
+                    };
+                    submitUrl = '/api/project_storyboard_panel';
+                    submitMethod = 'POST';
+                    changedFields = {
+                        storyboard_id: this.props.params.storyboardId
+                    };
+                }
+
                 this.setState({
                     project: data,
                     storyboard: storyboard,
                     panel: panel,
                     formState: null,
-                    formMessage: null
+                    formMessage: null,
+                    submitUrl: submitUrl,
+                    submitMethod: submitMethod,
+                    changedFields: changedFields
                 });
             }.bind(this),
             error: function (xhr, status, err) {
@@ -38588,14 +38601,14 @@ var StoryboardPanelEdit = _react2.default.createClass({
     },
     handleFieldChange: function handleFieldChange(event) {
         var panel = this.state.panel;
-        var panelChangedFields = this.state.panelChangedFields || {};
+        var changedFields = this.state.changedFields || {};
 
         panel[event.target.id] = event.target.value;
-        panelChangedFields[event.target.id] = event.target.value;
+        changedFields[event.target.id] = event.target.value;
 
         this.setState({
             panel: panel,
-            panelChangedFields: panelChangedFields
+            changedFields: changedFields
         });
     },
     handleClickCancel: function handleClickCancel(event) {
@@ -38606,16 +38619,17 @@ var StoryboardPanelEdit = _react2.default.createClass({
         event.preventDefault();
         var that = this;
         $.ajax({
-            url: '/api/project_storyboard_panel/' + this.props.params.panelId,
+            data: that.state.changedFields,
             dataType: 'json',
             cache: false,
-            data: that.state.panelChangedFields,
-            method: "PUT",
+            method: this.state.submitMethod,
+            url: this.state.submitUrl,
             success: function (data) {
                 this.setState({
                     formState: 'success',
                     formMessage: 'Success.'
                 });
+                this.componentDidMount();
             }.bind(this),
             error: function (xhr, status, err) {
                 this.setState({
@@ -38628,6 +38642,7 @@ var StoryboardPanelEdit = _react2.default.createClass({
     render: function render() {
         var that = this;
         if (this.state) {
+            console.log(this.state);
             var panelRevisionNodes = this.state.panel.revisions.map(function (revision) {
                 var props = {};
                 props.src = revision.content;
@@ -38725,7 +38740,7 @@ var StoryboardPanelEdit = _react2.default.createClass({
                             {
                                 className: 'btn btn-success',
                                 onClick: that.handleClickSubmit,
-                                disabled: !that.state.panelChangedFields
+                                disabled: !that.state.changedFields
                             },
                             'Save'
                         )
@@ -38851,7 +38866,15 @@ var StoryboardPanel = _react2.default.createClass({
                 _react2.default.createElement(
                     'div',
                     { className: 'clearfix PanelRevisionsContainer' },
-                    panelRevisionNodes
+                    panelRevisionNodes,
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        {
+                            className: 'btn btn-success',
+                            to: '/project/' + that.props.params.projectId + '/storyboard/' + that.props.params.storyboardId + '/panel/' + that.props.params.panelId + '/revision/add'
+                        },
+                        'Add'
+                    )
                 ),
                 _react2.default.createElement(
                     _sectionHeader.SectionHeader,
@@ -38890,7 +38913,7 @@ var StoryboardPanelBreadcrumb = _react2.default.createClass({
     propTypes: {
         project: _react2.default.PropTypes.object.isRequired,
         storyboard: _react2.default.PropTypes.object.isRequired,
-        panel: _react2.default.PropTypes.object.isRequired
+        panel: _react2.default.PropTypes.object
     },
 
     render: function render() {
@@ -38945,7 +38968,7 @@ var StoryboardPanelBreadcrumb = _react2.default.createClass({
             _react2.default.createElement(
                 'li',
                 { className: 'breadcrumb-item' },
-                this.props.panel.name
+                this.props.panel ? this.props.panel.name : 'Add'
             )
         );
     }
@@ -38971,6 +38994,10 @@ var _card = require('../ui/card');
 var _cardClickable = require('../ui/card-clickable');
 
 var _cardBlock = require('../ui/card-block');
+
+var _description = require('../ui/description');
+
+var _fountain = require('../ui/fountain');
 
 var _imagePanelRevision = require('../ui/image-panel-revision');
 
@@ -39070,11 +39097,34 @@ var Storyboard = _react2.default.createClass({
                         _react2.default.createElement(
                             _cardBlock.CardBlock,
                             null,
+                            _react2.default.createElement(_description.Description, { source: this.state.storyboard.description })
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'card-footer text-muted clearfix' },
                             _react2.default.createElement(
-                                'div',
-                                null,
-                                'farts'
+                                _reactRouter.Link,
+                                { to: '/project/' + this.props.params.projectId + '/storyboard/' + this.props.params.storyboardId + '/edit' },
+                                'Edit'
                             )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    _sectionHeader.SectionHeader,
+                    null,
+                    'Script'
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'StoryboardPanelsContainer' },
+                    _react2.default.createElement(
+                        _card.Card,
+                        null,
+                        _react2.default.createElement(
+                            _cardBlock.CardBlock,
+                            null,
+                            _react2.default.createElement(_fountain.Fountain, { source: this.state.storyboard.script })
                         )
                     )
                 ),
@@ -39087,7 +39137,15 @@ var Storyboard = _react2.default.createClass({
                 _react2.default.createElement(
                     'div',
                     { className: 'StoryboardPanelsContainer' },
-                    storyboardPanelNodes
+                    storyboardPanelNodes,
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        {
+                            className: 'btn btn-success',
+                            to: '/project/' + that.props.params.projectId + '/storyboard/' + that.props.params.storyboardId + '/panel/add'
+                        },
+                        'Add'
+                    )
                 )
             );
         }
@@ -39097,7 +39155,7 @@ var Storyboard = _react2.default.createClass({
 
 module.exports.Storyboard = Storyboard;
 
-},{"../ui/card":306,"../ui/card-block":302,"../ui/card-clickable":303,"../ui/image-panel-revision":309,"../ui/section-header":310,"../ui/spinner":311,"./storyboard/storyboard-breadcrumb":300,"react":264,"react-markdown":81,"react-router":112}],300:[function(require,module,exports){
+},{"../ui/card":306,"../ui/card-block":302,"../ui/card-clickable":303,"../ui/description":307,"../ui/fountain":308,"../ui/image-panel-revision":309,"../ui/section-header":310,"../ui/spinner":311,"./storyboard/storyboard-breadcrumb":300,"react":264,"react-markdown":81,"react-router":112}],300:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -39715,6 +39773,7 @@ if (lastRequestUri) {
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/reference_images', component: _projectReference_images.ProjectReferenceImages }),
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboards', component: _projectStoryboards.ProjectStoryboards }),
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboard/:storyboardId', component: _storyboard.Storyboard }),
+        _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboard/:storyboardId/panel/add', component: _storyboardPanelEdit.StoryboardPanelEdit }),
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboard/:storyboardId/panel/:panelId', component: _storyboardPanel.StoryboardPanel }),
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboard/:storyboardId/panel/:panelId/edit', component: _storyboardPanelEdit.StoryboardPanelEdit }),
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboard/:storyboardId/panel/:panelId/comment/:commentId/edit', component: _storyboardPanelCommentEdit.StoryboardPanelCommentEdit }),

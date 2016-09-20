@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import { Card } from "../ui/card"
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import { Description } from "../ui/description"
+import { Fountain } from "../ui/fountain"
 import { ImagePanelRevision } from "../ui/image-panel-revision"
 import { SectionHeader } from "../ui/section-header"
 import {
@@ -78,13 +80,38 @@ const Storyboard = React.createClass({
                         <Card>
                             <h3 className="card-header">{ this.state.storyboard.name }</h3>
                             <CardBlock>
-                                <div>farts</div>
+                                <Description source ={ this.state.storyboard.description } />
+                            </CardBlock>
+                            <div className='card-footer text-muted clearfix'>
+                                <Link to={
+                                    '/project/' + this.props.params.projectId
+                                    + '/storyboard/' + this.props.params.storyboardId
+                                    + '/edit'
+                                }>Edit</Link>
+                            </div>
+                        </Card>
+                    </div>
+
+                    <SectionHeader>Script</SectionHeader>
+                    <div className="StoryboardPanelsContainer">
+                        <Card>
+                            <CardBlock>
+                                <Fountain source={ this.state.storyboard.script } />
                             </CardBlock>
                         </Card>
                     </div>
+
                     <SectionHeader>{ this.state.storyboard.panels.length } Panel(s)</SectionHeader>
                     <div className="StoryboardPanelsContainer">
                         { storyboardPanelNodes }
+                        <Link
+                            className="btn btn-success"
+                            to={
+                                '/project/' + that.props.params.projectId
+                                + '/storyboard/' + that.props.params.storyboardId
+                                + '/panel/add'
+                            }
+                        >Add</Link>
                     </div>
                 </div>
             );

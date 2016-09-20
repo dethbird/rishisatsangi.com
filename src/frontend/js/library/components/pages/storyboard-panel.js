@@ -92,6 +92,15 @@ const StoryboardPanel = React.createClass({
                     <SectionHeader>{ this.state.panel.revisions.length } Revision(s)</SectionHeader>
                     <div className="clearfix PanelRevisionsContainer">
                         { panelRevisionNodes }
+                        <Link
+                            className="btn btn-success"
+                            to={
+                                '/project/' + that.props.params.projectId
+                                + '/storyboard/' + that.props.params.storyboardId
+                                + '/panel/' + that.props.params.panelId
+                                + '/revision/add'
+                            }
+                        >Add</Link>
                     </div>
                     <SectionHeader>{ this.state.panel.comments.length } Comment(s)</SectionHeader>
                     <div className="clearfix PanelCommentsContainer">

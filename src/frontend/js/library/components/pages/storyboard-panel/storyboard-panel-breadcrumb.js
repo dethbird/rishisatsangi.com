@@ -7,7 +7,7 @@ const StoryboardPanelBreadcrumb = React.createClass({
     propTypes: {
         project: React.PropTypes.object.isRequired,
         storyboard: React.PropTypes.object.isRequired,
-        panel: React.PropTypes.object.isRequired
+        panel: React.PropTypes.object
     },
 
     render: function() {
@@ -43,7 +43,7 @@ const StoryboardPanelBreadcrumb = React.createClass({
                     Panels
                 </li>
                 <li className="breadcrumb-item">
-                    { this.props.panel.name }
+                    { this.props.panel ? this.props.panel.name : 'Add' }
                 </li>
             </ol>
         );

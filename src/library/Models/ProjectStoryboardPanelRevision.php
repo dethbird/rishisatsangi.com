@@ -1,8 +1,8 @@
 <?php
 
-class ProjectStoryboardPanel extends ActiveRecord\Model
+class ProjectStoryboardPanelRevision extends ActiveRecord\Model
 {
-    static $table_name = 'project_storyboard_panels';
+    static $table_name = 'project_storyboard_panel_revisions';
 
     static $before_create = array('before_create_audit');
     static $before_save = array('before_save_audit');
@@ -15,5 +15,5 @@ class ProjectStoryboardPanel extends ActiveRecord\Model
     public function before_save_audit() {
         $this->date_updated = date('Y-m-d g:i:s a');
     }
-
+    
 }

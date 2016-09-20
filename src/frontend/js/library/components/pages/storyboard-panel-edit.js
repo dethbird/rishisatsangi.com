@@ -29,12 +29,32 @@ const StoryboardPanelEdit = React.createClass({
                     'id': this.props.params.panelId
                 });
 
+                let changedFields = null
+                let submitUrl = '/api/project_storyboard_panel/'
+                    + this.props.params.panelId
+                let submitMethod = 'PUT'
+
+                if (!panel) {
+                    panel = {
+                        name: '',
+                        revisions: []
+                    };
+                    submitUrl = '/api/project_storyboard_panel'
+                    submitMethod = 'POST'
+                    changedFields = {
+                        storyboard_id: this.props.params.storyboardId
+                    }
+                }
+
                 this.setState({
                     project: data,
                     storyboard: storyboard,
                     panel: panel,
                     formState: null,
-                    formMessage: null
+                    formMessage: null,
+                    submitUrl: submitUrl,
+                    submitMethod: submitMethod,
+                    changedFields: changedFields
                 });
             }.bind(this),
             error: function(xhr, status, err) {
@@ -44,14 +64,14 @@ const StoryboardPanelEdit = React.createClass({
     },
     handleFieldChange(event) {
         let panel = this.state.panel;
-        let panelChangedFields = this.state.panelChangedFields || {};
+        let changedFields = this.state.changedFields || {};
 
         panel[event.target.id] = event.target.value
-        panelChangedFields[event.target.id] = event.target.value
+        changedFields[event.target.id] = event.target.value
 
         this.setState({
             panel: panel,
-            panelChangedFields: panelChangedFields
+            changedFields: changedFields
         })
     },
     handleClickCancel(event) {
@@ -66,11 +86,11 @@ const StoryboardPanelEdit = React.createClass({
         event.preventDefault()
         var that = this
         $.ajax({
-            url: '/api/project_storyboard_panel/' + this.props.params.panelId,
+            data: that.state.changedFields,
             dataType: 'json',
             cache: false,
-            data: that.state.panelChangedFields,
-            method: "PUT",
+            method: this.state.submitMethod,
+            url: this.state.submitUrl,
             success: function(data) {
                 this.setState({
                     formState: 'success',
@@ -88,9 +108,10 @@ const StoryboardPanelEdit = React.createClass({
     render() {
         let that = this
         if (this.state){
+            console.log(this.state)
             let panelRevisionNodes = this.state.panel.revisions.map(function(revision) {
                 let props = {};
-                    props.src = revision.content
+                props.src = revision.content
                 return (
                     <Card
                         className="col-xs-4"
@@ -109,6 +130,7 @@ const StoryboardPanelEdit = React.createClass({
                         message={ this.state.formMessage }
                     />
                     <form>
+
                         <SectionHeader>name:</SectionHeader>
                         <div className="form-group">
                             <input
@@ -120,6 +142,7 @@ const StoryboardPanelEdit = React.createClass({
                                 onChange= { this.handleFieldChange }
                             />
                         </div>
+
                         <SectionHeader>script:</SectionHeader>
                         <div className="form-group">
                             <textarea
@@ -136,12 +159,14 @@ const StoryboardPanelEdit = React.createClass({
                                 </CardBlock>
                             </Card>
                         </div>
+
                         <SectionHeader>revisions:</SectionHeader>
                         <div className="form-group">
                             <div className="panelRevisionsContainer clearfix">
                                 { panelRevisionNodes }
                             </div>
                         </div>
+
                         <div className="form-group text-align-center">
                             <button
                                 className="btn btn-secondary"
@@ -150,7 +175,7 @@ const StoryboardPanelEdit = React.createClass({
                             <button
                                 className="btn btn-success"
                                 onClick={ that.handleClickSubmit }
-                                disabled={ !that.state.panelChangedFields }
+                                disabled={ !that.state.changedFields }
                             >Save</button>
                         </div>
                     </form>

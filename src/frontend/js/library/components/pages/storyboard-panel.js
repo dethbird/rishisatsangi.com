@@ -8,6 +8,7 @@ import { CardClickable } from "../ui/card-clickable"
 import { CardComment } from "../ui/card-comment"
 import { CardBlock } from "../ui/card-block"
 import { CardStoryboardPanel } from "../ui/card-storyboard-panel"
+import { Description } from "../ui/description"
 import { Fountain } from "../ui/fountain"
 import { ImagePanelRevision } from "../ui/image-panel-revision"
 import {
@@ -42,7 +43,13 @@ const StoryboardPanel = React.createClass({
         });
     },
     handleClickRevision(revision_id) {
-        console.log(revision_id)
+        browserHistory.push(
+            '/project/' + this.props.params.projectId
+            + '/storyboard/' + this.props.params.storyboardId
+            + '/panel/' + this.props.params.panelId
+            + '/revision/' + revision_id
+            + '/edit'
+        )
     },
     render() {
         let that = this
@@ -53,11 +60,14 @@ const StoryboardPanel = React.createClass({
                     props.src = revision.content
                 return (
                     <CardClickable
-                        className="col-xs-4"
+                        className="col-lg-4"
                         key={ revision.id }
                         onClick={ that.handleClickRevision.bind(that, revision.id) }
                     >
                         <ImagePanelRevision { ...props } ></ImagePanelRevision>
+                        <CardBlock>
+                            <Description source={ revision.description } />
+                        </CardBlock>
                     </CardClickable>
                 );
             });

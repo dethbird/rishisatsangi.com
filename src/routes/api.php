@@ -795,7 +795,7 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
     });
 
-    # update panel
+    # update storyboard panel
     $app->put('/project_storyboard_panel/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
@@ -847,18 +847,19 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 		$app->response->setBody(json_encode($result));
 	});
 
-	# create revision
+	# create storyboard panel revision
     $app->post('/project_storyboard_panel_revision', function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
+
+        $model = new ProjectStoryboardPanelRevision($app->request->params());
+        $model->user_id = $securityContext->id;
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
+            json_decode($model->to_json()),
             APPLICATION_PATH . "configs/validation_schemas/project_storyboard_panel_revision.json");
 
         if (is_array($validation_response)) {
@@ -866,28 +867,37 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $revision = $projectService->createProjectStoryboardPanelRevision($app->request->params());
 
-            $app->response->setStatus(201);
+            $model->save();
+            $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($revision));
+            $app->response->setBody($model->to_json());
         }
 
     });
 
-    # update revision
+    # update storyboard panel revision
     $app->put('/project_storyboard_panel_revision/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
+
+        $model = ProjectStoryboardPanelRevision::find_by_id_and_user_id(
+            $id, $securityContext->id);
+
+        if(!$model) {
+            $app->halt(404);
+        }
+
+        foreach($app->request->params() as $key=>$value) {
+            $model->$key = $value;
+        }
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
+            json_decode($model->to_json()),
             APPLICATION_PATH . "configs/validation_schemas/project_storyboard_panel_revision.json");
 
         if (is_array($validation_response)) {
@@ -895,12 +905,10 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $revision = $projectService->updateProjectStoryboardPanelRevision(
-                $id, $app->request->params());
-
+            $model->save();
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($revision));
+            $app->response->setBody($model->to_json());
         }
 
     });

@@ -34,14 +34,44 @@ const StoryboardPanelCommentEdit = React.createClass({
                     'id': this.props.params.commentId
                 });
 
+                let changedFields = null
+                let submitUrl = '/api/comment/' + this.props.params.commentId
+                let submitMethod = 'PUT'
+
+
+                if (!comment) {
+                    comment = {
+                        comment: ''
+                    };
+                    submitUrl = '/api/comment'
+                    submitMethod = 'POST'
+
+                    let user = data.users[0]
+
+                    console.log(user);
+                    console.log(moment().format('YYYY-MM-DD'));
+
+                    changedFields = {
+                        entity_id: this.props.params.panelId,
+                        entity_table_name: 'project_storyboard_panels',
+                        date_added: moment().format('YYYY-MM-DD'),
+                        user_id: user.id,
+                        'status': 'new'
+                    }
+                }
+
                 this.setState({
                     project: data,
                     storyboard: storyboard,
                     panel: panel,
                     comment: comment,
                     formState: null,
-                    formMessage: null
+                    formMessage: null,
+                    submitUrl: submitUrl,
+                    submitMethod: submitMethod,
+                    changedFields: changedFields
                 });
+
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -79,16 +109,20 @@ const StoryboardPanelCommentEdit = React.createClass({
     handleClickSubmit(event) {
         event.preventDefault()
         var that = this
+
         $.ajax({
-            url: '/api/comment/' + this.props.params.commentId,
+            url: that.state.submitUrl,
+            data: that.state.changedFields,
             dataType: 'json',
             cache: false,
-            data: that.state.changedFields,
-            method: "PUT",
+            method: that.state.submitMethod,
             success: function(data) {
                 this.setState({
                     formState: 'success',
-                    formMessage: 'Success.'
+                    formMessage: 'Success.',
+                    comment: data,
+                    submitUrl: '/api/comment/' + data.id,
+                    submitMethod:'PUT'
                 })
             }.bind(this),
             error: function(xhr, status, err) {
@@ -102,7 +136,6 @@ const StoryboardPanelCommentEdit = React.createClass({
     render() {
         let that = this
         if (this.state){
-
             let userOptionsNodes = this.state.project.users.map(function(user) {
                 return (
                     <option value={ user.id } key={ user.id }>{ user.username }</option>

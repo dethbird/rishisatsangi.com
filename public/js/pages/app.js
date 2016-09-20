@@ -38326,13 +38326,41 @@ var StoryboardPanelCommentEdit = _react2.default.createClass({
                     'id': this.props.params.commentId
                 });
 
+                var changedFields = null;
+                var submitUrl = '/api/comment/' + this.props.params.commentId;
+                var submitMethod = 'PUT';
+
+                if (!comment) {
+                    comment = {
+                        comment: ''
+                    };
+                    submitUrl = '/api/comment';
+                    submitMethod = 'POST';
+
+                    var user = data.users[0];
+
+                    console.log(user);
+                    console.log(moment().format('YYYY-MM-DD'));
+
+                    changedFields = {
+                        entity_id: this.props.params.panelId,
+                        entity_table_name: 'project_storyboard_panels',
+                        date_added: moment().format('YYYY-MM-DD'),
+                        user_id: user.id,
+                        'status': 'new'
+                    };
+                }
+
                 this.setState({
                     project: data,
                     storyboard: storyboard,
                     panel: panel,
                     comment: comment,
                     formState: null,
-                    formMessage: null
+                    formMessage: null,
+                    submitUrl: submitUrl,
+                    submitMethod: submitMethod,
+                    changedFields: changedFields
                 });
             }.bind(this),
             error: function (xhr, status, err) {
@@ -38367,16 +38395,20 @@ var StoryboardPanelCommentEdit = _react2.default.createClass({
     handleClickSubmit: function handleClickSubmit(event) {
         event.preventDefault();
         var that = this;
+
         $.ajax({
-            url: '/api/comment/' + this.props.params.commentId,
+            url: that.state.submitUrl,
+            data: that.state.changedFields,
             dataType: 'json',
             cache: false,
-            data: that.state.changedFields,
-            method: "PUT",
+            method: that.state.submitMethod,
             success: function (data) {
                 this.setState({
                     formState: 'success',
-                    formMessage: 'Success.'
+                    formMessage: 'Success.',
+                    comment: data,
+                    submitUrl: '/api/comment/' + data.id,
+                    submitMethod: 'PUT'
                 });
             }.bind(this),
             error: function (xhr, status, err) {
@@ -38390,7 +38422,7 @@ var StoryboardPanelCommentEdit = _react2.default.createClass({
     render: function render() {
         var that = this;
         if (this.state) {
-
+            console.log(this.state);
             var userOptionsNodes = this.state.project.users.map(function (user) {
                 return _react2.default.createElement(
                     'option',
@@ -38578,6 +38610,7 @@ var StoryboardPanelEdit = _react2.default.createClass({
                     };
                     submitUrl = '/api/project_storyboard_panel';
                     submitMethod = 'POST';
+
                     changedFields = {
                         storyboard_id: this.props.params.storyboardId
                     };
@@ -38627,9 +38660,11 @@ var StoryboardPanelEdit = _react2.default.createClass({
             success: function (data) {
                 this.setState({
                     formState: 'success',
-                    formMessage: 'Success.'
+                    formMessage: 'Success.',
+                    submitUrl: '/api/project_storyboard_panel/' + data.id,
+                    submitMethod: 'PUT',
+                    panel: data
                 });
-                this.componentDidMount();
             }.bind(this),
             error: function (xhr, status, err) {
                 this.setState({
@@ -38642,7 +38677,6 @@ var StoryboardPanelEdit = _react2.default.createClass({
     render: function render() {
         var that = this;
         if (this.state) {
-            console.log(this.state);
             var panelRevisionNodes = this.state.panel.revisions.map(function (revision) {
                 var props = {};
                 props.src = revision.content;
@@ -38885,7 +38919,15 @@ var StoryboardPanel = _react2.default.createClass({
                 _react2.default.createElement(
                     'div',
                     { className: 'clearfix PanelCommentsContainer' },
-                    panelCommentNodes
+                    panelCommentNodes,
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        {
+                            className: 'btn btn-success',
+                            to: '/project/' + that.props.params.projectId + '/storyboard/' + that.props.params.storyboardId + '/panel/' + that.props.params.panelId + '/comment/add'
+                        },
+                        'Add'
+                    )
                 )
             );
         }
@@ -39776,6 +39818,7 @@ if (lastRequestUri) {
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboard/:storyboardId/panel/add', component: _storyboardPanelEdit.StoryboardPanelEdit }),
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboard/:storyboardId/panel/:panelId', component: _storyboardPanel.StoryboardPanel }),
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboard/:storyboardId/panel/:panelId/edit', component: _storyboardPanelEdit.StoryboardPanelEdit }),
+        _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboard/:storyboardId/panel/:panelId/comment/add', component: _storyboardPanelCommentEdit.StoryboardPanelCommentEdit }),
         _react2.default.createElement(_reactRouter.Route, { path: 'project/:projectId/storyboard/:storyboardId/panel/:panelId/comment/:commentId/edit', component: _storyboardPanelCommentEdit.StoryboardPanelCommentEdit }),
         _react2.default.createElement(_reactRouter.Route, { path: '*', component: _projects.Projects })
     )

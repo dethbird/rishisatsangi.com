@@ -41,6 +41,7 @@ const StoryboardPanelEdit = React.createClass({
                     };
                     submitUrl = '/api/project_storyboard_panel'
                     submitMethod = 'POST'
+
                     changedFields = {
                         storyboard_id: this.props.params.storyboardId
                     }
@@ -94,7 +95,11 @@ const StoryboardPanelEdit = React.createClass({
             success: function(data) {
                 this.setState({
                     formState: 'success',
-                    formMessage: 'Success.'
+                    formMessage: 'Success.',
+                    submitUrl:'/api/project_storyboard_panel/'
+                        + data.id,
+                    submitMethod: 'PUT',
+                    panel: data
                 })
             }.bind(this),
             error: function(xhr, status, err) {
@@ -108,7 +113,6 @@ const StoryboardPanelEdit = React.createClass({
     render() {
         let that = this
         if (this.state){
-            console.log(this.state)
             let panelRevisionNodes = this.state.panel.revisions.map(function(revision) {
                 let props = {};
                 props.src = revision.content

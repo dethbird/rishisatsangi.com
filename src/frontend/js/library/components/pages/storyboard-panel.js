@@ -105,6 +105,15 @@ const StoryboardPanel = React.createClass({
                     <SectionHeader>{ this.state.panel.comments.length } Comment(s)</SectionHeader>
                     <div className="clearfix PanelCommentsContainer">
                         { panelCommentNodes }
+                        <Link
+                            className="btn btn-success"
+                            to={
+                                '/project/' + that.props.params.projectId
+                                + '/storyboard/' + that.props.params.storyboardId
+                                + '/panel/' + that.props.params.panelId
+                                + '/comment/add'
+                            }
+                        >Add</Link>
                     </div>
                 </div>
             );

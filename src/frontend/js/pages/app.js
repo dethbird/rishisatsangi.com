@@ -46,6 +46,7 @@ render((
             <Route path="project/:projectId/storyboard/:storyboardId/panel/add" component={StoryboardPanelEdit}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId" component={StoryboardPanel}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId/edit" component={StoryboardPanelEdit}/>
+            <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId/comment/add" component={StoryboardPanelCommentEdit}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId/comment/:commentId/edit" component={StoryboardPanelCommentEdit}/>
             <Route path="*" component={Projects}/>
         </Route>

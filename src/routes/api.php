@@ -33,6 +33,38 @@ $app->post('/api/login', function () use ($app) {
 $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
     # update comment
+    $app->post('/comment', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+        $db = $app->container->get('db');
+
+        /**
+         * @todo use a different column to store the commenting user id
+         */
+        $model = new Comment($app->request->params());
+
+        # validate
+        $validator = new Validator();
+        $validation_response = $validator->validate(
+            json_decode($model->to_json()),
+            APPLICATION_PATH . "configs/validation_schemas/comment.json");
+
+        if (is_array($validation_response)) {
+            $app->response->setStatus(400);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody(json_encode($validation_response));
+        } else {
+
+            $model->save();
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody($model->to_json());
+        }
+
+    });
+
+    # update comment
     $app->put('/comment/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');

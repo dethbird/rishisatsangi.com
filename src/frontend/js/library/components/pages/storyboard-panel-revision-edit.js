@@ -6,6 +6,7 @@ import { Card } from "../ui/card"
 import { SectionHeader } from "../ui/section-header"
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import { ContentEdit } from "../ui/content-edit"
 import { Description } from "../ui/description"
 import { ImagePanelRevision } from "../ui/image-panel-revision"
 import {
@@ -40,7 +41,8 @@ const StoryboardPanelRevisionEdit = React.createClass({
                 if (!revision) {
                     revision = {
                         name: '',
-                        content: ''
+                        content: '',
+                        description: ''
                     };
                     submitUrl = '/api/project_storyboard_panel_revision'
                     submitMethod = 'POST'
@@ -66,6 +68,15 @@ const StoryboardPanelRevisionEdit = React.createClass({
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
+    },
+    handleContentSelection(event) {
+        event.preventDefault()
+        this.handleFieldChange({
+            target: {
+                id: 'content',
+                value: event.target.src
+            }
+        })
     },
     handleFieldChange(event) {
         let revision = this.state.revision;
@@ -117,7 +128,6 @@ const StoryboardPanelRevisionEdit = React.createClass({
     render() {
         let that = this
         if (this.state){
-            console.log(this.state);
             return (
                 <div>
                     <StoryboardPanelBreadcrumb { ...this.state }></StoryboardPanelBreadcrumb>
@@ -129,13 +139,12 @@ const StoryboardPanelRevisionEdit = React.createClass({
 
                         <SectionHeader>content:</SectionHeader>
                         <div className="form-group">
-                            <input
+                            <ContentEdit
                                 type="text"
-                                className="form-control"
                                 id="content"
                                 placeholder="Image Url"
                                 value={ this.state.revision.content }
-                                onChange= { this.handleFieldChange }
+                                handleFieldChange={ this.handleFieldChange }
                             />
                         </div>
 
@@ -145,7 +154,7 @@ const StoryboardPanelRevisionEdit = React.createClass({
                                 className="form-control"
                                 id="description"
                                 rows="3"
-                                value={ this.state.revision.description }
+                                value={ this.state.revision.description || '' }
                                 onChange= { this.handleFieldChange }
                             />
                             <br />

@@ -1,10 +1,15 @@
 import React from 'react'
+import {
+    SortableItems,
+    SortableItem
+} from 'react-sortable-component'
 import { browserHistory } from 'react-router'
 
 import { Alert } from "../ui/alert"
 import { Card } from "../ui/card"
 import { SectionHeader } from "../ui/section-header"
 import { CardClickable } from "../ui/card-clickable"
+// import { CardSortable } from "../ui/card-sortable"
 import { CardBlock } from "../ui/card-block"
 import { Fountain } from "../ui/fountain"
 import { ImagePanelRevision } from "../ui/image-panel-revision"
@@ -110,19 +115,26 @@ const StoryboardPanelEdit = React.createClass({
             }.bind(this)
         });
     },
+    handleSort(items) {
+        let panel = this.state.panel
+        panel.revisions = items
+        this.setState({
+            panel: panel
+        })
+    },
     render() {
         let that = this
         if (this.state){
-            let panelRevisionNodes = this.state.panel.revisions.map(function(revision) {
+            let panelRevisionNodes = this.state.panel.revisions.map(function(revision, i) {
                 let props = {};
                 props.src = revision.content
                 return (
-                    <Card
-                        className="col-xs-4"
+                    <SortableItem
                         key={ revision.id }
+                        className="card col-xs-4"
                     >
                         <ImagePanelRevision { ...props } ></ImagePanelRevision>
-                    </Card>
+                    </SortableItem>
                 );
             });
 
@@ -167,7 +179,13 @@ const StoryboardPanelEdit = React.createClass({
                         <SectionHeader>revisions:</SectionHeader>
                         <div className="form-group">
                             <div className="panelRevisionsContainer clearfix">
-                                { panelRevisionNodes }
+                                <SortableItems
+                                    items={ that.state.panel.revisions }
+                                    onSort={ that.handleSort }
+                                    name="sort-revisions-component"
+                                >
+                                    { panelRevisionNodes }
+                                </SortableItems>
                             </div>
                         </div>
 

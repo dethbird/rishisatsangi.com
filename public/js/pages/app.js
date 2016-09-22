@@ -39047,10 +39047,24 @@ var StoryboardPanelEdit = _react2.default.createClass({
         });
     },
     handleSort: function handleSort(items) {
+
+        var that = this;
+
         var panel = this.state.panel;
         panel.revisions = items;
         this.setState({
             panel: panel
+        });
+
+        $.post('/api/project_storyboard_panel_revision_order', { 'items': items }, function (response) {
+
+            var panel = that.state.panel;
+            panel.revisions = response.items;
+            that.setState({
+                panel: panel,
+                formState: 'success',
+                formMessage: 'Order saved.'
+            });
         });
     },
     render: function render() {

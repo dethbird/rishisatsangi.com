@@ -116,11 +116,25 @@ const StoryboardPanelEdit = React.createClass({
         });
     },
     handleSort(items) {
+
+        var that = this
+
         let panel = this.state.panel
         panel.revisions = items
         this.setState({
             panel: panel
-        })
+        });
+
+        $.post('/api/project_storyboard_panel_revision_order', {'items': items}, function(response){
+
+            let panel = that.state.panel
+            panel.revisions = response.items
+            that.setState({
+                panel: panel,
+                formState: 'success',
+                formMessage: 'Order saved.'
+            })
+        });
     },
     render() {
         let that = this

@@ -832,7 +832,8 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
     });
 
-	# order storyboards
+
+	# order project storyboard panels
 	$app->post('/project_storyboard_panel_order', function () use ($app) {
 
 		$configs = $app->container->get('configs');
@@ -846,6 +847,7 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 		$app->response->headers->set('Content-Type', 'application/json');
 		$app->response->setBody(json_encode($result));
 	});
+
 
 	# create storyboard panel revision
     $app->post('/project_storyboard_panel_revision', function () use ($app) {
@@ -913,15 +915,21 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
     });
 
-    # order panel revision
+    # order project storyboard panel revisions
     $app->post('/project_storyboard_panel_revision_order', function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
 
-        $result = $projectService->orderProjectStoryboardPanelRevisions($app->request->params());
+        $result = [];
+        $result['items'] = [];
+        foreach($app->request->params('items') as $sort_order => $item) {
+            $model = ProjectStoryboardPanelRevision::find_by_id_and_user_id(
+                $item['id'], $securityContext->id);
+            $model->sort_order = $sort_order;
+            $model->save();
+            $result['items'][] = json_decode($model->to_json());
+        }
 
         $app->response->setStatus(200);
         $app->response->headers->set('Content-Type', 'application/json');

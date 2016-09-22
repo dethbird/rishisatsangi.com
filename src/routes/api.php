@@ -326,10 +326,16 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
 		$configs = $app->container->get('configs');
 		$securityContext = $_SESSION['securityContext'];
-		$db = $app->container->get('db');
-		$projectService = new Projects($db, $configs, $securityContext);
 
-		$result = $projectService->orderProjectCharacters($app->request->params());
+        $result = [];
+        $result['items'] = [];
+        foreach($app->request->params('items') as $sort_order => $item) {
+            $model = ProjectCharacter::find_by_id_and_user_id(
+                $item['id'], $securityContext->id);
+            $model->sort_order = $sort_order;
+            $model->save();
+            $result['items'][] = json_decode($model->to_json());
+        }
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Content-Type', 'application/json');

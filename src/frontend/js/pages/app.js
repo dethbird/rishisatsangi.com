@@ -7,6 +7,7 @@ import { Character } from '../library/components/pages/character'
 import { ConceptArt } from '../library/components/pages/concept_art'
 import { Project } from '../library/components/pages/project'
 import { ProjectCharacters } from '../library/components/pages/project-characters'
+import { ProjectCharactersEdit } from '../library/components/pages/project-characters-edit'
 import { ProjectConceptArt } from '../library/components/pages/project-concept_art'
 import { ProjectLocations } from '../library/components/pages/project-locations'
 import { ProjectReferenceImages } from '../library/components/pages/project-reference_images'
@@ -37,6 +38,7 @@ render((
             <Route path="projects" component={Projects}/>
             <Route path="project/:projectId" component={Project}/>
             <Route path="project/:projectId/characters" component={ProjectCharacters}/>
+            <Route path="project/:projectId/characters/edit" component={ProjectCharactersEdit}/>
             <Route path="project/:projectId/character/:characterId" component={Character}/>
             <Route path="project/:projectId/concept_art" component={ProjectConceptArt}/>
             <Route path="project/:projectId/concept_art/:conceptArtId" component={ConceptArt}/>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import { CardClickable } from '../ui/card-clickable'
 import { CardBlock } from '../ui/card-block'
@@ -63,8 +63,13 @@ const ProjectCharacters = React.createClass({
             });
             return (
                 <div>
-                    <ProjectCharactersBreadcrumb project={ this.state.project }>
-                    </ProjectCharactersBreadcrumb>
+                    <ProjectCharactersBreadcrumb project={ this.state.project } />
+                    <Link to={
+                            '/project/' + this.state.project.id + '/characters/edit'
+                        }
+                        className="btn btn-info"
+                    >Reorder</Link>
+                    <br className="clearfix" />
                     <div className="projectCharactersList">
                         { characterNodes }
                     </div>

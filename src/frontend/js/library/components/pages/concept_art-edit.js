@@ -28,7 +28,7 @@ const ConceptArtEdit = React.createClass({
             success: function(data) {
 
                 let concept_art = _.findWhere(data.concept_art, {
-                    'id': this.props.params.conceptArtId
+                    'id': parseInt(this.props.params.conceptArtId)
                 });
 
                 let changedFields = null

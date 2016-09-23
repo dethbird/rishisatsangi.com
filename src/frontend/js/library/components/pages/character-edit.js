@@ -28,7 +28,7 @@ const CharacterEdit = React.createClass({
             success: function(data) {
 
                 let character = _.findWhere(data.characters, {
-                    'id': this.props.params.characterId
+                    'id': parseInt(this.props.params.characterId)
                 });
 
                 let changedFields = null

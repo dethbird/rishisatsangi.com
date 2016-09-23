@@ -3,6 +3,7 @@ import React from 'react'
 import { Card } from "../../ui/card"
 import { CardBlock } from "../../ui/card-block"
 import { Description } from "../../ui/description"
+import { ImagePanelRevision } from "../../ui/image-panel-revision"
 
 
 const ProjectDetails = React.createClass({
@@ -18,6 +19,7 @@ const ProjectDetails = React.createClass({
                 <CardBlock>
                     <div>
                         <h3>{ this.props.project.name }</h3>
+                        <ImagePanelRevision { ...{src: this.props.project.content }} />
                         <Description source={ this.props.project.description }></Description>
                     </div>
                 </CardBlock>

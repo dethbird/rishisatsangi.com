@@ -25,7 +25,7 @@ const ReferenceImageEdit = React.createClass({
             success: function(data) {
 
                 let reference_image = _.findWhere(data.reference_images, {
-                    'id': this.props.params.referenceImageId
+                    'id': parseInt(this.props.params.referenceImageId)
                 });
 
                 let changedFields = null

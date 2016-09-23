@@ -25,13 +25,13 @@ const StoryboardPanelCommentEdit = React.createClass({
             success: function(data) {
 
                 let storyboard = _.findWhere(data.storyboards, {
-                    'id': this.props.params.storyboardId
+                    'id': parseInt(this.props.params.storyboardId)
                 });
                 let panel = _.findWhere(storyboard.panels, {
-                    'id': this.props.params.panelId
+                    'id': parseInt(this.props.params.panelId)
                 });
                 let comment = _.findWhere(panel.comments, {
-                    'id': this.props.params.commentId
+                    'id': parseInt(this.props.params.commentId)
                 });
 
                 let changedFields = null

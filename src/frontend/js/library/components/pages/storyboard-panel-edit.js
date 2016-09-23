@@ -9,6 +9,7 @@ import { Alert } from "../ui/alert"
 import { Card } from "../ui/card"
 import { SectionHeader } from "../ui/section-header"
 import { CardClickable } from "../ui/card-clickable"
+// import { CardSortable } from "../ui/card-sortable"
 import { CardBlock } from "../ui/card-block"
 import { Fountain } from "../ui/fountain"
 import { ImagePanelRevision } from "../ui/image-panel-revision"
@@ -27,10 +28,10 @@ const StoryboardPanelEdit = React.createClass({
             success: function(data) {
 
                 let storyboard = _.findWhere(data.storyboards, {
-                    'id': this.props.params.storyboardId
+                    'id': parseInt(this.props.params.storyboardId)
                 });
                 let panel = _.findWhere(storyboard.panels, {
-                    'id': this.props.params.panelId
+                    'id': parseInt(this.props.params.panelId)
                 });
 
                 let changedFields = null
@@ -124,12 +125,6 @@ const StoryboardPanelEdit = React.createClass({
             panel: panel
         });
 
-        items = items.map(function(item, i){
-            return (
-                { 'id': item.id }
-            );
-        })
-
         $.post('/api/project_storyboard_panel_revision_order', {'items': items}, function(response){
 
             let panel = that.state.panel
@@ -195,20 +190,6 @@ const StoryboardPanelEdit = React.createClass({
                             </Card>
                         </div>
 
-                        <div className="form-group text-align-center">
-                            <button
-                                className="btn btn-secondary"
-                                onClick={ that.handleClickCancel }
-                            >Cancel</button>
-                            <button
-                                className="btn btn-success"
-                                onClick={ that.handleClickSubmit }
-                                disabled={ !that.state.changedFields }
-                            >Save</button>
-                        </div>
-
-
-
                         <SectionHeader>revisions:</SectionHeader>
                         <div className="form-group">
                             <div className="panelRevisionsContainer clearfix">
@@ -221,7 +202,18 @@ const StoryboardPanelEdit = React.createClass({
                                 </SortableItems>
                             </div>
                         </div>
-                        
+
+                        <div className="form-group text-align-center">
+                            <button
+                                className="btn btn-secondary"
+                                onClick={ that.handleClickCancel }
+                            >Cancel</button>
+                            <button
+                                className="btn btn-success"
+                                onClick={ that.handleClickSubmit }
+                                disabled={ !that.state.changedFields }
+                            >Save</button>
+                        </div>
                     </form>
                 </div>
             );

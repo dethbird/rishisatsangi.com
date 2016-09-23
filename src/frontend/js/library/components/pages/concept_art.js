@@ -20,8 +20,9 @@ const ConceptArt = React.createClass({
             dataType: 'json',
             cache: false,
             success: function(data) {
+
                 let concept_art = _.findWhere(data.concept_art, {
-                    'id': this.props.params.conceptArtId
+                    'id': parseInt(this.props.params.conceptArtId)
                 });
 
                 if (!concept_art) {
@@ -43,19 +44,16 @@ const ConceptArt = React.createClass({
     render() {
 
         if (this.state) {
-
             var that = this;
 
             var conceptArtRevisionNodes = that.state.concept_art.revisions.map(function(revision) {
-                let props = {};
-                props.src = revision.content;
                 return (
                     <Card
                         className="col-lg-4"
                         key={ revision.id }
                     >
                         <CardBlock className="text-align-center">
-                            <ImagePanelRevision { ...props } />
+                            <ImagePanelRevision { ...{src: revision.content} } />
                         </CardBlock>
                     </Card>
                 );
@@ -74,6 +72,19 @@ const ConceptArt = React.createClass({
                         concept_art={ this.state.concept_art }
                     />
 
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-info"
+                                to={
+                                    '/project/' + this.props.params.projectId
+                                    + '/concept_art/' + this.props.params.conceptArtId
+                                    + '/edit'
+                                }>Edit</Link>
+                        </li>
+                    </ul>
+                    <br />
+
                     <div className="ConceptArtDetailsContainer">
                         <Card>
                             <h3 className="card-header">{ this.state.concept_art.name }</h3>
@@ -85,13 +96,6 @@ const ConceptArt = React.createClass({
                             <CardBlock>
                                 <Description source={ this.state.concept_art.description }></Description>
                             </CardBlock>
-                            <div className='card-footer text-muted clearfix'>
-                                <Link to={
-                                    '/project/' + this.props.params.projectId
-                                    + '/concept_art/' + this.props.params.conceptArtId
-                                    + '/edit'
-                                }>Edit</Link>
-                            </div>
                         </Card>
                     </div>
 

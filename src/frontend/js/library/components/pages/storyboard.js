@@ -23,7 +23,7 @@ const Storyboard = React.createClass({
             cache: false,
             success: function(data) {
                 let storyboard = _.findWhere(data.storyboards, {
-                    'id': this.props.params.storyboardId
+                    'id': parseInt(this.props.params.storyboardId)
                 });
                 this.setState({
                     project: data,

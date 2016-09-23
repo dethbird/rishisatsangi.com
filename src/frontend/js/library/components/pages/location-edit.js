@@ -25,7 +25,7 @@ const LocationEdit = React.createClass({
             success: function(data) {
 
                 let location = _.findWhere(data.locations, {
-                    'id': this.props.params.locationId
+                    'id': parseInt(this.props.params.locationId)
                 });
 
                 let changedFields = null

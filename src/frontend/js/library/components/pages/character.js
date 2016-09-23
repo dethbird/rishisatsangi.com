@@ -19,9 +19,11 @@ const Character = React.createClass({
             dataType: 'json',
             cache: false,
             success: function(data) {
+
                 let character = _.findWhere(data.characters, {
-                    'id': this.props.params.characterId
+                    id: parseInt(this.props.params.characterId)
                 });
+
                 this.setState({
                     project: data,
                     character: character

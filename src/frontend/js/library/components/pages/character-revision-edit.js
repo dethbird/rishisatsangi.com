@@ -24,11 +24,11 @@ const CharacterRevisionEdit = React.createClass({
             success: function(data) {
 
                 let character = _.findWhere(data.characters, {
-                    'id': this.props.params.characterId
+                    'id': parseInt(this.props.params.characterId)
                 });
 
                 let revision = _.findWhere(character.revisions, {
-                    'id': this.props.params.revisionId
+                    'id': parseInt(this.props.params.revisionId)
                 });
 
                 let changedFields = null

@@ -4,6 +4,7 @@ import { browserHistory, Link } from 'react-router'
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
 import { Description } from "../ui/description"
+import { ImagePanelRevision } from "../ui/image-panel-revision"
 import {
     ProjectConceptArtBreadcrumb
 } from "./project-concept_art/project-concept_art-breadcrumb"
@@ -49,9 +50,7 @@ const ProjectConceptArt = React.createClass({
                         }
                     >
                         <h3 className="card-header">{ concept_art.name }</h3>
-                        <div className="text-align-center">
-                            <img className="card-img-top" src={ src } />
-                        </div>
+                        <ImagePanelRevision { ...{ src: src }} />
                         <CardBlock>
                             <div>
                                 <Description source={ concept_art.description }></Description>

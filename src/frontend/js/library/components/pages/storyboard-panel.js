@@ -25,10 +25,10 @@ const StoryboardPanel = React.createClass({
             cache: false,
             success: function(data) {
                 let storyboard = _.findWhere(data.storyboards, {
-                    'id': this.props.params.storyboardId
+                    'id': parseInt(this.props.params.storyboardId)
                 });
                 let panel = _.findWhere(storyboard.panels, {
-                    'id': this.props.params.panelId
+                    'id': parseInt(this.props.params.panelId)
                 });
 
                 this.setState({

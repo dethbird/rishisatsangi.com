@@ -21,6 +21,7 @@ import { ProjectLocationsEdit } from '../library/components/pages/project-locati
 import { ProjectReferenceImages } from '../library/components/pages/project-reference_images'
 import { ProjectReferenceImagesEdit } from '../library/components/pages/project-reference_images-edit'
 import { ProjectStoryboards } from '../library/components/pages/project-storyboards'
+import { ProjectStoryboardsEdit } from '../library/components/pages/project-storyboards-edit'
 import { Projects } from '../library/components/pages/projects'
 import { ProjectsEdit } from '../library/components/pages/projects-edit'
 import { ReferenceImageEdit } from '../library/components/pages/reference_image-edit'
@@ -75,6 +76,7 @@ render((
             <Route path="project/:projectId/reference_image/add" component={ReferenceImageEdit}/>
             <Route path="project/:projectId/reference_image/:referenceImageId/edit" component={ReferenceImageEdit}/>
             <Route path="project/:projectId/storyboards" component={ProjectStoryboards}/>
+            <Route path="project/:projectId/storyboards/edit" component={ProjectStoryboardsEdit}/>
             <Route path="project/:projectId/storyboard/add" component={StoryboardEdit}/>
             <Route path="project/:projectId/storyboard/:storyboardId" component={Storyboard}/>
             <Route path="project/:projectId/storyboard/:storyboardId/edit" component={StoryboardEdit}/>

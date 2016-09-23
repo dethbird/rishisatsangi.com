@@ -24,13 +24,13 @@ const StoryboardPanelRevisionEdit = React.createClass({
             success: function(data) {
 
                 let storyboard = _.findWhere(data.storyboards, {
-                    'id': this.props.params.storyboardId
+                    'id': parseInt(this.props.params.storyboardId)
                 });
                 let panel = _.findWhere(storyboard.panels, {
-                    'id': this.props.params.panelId
+                    'id': parseInt(this.props.params.panelId)
                 });
                 let revision = _.findWhere(panel.revisions, {
-                    'id': this.props.params.revisionId
+                    'id': parseInt(this.props.params.revisionId)
                 });
 
                 let changedFields = null

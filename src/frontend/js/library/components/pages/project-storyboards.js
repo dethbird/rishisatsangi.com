@@ -53,17 +53,30 @@ const ProjectStoryboards = React.createClass({
             });
             return (
                 <div>
-                    <ProjectStoryboardsBreadcrumb project={ this.state.project }>
-                    </ProjectStoryboardsBreadcrumb>
+                    <ProjectStoryboardsBreadcrumb project={ this.state.project } />
+
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-info"
+                                to={
+                                    '/project/' + that.props.params.projectId
+                                    + '/storyboards/edit'
+                                }>Reorder</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-success"
+                                to={
+                                    '/project/' + that.props.params.projectId
+                                    + '/storyboard/add'
+                                }>Add</Link>
+                        </li>
+                    </ul>
+                    <br />
+
                     <div className="projectStoryboardsList">
                         { storyboardNodes }
-                        <Link
-                            className="btn btn-success"
-                            to={
-                                '/project/' + that.props.params.projectId
-                                + '/storyboard/add'
-                            }
-                        >Add</Link>
                     </div>
                 </div>
             )

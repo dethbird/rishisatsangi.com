@@ -21,7 +21,7 @@ const ConceptArtBreadcrumb = React.createClass({
                     <Link
                         to={
                             '/project/' + this.props.project.id
-                            + '/concept_arts'
+                            + '/concept_art'
                         }
                     >
                         Concept Art

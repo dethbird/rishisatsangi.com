@@ -7,6 +7,8 @@ import { Character } from '../library/components/pages/character'
 import { CharacterEdit } from '../library/components/pages/character-edit'
 import { CharacterRevisionEdit } from '../library/components/pages/character-revision-edit'
 import { ConceptArt } from '../library/components/pages/concept_art'
+import { ConceptArtEdit } from '../library/components/pages/concept_art-edit'
+import { ConceptArtRevisionEdit } from '../library/components/pages/concept_art-revision-edit'
 import { Project } from '../library/components/pages/project'
 import { ProjectCharacters } from '../library/components/pages/project-characters'
 import { ProjectCharactersEdit } from '../library/components/pages/project-characters-edit'
@@ -50,7 +52,11 @@ render((
             <Route path="project/:projectId/character/:characterId/revision/:revisionId/edit" component={CharacterRevisionEdit}/>
             <Route path="project/:projectId/concept_art" component={ProjectConceptArt}/>
             <Route path="project/:projectId/concept_art/edit" component={ProjectConceptArtEdit}/>
+            <Route path="project/:projectId/concept_art/add" component={ConceptArtEdit}/>
             <Route path="project/:projectId/concept_art/:conceptArtId" component={ConceptArt}/>
+            <Route path="project/:projectId/concept_art/:conceptArtId/edit" component={ConceptArtEdit}/>
+            <Route path="project/:projectId/concept_art/:conceptArtId/revision/add" component={ConceptArtRevisionEdit}/>
+            <Route path="project/:projectId/concept_art/:conceptArtId/revision/:revisionId/edit" component={ConceptArtRevisionEdit}/>
             <Route path="project/:projectId/locations" component={ProjectLocations}/>
             <Route path="project/:projectId/reference_images" component={ProjectReferenceImages}/>
             <Route path="project/:projectId/storyboards" component={ProjectStoryboards}/>

@@ -418,7 +418,7 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
     });
 
-    # order panel revision
+    # order project character revision revision
     $app->post('/project_character_revision_order', function () use ($app) {
 
         $configs = $app->container->get('configs');
@@ -446,13 +446,14 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
+
+        $model = new ProjectConceptArt($app->request->params());
+        $model->user_id = $securityContext->id;
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
+            json_decode($model->to_json()),
             APPLICATION_PATH . "configs/validation_schemas/project_concept_art.json");
 
         if (is_array($validation_response)) {
@@ -460,11 +461,11 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $concept_art = $projectService->createProjectConceptArt($app->request->params());
 
-            $app->response->setStatus(201);
+            $model->save();
+            $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($concept_art));
+            $app->response->setBody($model->to_json());
         }
 
     });
@@ -474,14 +475,23 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
+
+        $model = ProjectConceptArt::find_by_id_and_user_id(
+            $id, $securityContext->id);
+
+        if(!$model) {
+            $app->halt(404);
+        }
+
+        foreach($app->request->params() as $key=>$value) {
+            $model->$key = $value;
+        }
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
+            json_decode($model->to_json()),
             APPLICATION_PATH . "configs/validation_schemas/project_concept_art.json");
 
         if (is_array($validation_response)) {
@@ -489,12 +499,10 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $concept_art = $projectService->updateProjectConceptArt(
-                $id, $app->request->params());
-
+            $model->save();
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($concept_art));
+            $app->response->setBody($model->to_json());
         }
 
     });
@@ -528,13 +536,14 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
+
+        $model = new ProjectConceptArtRevision($app->request->params());
+        $model->user_id = $securityContext->id;
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
+            json_decode($model->to_json()),
             APPLICATION_PATH . "configs/validation_schemas/project_concept_art_revision.json");
 
         if (is_array($validation_response)) {
@@ -542,11 +551,11 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $result = $projectService->createProjectConceptArtRevision($app->request->params());
 
-            $app->response->setStatus(201);
+            $model->save();
+            $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($result));
+            $app->response->setBody($model->to_json());
         }
 
     });
@@ -557,14 +566,23 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
+
+        $model = ProjectConceptArtRevision::find_by_id_and_user_id(
+            $id, $securityContext->id);
+
+        if(!$model) {
+            $app->halt(404);
+        }
+
+        foreach($app->request->params() as $key=>$value) {
+            $model->$key = $value;
+        }
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
+            json_decode($model->to_json()),
             APPLICATION_PATH . "configs/validation_schemas/project_concept_art_revision.json");
 
         if (is_array($validation_response)) {
@@ -572,15 +590,36 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $result = $projectService->updateProjectConceptArtRevision(
-                $id, $app->request->params());
-
+            $model->save();
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($result));
+            $app->response->setBody($model->to_json());
         }
 
     });
+
+    # order project concept_art revisions
+    $app->post('/project_concept_art_revision_order', function () use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+
+        $result = [];
+        $result['items'] = [];
+        foreach($app->request->params('items') as $sort_order => $item) {
+            $model = ProjectConceptArtRevision::find_by_id_and_user_id(
+                $item['id'], $securityContext->id);
+            $model->sort_order = $sort_order;
+            $model->save();
+            $result['items'][] = json_decode($model->to_json());
+        }
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->setBody(json_encode($result));
+
+    });
+
 
     # create location
     $app->post('/project_location', function () use ($app) {
@@ -609,6 +648,7 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
         }
 
     });
+
 
     # update location
     $app->put('/project_location/:id', function ($id) use ($app) {

@@ -69,6 +69,11 @@ const ProjectCharacters = React.createClass({
                         }
                         className="btn btn-info"
                     >Reorder</Link>
+                    <Link to={
+                            '/project/' + this.state.project.id + '/character/add'
+                        }
+                        className="btn btn-success"
+                    >Add</Link>
                     <br className="clearfix" />
                     <div className="projectCharactersList">
                         { characterNodes }

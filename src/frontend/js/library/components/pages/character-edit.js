@@ -10,15 +10,16 @@ import { Card } from "../ui/card"
 import { SectionHeader } from "../ui/section-header"
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
+import { Description } from "../ui/description"
 import { Fountain } from "../ui/fountain"
 import { ImagePanelRevision } from "../ui/image-panel-revision"
 import {
-    StoryboardPanelBreadcrumb
-} from "./storyboard-panel/storyboard-panel-breadcrumb"
+    CharacterBreadcrumb
+} from "./character/character-breadcrumb"
 import { Spinner } from "../ui/spinner"
 
 
-const StoryboardPanelEdit = React.createClass({
+const CharacterEdit = React.createClass({
     componentDidMount() {
         $.ajax({
             url: '/api/project/' + this.props.params.projectId,
@@ -26,35 +27,31 @@ const StoryboardPanelEdit = React.createClass({
             cache: false,
             success: function(data) {
 
-                let storyboard = _.findWhere(data.storyboards, {
-                    'id': this.props.params.storyboardId
-                });
-                let panel = _.findWhere(storyboard.panels, {
-                    'id': this.props.params.panelId
+                let character = _.findWhere(data.characters, {
+                    'id': this.props.params.characterId
                 });
 
                 let changedFields = null
-                let submitUrl = '/api/project_storyboard_panel/'
-                    + this.props.params.panelId
+                let submitUrl = '/api/project_character/'
+                    + this.props.params.characterId
                 let submitMethod = 'PUT'
 
-                if (!panel) {
-                    panel = {
+                if (!character) {
+                    character = {
                         name: '',
                         revisions: []
                     };
-                    submitUrl = '/api/project_storyboard_panel'
+                    submitUrl = '/api/project_character'
                     submitMethod = 'POST'
 
                     changedFields = {
-                        storyboard_id: this.props.params.storyboardId
+                        project_id: this.props.params.projectId
                     }
                 }
 
                 this.setState({
                     project: data,
-                    storyboard: storyboard,
-                    panel: panel,
+                    character: character,
                     formState: null,
                     formMessage: null,
                     submitUrl: submitUrl,
@@ -68,14 +65,14 @@ const StoryboardPanelEdit = React.createClass({
         });
     },
     handleFieldChange(event) {
-        let panel = this.state.panel;
+        let character = this.state.character;
         let changedFields = this.state.changedFields || {};
 
-        panel[event.target.id] = event.target.value
+        character[event.target.id] = event.target.value
         changedFields[event.target.id] = event.target.value
 
         this.setState({
-            panel: panel,
+            character: character,
             changedFields: changedFields
         })
     },
@@ -83,8 +80,7 @@ const StoryboardPanelEdit = React.createClass({
         event.preventDefault()
         browserHistory.push(
             '/project/' + this.props.params.projectId
-            + '/storyboard/' + this.props.params.storyboardId
-            + '/panel/' + this.props.params.panelId
+            + '/characters'
         )
     },
     handleClickSubmit(event) {
@@ -100,10 +96,10 @@ const StoryboardPanelEdit = React.createClass({
                 this.setState({
                     formState: 'success',
                     formMessage: 'Success.',
-                    submitUrl:'/api/project_storyboard_panel/'
+                    submitUrl:'/api/project_character/'
                         + data.id,
                     submitMethod: 'PUT',
-                    panel: data
+                    character: data
                 })
             }.bind(this),
             error: function(xhr, status, err) {
@@ -118,10 +114,10 @@ const StoryboardPanelEdit = React.createClass({
 
         var that = this
 
-        let panel = this.state.panel
-        panel.revisions = items
+        let character = this.state.character
+        character.revisions = items
         this.setState({
-            panel: panel
+            character: character
         });
 
         items = items.map(function(item, i){
@@ -130,12 +126,12 @@ const StoryboardPanelEdit = React.createClass({
             );
         })
 
-        $.post('/api/project_storyboard_panel_revision_order', {'items': items}, function(response){
+        $.post('/api/project_character_revision_order', {'items': items}, function(response){
 
-            let panel = that.state.panel
-            panel.revisions = response.items
+            let character = that.state.character
+            character.revisions = response.items
             that.setState({
-                panel: panel,
+                character: character,
                 formState: 'success',
                 formMessage: 'Order saved.'
             })
@@ -144,7 +140,7 @@ const StoryboardPanelEdit = React.createClass({
     render() {
         let that = this
         if (this.state){
-            let panelRevisionNodes = this.state.panel.revisions.map(function(revision, i) {
+            let characterRevisionNodes = this.state.character.revisions.map(function(revision, i) {
                 let props = {};
                 props.src = revision.content
                 return (
@@ -159,7 +155,7 @@ const StoryboardPanelEdit = React.createClass({
 
             return (
                 <div>
-                    <StoryboardPanelBreadcrumb { ...this.state }></StoryboardPanelBreadcrumb>
+                    <CharacterBreadcrumb { ...this.state }></CharacterBreadcrumb>
                     <Alert
                         status={ this.state.formState }
                         message={ this.state.formMessage }
@@ -173,24 +169,24 @@ const StoryboardPanelEdit = React.createClass({
                                 className="form-control"
                                 id="name"
                                 placeholder="Name"
-                                value={ this.state.panel.name }
+                                value={ this.state.character.name }
                                 onChange= { this.handleFieldChange }
                             />
                         </div>
 
-                        <SectionHeader>script:</SectionHeader>
+                        <SectionHeader>description:</SectionHeader>
                         <div className="form-group">
                             <textarea
                                 className="form-control"
-                                id="script"
+                                id="description"
                                 rows="3"
-                                value={ this.state.panel.script || '' }
+                                value={ this.state.character.description || '' }
                                 onChange= { this.handleFieldChange }
                             />
                             <br />
                             <Card>
                                 <CardBlock>
-                                    <Fountain source={ this.state.panel.script } />
+                                    <Description source={ this.state.character.description } />
                                 </CardBlock>
                             </Card>
                         </div>
@@ -207,21 +203,19 @@ const StoryboardPanelEdit = React.createClass({
                             >Save</button>
                         </div>
 
-
-
                         <SectionHeader>revisions:</SectionHeader>
                         <div className="form-group">
-                            <div className="panelRevisionsContainer clearfix">
+                            <div className="characterRevisionsContainer clearfix">
                                 <SortableItems
-                                    items={ that.state.panel.revisions }
+                                    items={ that.state.character.revisions }
                                     onSort={ that.handleSort }
                                     name="sort-revisions-component"
                                 >
-                                    { panelRevisionNodes }
+                                    { characterRevisionNodes }
                                 </SortableItems>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             );
@@ -232,4 +226,4 @@ const StoryboardPanelEdit = React.createClass({
     }
 })
 
-module.exports.StoryboardPanelEdit = StoryboardPanelEdit
+module.exports.CharacterEdit = CharacterEdit

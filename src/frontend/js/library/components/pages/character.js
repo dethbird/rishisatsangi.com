@@ -1,5 +1,5 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import { Card } from "../ui/card"
 import { CardClickable } from "../ui/card-clickable"
@@ -86,6 +86,14 @@ const Character = React.createClass({
                     <SectionHeader>{ this.state.character.revisions.length } Revision(s)</SectionHeader>
                     <div className="CharacterRevisionsContainer">
                         { characterRevisionNodes }
+                        <Link
+                            className="btn btn-success"
+                            to={
+                                '/project/' + that.props.params.projectId
+                                + '/character/' + that.props.params.characterId
+                                + '/revision/add'
+                            }
+                        >Add</Link>
                     </div>
                 </div>
             );

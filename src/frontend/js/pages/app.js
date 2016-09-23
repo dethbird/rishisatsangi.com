@@ -4,6 +4,7 @@ import { IndexRoute, Router, Route, browserHistory } from 'react-router'
 
 import { App } from '../library/components/app'
 import { Character } from '../library/components/pages/character'
+import { CharacterEdit } from '../library/components/pages/character-edit'
 import { ConceptArt } from '../library/components/pages/concept_art'
 import { Project } from '../library/components/pages/project'
 import { ProjectCharacters } from '../library/components/pages/project-characters'
@@ -40,7 +41,9 @@ render((
             <Route path="project/:projectId" component={Project}/>
             <Route path="project/:projectId/characters" component={ProjectCharacters}/>
             <Route path="project/:projectId/characters/edit" component={ProjectCharactersEdit}/>
+            <Route path="project/:projectId/character/add" component={CharacterEdit}/>
             <Route path="project/:projectId/character/:characterId" component={Character}/>
+            <Route path="project/:projectId/character/:characterId/edit" component={CharacterEdit}/>
             <Route path="project/:projectId/concept_art" component={ProjectConceptArt}/>
             <Route path="project/:projectId/concept_art/:conceptArtId" component={ConceptArt}/>
             <Route path="project/:projectId/locations" component={ProjectLocations}/>

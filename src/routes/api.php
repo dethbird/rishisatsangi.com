@@ -268,13 +268,14 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
+
+        $model = new ProjectCharacter($app->request->params());
+        $model->user_id = $securityContext->id;
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
+            json_decode($model->to_json()),
             APPLICATION_PATH . "configs/validation_schemas/project_character.json");
 
         if (is_array($validation_response)) {
@@ -282,11 +283,11 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $character = $projectService->createProjectCharacter($app->request->params());
 
-            $app->response->setStatus(201);
+            $model->save();
+            $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($character));
+            $app->response->setBody($model->to_json());
         }
 
     });
@@ -296,14 +297,23 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
+
+        $model = ProjectCharacter::find_by_id_and_user_id(
+            $id, $securityContext->id);
+
+        if(!$model) {
+            $app->halt(404);
+        }
+
+        foreach($app->request->params() as $key=>$value) {
+            $model->$key = $value;
+        }
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
+            json_decode($model->to_json()),
             APPLICATION_PATH . "configs/validation_schemas/project_character.json");
 
         if (is_array($validation_response)) {
@@ -311,12 +321,10 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $character = $projectService->updateProjectCharacter(
-                $id, $app->request->params());
-
+            $model->save();
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($character));
+            $app->response->setBody($model->to_json());
         }
 
     });
@@ -407,14 +415,21 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
 
-        $result = $projectService->orderProjectCharacterRevisions($app->request->params());
+        $result = [];
+        $result['items'] = [];
+        foreach($app->request->params('items') as $sort_order => $item) {
+            $model = ProjectCharacterRevision::find_by_id_and_user_id(
+                $item['id'], $securityContext->id);
+            $model->sort_order = $sort_order;
+            $model->save();
+            $result['items'][] = json_decode($model->to_json());
+        }
 
         $app->response->setStatus(200);
         $app->response->headers->set('Content-Type', 'application/json');
         $app->response->setBody(json_encode($result));
+
     });
 
 

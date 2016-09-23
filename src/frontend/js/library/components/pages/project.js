@@ -1,4 +1,5 @@
 import React from 'react'
+import { browserHistory, Link } from 'react-router'
 
 import { ProjectBreadcrumb } from "./project/project-breadcrumb"
 import { ProjectCharacters } from "./project/project-characters"
@@ -25,11 +26,25 @@ const Project = React.createClass({
         });
     },
     render() {
+        let that = this;
         if(this.state) {
             let project = this.state.project;
             return (
                 <div className="projectPage">
                     <ProjectBreadcrumb project={ project } />
+
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-info"
+                                to={
+                                    '/project/' + that.props.params.projectId
+                                    + '/edit'
+                                }>Edit</Link>
+                        </li>
+                    </ul>
+                    <br />
+
                     <ProjectDetails project={ project } />
                     <ProjectCharacters project={ project } />
                     <ProjectStoryboards project={ project } />

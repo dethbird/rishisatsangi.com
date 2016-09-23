@@ -5,6 +5,9 @@
 			"required": true,
 		    "type": "string"
 		},
+		"content": {
+			"type": ["string", "null", "integer"]
+		},
 		"description": {
 			"type": ["string", "null", "integer"]
 		}

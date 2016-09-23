@@ -137,48 +137,51 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
     });
 
 
-    # get
+    # get project
     $app->get('/project/:id', function ($id) use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
 
-        $project = $projectService->fetchOne($id);
-        $project = $projectService->hydrateProject($project);
+        $model = Project::find_by_id_and_user_id(
+            $id, $securityContext->id);
 
-        $app->response->setStatus(200);
-        $app->response->headers->set('Content-Type', 'application/json');
-        $app->response->setBody(json_encode($project));
+        if(!$model) {
+            $app->halt(404);
+        } else {
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+            $app->response->setBody($model->to_json());
+        }
 
     });
 
-    # create
+    # create project
     $app->post('/project', function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
+
+        $model = new Project($app->request->params());
+        $model->user_id = $securityContext->id;
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
-            APPLICATION_PATH . "configs/validation_schemas/post_project.json");
+            json_decode($model->to_json()),
+            APPLICATION_PATH . "configs/validation_schemas/project.json");
 
         if (is_array($validation_response)) {
             $app->response->setStatus(400);
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $project = $projectService->create($app->request->params());
 
-            $app->response->setStatus(201);
+            $model->save();
+            $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($project));
+            $app->response->setBody($model->to_json());
         }
 
     });
@@ -189,27 +192,34 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
+
+        $model = Project::find_by_id_and_user_id(
+            $id, $securityContext->id);
+
+        if(!$model) {
+            $app->halt(404);
+        }
+
+        foreach($app->request->params() as $key=>$value) {
+            $model->$key = $value;
+        }
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
-            APPLICATION_PATH . "configs/validation_schemas/post_project.json");
+            json_decode($model->to_json()),
+            APPLICATION_PATH . "configs/validation_schemas/project.json");
 
         if (is_array($validation_response)) {
             $app->response->setStatus(400);
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-
-            $project = $projectService->update($id, $app->request->params());
-
+            $model->save();
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($project));
+            $app->response->setBody($model->to_json());
         }
 
     });

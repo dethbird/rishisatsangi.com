@@ -5,6 +5,7 @@ import TimeAgo from 'react-timeago'
 import { CardClickable } from "../../ui/card-clickable"
 import { CardBlock } from "../../ui/card-block"
 import { Description } from "../../ui/description"
+import { ImagePanelRevision } from "../../ui/image-panel-revision"
 
 
 const Project = React.createClass({
@@ -25,6 +26,7 @@ const Project = React.createClass({
                 key={ this.props.project.id }
             >
                 <h3 className="card-header">{ this.props.project.name }</h3>
+                <ImagePanelRevision { ...{ src: this.props.project.content }} />
                 <CardBlock>
                     <TimeAgo date={ this.props.project.date_updated } />
                 </CardBlock>

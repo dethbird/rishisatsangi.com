@@ -11,6 +11,7 @@ import { ConceptArtEdit } from '../library/components/pages/concept_art-edit'
 import { ConceptArtRevisionEdit } from '../library/components/pages/concept_art-revision-edit'
 import { LocationEdit } from '../library/components/pages/location-edit'
 import { Project } from '../library/components/pages/project'
+import { ProjectEdit } from '../library/components/pages/project-edit'
 import { ProjectCharacters } from '../library/components/pages/project-characters'
 import { ProjectCharactersEdit } from '../library/components/pages/project-characters-edit'
 import { ProjectConceptArt } from '../library/components/pages/project-concept_art'
@@ -48,7 +49,9 @@ render((
             <IndexRoute component={Projects}/>
             <Route path="projects" component={Projects}/>
             <Route path="projects/edit" component={ProjectsEdit}/>
+            <Route path="project/add" component={ProjectEdit}/>
             <Route path="project/:projectId" component={Project}/>
+            <Route path="project/:projectId/edit" component={ProjectEdit}/>
             <Route path="project/:projectId/characters" component={ProjectCharacters}/>
             <Route path="project/:projectId/characters/edit" component={ProjectCharactersEdit}/>
             <Route path="project/:projectId/character/add" component={CharacterEdit}/>

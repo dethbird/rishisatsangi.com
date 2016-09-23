@@ -17,7 +17,7 @@ const ProjectDetails = React.createClass({
                 <h3 className="card-header">Details</h3>
                 <CardBlock>
                     <div>
-                        <h5>{ this.props.project.name }</h5>
+                        <h3>{ this.props.project.name }</h3>
                         <Description source={ this.props.project.description }></Description>
                     </div>
                 </CardBlock>

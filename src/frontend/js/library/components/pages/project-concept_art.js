@@ -1,5 +1,5 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
@@ -63,8 +63,28 @@ const ProjectConceptArt = React.createClass({
             });
             return (
                 <div>
-                    <ProjectConceptArtBreadcrumb project={ this.state.project }>
-                    </ProjectConceptArtBreadcrumb>
+                    <ProjectConceptArtBreadcrumb project={ this.state.project } />
+
+
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-info"
+                                to={
+                                    '/project/' + this.state.project.id + '/concept_art/edit'
+                                }>Reorder</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-success"
+                                to={
+                                    '/project/' + this.state.project.id + '/concept_art/add'
+                                }>Add</Link>
+                        </li>
+                    </ul>
+                    <br />
+
+
                     <div className="projectConceptArtList">
                         { conceptArtNodes }
                     </div>

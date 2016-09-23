@@ -64,17 +64,25 @@ const ProjectCharacters = React.createClass({
             return (
                 <div>
                     <ProjectCharactersBreadcrumb project={ this.state.project } />
-                    <Link to={
-                            '/project/' + this.state.project.id + '/characters/edit'
-                        }
-                        className="btn btn-info"
-                    >Reorder</Link>
-                    <Link to={
-                            '/project/' + this.state.project.id + '/character/add'
-                        }
-                        className="btn btn-success"
-                    >Add</Link>
-                    <br className="clearfix" />
+
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-info"
+                                to={
+                                    '/project/' + this.state.project.id + '/characters/edit'
+                                }>Reorder</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-success"
+                                to={
+                                    '/project/' + this.state.project.id + '/characters/add'
+                                }>Add</Link>
+                        </li>
+                    </ul>
+                    <br />
+
                     <div className="projectCharactersList">
                         { characterNodes }
                     </div>

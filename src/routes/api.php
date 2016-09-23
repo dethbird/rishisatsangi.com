@@ -219,20 +219,41 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
 
-        $projects = $projectService->getProjects();
+        $projects = Project::find_all_by_user_id($securityContext->id, [
+            'order' => 'sort_order']);
 
+        $_projects = [];
         foreach ($projects as $i=>$project) {
-            $projects[$i] = $projectService->hydrateProject($project);
+            $_projects[] = json_decode($project->to_json());
         }
 
         $app->response->setStatus(200);
         $app->response->headers->set('Content-Type', 'application/json');
-        $app->response->setBody(json_encode($projects));
+        $app->response->setBody(json_encode($_projects));
 
     });
+
+    # order characters
+	$app->post('/projects_order', function () use ($app) {
+
+		$configs = $app->container->get('configs');
+		$securityContext = $_SESSION['securityContext'];
+
+        $result = [];
+        $result['items'] = [];
+        foreach($app->request->params('items') as $sort_order => $item) {
+            $model = Project::find_by_id_and_user_id(
+                $item['id'], $securityContext->id);
+            $model->sort_order = $sort_order;
+            $model->save();
+            $result['items'][] = json_decode($model->to_json());
+        }
+
+		$app->response->setStatus(200);
+		$app->response->headers->set('Content-Type', 'application/json');
+		$app->response->setBody(json_encode($result));
+	});
 
 
     # add project user

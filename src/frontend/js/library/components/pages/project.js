@@ -29,13 +29,13 @@ const Project = React.createClass({
             let project = this.state.project;
             return (
                 <div className="projectPage">
-                    <ProjectBreadcrumb project={ project }></ProjectBreadcrumb>
-                    <ProjectDetails project={ project }></ProjectDetails>
-                    <ProjectCharacters project={ project }></ProjectCharacters>
-                    <ProjectStoryboards project={ project }></ProjectStoryboards>
-                    <ProjectConceptArts project={ project }></ProjectConceptArts>
-                    <ProjectReferenceImages project={ project }></ProjectReferenceImages>
-                    <ProjectLocations project={ project }></ProjectLocations>
+                    <ProjectBreadcrumb project={ project } />
+                    <ProjectDetails project={ project } />
+                    <ProjectCharacters project={ project } />
+                    <ProjectStoryboards project={ project } />
+                    <ProjectConceptArts project={ project } />
+                    <ProjectReferenceImages project={ project } />
+                    <ProjectLocations project={ project } />
                 </div>
             )
         }

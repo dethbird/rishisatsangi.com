@@ -1,5 +1,5 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import { Project } from "./projects/project"
 import {
@@ -40,8 +40,26 @@ const Projects = React.createClass({
 
             return (
                 <div>
-                    <ProjectsBreadcrumb project={ this.state.project }>
-                    </ProjectsBreadcrumb>
+                    <ProjectsBreadcrumb project={ this.state.project } />
+
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-info"
+                                to={
+                                    '/projects/edit'
+                                }>Reorder</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-success"
+                                to={
+                                    '/project/add'
+                                }>Add</Link>
+                        </li>
+                    </ul>
+                    <br />
+
                     <div className="projectsList">
                         { projectNodes }
                     </div>

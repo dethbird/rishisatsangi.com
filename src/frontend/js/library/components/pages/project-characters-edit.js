@@ -47,6 +47,12 @@ const ProjectCharactersEdit = React.createClass({
             project: project
         })
 
+        items = items.map(function(item, i){
+            return (
+                { 'id': item.id }
+            );
+        })
+
         $.post('/api/project_character_order', {'items': items}, function(response){
 
             let project = that.state.project

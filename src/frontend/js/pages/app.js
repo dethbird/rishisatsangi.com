@@ -14,6 +14,7 @@ import { ProjectReferenceImages } from '../library/components/pages/project-refe
 import { ProjectStoryboards } from '../library/components/pages/project-storyboards'
 import { Projects } from '../library/components/pages/projects'
 import { Storyboard } from '../library/components/pages/storyboard'
+import { StoryboardEdit } from '../library/components/pages/storyboard-edit'
 import { StoryboardPanel } from '../library/components/pages/storyboard-panel'
 import { StoryboardPanelEdit } from '../library/components/pages/storyboard-panel-edit'
 import { StoryboardPanelCommentEdit } from '../library/components/pages/storyboard-panel-comment-edit'
@@ -45,7 +46,9 @@ render((
             <Route path="project/:projectId/locations" component={ProjectLocations}/>
             <Route path="project/:projectId/reference_images" component={ProjectReferenceImages}/>
             <Route path="project/:projectId/storyboards" component={ProjectStoryboards}/>
+            <Route path="project/:projectId/storyboard/add" component={StoryboardEdit}/>
             <Route path="project/:projectId/storyboard/:storyboardId" component={Storyboard}/>
+            <Route path="project/:projectId/storyboard/:storyboardId/edit" component={StoryboardEdit}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/add" component={StoryboardPanelEdit}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId" component={StoryboardPanel}/>
             <Route path="project/:projectId/storyboard/:storyboardId/panel/:panelId/edit" component={StoryboardPanelEdit}/>

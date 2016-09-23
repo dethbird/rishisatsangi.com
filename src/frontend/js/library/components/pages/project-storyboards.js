@@ -1,5 +1,5 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
@@ -57,6 +57,13 @@ const ProjectStoryboards = React.createClass({
                     </ProjectStoryboardsBreadcrumb>
                     <div className="projectStoryboardsList">
                         { storyboardNodes }
+                        <Link
+                            className="btn btn-success"
+                            to={
+                                '/project/' + that.props.params.projectId
+                                + '/storyboard/add'
+                            }
+                        >Add</Link>
                     </div>
                 </div>
             )

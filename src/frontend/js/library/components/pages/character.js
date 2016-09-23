@@ -74,6 +74,13 @@ const Character = React.createClass({
                             <CardBlock>
                                 <Description source={ this.state.character.description }></Description>
                             </CardBlock>
+                            <div className='card-footer text-muted clearfix'>
+                                <Link to={
+                                    '/project/' + this.props.params.projectId
+                                    + '/character/' + this.props.params.characterId
+                                    + '/edit'
+                                }>Edit</Link>
+                            </div>
                         </Card>
                     </div>
                     <SectionHeader>{ this.state.character.revisions.length } Revision(s)</SectionHeader>

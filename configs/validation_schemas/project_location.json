@@ -6,8 +6,7 @@
 		    "type": "integer"
 		},
 		"content": {
-			"required": true,
-		    "type": "string"
+		    "type": ["string", "null", "integer"]
 		},
 		"name": {
 			"required": true,

@@ -9,12 +9,14 @@ import { CharacterRevisionEdit } from '../library/components/pages/character-rev
 import { ConceptArt } from '../library/components/pages/concept_art'
 import { ConceptArtEdit } from '../library/components/pages/concept_art-edit'
 import { ConceptArtRevisionEdit } from '../library/components/pages/concept_art-revision-edit'
+import { LocationEdit } from '../library/components/pages/location-edit'
 import { Project } from '../library/components/pages/project'
 import { ProjectCharacters } from '../library/components/pages/project-characters'
 import { ProjectCharactersEdit } from '../library/components/pages/project-characters-edit'
 import { ProjectConceptArt } from '../library/components/pages/project-concept_art'
 import { ProjectConceptArtEdit } from '../library/components/pages/project-concept_art-edit'
 import { ProjectLocations } from '../library/components/pages/project-locations'
+import { ProjectLocationsEdit } from '../library/components/pages/project-locations-edit'
 import { ProjectReferenceImages } from '../library/components/pages/project-reference_images'
 import { ProjectReferenceImagesEdit } from '../library/components/pages/project-reference_images-edit'
 import { ProjectStoryboards } from '../library/components/pages/project-storyboards'
@@ -60,6 +62,9 @@ render((
             <Route path="project/:projectId/concept_art/:conceptArtId/revision/add" component={ConceptArtRevisionEdit}/>
             <Route path="project/:projectId/concept_art/:conceptArtId/revision/:revisionId/edit" component={ConceptArtRevisionEdit}/>
             <Route path="project/:projectId/locations" component={ProjectLocations}/>
+            <Route path="project/:projectId/locations/edit" component={ProjectLocationsEdit}/>
+            <Route path="project/:projectId/location/add" component={LocationEdit}/>
+            <Route path="project/:projectId/location/:locationId/edit" component={LocationEdit}/>
             <Route path="project/:projectId/reference_images" component={ProjectReferenceImages}/>
             <Route path="project/:projectId/reference_images/edit" component={ProjectReferenceImagesEdit}/>
             <Route path="project/:projectId/reference_image/add" component={ReferenceImageEdit}/>

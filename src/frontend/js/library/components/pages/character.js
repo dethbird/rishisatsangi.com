@@ -32,6 +32,14 @@ const Character = React.createClass({
             }.bind(this)
         });
     },
+    handleClick(revision_id) {
+        browserHistory.push(
+            '/project/' + this.props.params.projectId
+            + '/character/' + this.props.params.characterId
+            + '/revision/' + revision_id
+            + '/edit'
+        )
+    },
     render() {
 
         if (this.state) {
@@ -45,14 +53,15 @@ const Character = React.createClass({
             var that = this;
             var characterRevisionNodes = this.state.character.revisions.map(function(revision) {
                 return (
-                    <Card
+                    <CardClickable
                         className="col-lg-4"
                         key={ revision.id }
+                        onClick={ that.handleClick.bind(that, revision.id) }
                     >
                         <CardBlock className="text-align-center">
                             <img className="card-img-top" src={ revision.content } />
                         </CardBlock>
-                    </Card>
+                    </CardClickable>
                 );
             });
 

@@ -356,13 +356,14 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
+
+        $model = new ProjectCharacterRevision($app->request->params());
+        $model->user_id = $securityContext->id;
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
+            json_decode($model->to_json()),
             APPLICATION_PATH . "configs/validation_schemas/project_character_revision.json");
 
         if (is_array($validation_response)) {
@@ -370,11 +371,11 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $revision = $projectService->createProjectCharacterRevision($app->request->params());
 
-            $app->response->setStatus(201);
+            $model->save();
+            $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($revision));
+            $app->response->setBody($model->to_json());
         }
 
     });
@@ -385,14 +386,23 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $projectService = new Projects($db, $configs, $securityContext);
         $id = (int) $id;
+
+        $model = ProjectCharacterRevision::find_by_id_and_user_id(
+            $id, $securityContext->id);
+
+        if(!$model) {
+            $app->halt(404);
+        }
+
+        foreach($app->request->params() as $key=>$value) {
+            $model->$key = $value;
+        }
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            (object) $app->request->params(),
+            json_decode($model->to_json()),
             APPLICATION_PATH . "configs/validation_schemas/project_character_revision.json");
 
         if (is_array($validation_response)) {
@@ -400,12 +410,10 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $app->response->setBody(json_encode($validation_response));
         } else {
-            $character = $projectService->updateProjectCharacterRevision(
-                $id, $app->request->params());
-
+            $model->save();
             $app->response->setStatus(200);
             $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($character));
+            $app->response->setBody($model->to_json());
         }
 
     });

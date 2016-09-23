@@ -16,8 +16,10 @@ import { ProjectConceptArt } from '../library/components/pages/project-concept_a
 import { ProjectConceptArtEdit } from '../library/components/pages/project-concept_art-edit'
 import { ProjectLocations } from '../library/components/pages/project-locations'
 import { ProjectReferenceImages } from '../library/components/pages/project-reference_images'
+import { ProjectReferenceImagesEdit } from '../library/components/pages/project-reference_images-edit'
 import { ProjectStoryboards } from '../library/components/pages/project-storyboards'
 import { Projects } from '../library/components/pages/projects'
+import { ReferenceImageEdit } from '../library/components/pages/reference_image-edit'
 import { Storyboard } from '../library/components/pages/storyboard'
 import { StoryboardEdit } from '../library/components/pages/storyboard-edit'
 import { StoryboardPanel } from '../library/components/pages/storyboard-panel'
@@ -59,6 +61,9 @@ render((
             <Route path="project/:projectId/concept_art/:conceptArtId/revision/:revisionId/edit" component={ConceptArtRevisionEdit}/>
             <Route path="project/:projectId/locations" component={ProjectLocations}/>
             <Route path="project/:projectId/reference_images" component={ProjectReferenceImages}/>
+            <Route path="project/:projectId/reference_images/edit" component={ProjectReferenceImagesEdit}/>
+            <Route path="project/:projectId/reference_image/add" component={ReferenceImageEdit}/>
+            <Route path="project/:projectId/reference_image/:referenceImageId/edit" component={ReferenceImageEdit}/>
             <Route path="project/:projectId/storyboards" component={ProjectStoryboards}/>
             <Route path="project/:projectId/storyboard/add" component={StoryboardEdit}/>
             <Route path="project/:projectId/storyboard/:storyboardId" component={Storyboard}/>

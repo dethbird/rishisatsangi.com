@@ -5,6 +5,7 @@ import {
 } from 'react-sortable-component'
 import { browserHistory, Link } from 'react-router'
 
+import { Alert } from '../ui/alert'
 import { CardClickable } from '../ui/card-clickable'
 import { CardBlock } from '../ui/card-block'
 import { Description } from '../ui/description'
@@ -87,12 +88,23 @@ const ProjectCharactersEdit = React.createClass({
             return (
                 <div>
                     <ProjectCharactersBreadcrumb project={ this.state.project } />
-                    <Link to={
-                            '/project/' + this.state.project.id + '/characters'
-                        }
-                        className="btn btn-secondary"
-                    >Cancel</Link>
-                    <br className="clearfix" />
+
+                    <Alert
+                        status={ this.state.formState }
+                        message={ this.state.formMessage }
+                    />
+
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-secondary"
+                                to={
+                                    '/project/' + this.state.project.id + '/characters'
+                                }>Cancel</Link>
+                        </li>
+                    </ul>
+                    <br />
+
                     <SortableItems
                         items={ that.state.project.characters }
                         onSort={ that.handleSort }

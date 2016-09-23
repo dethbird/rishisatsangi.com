@@ -11,12 +11,12 @@ import { CardBlock } from '../ui/card-block'
 import { Description } from '../ui/description'
 import { ImagePanelRevision } from "../ui/image-panel-revision"
 import {
-    ProjectConceptArtBreadcrumb
-} from './project-concept_art/project-concept_art-breadcrumb'
+    ProjectReferenceImagesBreadcrumb
+} from './project-reference_images/project-reference_images-breadcrumb'
 import { Spinner } from '../ui/spinner'
 
 
-const ProjectConceptArtEdit = React.createClass({
+const ProjectReferenceImagesEdit = React.createClass({
     componentDidMount() {
         $.ajax({
             url: '/api/project/' + this.props.params.projectId,
@@ -36,7 +36,7 @@ const ProjectConceptArtEdit = React.createClass({
         event.preventDefault()
         browserHistory.push(
             '/project/' + this.props.params.projectId
-            + '/concept_art/'
+            + '/reference_images/'
         )
     },
     handleSort(items) {
@@ -44,7 +44,7 @@ const ProjectConceptArtEdit = React.createClass({
         var that = this
 
         let project = that.state.project
-        project.concept_art = items
+        project.reference_images = items
         that.setState({
             project: project
         })
@@ -55,10 +55,10 @@ const ProjectConceptArtEdit = React.createClass({
             );
         })
 
-        $.post('/api/project_concept_art_order', {'items': items}, function(response){
+        $.post('/api/project_reference_image_order', {'items': items}, function(response){
 
             let project = that.state.project
-            project.concept_art = response.items
+            project.reference_images = response.items
             that.setState({
                 project: project,
                 formState: 'success',
@@ -69,26 +69,22 @@ const ProjectConceptArtEdit = React.createClass({
     render() {
         let that = this
         if (this.state){
-            let concept_artNodes = this.state.project.concept_art.map(function(concept_art) {
-                let props = {};
-                if (concept_art.revisions.length) {
-                    props.src = concept_art.revisions[0].content;
-                }
+            let reference_imageNodes = this.state.project.reference_images.map(function(reference_image) {
+                let props = {}
+                props.src = reference_image.content
                 return (
                     <SortableItem
-                        key={ concept_art.id }
+                        key={ reference_image.id }
                         className="card col-xs-4"
                     >
-                        <div className="text-align-center">
-                            <ImagePanelRevision { ...props } />
-                        </div>
+                        <ImagePanelRevision { ...props } />
                     </SortableItem>
                 );
             });
 
             return (
                 <div>
-                    <ProjectConceptArtBreadcrumb project={ this.state.project } />
+                    <ProjectReferenceImagesBreadcrumb project={ this.state.project } />
 
                     <Alert
                         status={ this.state.formState }
@@ -100,18 +96,18 @@ const ProjectConceptArtEdit = React.createClass({
                             <Link
                                 className="nav-link btn btn-secondary"
                                 to={
-                                    '/project/' + this.state.project.id + '/concept_art'
+                                    '/project/' + this.state.project.id + '/reference_images'
                                 }>Cancel</Link>
                         </li>
                     </ul>
                     <br />
 
                     <SortableItems
-                        items={ that.state.project.concept_art }
+                        items={ that.state.project.reference_images }
                         onSort={ that.handleSort }
-                        name="sort-concept_art-component"
+                        name="sort-reference_images-component"
                     >
-                        { concept_artNodes }
+                        { reference_imageNodes }
                     </SortableItems>
                 </div>
             );
@@ -122,4 +118,4 @@ const ProjectConceptArtEdit = React.createClass({
     }
 })
 
-module.exports.ProjectConceptArtEdit = ProjectConceptArtEdit
+module.exports.ProjectReferenceImagesEdit = ProjectReferenceImagesEdit

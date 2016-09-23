@@ -1,5 +1,5 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
@@ -26,7 +26,7 @@ const ProjectReferenceImages = React.createClass({
     },
     handleClick(project_id, reference_image_id) {
         browserHistory.push(
-            '/project/' + project_id + '/reference_image/' + reference_image_id);
+            '/project/' + project_id + '/reference_image/' + reference_image_id + '/edit');
     },
     render() {
         if (this.state) {
@@ -57,8 +57,26 @@ const ProjectReferenceImages = React.createClass({
             });
             return (
                 <div>
-                    <ProjectReferenceImagesBreadcrumb project={ this.state.project }>
-                    </ProjectReferenceImagesBreadcrumb>
+                    <ProjectReferenceImagesBreadcrumb project={ this.state.project } />
+
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-info"
+                                to={
+                                    '/project/' + this.state.project.id + '/reference_images/edit'
+                                }>Reorder</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-success"
+                                to={
+                                    '/project/' + this.state.project.id + '/reference_image/add'
+                                }>Add</Link>
+                        </li>
+                    </ul>
+                    <br />
+
                     <div className="projectReferenceImagesList">
                         { referenceImageNodes }
                     </div>

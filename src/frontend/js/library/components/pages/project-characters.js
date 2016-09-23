@@ -77,7 +77,7 @@ const ProjectCharacters = React.createClass({
                             <Link
                                 className="nav-link btn btn-success"
                                 to={
-                                    '/project/' + this.state.project.id + '/characters/add'
+                                    '/project/' + this.state.project.id + '/character/add'
                                 }>Add</Link>
                         </li>
                     </ul>

@@ -40478,7 +40478,11 @@ var ProjectsEdit = _react2.default.createClass({
                         null,
                         project.name
                     ),
-                    _react2.default.createElement(_imagePanelRevision.ImagePanelRevision, { src: project.content })
+                    _react2.default.createElement(
+                        _cardBlock.CardBlock,
+                        null,
+                        _react2.default.createElement(_imagePanelRevision.ImagePanelRevision, { src: project.content })
+                    )
                 );
             });
 

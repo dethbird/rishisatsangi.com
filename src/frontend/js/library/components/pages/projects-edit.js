@@ -72,7 +72,9 @@ const ProjectsEdit = React.createClass({
                         <CardBlock>
                             { project.name }
                         </CardBlock>
-                        <ImagePanelRevision { ...{src: project.content } } />
+                        <CardBlock>
+                            <ImagePanelRevision { ...{src: project.content } } />
+                        </CardBlock>
                     </SortableItem>
                 );
             });

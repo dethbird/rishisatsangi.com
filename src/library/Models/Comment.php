@@ -15,4 +15,13 @@ class Comment extends ActiveRecord\Model
     public function before_save_audit() {
         $this->date_updated = date('Y-m-d g:i:s a');
     }
+
+    public function to_json(array $options=array()) {
+        $model = json_decode(parent::to_json($options));
+        $user = User::find_by_id($model->user_id);
+        $model->user = json_decode($user->to_json([
+            'except' => ['auth_token', 'password', 'app_user', 'notifications']
+        ]));
+        return json_encode($model);
+    }
 }

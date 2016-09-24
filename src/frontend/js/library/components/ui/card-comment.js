@@ -14,13 +14,14 @@ const CardComment = React.createClass({
     },
 
     render: function() {
+        console.log(this.props.comment);
         let className = classNames(['comment', this.props.comment.status])
         return (
             <Card
                 className={ className }
             >
                 <CardBlock>
-                    <strong>{ this.props.comment.username }:</strong><br />
+                    <strong>{ this.props.comment.user.username }:</strong><br />
                     <blockquote>{ this.props.comment.comment }</blockquote>
                 </CardBlock>
                 <div className="card-footer text-muted clearfix">

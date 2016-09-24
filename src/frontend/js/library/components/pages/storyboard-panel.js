@@ -91,7 +91,22 @@ const StoryboardPanel = React.createClass({
 
             return (
                 <div>
-                    <StoryboardPanelBreadcrumb { ...this.state }></StoryboardPanelBreadcrumb>
+                    <StoryboardPanelBreadcrumb { ...this.state } />
+
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link btn btn-info"
+                                to={
+                                    '/project/' + that.props.params.projectId
+                                    + '/storyboard/' + that.props.params.storyboardId
+                                    + '/panel/' + that.props.params.panelId
+                                    + '/edit'
+                                }>Edit</Link>
+                        </li>
+                    </ul>
+                    <br />
+
                     <div className="StoryboardPanelDetailsContainer">
                         <CardStoryboardPanel
                             projectId={ this.props.params.projectId }
@@ -99,6 +114,7 @@ const StoryboardPanel = React.createClass({
                             panel={ this.state.panel }
                         ></CardStoryboardPanel>
                     </div>
+
                     <SectionHeader>{ this.state.panel.revisions.length } Revision(s)</SectionHeader>
                     <div className="clearfix PanelRevisionsContainer">
                         { panelRevisionNodes }
@@ -112,6 +128,7 @@ const StoryboardPanel = React.createClass({
                             }
                         >Add</Link>
                     </div>
+
                     <SectionHeader>{ this.state.panel.comments.length } Comment(s)</SectionHeader>
                     <div className="clearfix PanelCommentsContainer">
                         { panelCommentNodes }

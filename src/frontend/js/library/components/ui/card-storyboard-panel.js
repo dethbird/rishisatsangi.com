@@ -28,19 +28,11 @@ const CardStoryboardPanel = React.createClass({
             >
                 <h3 className='card-header'>{ this.props.panel.name }</h3>
                 <CardBlock>
-                    <ImagePanelRevision { ...props } ></ImagePanelRevision>
+                    <ImagePanelRevision { ...props } />
                 </CardBlock>
                 <CardBlock>
                     <Fountain source={ this.props.panel.script }></Fountain>
                 </CardBlock>
-                <div className='card-footer text-muted clearfix'>
-                    <Link to={
-                        '/project/' + this.props.projectId
-                        + '/storyboard/' + this.props.storyboardId
-                        + '/panel/' + this.props.panel.id
-                        + '/edit'
-                    }>Edit</Link>
-                </div>
             </Card>
         );
     }

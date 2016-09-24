@@ -37837,7 +37837,6 @@ var ConceptArtEdit = _react2.default.createClass({
     render: function render() {
         var that = this;
         if (this.state) {
-            console.log(this.state);
             var concept_artRevisionNodes = this.state.concept_art.revisions.map(function (revision, i) {
 
                 var props = {};
@@ -42493,6 +42492,22 @@ var StoryboardPanel = _react2.default.createClass({
                 null,
                 _react2.default.createElement(_storyboardPanelBreadcrumb.StoryboardPanelBreadcrumb, this.state),
                 _react2.default.createElement(
+                    'ul',
+                    { className: 'nav nav-pills' },
+                    _react2.default.createElement(
+                        'li',
+                        { className: 'nav-item' },
+                        _react2.default.createElement(
+                            _reactRouter.Link,
+                            {
+                                className: 'nav-link btn btn-info',
+                                to: '/project/' + that.props.params.projectId + '/storyboard/' + that.props.params.storyboardId + '/panel/' + that.props.params.panelId + '/edit' },
+                            'Edit'
+                        )
+                    )
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
                     'div',
                     { className: 'StoryboardPanelDetailsContainer' },
                     _react2.default.createElement(_cardStoryboardPanel.CardStoryboardPanel, {
@@ -43012,6 +43027,7 @@ var CardComment = _react2.default.createClass({
     },
 
     render: function render() {
+        console.log(this.props.comment);
         var className = (0, _classnames2.default)(['comment', this.props.comment.status]);
         return _react2.default.createElement(
             _card.Card,
@@ -43024,7 +43040,7 @@ var CardComment = _react2.default.createClass({
                 _react2.default.createElement(
                     'strong',
                     null,
-                    this.props.comment.username,
+                    this.props.comment.user.username,
                     ':'
                 ),
                 _react2.default.createElement('br', null),
@@ -43110,15 +43126,6 @@ var CardStoryboardPanel = _react2.default.createClass({
                 _cardBlock.CardBlock,
                 null,
                 _react2.default.createElement(_fountain.Fountain, { source: this.props.panel.script })
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'card-footer text-muted clearfix' },
-                _react2.default.createElement(
-                    _reactRouter.Link,
-                    { to: '/project/' + this.props.projectId + '/storyboard/' + this.props.storyboardId + '/panel/' + this.props.panel.id + '/edit' },
-                    'Edit'
-                )
             )
         );
     }

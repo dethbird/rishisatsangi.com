@@ -8,6 +8,7 @@ import { ProjectDetails } from "./project/project-details"
 import { ProjectLocations } from "./project/project-locations"
 import { ProjectReferenceImages } from "./project/project-reference_images"
 import { ProjectStoryboards } from "./project/project-storyboards"
+import { SectionHeader } from "../ui/section-header"
 import { Spinner } from "../ui/spinner"
 
 

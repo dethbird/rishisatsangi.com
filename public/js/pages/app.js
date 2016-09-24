@@ -40367,6 +40367,8 @@ var _projectReference_images = require('./project/project-reference_images');
 
 var _projectStoryboards = require('./project/project-storyboards');
 
+var _sectionHeader = require('../ui/section-header');
+
 var _spinner = require('../ui/spinner');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -40424,7 +40426,7 @@ var Project = _react2.default.createClass({
 
 module.exports.Project = Project;
 
-},{"../ui/spinner":331,"./project/project-breadcrumb":299,"./project/project-characters":300,"./project/project-concept_arts":301,"./project/project-details":302,"./project/project-locations":303,"./project/project-reference_images":304,"./project/project-storyboards":305,"react":267,"react-router":112}],299:[function(require,module,exports){
+},{"../ui/section-header":330,"../ui/spinner":331,"./project/project-breadcrumb":299,"./project/project-characters":300,"./project/project-concept_arts":301,"./project/project-details":302,"./project/project-locations":303,"./project/project-reference_images":304,"./project/project-storyboards":305,"react":267,"react-router":112}],299:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -40479,6 +40481,8 @@ var _cardClickable = require('../../ui/card-clickable');
 
 var _cardBlock = require('../../ui/card-block');
 
+var _sectionHeader = require('../../ui/section-header');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ProjectCharacters = _react2.default.createClass({
@@ -40493,25 +40497,21 @@ var ProjectCharacters = _react2.default.createClass({
 
     render: function render() {
         return _react2.default.createElement(
-            _cardClickable.CardClickable,
-            { onClick: this.handleClick.bind(this, this.props.project.id) },
+            'div',
+            null,
             _react2.default.createElement(
-                'div',
+                _sectionHeader.SectionHeader,
                 null,
-                _react2.default.createElement(
-                    'h3',
-                    { className: 'card-header' },
-                    'Characters'
-                ),
+                'Characters'
+            ),
+            _react2.default.createElement(
+                _cardClickable.CardClickable,
+                { onClick: this.handleClick.bind(this, this.props.project.id) },
                 _react2.default.createElement(
                     _cardBlock.CardBlock,
                     null,
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        this.props.project.characters.length,
-                        ' character(s)'
-                    )
+                    this.props.project.characters.length,
+                    ' character(s)'
                 )
             )
         );
@@ -40520,7 +40520,7 @@ var ProjectCharacters = _react2.default.createClass({
 
 module.exports.ProjectCharacters = ProjectCharacters;
 
-},{"../../ui/card-block":320,"../../ui/card-clickable":321,"react":267,"react-router":112}],301:[function(require,module,exports){
+},{"../../ui/card-block":320,"../../ui/card-clickable":321,"../../ui/section-header":330,"react":267,"react-router":112}],301:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -40532,6 +40532,8 @@ var _reactRouter = require('react-router');
 var _cardClickable = require('../../ui/card-clickable');
 
 var _cardBlock = require('../../ui/card-block');
+
+var _sectionHeader = require('../../ui/section-header');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40547,25 +40549,21 @@ var ProjectConceptArts = _react2.default.createClass({
 
     render: function render() {
         return _react2.default.createElement(
-            _cardClickable.CardClickable,
-            { onClick: this.handleClick.bind(this, this.props.project.id) },
+            'div',
+            null,
             _react2.default.createElement(
-                'div',
+                _sectionHeader.SectionHeader,
                 null,
-                _react2.default.createElement(
-                    'h3',
-                    { className: 'card-header' },
-                    'Concept Art'
-                ),
+                'Concept Art'
+            ),
+            _react2.default.createElement(
+                _cardClickable.CardClickable,
+                { onClick: this.handleClick.bind(this, this.props.project.id) },
                 _react2.default.createElement(
                     _cardBlock.CardBlock,
                     null,
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        this.props.project.concept_art.length,
-                        ' concept(s)'
-                    )
+                    this.props.project.concept_art.length,
+                    ' concept art(s)'
                 )
             )
         );
@@ -40574,7 +40572,7 @@ var ProjectConceptArts = _react2.default.createClass({
 
 module.exports.ProjectConceptArts = ProjectConceptArts;
 
-},{"../../ui/card-block":320,"../../ui/card-clickable":321,"react":267,"react-router":112}],302:[function(require,module,exports){
+},{"../../ui/card-block":320,"../../ui/card-clickable":321,"../../ui/section-header":330,"react":267,"react-router":112}],302:[function(require,module,exports){
 "use strict";
 
 var _react = require("react");
@@ -40589,6 +40587,8 @@ var _description = require("../../ui/description");
 
 var _imagePanelRevision = require("../../ui/image-panel-revision");
 
+var _sectionHeader = require("../../ui/section-header");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ProjectDetails = _react2.default.createClass({
@@ -40600,30 +40600,26 @@ var ProjectDetails = _react2.default.createClass({
 
     render: function render() {
         return _react2.default.createElement(
-            _card.Card,
+            "div",
             null,
             _react2.default.createElement(
-                "div",
+                _sectionHeader.SectionHeader,
                 null,
-                _react2.default.createElement(
-                    "h3",
-                    { className: "card-header" },
-                    "Details"
-                ),
+                "Details:"
+            ),
+            _react2.default.createElement(
+                _card.Card,
+                null,
                 _react2.default.createElement(
                     _cardBlock.CardBlock,
                     null,
                     _react2.default.createElement(
-                        "div",
-                        null,
-                        _react2.default.createElement(
-                            "h3",
-                            null,
-                            this.props.project.name
-                        ),
-                        _react2.default.createElement(_imagePanelRevision.ImagePanelRevision, { src: this.props.project.content }),
-                        _react2.default.createElement(_description.Description, { source: this.props.project.description })
-                    )
+                        "h3",
+                        { className: "card-title" },
+                        this.props.project.name
+                    ),
+                    _react2.default.createElement(_imagePanelRevision.ImagePanelRevision, { src: this.props.project.content }),
+                    _react2.default.createElement(_description.Description, { source: this.props.project.description })
                 )
             )
         );
@@ -40632,7 +40628,7 @@ var ProjectDetails = _react2.default.createClass({
 
 module.exports.ProjectDetails = ProjectDetails;
 
-},{"../../ui/card":324,"../../ui/card-block":320,"../../ui/description":326,"../../ui/image-panel-revision":329,"react":267}],303:[function(require,module,exports){
+},{"../../ui/card":324,"../../ui/card-block":320,"../../ui/description":326,"../../ui/image-panel-revision":329,"../../ui/section-header":330,"react":267}],303:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -40644,6 +40640,8 @@ var _reactRouter = require('react-router');
 var _cardClickable = require('../../ui/card-clickable');
 
 var _cardBlock = require('../../ui/card-block');
+
+var _sectionHeader = require('../../ui/section-header');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40659,25 +40657,21 @@ var ProjectLocations = _react2.default.createClass({
 
     render: function render() {
         return _react2.default.createElement(
-            _cardClickable.CardClickable,
-            { onClick: this.handleClick.bind(this, this.props.project.id) },
+            'div',
+            null,
             _react2.default.createElement(
-                'div',
+                _sectionHeader.SectionHeader,
                 null,
-                _react2.default.createElement(
-                    'h3',
-                    { className: 'card-header' },
-                    'Locations'
-                ),
+                'Locations'
+            ),
+            _react2.default.createElement(
+                _cardClickable.CardClickable,
+                { onClick: this.handleClick.bind(this, this.props.project.id) },
                 _react2.default.createElement(
                     _cardBlock.CardBlock,
                     null,
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        this.props.project.locations.length,
-                        ' location(s)'
-                    )
+                    this.props.project.locations.length,
+                    ' location(s)'
                 )
             )
         );
@@ -40686,7 +40680,7 @@ var ProjectLocations = _react2.default.createClass({
 
 module.exports.ProjectLocations = ProjectLocations;
 
-},{"../../ui/card-block":320,"../../ui/card-clickable":321,"react":267,"react-router":112}],304:[function(require,module,exports){
+},{"../../ui/card-block":320,"../../ui/card-clickable":321,"../../ui/section-header":330,"react":267,"react-router":112}],304:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -40698,6 +40692,8 @@ var _reactRouter = require('react-router');
 var _cardClickable = require('../../ui/card-clickable');
 
 var _cardBlock = require('../../ui/card-block');
+
+var _sectionHeader = require('../../ui/section-header');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40713,25 +40709,21 @@ var ProjectReferenceImages = _react2.default.createClass({
 
     render: function render() {
         return _react2.default.createElement(
-            _cardClickable.CardClickable,
-            { onClick: this.handleClick.bind(this, this.props.project.id) },
+            'div',
+            null,
             _react2.default.createElement(
-                'div',
+                _sectionHeader.SectionHeader,
                 null,
-                _react2.default.createElement(
-                    'h3',
-                    { className: 'card-header' },
-                    'Reference Images'
-                ),
+                'Reference Images'
+            ),
+            _react2.default.createElement(
+                _cardClickable.CardClickable,
+                { onClick: this.handleClick.bind(this, this.props.project.id) },
                 _react2.default.createElement(
                     _cardBlock.CardBlock,
                     null,
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        this.props.project.reference_images.length,
-                        ' reference(s)'
-                    )
+                    this.props.project.reference_images.length,
+                    ' character(s)'
                 )
             )
         );
@@ -40740,7 +40732,7 @@ var ProjectReferenceImages = _react2.default.createClass({
 
 module.exports.ProjectReferenceImages = ProjectReferenceImages;
 
-},{"../../ui/card-block":320,"../../ui/card-clickable":321,"react":267,"react-router":112}],305:[function(require,module,exports){
+},{"../../ui/card-block":320,"../../ui/card-clickable":321,"../../ui/section-header":330,"react":267,"react-router":112}],305:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -40752,6 +40744,8 @@ var _reactRouter = require('react-router');
 var _cardClickable = require('../../ui/card-clickable');
 
 var _cardBlock = require('../../ui/card-block');
+
+var _sectionHeader = require('../../ui/section-header');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40767,25 +40761,21 @@ var ProjectStoryboards = _react2.default.createClass({
 
     render: function render() {
         return _react2.default.createElement(
-            _cardClickable.CardClickable,
-            { onClick: this.handleClick.bind(this, this.props.project.id) },
+            'div',
+            null,
             _react2.default.createElement(
-                'div',
+                _sectionHeader.SectionHeader,
                 null,
-                _react2.default.createElement(
-                    'h3',
-                    { className: 'card-header' },
-                    'Storyboards'
-                ),
+                'Storyboards'
+            ),
+            _react2.default.createElement(
+                _cardClickable.CardClickable,
+                { onClick: this.handleClick.bind(this, this.props.project.id) },
                 _react2.default.createElement(
                     _cardBlock.CardBlock,
                     null,
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        this.props.project.storyboards.length,
-                        ' storyboard(s)'
-                    )
+                    this.props.project.storyboards.length,
+                    ' storyboard(s)'
                 )
             )
         );
@@ -40794,7 +40784,7 @@ var ProjectStoryboards = _react2.default.createClass({
 
 module.exports.ProjectStoryboards = ProjectStoryboards;
 
-},{"../../ui/card-block":320,"../../ui/card-clickable":321,"react":267,"react-router":112}],306:[function(require,module,exports){
+},{"../../ui/card-block":320,"../../ui/card-clickable":321,"../../ui/section-header":330,"react":267,"react-router":112}],306:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');

@@ -37,17 +37,18 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
 
         /**
          * @todo use a different column to store the commenting user id
          */
         $model = new Comment($app->request->params());
-
+        $object = json_decode($model->to_json());
+        unset($object->user);
+        // print_r($object); die();
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            json_decode($model->to_json()),
+            $object,
             APPLICATION_PATH . "configs/validation_schemas/comment.json");
 
         if (is_array($validation_response)) {

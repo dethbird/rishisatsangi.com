@@ -3,28 +3,27 @@ import { browserHistory } from 'react-router'
 
 import { CardClickable } from "../../ui/card-clickable"
 import { CardBlock } from "../../ui/card-block"
+import { SectionHeader } from "../../ui/section-header"
 
 
 const ProjectConceptArts = React.createClass({
     propTypes: {
-      project: React.PropTypes.object.isRequired
+        project: React.PropTypes.object.isRequired
     },
     handleClick(project_id) {
         browserHistory.push('/project/' + project_id + '/concept_art');
     },
     render: function() {
-      return (
-        <CardClickable onClick={ this.handleClick.bind(this, this.props.project.id)} >
+        return (
             <div>
-                <h3 className="card-header">Concept Art</h3>
-                <CardBlock>
-                    <div>
-                        { this.props.project.concept_art.length } concept(s)
-                    </div>
-                </CardBlock>
+                <SectionHeader>Concept Art</SectionHeader>
+                <CardClickable onClick={ this.handleClick.bind(this, this.props.project.id)} >
+                    <CardBlock>
+                        { this.props.project.concept_art.length } concept art(s)
+                    </CardBlock>
+                </CardClickable>
             </div>
-        </CardClickable>
-      );
+        );
     }
 })
 

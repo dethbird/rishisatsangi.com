@@ -38,7 +38,7 @@ class ProjectStoryboardPanel extends ActiveRecord\Model
                     'entity_id = ? and entity_table_name = "project_storyboard_panels"',
                     $model->id
                 ],
-                'order' => 'date_added DESC'
+                'order' => 'date_added ASC'
             ]
         );
 

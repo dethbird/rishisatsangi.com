@@ -85,11 +85,13 @@ $app->group('/api', $authorizeByHeaders($app), function () use ($app) {
         foreach($app->request->params() as $key=>$value) {
             $model->$key = $value;
         }
+        $object = json_decode($model->to_json());
+        unset($object->user);
 
         # validate
         $validator = new Validator();
         $validation_response = $validator->validate(
-            json_decode($model->to_json()),
+            $object,
             APPLICATION_PATH . "configs/validation_schemas/comment.json");
 
         if (is_array($validation_response)) {

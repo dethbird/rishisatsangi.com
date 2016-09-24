@@ -14,7 +14,6 @@ const CardComment = React.createClass({
     },
 
     render: function() {
-        console.log(this.props.comment);
         let className = classNames(['comment', this.props.comment.status])
         return (
             <Card

@@ -48,9 +48,6 @@ const StoryboardPanelCommentEdit = React.createClass({
 
                     let user = data.users[0]
 
-                    console.log(user);
-                    console.log(moment().format('YYYY-MM-DD'));
-
                     changedFields = {
                         entity_id: this.props.params.panelId,
                         entity_table_name: 'project_storyboard_panels',

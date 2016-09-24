@@ -8,7 +8,9 @@ class Comment extends ActiveRecord\Model
     static $before_save = array('before_save_audit');
 
     public function before_create_audit() {
-        $this->date_added = date('Y-m-d g:i:s a');
+        if (!$this->date_added) {
+            $this->date_added = date('Y-m-d g:i:s a');
+        }
         $this->date_updated = date('Y-m-d g:i:s a');
     }
 

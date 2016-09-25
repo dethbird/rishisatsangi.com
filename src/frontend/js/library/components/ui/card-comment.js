@@ -5,6 +5,7 @@ import TimeAgo from 'react-timeago'
 
 import { Card } from "../ui/card"
 import { CardBlock } from "../ui/card-block"
+import { Description } from "../ui/description"
 
 const CardComment = React.createClass({
 
@@ -21,7 +22,7 @@ const CardComment = React.createClass({
             >
                 <CardBlock>
                     <strong>{ this.props.comment.user.username }:</strong><br />
-                    <blockquote>{ this.props.comment.comment }</blockquote>
+                    <Description source={ this.props.comment.comment } />
                 </CardBlock>
                 <div className="card-footer text-muted clearfix">
                     <Link to={ this.props.link }>

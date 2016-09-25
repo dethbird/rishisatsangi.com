@@ -42993,6 +42993,8 @@ var _card = require('../ui/card');
 
 var _cardBlock = require('../ui/card-block');
 
+var _description = require('../ui/description');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CardComment = _react2.default.createClass({
@@ -43021,11 +43023,7 @@ var CardComment = _react2.default.createClass({
                     ':'
                 ),
                 _react2.default.createElement('br', null),
-                _react2.default.createElement(
-                    'blockquote',
-                    null,
-                    this.props.comment.comment
-                )
+                _react2.default.createElement(_description.Description, { source: this.props.comment.comment })
             ),
             _react2.default.createElement(
                 'div',
@@ -43042,7 +43040,7 @@ var CardComment = _react2.default.createClass({
 
 module.exports.CardComment = CardComment;
 
-},{"../ui/card":324,"../ui/card-block":320,"classnames":1,"react":267,"react-router":112,"react-timeago":124}],323:[function(require,module,exports){
+},{"../ui/card":324,"../ui/card-block":320,"../ui/description":326,"classnames":1,"react":267,"react-router":112,"react-timeago":124}],323:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');

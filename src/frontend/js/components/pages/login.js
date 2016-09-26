@@ -13,7 +13,7 @@ import { browserHistory } from 'react-router'
 // import {
 //     ProjectBreadcrumb
 // } from "./project/project-breadcrumb"
-// import { Spinner } from "../ui/spinner"
+import { Spinner } from "../ui/spinner"
 
 
 const Login = React.createClass({
@@ -59,7 +59,7 @@ const Login = React.createClass({
             );
         }
         return (
-            <div>Loading</div>
+            <Spinner />
         )
     }
 })

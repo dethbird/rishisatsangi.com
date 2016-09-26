@@ -306,22 +306,26 @@
             "'*.less'"
         ));
 
+
         foreach($frontendFiles as $file){
             if($file) {
                 $outputFile = str_replace("src/frontend", "public", $file);
-                $outputFile = str_replace(".less", ".css", $file);
+                $outputFile = str_replace(".less", ".css", $outputFile);
+
+                $result = $shell->executeCommand('lessc', array(
+                    $file,
+                    $outputFile,
+                    "--verbose"
+                ));
 
                 echo $c($outputFile)
                     ->yellow()->bold() . PHP_EOL;
 
-                echo $c("CSs built.")
+                echo $c("CSS built.")
                     ->green()->bold() . PHP_EOL;
             }
         }
     }
-
-
-    //lessc src/frontend/css/app.less public/css/app.css --verbose
 
     echo $c(
 "    ___  ___    __  __

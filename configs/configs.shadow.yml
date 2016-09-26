@@ -1,2 +1,4 @@
 storystation_api:
     hostname: :STORYSTATION_HOSTNAME
+security:
+    secret: :SECURITY_SECRET

@@ -15,6 +15,10 @@
         ->boolean()
         ->aka('cache')
         ->describedAs('Clear cache and reset permissions of cache directory');
+    $cmd->option('css')
+        ->boolean()
+        ->aka('css')
+        ->describedAs('Build .css files from .less');
     $cmd->option('configs')
         ->boolean()
         ->aka('configs')
@@ -282,6 +286,42 @@
             }
         }
     }
+
+    // css
+    if($cmd['css']) {
+
+        echo $c(
+"_________
+\_   ___ \  ______ ______
+/    \  \/ /  ___//  ___/
+\     \____\___ \ \___ \
+ \______  /____  >____  >
+        \/     \/     \/ "
+           )
+            ->white()->bold()->highlight('blue') . PHP_EOL;
+
+        $frontendFiles = $shell->executeCommand('find', array(
+            "src/frontend/css/",
+            "-name",
+            "'*.less'"
+        ));
+
+        foreach($frontendFiles as $file){
+            if($file) {
+                $outputFile = str_replace("src/frontend", "public", $file);
+                $outputFile = str_replace(".less", ".css", $file);
+
+                echo $c($outputFile)
+                    ->yellow()->bold() . PHP_EOL;
+
+                echo $c("CSs built.")
+                    ->green()->bold() . PHP_EOL;
+            }
+        }
+    }
+
+
+    //lessc src/frontend/css/app.less public/css/app.css --verbose
 
     echo $c(
 "    ___  ___    __  __

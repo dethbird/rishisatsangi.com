@@ -43,12 +43,20 @@ displays help:
      Publish configs from .env
 
 
+--css/--css
+     Build .css files from .less
+
+
 --help
      Show the help page for this command.
 
 
 --js/--javascript
      Broswerify and minify the js
+
+
+--js-page/--javascript-page <argument>
+     File in "src/frontend/js/pages/<page>.js" to build
 
 
 --npm/--npm
@@ -69,7 +77,7 @@ displays help:
 ##### build production:
 All the options for the first time build.
 ```bash
-php scripts/build.php --cache --configs --npm --js --php --ugly
+php scripts/build.php --cache --configs --css --npm --js --php --ugly
 ```
 
 ### Permissions

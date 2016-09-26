@@ -10,6 +10,6 @@
         "slim/slim": "~2.0",
         "slim/views": "~0.1",
         "symfony/yaml": "~2.7",
-        "twig/twig": "~1.2",
+        "twig/twig": "~1.2"
     }
 }

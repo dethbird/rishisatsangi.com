@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+{% block title %} - Login{% endblock %}
+{% block head %}
+    {{parent()}}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+    <div class="container" id="mount"></div>
+{% endblock %}
+
+
+{% block includes %}
+  <!-- js includes -->
+  <script type="text/javascript">
+    var lastRequestUri = "{{lastRequestUri}}";
+  </script>
+  <script type="text/javascript" src="/js/pages/login.js"></script>
+{% endblock %}

@@ -36,15 +36,7 @@ $app = new \Slim\Slim(
     )
 );
 
-$db = new DataBase(
-    $configs['mysql']['host'],
-    $configs['mysql']['database'],
-    $configs['mysql']['user'],
-    $configs['mysql']['password']);
-
-
 $app->container->set('configs', $configs);
-$app->container->set('db', $db);
 
 
 # authorize the user by session (middleware)

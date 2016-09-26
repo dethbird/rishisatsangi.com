@@ -18,6 +18,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require '../vendor/autoload.php';
 require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php';
+require_once APPLICATION_PATH . 'src/library/Connector/StorystationApiClient.php';
 
 use Cocur\Slugify\Slugify;
 use Symfony\Component\Yaml\Yaml;
@@ -60,31 +61,7 @@ $authorize = function ($app) {
     };
 };
 
-# authorize the user by header auth token
-$authorizeByHeaders = function ($app) {
-
-    return function () use ($app) {
-
-        # check cookie for securityContext
-        if (!isset($_SESSION['securityContext'])) {
-            $authToken = $app->request->headers->get('Auth-Token');
-            if ($authToken == "") {
-                $app->halt(400);
-            } else {
-                $configs = $app->container->get('configs');
-                $db = $app->container->get('db');
-                $result = $db->fetchOne(
-                    $configs['sql']['users']['get_by_auth_token'],
-                    [
-                        'auth_token' => $authToken
-                    ]
-                );
-                $_SESSION['securityContext'] = (object) $result;
-            }
-        }
-    };
-};
-
+# 404
 $app->notFound(function () use ($app) {
     $_SESSION['lastRequestUri'] = $_SERVER['REQUEST_URI'];
     $app->redirect("/");
@@ -114,7 +91,7 @@ $app->get("/login", function () use ($app) {
     );
 });
 
-# login
+# app (React)
 $app->get("/app", function () use ($app) {
 
     $configs = $app->container->get('configs');
@@ -139,6 +116,7 @@ $app->get("/logout", function () use ($app) {
   $app->redirect("/");
 });
 
+# api routes
 require_once APPLICATION_PATH . 'src/routes/api.php';
 
 $app->run();

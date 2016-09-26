@@ -18,19 +18,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require '../vendor/autoload.php';
 require_once APPLICATION_PATH . 'src/library/View/Extension/TemplateHelpers.php';
-require_once APPLICATION_PATH . 'src/library/ExternalData/FlickrData.php';
-require_once APPLICATION_PATH . 'src/library/ExternalData/GoogleData.php';
-require_once APPLICATION_PATH . 'src/library/ExternalData/InstagramData.php';
-require_once APPLICATION_PATH . 'src/library/ExternalData/PocketData.php';
-require_once APPLICATION_PATH . 'src/library/ExternalData/VimeoData.php';
-require_once APPLICATION_PATH . 'src/library/Data/Base.php';
-require_once APPLICATION_PATH . 'src/library/Logic/Projects.php';
-require_once APPLICATION_PATH . 'src/library/Logic/Scripts.php';
-require_once APPLICATION_PATH . 'src/library/Validation/Validator.php';
-require_once APPLICATION_PATH . 'vendor/php-activerecord/php-activerecord/ActiveRecord.php';
 
-use Aptoma\Twig\Extension\MarkdownExtension;
-use Aptoma\Twig\Extension\MarkdownEngine;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\Yaml\Yaml;
 use Guzzle\Http\Client;
@@ -48,15 +36,6 @@ $app = new \Slim\Slim(
     )
 );
 
-$markdownEngine = new MarkdownEngine\MichelfMarkdownEngine();
-
-$view = $app->view();
-$view->parserExtensions = array(
-    new \Slim\Views\TwigExtension(),
-    new TemplateHelpers(),
-    new MarkdownExtension($markdownEngine)
-);
-
 $db = new DataBase(
     $configs['mysql']['host'],
     $configs['mysql']['database'],
@@ -67,22 +46,6 @@ $db = new DataBase(
 $app->container->set('configs', $configs);
 $app->container->set('db', $db);
 
-
-ActiveRecord\Config::initialize(function($cfg)
-{
-    global $configs;
-
-    $cfg->set_model_directory(APPLICATION_PATH . '/src/library/Models');
-    $cfg->set_connections(
-        [
-            'development' =>
-                'mysql://'.$configs['mysql']['user']
-                .':'.$configs['mysql']['password']
-                .'@'.$configs['mysql']['host'].'/'
-                .$configs['mysql']['database']
-        ]
-    );
-});
 
 # authorize the user by session (middleware)
 $authorize = function ($app) {
@@ -138,22 +101,7 @@ $app->notFound(function () use ($app) {
 # index
 $app->get("/", $authorize($app), function () use ($app) {
 
-    $configs = $app->container->get('configs');
-    $securityContext = $_SESSION['securityContext'];
-    $lastRequestUri = $_SESSION['lastRequestUri'];
-
-    $templateVars = array(
-        "configs" => $configs,
-        'securityContext' => $securityContext,
-        'lastRequestUri' => $lastRequestUri,
-        "section" => "index"
-    );
-
-    $app->render(
-        'pages/index.html.twig',
-        $templateVars,
-        200
-    );
+    $app->redirect("http://rishisatsangi.com");
 });
 
 
@@ -174,6 +122,23 @@ $app->get("/login", function () use ($app) {
     );
 });
 
+# login
+$app->get("/app", function () use ($app) {
+
+    $configs = $app->container->get('configs');
+
+    $templateVars = array(
+        "configs" => $configs,
+        "section" => "login"
+    );
+
+    $app->render(
+        'pages/app.html.twig',
+        $templateVars,
+        200
+    );
+});
+
 
 
 # logout
@@ -182,12 +147,6 @@ $app->get("/logout", function () use ($app) {
   $app->redirect("/");
 });
 
-
 require_once APPLICATION_PATH . 'src/routes/api.php';
-// require_once APPLICATION_PATH . 'src/routes/likedrop.php';
-// require_once APPLICATION_PATH . 'src/routes/projects.php';
-require_once APPLICATION_PATH . 'src/routes/scripts.php';
-require_once APPLICATION_PATH . 'src/routes/service.php';
-
 
 $app->run();

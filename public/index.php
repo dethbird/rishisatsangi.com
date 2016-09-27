@@ -73,12 +73,14 @@ $app->notFound(function () use ($app) {
 # index
 $app->get("/", function () use ($app) {
 
-    if(!$_SESSION['securityContext']) {
+
+    if (!isset($_SESSION['securityContext'])) {
       $app->redirect("http://rishisatsangi.com");
     }
 
     $templateVars = [
-      'securityContext' => $_SESSION['securityContext']
+      'securityContext' => $_SESSION['securityContext'],
+      'lastRequestUri' => $_SESSION['lastRequestUri']
     ];
 
     $app->render(

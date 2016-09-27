@@ -57,4 +57,19 @@ class StorystationApiClient {
         }
 
     }
+
+    public function getProject($id)
+    {
+
+        try {
+            $response = $this->client->request(
+                'GET',
+                '/api/project/' . $id
+            );
+            return $response;
+        } catch (Exception $e) {
+            return $e->getResponse();
+        }
+
+    }
 }

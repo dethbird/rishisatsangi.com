@@ -60,4 +60,27 @@ $app->group('/api', $authorize($app), function () use ($app) {
         }
 
     });
+
+    $app->get('/project/:id', function ($id) use ($app) {
+
+        $configs = $app->container->get('configs');
+        $securityContext = $_SESSION['securityContext'];
+
+        $apiClient = new StorystationApiClient(
+            $configs['storystation_api']['hostname'],
+            $securityContext->auth_token);
+
+        $response = $apiClient->getProject($id);
+
+        if($response->getStatusCode()!==200) {
+            $app->halt($response->getStatusCode());
+        } else {
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+
+            $body = $response->getBody()->getContents();
+            $app->response->setBody($body);
+        }
+
+    });
 });

@@ -18,8 +18,19 @@ $app->post('/api/login', function () use ($app) {
     } else {
         $app->response->setStatus(200);
         $app->response->headers->set('Content-Type', 'application/json');
+
         $body = $response->getBody()->getContents();
-        $app->response->setBody(json_encode($body));
+        $model = json_decode($body);
+
+        $_SESSION['securityContext'] = $model;
+
+        if (isset($_SESSION['redirectTo'])) {
+            $model->redirectTo = $_SESSION['redirectTo'] == "/" ? '/app' : $_SESSION['redirectTo'];
+        } else {
+            $model->redirectTo = '/app';
+        }
+
+        $app->response->setBody(json_encode($model));
     }
 
 });
@@ -27,32 +38,12 @@ $app->post('/api/login', function () use ($app) {
 $app->group('/api', $authorize($app), function () use ($app) {
 
     # update script
-    $app->put('/script/:id', function ($id) use ($app) {
+    $app->get('/projects', function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
-        $db = $app->container->get('db');
-        $scriptService = new Scripts($db, $configs, $securityContext);
-        $id = (int) $id;
 
-        # validate
-        $validator = new Validator();
-        $validation_response = $validator->validate(
-            (object) $app->request->params(),
-            APPLICATION_PATH . "configs/validation_schemas/script.json");
-
-        if (is_array($validation_response)) {
-            $app->response->setStatus(400);
-            $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($validation_response));
-        } else {
-
-            $script = $scriptService->update($id, $app->request->params());
-
-            $app->response->setStatus(200);
-            $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($script));
-        }
+        echo "farts"; die();
 
     });
 });

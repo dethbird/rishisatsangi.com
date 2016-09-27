@@ -50,6 +50,7 @@ const Login = React.createClass({
                     formMessage: 'Success.',
                     model: data
                 })
+                document.location = data.redirectTo
             }.bind(this),
             error: function(xhr, status, err) {
                 this.setState({

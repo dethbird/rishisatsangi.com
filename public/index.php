@@ -24,6 +24,7 @@ use Cocur\Slugify\Slugify;
 use Symfony\Component\Yaml\Yaml;
 use Guzzle\Http\Client;
 
+
 # Load configs and add to the app container
 $configs = Yaml::parse(file_get_contents("../configs/configs.yml"));
 $app = new \Slim\Slim(
@@ -61,16 +62,31 @@ $authorize = function ($app) {
     };
 };
 
+
 # 404
 $app->notFound(function () use ($app) {
     $_SESSION['lastRequestUri'] = $_SERVER['REQUEST_URI'];
     $app->redirect("/");
 });
 
-# index
-$app->get("/", $authorize($app), function () use ($app) {
 
-    $app->redirect("http://rishisatsangi.com");
+# index
+$app->get("/", function () use ($app) {
+
+    if(!$_SESSION['securityContext']) {
+      $app->redirect("http://rishisatsangi.com");
+    }
+
+    $templateVars = [
+      'securityContext' => $_SESSION['securityContext']
+    ];
+
+    $app->render(
+        'pages/index.html.twig',
+        $templateVars,
+        200
+    );
+
 });
 
 
@@ -91,30 +107,13 @@ $app->get("/login", function () use ($app) {
     );
 });
 
-# app (React)
-$app->get("/app", function () use ($app) {
-
-    $configs = $app->container->get('configs');
-
-    $templateVars = array(
-        "configs" => $configs,
-        "section" => "login"
-    );
-
-    $app->render(
-        'pages/app.html.twig',
-        $templateVars,
-        200
-    );
-});
-
-
 
 # logout
 $app->get("/logout", function () use ($app) {
   $_SESSION['securityContext'] = null;
   $app->redirect("/");
 });
+
 
 # api routes
 require_once APPLICATION_PATH . 'src/routes/api.php';

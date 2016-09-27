@@ -25,9 +25,9 @@ $app->post('/api/login', function () use ($app) {
         $_SESSION['securityContext'] = $model;
 
         if (isset($_SESSION['redirectTo'])) {
-            $model->redirectTo = $_SESSION['redirectTo'] == "/" ? '/app' : $_SESSION['redirectTo'];
+            $model->redirectTo = $_SESSION['redirectTo'];
         } else {
-            $model->redirectTo = '/app';
+            $model->redirectTo = '/';
         }
 
         $app->response->setBody(json_encode($model));
@@ -37,13 +37,27 @@ $app->post('/api/login', function () use ($app) {
 
 $app->group('/api', $authorize($app), function () use ($app) {
 
-    # update script
+    # get projects
     $app->get('/projects', function () use ($app) {
 
         $configs = $app->container->get('configs');
         $securityContext = $_SESSION['securityContext'];
 
-        echo "farts"; die();
+        $apiClient = new StorystationApiClient(
+            $configs['storystation_api']['hostname'],
+            $securityContext->auth_token);
+
+        $response = $apiClient->getProjects();
+
+        if($response->getStatusCode()!==200) {
+            $app->halt($response->getStatusCode());
+        } else {
+            $app->response->setStatus(200);
+            $app->response->headers->set('Content-Type', 'application/json');
+
+            $body = $response->getBody()->getContents();
+            $app->response->setBody($body);
+        }
 
     });
 });

@@ -10,9 +10,16 @@ class StorystationApiClient {
 
     public function __construct($apiUrl, $authToken = null)
     {
+        if (!$authToken) {
+          $this->client = new GuzzleHttp\Client([
+              'base_uri' => 'http://' . $apiUrl ]);
+        } else {
+          $this->client = new GuzzleHttp\Client([
+              'base_uri' => 'http://' . $apiUrl,
+              'headers' => [
+                'Auth-Token' => $authToken ]]);
+        }
 
-        $this->client = new GuzzleHttp\Client([
-            'base_uri' => 'http://' . $apiUrl ]);
     }
 
     public function login($username, $password)
@@ -28,6 +35,21 @@ class StorystationApiClient {
                         'password' => $password
                     ]
                 ]
+            );
+            return $response;
+        } catch (Exception $e) {
+            return $e->getResponse();
+        }
+
+    }
+
+    public function getProjects()
+    {
+
+        try {
+            $response = $this->client->request(
+                'GET',
+                '/api/projects'
             );
             return $response;
         } catch (Exception $e) {

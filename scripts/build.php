@@ -111,14 +111,13 @@
                 $v = trim($v);
                 if($v!=""){
                     try {
-                        echo $c("sed -i 's/:".$k."$/".addcslashes($v, "/")."/g' ".$configFilePath)
-                            ->white() . PHP_EOL;
+                        echo $c("sed -i 's/:".$k."/".addcslashes($v, "/")."/g' ".$configFilePath)
+                          ->white() . PHP_EOL;
                         $resp = $shell->executeCommand('sed', array(
                             "-i",
-                            "'s/:".$k."$/".addcslashes($v, "/")."/g'",
+                            "'s/:".$k."/".addcslashes($v, "/")."/g'",
                             $configFilePath
                         ));
-
                     } catch (Exception $e) {
                         var_dump($e);
                         var_dump(addcslashes($v, "/"));

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react'
+import { Link } from 'react-router'
 
 const ProjectNav = React.createClass({
 
@@ -10,42 +11,70 @@ const ProjectNav = React.createClass({
 
     render: function() {
 
+        let that = this;
+
         let storyboardNodes = this.props.project.storyboards.map(function(storyboard) {
             return (
-                <a className="dropdown-item" key={ storyboard.id }>
+                <Link
+                  className="dropdown-item"
+                  key={ storyboard.id }
+                  to={
+                    '/project/' + that.props.project.id
+                    + '/storyboard/' + storyboard.id
+                  }
+                >
                   { storyboard.name }
-                </a>
+                </Link>
             );
         });
 
-
         let className = classNames([this.props.className, 'nav nav-pills'])
         return (
-            <ul className={ className }>
-                <li className="nav-item">
-                    <a
-                      className="nav-link btn btn-secondary dropdown-toggle"
-                      data-toggle="dropdown" role="button"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >Storyboards</a>
-                  <div className="dropdown-menu">
-                      { storyboardNodes }
-                    </div>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link btn btn-secondary" href="#">Characters</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link btn btn-secondary" href="#">Concept Art</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link btn btn-secondary" href="#">Reference Images</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link btn btn-secondary" href="#">Locations</a>
-                </li>
-            </ul>
+            <div className="btn-group">
+                <button
+                    type="button"
+                    className="btn btn-secondary dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                Storyboards
+                </button>
+                <Link
+                    type="button"
+                    className="btn btn-secondary"
+                    to={
+                        '/project/' + this.props.project.id
+                        + '/characters'
+                    }
+                >Characters</Link>
+                <Link
+                    type="button"
+                    className="btn btn-secondary"
+                    to={
+                        '/project/' + this.props.project.id
+                        + '/concept_art'
+                    }
+                >Concept Art</Link>
+                <Link
+                    type="button"
+                    className="btn btn-secondary"
+                    to={
+                        '/project/' + this.props.project.id
+                        + '/reference_images'
+                    }
+                >Reference Images</Link>
+                <Link
+                    type="button"
+                    className="btn btn-secondary"
+                    to={
+                        '/project/' + this.props.project.id
+                        + '/locations'
+                    }
+                >Locations</Link>
+                <div className="dropdown-menu">
+                    { storyboardNodes }
+                </div>
+            </div>
         );
     }
 })

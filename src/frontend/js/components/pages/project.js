@@ -5,8 +5,8 @@ import { Alert } from "../ui/alert"
 import { Card } from "../ui/card"
 import { CardClickable } from "../ui/card-clickable"
 import { CardBlock } from "../ui/card-block"
-import { SectionHeader } from "../ui/section-header"
 import { ProjectNav } from "../ui/project-nav"
+import { SectionHeader } from "../ui/section-header"
 import { Spinner } from "../ui/spinner"
 
 
@@ -33,18 +33,6 @@ const Project = React.createClass({
     render() {
         let that = this
         if (this.state){
-            // let projectNodes = this.state.projects.map(function(project) {
-            //     return (
-            //         <CardClickable
-            //             key={ project.id }
-            //             onClick={ that.handleClickProject.bind(that, project.id) }
-            //         >
-            //             <CardBlock>
-            //                 { project.name }
-            //             </CardBlock>
-            //         </CardClickable>
-            //     );
-            // });
             return (
                 <div>
                     <SectionHeader>{ this.state.project.name }</SectionHeader>

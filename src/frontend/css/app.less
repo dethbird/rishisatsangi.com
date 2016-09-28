@@ -17,6 +17,14 @@ body {
   font-family: 'Pavanam', sans-serif;
 }
 
+.btn-group {
+    margin-bottom: 15px;
+}
+
+.btn-group.btn {
+    margin-right: 5px;
+}
+
 .card.clickable {
     cursor: pointer;
     &:hover {
@@ -40,6 +48,10 @@ body {
     height: auto;
 }
 
+.card-section-header {
+  font-weight: bold;
+}
+
 [class^=col-lg] {
     padding-left: 0;
     padding-right: 0;
@@ -49,9 +61,7 @@ body {
     opacity: 0.9;
     background-color: @cardBackgroundColorHover;
     color: @muted;
-    blockquote {
-        text-decoration: line-through;
-    }
+    text-decoration: line-through;
 }
 
 .container {

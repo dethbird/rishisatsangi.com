@@ -32409,7 +32409,6 @@ var PanelRevisions = _react2.default.createClass({
         this.props.handleClickRevision(revision);
     },
     render: function render() {
-        console.log(this.props.selectedPanelRevision);
         var that = this;
         var panelRevisions = that.props.revisions.map(function (revision) {
 

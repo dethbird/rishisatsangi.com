@@ -32399,24 +32399,32 @@ var PanelRevisions = _react2.default.createClass({
     displayName: 'PanelRevisions',
 
     propTypes: {
-        panel: _react2.default.PropTypes.object.isRequired,
         revisions: _react2.default.PropTypes.array.isRequired,
         panelClassName: _react2.default.PropTypes.string,
-        handleClickRevision: _react2.default.PropTypes.func
+        handleClickRevision: _react2.default.PropTypes.func,
+        selectedPanelRevision: _react2.default.PropTypes.object
     },
 
-    handleOnClick: function handleOnClick(panel_id, src) {
-        this.props.handleClickRevision(panel_id, src);
+    handleOnClick: function handleOnClick(revision) {
+        this.props.handleClickRevision(revision);
     },
     render: function render() {
+        console.log(this.props.selectedPanelRevision);
         var that = this;
         var panelRevisions = that.props.revisions.map(function (revision) {
+
+            var className = that.props.panelClassName;
+            if (that.props.selectedPanelRevision) {
+                if (revision.id == that.props.selectedPanelRevision.id) {
+                    className = (0, _classnames2.default)([className, 'active']);
+                }
+            }
             return _react2.default.createElement(
                 _cardClickable.CardClickable,
                 {
-                    className: that.props.panelClassName,
+                    className: className,
                     key: revision.id,
-                    onClick: that.handleOnClick.bind(that, that.props.panel.id, revision.content)
+                    onClick: that.handleOnClick.bind(that, revision)
                 },
                 _react2.default.createElement(_image.Image, { src: revision.content })
             );
@@ -32468,33 +32476,34 @@ var Panels = _react2.default.createClass({
     displayName: 'Panels',
     getInitialState: function getInitialState() {
         return {
-            panelsMainSrc: []
+            selectedPanelRevision: []
         };
     },
 
     propTypes: {
         panels: _react2.default.PropTypes.array.isRequired
     },
-    handleClickRevision: function handleClickRevision(panel_id, src) {
-        // console.log(panel_id)
-        var panelsMainSrc = this.state.panelsMainSrc;
-        panelsMainSrc[panel_id] = src;
-        console.log(panelsMainSrc);
+    handleClickRevision: function handleClickRevision(revision) {
+        var selectedPanelRevision = this.state.selectedPanelRevision;
+        selectedPanelRevision[revision.panel_id] = revision;
         this.setState({
-            panelsMainSrc: panelsMainSrc
+            selectedPanelRevision: selectedPanelRevision
         });
-        // console.log(src)
-        // console.log(panelsMainSrc)
     },
     render: function render() {
         var that = this;
-        var panelsMainSrc = this.state.panelsMainSrc;
+        var selectedPanelRevision = this.state.selectedPanelRevision;
 
         if (this.state) {
 
             var storyboardPanelNodes = this.props.panels.map(function (panel, i) {
                 var props = {};
-                if (panelsMainSrc[panel.id]) props.src = panelsMainSrc[panel.id];else if (panel.revisions.length > 0) props.src = panel.revisions[0].content;
+                if (selectedPanelRevision[panel.id]) {
+                    var revision = selectedPanelRevision[panel.id];
+                    props.src = revision.content;
+                } else if (panel.revisions.length > 0) {
+                    props.src = panel.revisions[0].content;
+                }
 
                 return _react2.default.createElement(
                     _card.Card,
@@ -32520,6 +32529,7 @@ var Panels = _react2.default.createClass({
                         ),
                         _react2.default.createElement(_panelRevisions.PanelRevisions, {
                             panel: panel,
+                            selectedPanelRevision: selectedPanelRevision[panel.id] ? selectedPanelRevision[panel.id] : null,
                             revisions: panel.revisions,
                             panelClassName: 'col-xs-4',
                             handleClickRevision: that.handleClickRevision

@@ -8,23 +8,30 @@ import { Image } from "../../ui/image"
 
 const PanelRevisions = React.createClass({
     propTypes: {
-        panel: React.PropTypes.object.isRequired,
         revisions: React.PropTypes.array.isRequired,
         panelClassName: React.PropTypes.string,
-        handleClickRevision: React.PropTypes.func
+        handleClickRevision: React.PropTypes.func,
+        selectedPanelRevision: React.PropTypes.object
     },
 
-    handleOnClick: function(panel_id, src) {
-        this.props.handleClickRevision(panel_id, src);
+    handleOnClick: function(revision) {
+        this.props.handleClickRevision(revision);
     },
     render: function() {
         var that = this
         let panelRevisions = that.props.revisions.map(function(revision) {
+
+            let className = that.props.panelClassName;
+            if (that.props.selectedPanelRevision) {
+                if (revision.id == that.props.selectedPanelRevision.id) {
+                    className = classNames([className, 'active']);
+                }
+            }
             return (
                 <CardClickable
-                    className={ that.props.panelClassName }
+                    className={ className }
                     key={ revision.id }
-                    onClick={ that.handleOnClick.bind(that, that.props.panel.id, revision.content) }
+                    onClick={ that.handleOnClick.bind(that, revision) }
                 >
                     <Image { ...{src: revision.content} } ></Image>
                 </CardClickable>

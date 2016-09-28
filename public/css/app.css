@@ -311,6 +311,9 @@ body {
 .card.clickable:hover .card-footer {
   background-color: #e4e4e4;
 }
+.card.active {
+  border-color: #2075A0;
+}
 .card.col-lg-6:nth-child(2n+1) {
   clear: both;
 }

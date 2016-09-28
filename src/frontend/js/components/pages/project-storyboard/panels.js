@@ -16,31 +16,33 @@ import { Spinner } from "../../ui/spinner"
 const Panels = React.createClass({
     getInitialState() {
         return ({
-            panelsMainSrc: []
+            selectedPanelRevision: []
         });
     },
     propTypes: {
         panels: React.PropTypes.array.isRequired
     },
-    handleClickRevision(panel_id, src) {
-        let panelsMainSrc = this.state.panelsMainSrc
-        panelsMainSrc[panel_id] = src
+    handleClickRevision(revision) {
+        let selectedPanelRevision = this.state.selectedPanelRevision
+        selectedPanelRevision[revision.panel_id] = revision
         this.setState({
-            panelsMainSrc: panelsMainSrc
+            selectedPanelRevision: selectedPanelRevision
         })
     },
     render() {
         let that = this
-        let panelsMainSrc = this.state.panelsMainSrc
+        let selectedPanelRevision = this.state.selectedPanelRevision
 
         if (this.state){
 
             var storyboardPanelNodes = this.props.panels.map(function(panel, i) {
                 let props = {}
-                if (panelsMainSrc[panel.id])
-                    props.src = panelsMainSrc[panel.id]
-                else if (panel.revisions.length > 0)
+                if (selectedPanelRevision[panel.id]){
+                    let revision = selectedPanelRevision[panel.id]
+                    props.src = revision.content
+                } else if (panel.revisions.length > 0) {
                     props.src = panel.revisions[0].content
+                }
 
                 return (
                     <Card
@@ -54,6 +56,7 @@ const Panels = React.createClass({
                             <div className="card-section-header">{ panel.revisions.length } revision(s)</div>
                             <PanelRevisions
                                 panel={ panel }
+                                selectedPanelRevision={ selectedPanelRevision[panel.id] ? selectedPanelRevision[panel.id] : null}
                                 revisions={ panel.revisions }
                                 panelClassName="col-xs-4"
                                 handleClickRevision={ that.handleClickRevision }

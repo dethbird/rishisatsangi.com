@@ -22,7 +22,7 @@ const CardComment = React.createClass({
                 <CardBlock>
                     <MarkdownBlock source={ this.props.comment.comment } />
                     <div className="pull-right">
-                        <strong>{ this.props.comment.user.username }</strong>
+                        <strong>{ this.props.comment.user.username } </strong>
                         <TimeAgo
                             className="muted"
                             date={ this.props.comment.date_added }

@@ -32398,15 +32398,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var PanelRevisions = _react2.default.createClass({
     displayName: 'PanelRevisions',
 
-
     propTypes: {
+        panel: _react2.default.PropTypes.object.isRequired,
         revisions: _react2.default.PropTypes.array.isRequired,
         panelClassName: _react2.default.PropTypes.string,
         handleClickRevision: _react2.default.PropTypes.func
     },
 
-    handleOnClick: function handleOnClick(src) {
-        this.props.handleClickRevision(src);
+    handleOnClick: function handleOnClick(panel_id, src) {
+        this.props.handleClickRevision(panel_id, src);
     },
     render: function render() {
         var that = this;
@@ -32416,7 +32416,7 @@ var PanelRevisions = _react2.default.createClass({
                 {
                     className: that.props.panelClassName,
                     key: revision.id,
-                    onClick: that.handleOnClick.bind(that, revision.content)
+                    onClick: that.handleOnClick.bind(that, that.props.panel.id, revision.content)
                 },
                 _react2.default.createElement(_image.Image, { src: revision.content })
             );
@@ -32468,24 +32468,33 @@ var Panels = _react2.default.createClass({
     displayName: 'Panels',
     getInitialState: function getInitialState() {
         return {
-            panelMainSrc: []
+            panelsMainSrc: []
         };
     },
 
     propTypes: {
         panels: _react2.default.PropTypes.array.isRequired
     },
-    handleClickRevision: function handleClickRevision(src) {
-        console.log(src);
+    handleClickRevision: function handleClickRevision(panel_id, src) {
+        // console.log(panel_id)
+        var panelsMainSrc = this.state.panelsMainSrc;
+        panelsMainSrc[panel_id] = src;
+        console.log(panelsMainSrc);
+        this.setState({
+            panelsMainSrc: panelsMainSrc
+        });
+        // console.log(src)
+        // console.log(panelsMainSrc)
     },
     render: function render() {
         var that = this;
+        var panelsMainSrc = this.state.panelsMainSrc;
 
         if (this.state) {
 
             var storyboardPanelNodes = this.props.panels.map(function (panel, i) {
                 var props = {};
-                if (panel.revisions.length > 0) props.src = panel.revisions[0].content;
+                if (panelsMainSrc[panel.id]) props.src = panelsMainSrc[panel.id];else if (panel.revisions.length > 0) props.src = panel.revisions[0].content;
 
                 return _react2.default.createElement(
                     _card.Card,
@@ -32510,6 +32519,7 @@ var Panels = _react2.default.createClass({
                             ' revision(s)'
                         ),
                         _react2.default.createElement(_panelRevisions.PanelRevisions, {
+                            panel: panel,
                             revisions: panel.revisions,
                             panelClassName: 'col-xs-4',
                             handleClickRevision: that.handleClickRevision

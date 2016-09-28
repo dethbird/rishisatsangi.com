@@ -7,15 +7,15 @@ import { CardClickable } from "../../ui/card-clickable"
 import { Image } from "../../ui/image"
 
 const PanelRevisions = React.createClass({
-
     propTypes: {
+        panel: React.PropTypes.object.isRequired,
         revisions: React.PropTypes.array.isRequired,
         panelClassName: React.PropTypes.string,
         handleClickRevision: React.PropTypes.func
     },
 
-    handleOnClick: function(src) {
-        this.props.handleClickRevision(src);
+    handleOnClick: function(panel_id, src) {
+        this.props.handleClickRevision(panel_id, src);
     },
     render: function() {
         var that = this
@@ -24,7 +24,7 @@ const PanelRevisions = React.createClass({
                 <CardClickable
                     className={ that.props.panelClassName }
                     key={ revision.id }
-                    onClick={ that.handleOnClick.bind(that, revision.content) }
+                    onClick={ that.handleOnClick.bind(that, that.props.panel.id, revision.content) }
                 >
                     <Image { ...{src: revision.content} } ></Image>
                 </CardClickable>

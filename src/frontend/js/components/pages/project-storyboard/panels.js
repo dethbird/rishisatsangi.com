@@ -16,23 +16,30 @@ import { Spinner } from "../../ui/spinner"
 const Panels = React.createClass({
     getInitialState() {
         return ({
-            panelMainSrc: []
+            panelsMainSrc: []
         });
     },
     propTypes: {
         panels: React.PropTypes.array.isRequired
     },
-    handleClickRevision(src) {
-        console.log(src)
+    handleClickRevision(panel_id, src) {
+        let panelsMainSrc = this.state.panelsMainSrc
+        panelsMainSrc[panel_id] = src
+        this.setState({
+            panelsMainSrc: panelsMainSrc
+        })
     },
     render() {
         let that = this
+        let panelsMainSrc = this.state.panelsMainSrc
 
         if (this.state){
 
             var storyboardPanelNodes = this.props.panels.map(function(panel, i) {
-                let props = {};
-                if (panel.revisions.length > 0)
+                let props = {}
+                if (panelsMainSrc[panel.id])
+                    props.src = panelsMainSrc[panel.id]
+                else if (panel.revisions.length > 0)
                     props.src = panel.revisions[0].content
 
                 return (
@@ -46,6 +53,7 @@ const Panels = React.createClass({
                             <MarkdownBlock source={ panel.description } />
                             <div className="card-section-header">{ panel.revisions.length } revision(s)</div>
                             <PanelRevisions
+                                panel={ panel }
                                 revisions={ panel.revisions }
                                 panelClassName="col-xs-4"
                                 handleClickRevision={ that.handleClickRevision }

@@ -31,16 +31,21 @@ const ProjectNav = React.createClass({
         let className = classNames([this.props.className, 'nav nav-pills'])
         return (
             <div className="btn-group">
-                <button
-                    type="button"
+            <Link
+                className="btn btn-secondary"
+                to={
+                    '/project/' + this.props.project.id
+                    + '/projects'
+                }
+                >Projects</Link>
+                <Link
                     className="btn btn-secondary dropdown-toggle"
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false">
                 Storyboards
-                </button>
+                </Link>
                 <Link
-                    type="button"
                     className="btn btn-secondary"
                     to={
                         '/project/' + this.props.project.id
@@ -48,7 +53,6 @@ const ProjectNav = React.createClass({
                     }
                 >Characters</Link>
                 <Link
-                    type="button"
                     className="btn btn-secondary"
                     to={
                         '/project/' + this.props.project.id
@@ -56,7 +60,6 @@ const ProjectNav = React.createClass({
                     }
                 >Concept Art</Link>
                 <Link
-                    type="button"
                     className="btn btn-secondary"
                     to={
                         '/project/' + this.props.project.id
@@ -64,7 +67,6 @@ const ProjectNav = React.createClass({
                     }
                 >Reference Images</Link>
                 <Link
-                    type="button"
                     className="btn btn-secondary"
                     to={
                         '/project/' + this.props.project.id

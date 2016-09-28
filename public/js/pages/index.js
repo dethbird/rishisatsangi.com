@@ -33100,9 +33100,16 @@ var ProjectNav = _react2.default.createClass({
             'div',
             { className: 'btn-group' },
             _react2.default.createElement(
-                'button',
+                _reactRouter.Link,
                 {
-                    type: 'button',
+                    className: 'btn btn-secondary',
+                    to: '/project/' + this.props.project.id + '/projects'
+                },
+                'Projects'
+            ),
+            _react2.default.createElement(
+                _reactRouter.Link,
+                {
                     className: 'btn btn-secondary dropdown-toggle',
                     'data-toggle': 'dropdown',
                     'aria-haspopup': 'true',
@@ -33112,7 +33119,6 @@ var ProjectNav = _react2.default.createClass({
             _react2.default.createElement(
                 _reactRouter.Link,
                 {
-                    type: 'button',
                     className: 'btn btn-secondary',
                     to: '/project/' + this.props.project.id + '/characters'
                 },
@@ -33121,7 +33127,6 @@ var ProjectNav = _react2.default.createClass({
             _react2.default.createElement(
                 _reactRouter.Link,
                 {
-                    type: 'button',
                     className: 'btn btn-secondary',
                     to: '/project/' + this.props.project.id + '/concept_art'
                 },
@@ -33130,7 +33135,6 @@ var ProjectNav = _react2.default.createClass({
             _react2.default.createElement(
                 _reactRouter.Link,
                 {
-                    type: 'button',
                     className: 'btn btn-secondary',
                     to: '/project/' + this.props.project.id + '/reference_images'
                 },
@@ -33139,7 +33143,6 @@ var ProjectNav = _react2.default.createClass({
             _react2.default.createElement(
                 _reactRouter.Link,
                 {
-                    type: 'button',
                     className: 'btn btn-secondary',
                     to: '/project/' + this.props.project.id + '/locations'
                 },

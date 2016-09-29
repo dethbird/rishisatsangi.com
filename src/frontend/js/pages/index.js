@@ -6,6 +6,7 @@ import { App } from '../components/app'
 import { Project } from '../components/pages/project'
 import { ProjectCharacters } from '../components/pages/project-characters'
 import { ProjectConceptArt } from '../components/pages/project-concept_art'
+import { ProjectReferenceImages } from '../components/pages/project-reference_images'
 import { ProjectStoryboard } from '../components/pages/project-storyboard'
 import { Projects } from '../components/pages/projects'
 
@@ -22,6 +23,7 @@ render((
             <Route path="project/:projectId" component={Project}/>
             <Route path="project/:projectId/characters" component={ProjectCharacters}/>
             <Route path="project/:projectId/concept_art" component={ProjectConceptArt}/>
+            <Route path="project/:projectId/reference_images" component={ProjectReferenceImages}/>
             <Route path="project/:projectId/storyboard/:storyboardId" component={ProjectStoryboard}/>
             <Route path="*" component={Projects}/>
         </Route>

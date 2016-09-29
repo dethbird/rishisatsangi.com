@@ -46,8 +46,10 @@ $authorize = function ($app) {
 
     return function () use ($app) {
 
-        # store current path in session for smart login
-        $_SESSION['redirectTo'] = $app->request->getPathInfo();
+        if (!$app->request->isAjax()) {
+            # store current path in session for smart login
+            $_SESSION['redirectTo'] = $app->request->getPathInfo();
+        }
 
         # check cookie for securityContext
         if(!isset( $_SESSION['securityContext'])) {

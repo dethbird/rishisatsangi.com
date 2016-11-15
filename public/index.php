@@ -75,7 +75,7 @@ $app->get("/", function () use ($app) {
     );
     $pocketData = new PocketData($configs['pocket']['consumer_key'], $configs['pocket']['access_token']);
     $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
-    
+
     $templateVars = array(
         "configs" => $configs,
         "section" => "index",
@@ -91,6 +91,24 @@ $app->get("/", function () use ($app) {
     $app->render(
         'pages/index.html.twig',
         $templateVars,
+        200
+    );
+});
+
+$app->get("/resume", function () use ($app) {
+
+    $configs = $app->container->get('configs');
+    $resume = Yaml::parse(file_get_contents("../configs/resume.yml"));
+
+    // $templateVars = array(
+    //     "configs" => $configs,
+    //     "section" => "resume",
+    //     "resume" => $resume
+    // );
+
+    $app->render(
+        'pages/resume.html.twig',
+        $resume,
         200
     );
 });

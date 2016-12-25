@@ -107,6 +107,13 @@ body {
     height: 244px;
     position: absolute;
   }
+  #portfolio {
+    top: 960px;
+    left: 0px;
+    width: 1900px;
+    height: 800px;
+    position: absolute;
+  }
   #whatido_background {
     top: 2016px;
     left: 203px;
@@ -271,6 +278,13 @@ body {
     left: 192.75px;
     width: 160.5px;
     height: 183px;
+    position: absolute;
+  }
+  #portfolio {
+    top: 720px;
+    left: 0px;
+    width: 1425px;
+    height: 600px;
     position: absolute;
   }
   #whatido_background {

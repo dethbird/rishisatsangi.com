@@ -1,5 +1,3 @@
-var IndexView = require('../library/views/IndexView');
+import IndexView from '../library/views/IndexView';
 
-var indexView = new IndexView({
-    el: 'body'
-});
+const indexView = new IndexView({ el: 'body' });

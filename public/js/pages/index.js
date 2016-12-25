@@ -152,10 +152,12 @@ module.exports = ParallaxView;
 },{}],5:[function(require,module,exports){
 'use strict';
 
-var IndexView = require('../library/views/IndexView');
+var _IndexView = require('../library/views/IndexView');
 
-var indexView = new IndexView({
-    el: 'body'
-});
+var _IndexView2 = _interopRequireDefault(_IndexView);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var indexView = new _IndexView2.default({ el: 'body' });
 
 },{"../library/views/IndexView":1}]},{},[5]);

@@ -15,6 +15,10 @@
         ->boolean()
         ->aka('cache')
         ->describedAs('Clear cache and reset permissions of cache directory');
+    $cmd->option('css')
+        ->boolean()
+        ->aka('css')
+        ->describedAs('Build .css files from .less');
     $cmd->option('configs')
         ->boolean()
         ->aka('configs')
@@ -35,6 +39,9 @@
         ->boolean()
         ->aka('uglify')
         ->describedAs('Uglify the compiled js (leave empty in dev)');
+    $cmd->option('js-page')
+        ->aka('javascript-page')
+        ->describedAs('File in "src/frontend/js/pages/<page>.js" to build');
     $c = new Color();
     $dotenv = (new Loader('.env'))
               ->parse()
@@ -58,6 +65,12 @@
         ));
         $shell->executeCommand('mkdir', array(
             "cache"
+        ));
+        $shell->executeCommand('mkdir', array(
+            "cache/gdrive"
+        ));
+        $shell->executeCommand('mkdir', array(
+            "cache/gdrive/thumbnails"
         ));
         $shell->executeCommand('chmod', array(
             "777",
@@ -98,9 +111,11 @@
                 $v = trim($v);
                 if($v!=""){
                     try {
+                        echo $c("sed -i 's/:".$k."/".addcslashes($v, "/")."/g' ".$configFilePath)
+                          ->white() . PHP_EOL;
                         $resp = $shell->executeCommand('sed', array(
                             "-i",
-                            "'s/:".$k."$/".addcslashes($v, "/")."/g'",
+                            "'s/:".$k."/".addcslashes($v, "/")."/g'",
                             $configFilePath
                         ));
                     } catch (Exception $e) {
@@ -200,22 +215,18 @@
     // javascript
     if($cmd['javascript']) {
 
-        echo $c(
-"   __                                 _       _
-   \ \  __ ___   ____ _ ___  ___ _ __(_)_ __ | |_
-    \ \/ _` \ \ / / _` / __|/ __| '__| | '_ \| __|
- /\_/ / (_| |\ V / (_| \__ \ (__| |  | | |_) | |_
- \___/ \__,_| \_/ \__,_|___/\___|_|  |_| .__/ \__|
-                                       |_|        "
-           )
+        echo $c("Javascript")
             ->white()->bold()->highlight('blue') . PHP_EOL;
 
-        $frontendFiles = $shell->executeCommand('find', array(
-            "src/frontend/js/pages/",
-            "-name",
-            "'*.js'"
-        ));
-
+        if($cmd['js-page']){
+            $frontendFiles = ["src/frontend/js/pages/" . $cmd['js-page'] . ".js"];
+        } else {
+            $frontendFiles = $shell->executeCommand('find', array(
+                "src/frontend/js/pages/",
+                "-name",
+                "'*.js'"
+            ));
+        }
         foreach($frontendFiles as $file){
             if($file) {
                 $outputFile = str_replace("src/frontend", "public", $file);
@@ -223,18 +234,31 @@
                 echo $c($outputFile)
                     ->yellow()->bold() . PHP_EOL;
 
-                $browserifyList = $shell->executeCommand('browserify', array(
+                $command = [
                     $file,
                     "-o",
                     $outputFile,
-                    "--list"
-                ));
+                    "-t",
+                    "[ babelify --presets [ es2015 react stage-2 ] ]"
+                ];
 
-                $browserifyResponse = $shell->executeCommand('browserify', array(
-                    $file,
-                    "-o",
-                    $outputFile
-                ));
+                try {
+                    $browserifyList = $shell->executeCommand('browserify', array_merge($command, ["--list"]));
+                } catch (Exception $e) {
+                    echo $c(print_r($e->getMessage(), true))->dark() . PHP_EOL;
+                    echo $c('EXCEPTION')->red()->bold() . PHP_EOL;
+                    echo $c('browserify '  . implode(' ', $command))->yellow()->bold() . PHP_EOL;
+                    exit();
+                }
+
+                try {
+                    $browserifyResponse = $shell->executeCommand('browserify', $command);
+                } catch (Exception $e) {
+                    echo $c(print_r($e->getMessage(), true))->dark() . PHP_EOL;
+                    echo $c('EXCEPTION')->red()->bold() . PHP_EOL;
+                    echo $c('browserify '  . implode(' ', $command))->yellow()->bold() . PHP_EOL;
+                    exit();
+                }
 
                 foreach($browserifyList as $builtFrom) {
                     echo $c("   " . $builtFrom)
@@ -262,12 +286,31 @@
         }
     }
 
-    echo $c(
-"    ___  ___    __  __
-   /   \/___\/\ \ \/__\
-  / /\ //  //  \/ /_\
- / /_// \_// /\  //__
-/___,'\___/\_\ \/\__/
-                       "
-        )
+    // css
+    if($cmd['css']) {
+        echo $c("CSS")
+            ->white()->bold()->highlight('blue') . PHP_EOL;
+        $frontendFiles = $shell->executeCommand('find', array(
+            "src/frontend/css/",
+            "-name",
+            "'*.less'"
+        ));
+        foreach($frontendFiles as $file){
+            if($file) {
+                $outputFile = str_replace("src/frontend", "public", $file);
+                $outputFile = str_replace(".less", ".css", $outputFile);
+                $result = $shell->executeCommand('lessc', array(
+                    $file,
+                    $outputFile,
+                    "--verbose"
+                ));
+                echo $c($outputFile)
+                    ->yellow()->bold() . PHP_EOL;
+                echo $c("CSS built.")
+                    ->green()->bold() . PHP_EOL;
+            }
+        }
+    }
+
+    echo $c("Done.")
         ->green()->bold() . PHP_EOL;

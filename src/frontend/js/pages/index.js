@@ -1,7 +1,5 @@
-var PanelView = require('../library/views/PanelView');
+var IndexView = require('../library/views/IndexView');
 
-var panelView = new PanelView({
-    el: 'body',
-    greatButtonId: "#great_button",
-    layout: layout
+var indexView = new IndexView({
+    el: 'body'
 });

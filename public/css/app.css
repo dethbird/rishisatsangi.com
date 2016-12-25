@@ -2,6 +2,7 @@
 body {
   background-color: #000;
   color: #FFF;
+  overflow-x: hidden;
 }
 .contact-info i {
   color: #f5b20a;

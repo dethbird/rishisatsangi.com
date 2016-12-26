@@ -1,9 +1,19 @@
 /* LESS Document */
 
+a, a:hover, a:visited {
+    cursor: pointer;
+    color: #E7120E;
+}
 body {
 	background-color: #000;
 	color: #FFF;
     overflow-x: hidden;
+}
+.col-lg-2:nth-child(5n+1) {
+    clear:both;
+}
+.col-xs-2:nth-child(5n+1) {
+    clear:both;
 }
 .col-lg-3:nth-child(4n+1) {
     clear:both;
@@ -34,7 +44,14 @@ body {
     padding: 5px;
     margin-bottom: 15px;
 }
-
+.portfolio-breadcrumb {
+    background-color: rgba(0,0,0,0.7);
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.subtitle {
+    color: #f5b20a;
+}
 @scale-1440: (1440 / 1920);
 
 @media (min-width: 1920px){
@@ -117,9 +134,11 @@ body {
 	}
     #portfolio {
 		top: 990px;
-		left: 0px;
+		left: 50px;
 		width: 1900px;
       	height: 800px;
+        overflow-x: hidden;
+        overflow-y: auto;
 		.object;
 	}
     #whatido_background {
@@ -205,12 +224,21 @@ body {
         overflow-x: hidden;
         height: 700px;
     }
-    .portfolio-category {
+    .portfolio-card {
         text-align: center;
         margin-bottom: 15px;
-        img {
+		max-width: 250px;
+        background-color: rgba(0,0,0,0.7);
+		display: inline-block;
+        padding-bottom: 10px;
+        img.landscape {
             max-width: 250px;
             height: auto;
+            margin-bottom:5px;
+        }
+        img.portrait {
+            max-height: 250px;
+            width: auto;
             margin-bottom: 5px;
         }
     }
@@ -295,9 +323,11 @@ body {
 	}
     #portfolio {
 		top: @scale-1440 * 990px;
-		left: @scale-1440 * 0px;
+		left: @scale-1440 * 50px;
 		width: @scale-1440 * 1900px;
       	height: @scale-1440 * 800px;
+        overflow-x: hidden;
+        overflow-y: auto;
 		.object;
 	}
     #whatido_background {
@@ -383,14 +413,22 @@ body {
         overflow-x: hidden;
         height: @scale-1440 * 700px;
     }
-
-    .portfolio-category {
+    .portfolio-card {
         text-align: center;
         margin-bottom: @scale-1440 * 15px;
-        img {
+        max-width: @scale-1440 * 250px;
+        background-color: rgba(0,0,0,0.7);
+        display: inline-block;
+        padding-bottom: @scale-1440 * 10px;
+        img.landscape {
             max-width: @scale-1440 * 250px;
             height: auto;
-            margin-bottom: 5px;
+            margin-bottom: @scale-1440 * 5px;
+        }
+        img.portrait {
+            max-height: @scale-1440 * 250px;
+            width: auto;
+            margin-bottom: @scale-1440 * 5px;
         }
     }
 }

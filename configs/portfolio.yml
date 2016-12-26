@@ -4,32 +4,38 @@ categories:
         name: "Illustration"
         type: gallery
         image_url: https://c1.staticflickr.com/3/2473/3692721420_0cee6cd9d2.jpg
+        orientation: landscape
     -
         id: nxmw
         name: "North by Midwest"
         type: project
         image_url: https://c1.staticflickr.com/1/542/31555593015_8cfce63db9.jpg
+        orientation: landscape
     -
         id: beepo
         name: "The World of Beepo Beeparelli"
         type: project
         image_url: https://c1.staticflickr.com/3/2439/3663515635_1c89de110c.jpg
+        orientation: landscape
     -
         id: on_the_scene
         name: "Tweetstream and Zeitgeist on the Scene"
         type: comic
         image_url: https://c2.staticflickr.com/2/1695/26353066916_2651cca279.jpg
+        orientation: landscape
     -
         id: animation
         name: "Animation"
         type: gallery
         image_url: http://img.youtube.com/vi/MVC4mg46haM/0.jpg
+        orientation: landscape
     -
         id: drawings
         name: "Drawings"
         type: gallery
         image_url: https://c2.staticflickr.com/4/3656/3462932062_62b2768087.jpg
-content:
+        orientation: landscape
+items:
     -
         title: "Sauced Octopus"
         year: "2008"
@@ -55,7 +61,7 @@ content:
         title: "Discommunication"
         year: "2010"
         medium: "Painter"
-        category_id: illustration
+        category_id: beepo
         type: "image"
         content: "https://c1.staticflickr.com/5/4040/4537442530_55219acf71_b.jpg"
         thumbnail: "https://c1.staticflickr.com/5/4040/4537442530_55219acf71.jpg"
@@ -240,7 +246,7 @@ content:
         title: "Beepo Takes A Pipe To Nowhere"
         year: "2010"
         medium: "pencil, Painter, Photoshop"
-        category_id: illustration
+        category_id: beepo
         type: "image"
         content: "https://farm3.staticflickr.com/2439/3663515635_1c89de110c_b.jpg"
         thumbnail: "https://c1.staticflickr.com/3/2439/3663515635_1c89de110c.jpg"

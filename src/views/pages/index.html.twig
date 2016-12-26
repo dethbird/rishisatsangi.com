@@ -36,6 +36,7 @@
 {% block includes %}
     <!-- js includes -->
     <script type="text/javascript">
+        var lastRequestUri = '{{lastRequestUri}}';
         var layout = {{layout|json_encode|raw}};
         var portfolio = {{portfolio|json_encode|raw}};
     </script>

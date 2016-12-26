@@ -1,8 +1,20 @@
 /* LESS Document */
+a,
+a:hover,
+a:visited {
+  cursor: pointer;
+  color: #E7120E;
+}
 body {
   background-color: #000;
   color: #FFF;
   overflow-x: hidden;
+}
+.col-lg-2:nth-child(5n+1) {
+  clear: both;
+}
+.col-xs-2:nth-child(5n+1) {
+  clear: both;
 }
 .col-lg-3:nth-child(4n+1) {
   clear: both;
@@ -32,6 +44,14 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 5px;
   margin-bottom: 15px;
+}
+.portfolio-breadcrumb {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.subtitle {
+  color: #f5b20a;
 }
 @media (min-width: 1920px) {
   #intro_hydrant {
@@ -115,9 +135,11 @@ body {
   }
   #portfolio {
     top: 990px;
-    left: 0px;
+    left: 50px;
     width: 1900px;
     height: 800px;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: absolute;
   }
   #whatido_background {
@@ -205,13 +227,22 @@ body {
     overflow-x: hidden;
     height: 700px;
   }
-  .portfolio-category {
+  .portfolio-card {
     text-align: center;
     margin-bottom: 15px;
+    max-width: 250px;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    padding-bottom: 10px;
   }
-  .portfolio-category img {
+  .portfolio-card img.landscape {
     max-width: 250px;
     height: auto;
+    margin-bottom: 5px;
+  }
+  .portfolio-card img.portrait {
+    max-height: 250px;
+    width: auto;
     margin-bottom: 5px;
   }
 }
@@ -297,9 +328,11 @@ body {
   }
   #portfolio {
     top: 742.5px;
-    left: 0px;
+    left: 37.5px;
     width: 1425px;
     height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: absolute;
   }
   #whatido_background {
@@ -387,13 +420,22 @@ body {
     overflow-x: hidden;
     height: 525px;
   }
-  .portfolio-category {
+  .portfolio-card {
     text-align: center;
     margin-bottom: 11.25px;
+    max-width: 187.5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    padding-bottom: 7.5px;
   }
-  .portfolio-category img {
+  .portfolio-card img.landscape {
     max-width: 187.5px;
     height: auto;
-    margin-bottom: 5px;
+    margin-bottom: 3.75px;
+  }
+  .portfolio-card img.portrait {
+    max-height: 187.5px;
+    width: auto;
+    margin-bottom: 3.75px;
   }
 }

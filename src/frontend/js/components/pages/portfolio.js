@@ -9,17 +9,27 @@ const Portfolio = React.createClass({
             return (
                 <div
                     key={ category.id }
-                    className="col-xs-3 portfolio-category"
+                    className="col-xs-3 text-align-center"
                 >
-                    <img src={ category.image_url } />
-                    <h5>{ category.name }</h5>
-                    { category.type }
+                    <div className="portfolio-card">
+                        <a title={ category.name } onTouchTap={() => browserHistory.push('/portfolio/' + category.id)}>
+                            <img className={ category.orientation } src={ category.image_url } />
+                        </a>
+                        <h5>{ category.name }</h5>
+                        <span className="subtitle">{ category.type }</span>
+                    </div>
                 </div>
             );
         });
         return (
             <div>
-                { categoryNodes }
+                <div className="portfolio-breadcrumb">
+                    <a onTouchTap={() => browserHistory.push('/')}>Portfolio</a>
+                    <span> / </span>
+                </div>
+                <div>
+                    { categoryNodes }
+                </div>
             </div>
         );
     }

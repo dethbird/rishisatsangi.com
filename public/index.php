@@ -51,11 +51,9 @@ $app->container->set('configs', $configs);
 
 
 $app->notFound(function () use ($app) {
-    $app->render(
-        'pages/404.html.twig'
-    );
+    $_SESSION['lastRequestUri'] = $_SERVER['REQUEST_URI'];
+    $app->redirect("/");
 });
-
 
 $app->get("/logout", function () use ($app) {
   $app->deleteCookie('securityContext');
@@ -77,8 +75,14 @@ $app->get("/", function () use ($app) {
         "layout" => $layout,
         "portfolio" => $portfolio,
         "pocket_articles" => $pocketData->getArticles(10, 3600),
+        "lastRequestUri" => $_SESSION['lastRequestUri'] ? $_SESSION['lastRequestUri'] : null,
         "comics" => $comics
     );
+
+    // clear last request url
+    if (isset($_SESSION['lastRequestUri'])) {
+        $_SESSION['lastRequestUri'] = null;
+    }
 
     $app->render(
         'pages/index.html.twig',

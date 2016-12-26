@@ -67,11 +67,7 @@ $app->get("/", function () use ($app) {
 
     $configs = $app->container->get('configs');
     $layout = Yaml::parse(file_get_contents("../configs/layout.yml"));
-    $gallery = Yaml::parse(file_get_contents("../configs/gallery.yml"));
-    $instagramData = new InstagramData(
-        $configs['instagram']['client_id'],
-        $configs['instagram']['client_secret']
-    );
+    $portfolio = Yaml::parse(file_get_contents("../configs/portfolio.yml"));
     $pocketData = new PocketData($configs['pocket']['consumer_key'], $configs['pocket']['access_token']);
     $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
 
@@ -79,10 +75,7 @@ $app->get("/", function () use ($app) {
         "configs" => $configs,
         "section" => "index",
         "layout" => $layout,
-        "gallery" => $gallery,
-        "instagram_posts" => $instagramData->getEmbedMedia(
-            $configs['instagram']['photos']
-        ),
+        "portfolio" => $portfolio,
         "pocket_articles" => $pocketData->getArticles(10, 3600),
         "comics" => $comics
     );

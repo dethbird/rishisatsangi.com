@@ -5,6 +5,12 @@ body {
 	color: #FFF;
     overflow-x: hidden;
 }
+.col-lg-3:nth-child(4n+1) {
+    clear:both;
+}
+.col-xs-3:nth-child(4n+1) {
+    clear:both;
+}
 .contact-info i {
     color: #f5b20a;
 }
@@ -24,10 +30,11 @@ body {
 	position: absolute;
 }
 .pocket-article {
-  background-color: rgba(0,0,0,0.7);
-  padding: 5px;
-  margin-bottom: 15px;
+    background-color: rgba(0,0,0,0.7);
+    padding: 5px;
+    margin-bottom: 15px;
 }
+
 @scale-1440: (1440 / 1920);
 
 @media (min-width: 1920px){
@@ -109,7 +116,7 @@ body {
 		.object;
 	}
     #portfolio {
-		top: 960px;
+		top: 990px;
 		left: 0px;
 		width: 1900px;
       	height: 800px;
@@ -198,6 +205,15 @@ body {
         overflow-x: hidden;
         height: 700px;
     }
+    .portfolio-category {
+        text-align: center;
+        margin-bottom: 15px;
+        img {
+            max-width: 250px;
+            height: auto;
+            margin-bottom: 5px;
+        }
+    }
 }
 @media (min-width: 1440px) and (max-width: 1919px){
 	#intro_hydrant {
@@ -278,7 +294,7 @@ body {
 		.object;
 	}
     #portfolio {
-		top: @scale-1440 * 960px;
+		top: @scale-1440 * 990px;
 		left: @scale-1440 * 0px;
 		width: @scale-1440 * 1900px;
       	height: @scale-1440 * 800px;
@@ -366,5 +382,15 @@ body {
         overflow-y: scroll;
         overflow-x: hidden;
         height: @scale-1440 * 700px;
+    }
+
+    .portfolio-category {
+        text-align: center;
+        margin-bottom: @scale-1440 * 15px;
+        img {
+            max-width: @scale-1440 * 250px;
+            height: auto;
+            margin-bottom: 5px;
+        }
     }
 }

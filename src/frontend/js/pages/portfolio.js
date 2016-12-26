@@ -15,10 +15,6 @@ const NoMatch = React.createClass({
   }
 })
 
-// if (lastRequestUri) {
-//     browserHistory.push(lastRequestUri);
-// }
-
 render((
     <Provider store={ store }>
         <Router history={browserHistory}>

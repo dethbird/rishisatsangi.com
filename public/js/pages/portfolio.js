@@ -34822,10 +34822,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Portfolio = _react2.default.createClass({
     displayName: 'Portfolio',
     render: function render() {
+        var categoryNodes = portfolio.categories.map(function (category, i) {
+            return _react2.default.createElement(
+                'div',
+                {
+                    key: category.id,
+                    className: 'col-xs-3 portfolio-category'
+                },
+                _react2.default.createElement('img', { src: category.image_url }),
+                _react2.default.createElement(
+                    'h5',
+                    null,
+                    category.name
+                ),
+                category.type
+            );
+        });
         return _react2.default.createElement(
             'div',
             null,
-            'El portfolio'
+            categoryNodes
         );
     }
 });
@@ -34869,10 +34885,6 @@ var NoMatch = _react2.default.createClass({
         );
     }
 });
-
-// if (lastRequestUri) {
-//     browserHistory.push(lastRequestUri);
-// }
 
 (0, _reactDom.render)(_react2.default.createElement(
     _reactRedux.Provider,

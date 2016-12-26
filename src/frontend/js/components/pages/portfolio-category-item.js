@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from 'react-modal'
+import Modal from 'react-modal';
 import classNames from 'classnames';
 import { browserHistory, Link } from 'react-router';
 import { connect } from 'react-redux';
@@ -38,6 +38,18 @@ const PortfolioCategoryItem = React.createClass({
     },
     closeModal() {
         this.setState({modalIsOpen: false});
+    },
+    renderContent(item) {
+        if (item.type === 'embed') {
+            return (
+                <div
+                    dangerouslySetInnerHTML={ {__html: item.content} }
+                />
+            )
+        }
+        return (
+            <img className="image-display" src={ item.content } />
+        )
     },
     render() {
         const { modalIsOpen } = this.state;
@@ -96,7 +108,7 @@ const PortfolioCategoryItem = React.createClass({
                             <br />
 
                             <div className="text-align-center">
-                                <img className="image-modal" src={ item.content } />
+                                <img className="image-modal" src={ item.thumbnail } />
                                 <br />
                                 <h1>{ item.title }</h1>
                                 <span className="subtitle">{ item.medium }</span><br />
@@ -111,7 +123,9 @@ const PortfolioCategoryItem = React.createClass({
                     </div>
                     <div className="clearfix" />
                 </div>
-                <img className="image-display" src={ item.content } />
+                <div className='portfolio-item-content'>
+                    { this.renderContent(item) }
+                </div>
             </div>
         );
     }

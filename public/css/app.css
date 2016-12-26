@@ -246,6 +246,10 @@ body {
     overflow-x: hidden;
     height: 700px;
   }
+  .portfolio-item-content iframe {
+    width: 800px;
+    height: 600px;
+  }
   .portfolio-card {
     text-align: center;
     margin-bottom: 15px;
@@ -444,6 +448,10 @@ body {
     overflow-y: scroll;
     overflow-x: hidden;
     height: 525px;
+  }
+  .portfolio-item-content iframe {
+    width: 600px;
+    height: 450px;
   }
   .portfolio-card {
     text-align: center;

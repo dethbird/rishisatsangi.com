@@ -1,11 +1,24 @@
 import React from 'react';
+import Modal from 'react-modal';
 import classNames from 'classnames';
 import { browserHistory, Link } from 'react-router';
 import { connect } from 'react-redux';
 
 
 const PortfolioCategory = React.createClass({
+    getInitialState() {
+        return {
+            modalIsOpen: false
+        };
+    },
+    openModal() {
+        this.setState({modalIsOpen: true});
+    },
+    closeModal() {
+        this.setState({modalIsOpen: false});
+    },
     render() {
+        const { modalIsOpen } = this.state;
         const { categoryId } = this.props.params;
         const items = _.where(portfolio.items, {
             'category_id': categoryId
@@ -38,6 +51,32 @@ const PortfolioCategory = React.createClass({
                     <a onTouchTap={() => browserHistory.push('/')}>Portfolio</a>
                     <span> / </span>
                     <a onTouchTap={() => browserHistory.push('/portfolio/' + categoryId)}>{ category.name }</a>
+                    <a className="btn btn-secondary btn-xs" onTouchTap={ this.openModal }>Info</a>
+
+                    <Modal
+                        ref="infoModal"
+                        isOpen={ modalIsOpen }
+                        contentLabel="infoModal"
+                        style={{
+                            overlay: {
+                                backgroundColor : 'rgba(0, 0, 0, 0.75)'
+                            },
+                            content: {
+                                background : '#000'
+                            }
+                        }}
+                    >
+                        <a onTouchTap={ this.closeModal } className="btn btn-danger pull-right">X</a>
+                        <br />
+
+                        <div className="text-align-center">
+                            <img className="image-modal" src={ category.image_url } />
+                            <br />
+                            <h1>{ category.name }</h1>
+                            <span className="subtitle">{ category.type }</span><br />
+                            <blockquote>{ category.description }</blockquote>
+                        </div>
+                    </Modal>
                 </div>
                 <div>
                     { itemNodes }

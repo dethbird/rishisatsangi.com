@@ -36205,6 +36205,14 @@ var PortfolioCategoryItem = _react2.default.createClass({
     closeModal: function closeModal() {
         this.setState({ modalIsOpen: false });
     },
+    renderContent: function renderContent(item) {
+        if (item.type === 'embed') {
+            return _react2.default.createElement('div', {
+                dangerouslySetInnerHTML: { __html: item.content }
+            });
+        }
+        return _react2.default.createElement('img', { className: 'image-display', src: item.content });
+    },
     render: function render() {
         var modalIsOpen = this.state.modalIsOpen;
         var _props$params = this.props.params,
@@ -36304,7 +36312,7 @@ var PortfolioCategoryItem = _react2.default.createClass({
                         _react2.default.createElement(
                             'div',
                             { className: 'text-align-center' },
-                            _react2.default.createElement('img', { className: 'image-modal', src: item.content }),
+                            _react2.default.createElement('img', { className: 'image-modal', src: item.thumbnail }),
                             _react2.default.createElement('br', null),
                             _react2.default.createElement(
                                 'h1',
@@ -36333,7 +36341,11 @@ var PortfolioCategoryItem = _react2.default.createClass({
                 ),
                 _react2.default.createElement('div', { className: 'clearfix' })
             ),
-            _react2.default.createElement('img', { className: 'image-display', src: item.content })
+            _react2.default.createElement(
+                'div',
+                { className: 'portfolio-item-content' },
+                this.renderContent(item)
+            )
         );
     }
 });
@@ -36351,6 +36363,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactModal = require('react-modal');
+
+var _reactModal2 = _interopRequireDefault(_reactModal);
+
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -36363,7 +36379,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var PortfolioCategory = _react2.default.createClass({
     displayName: 'PortfolioCategory',
+    getInitialState: function getInitialState() {
+        return {
+            modalIsOpen: false
+        };
+    },
+    openModal: function openModal() {
+        this.setState({ modalIsOpen: true });
+    },
+    closeModal: function closeModal() {
+        this.setState({ modalIsOpen: false });
+    },
     render: function render() {
+        var modalIsOpen = this.state.modalIsOpen;
         var categoryId = this.props.params.categoryId;
 
         var items = _.where(portfolio.items, {
@@ -36423,6 +36451,55 @@ var PortfolioCategory = _react2.default.createClass({
                             return _reactRouter.browserHistory.push('/portfolio/' + categoryId);
                         } },
                     category.name
+                ),
+                _react2.default.createElement(
+                    'a',
+                    { className: 'btn btn-secondary btn-xs', onTouchTap: this.openModal },
+                    'Info'
+                ),
+                _react2.default.createElement(
+                    _reactModal2.default,
+                    {
+                        ref: 'infoModal',
+                        isOpen: modalIsOpen,
+                        contentLabel: 'infoModal',
+                        style: {
+                            overlay: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.75)'
+                            },
+                            content: {
+                                background: '#000'
+                            }
+                        }
+                    },
+                    _react2.default.createElement(
+                        'a',
+                        { onTouchTap: this.closeModal, className: 'btn btn-danger pull-right' },
+                        'X'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'text-align-center' },
+                        _react2.default.createElement('img', { className: 'image-modal', src: category.image_url }),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            category.name
+                        ),
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'subtitle' },
+                            category.type
+                        ),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(
+                            'blockquote',
+                            null,
+                            category.description
+                        )
+                    )
                 )
             ),
             _react2.default.createElement(
@@ -36436,7 +36513,7 @@ var PortfolioCategory = _react2.default.createClass({
 
 exports.default = PortfolioCategory;
 
-},{"classnames":19,"react":426,"react-redux":355,"react-router":389}],445:[function(require,module,exports){
+},{"classnames":19,"react":426,"react-modal":352,"react-redux":355,"react-router":389}],445:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

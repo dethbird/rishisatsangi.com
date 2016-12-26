@@ -37,6 +37,7 @@ categories:
         orientation: landscape
 items:
     -
+        id: sauced_octopus
         title: "Sauced Octopus"
         year: "2008"
         medium: "pencil, Painter, Photoshop"
@@ -48,6 +49,7 @@ items:
         orientation: landscape
         featured: true
     -
+        id: atomic_cigarette
         title: "Atomic Cigarette"
         year: "2010"
         medium: "pencil, Painter, Photoshop"
@@ -58,6 +60,7 @@ items:
         description: "last cigarette on earth"
         orientation: portrait
     -
+        id: discommunication
         title: "Discommunication"
         year: "2010"
         medium: "Painter"
@@ -68,6 +71,7 @@ items:
         description: "Can't ever figure anything out, there are holes in the story."
         orientation: landscape
     -
+        id: late_again
         title: "Late Again"
         year: "2007"
         medium: "pencil, Painter"
@@ -78,6 +82,7 @@ items:
         description: "Can't get there on time and don't want to."
         orientation: landscape
     -
+        id: a_pungent_seasonal_realization
         title: "a pungent seasonal realization"
         year: "2007"
         medium: "pencil, ink, Painter, Photoshop"
@@ -88,6 +93,7 @@ items:
         description: "white knuckling in the white snow"
         orientation: landscape
     -
+        id: its_a_mix_tape_i_might_eat
         title: "It's a Mix Tape I Might Eat"
         year: "2007"
         medium: "pencil, Painter, Photoshop"
@@ -98,6 +104,7 @@ items:
         description: "It says please meatball me."
         orientation: landscape
     -
+        id: minus_plus_minus
         title: "-+-"
         year: "2008"
         medium: "pencil, Painter, Photoshop"
@@ -108,6 +115,7 @@ items:
         description: "burping colors"
         orientation: portrait
     -
+        id: room_temperature_wheels
         title: "room temperature wheels"
         year: "2009"
         medium: "pencil, Painter, Photoshop"
@@ -118,6 +126,7 @@ items:
         description: "a boy's life"
         orientation: landscape
     -
+        id: get_outta_my_dreams_and_into_my_van
         title: "get outta my dreams and into my van"
         year: "2009"
         medium: "pencil, Painter, Photoshop"
@@ -128,6 +137,7 @@ items:
         description: "beats van"
         orientation: landscape
     -
+        id: the_octopus_is_the_dialogue
         title: "the octopus is the dialogue"
         year: "2008"
         medium: "Painter"
@@ -138,6 +148,7 @@ items:
         description: "we only exist by communitcating with another"
         orientation: portrait
     -
+        id: makin_it_with_bots
         title: "makin it with bots"
         year: "2007"
         medium: "Painter"
@@ -148,6 +159,7 @@ items:
         description: "creation and destruction with the stroke of a brush"
         orientation: portrait
     -
+        id: eyeguy_animation_test
         title: "Eyeguy Animation Test"
         year: "2007"
         medium: "pencil, Painter, Photoshop, Flash"
@@ -160,6 +172,7 @@ items:
         orientation: landscape
         featured: true
     -
+        id: cute_animals_animatic
         title: "Cute Animals (animatic)"
         year: "2007"
         medium: "pencil, Photoshop, Flash"
@@ -243,6 +256,7 @@ items:
     #     description: "This is my own wedding website which I designed with my wife :) -- fully functional feature-rich wedding website. I can make one for you. http://bandbajgayi.com"
     #     orientation: portrait
     -
+        id: beepo_takes_a_pipe_to_nowhere
         title: "Beepo Takes A Pipe To Nowhere"
         year: "2010"
         medium: "pencil, Painter, Photoshop"
@@ -253,6 +267,7 @@ items:
         description: "Beepo is a robot built by Japanese robotics engineers with whatever information they had about Italian stereotypes. Upon his activation they uploaded the occupation \"plumber\" into his main fucking memory.\nIn this world there are no humans around but somehow he always has a pipe to clean out or something to unclog. It's a very septic life. He tends to drink and do a lot of drugs, even on the job.\nBut he also has a stereotypically Italian lust for life, and he sings Opera to all the beautiful women ... robots. Women robots.\nThis piece is concept art for a mini film starring the one and only Beepo Beeparelli"
         orientation: landscape
     -
+        id: burger_pope_ad
         title: "Burger Pope Ad"
         year: "2007"
         medium: "pencil, Painter, Photoshop"
@@ -284,6 +299,7 @@ items:
     #     description: "Character design for Beepo Beeparelli"
     #     orientation: portrait
     -
+        id: uranium_239_pops
         title: "Uranium 239 Pops"
         year: "1997"
         medium: "Painter"
@@ -294,6 +310,7 @@ items:
         description: "Uranium 239 Glow Pops"
         orientation: portrait
     -
+        id: the_power_of_buddha_compels_you
         title: "The Power of Buddha Compels You"
         year: "2011"
         medium: "Painter"
@@ -305,6 +322,7 @@ items:
         orientation: landscape
         featured: true
     -
+        id: the_way_the_sun_moves
         title: "The way the sun moves"
         year: "2002"
         medium: "3D Studio, Painter"
@@ -395,6 +413,7 @@ items:
     #     description: "this is Dethird's owner, Krin"
     #     orientation: portrait
     -
+        id: liquidation
         title: "liquidation"
         year: "2009"
         medium: "Pencil"
@@ -405,6 +424,7 @@ items:
         description: "sketchbook"
         orientation: portrait
     -
+        id: quit_clowning_around
         title: "quit clowning around"
         year: "2008"
         medium: "Pencil"
@@ -455,6 +475,7 @@ items:
     #     description: "figure drawing"
     #     orientation: portrait
     -
+        id: figure_drawing_shabnam
         title: "figure drawing (shabnam)"
         year: "2009"
         medium: "Pencil"
@@ -466,6 +487,7 @@ items:
         orientation: landscape
         featured: true
     -
+        id: figure_drawing_shabnam_2
         title: "figure drawing (shabnam) 2"
         year: "2009"
         medium: "Pencil"
@@ -476,6 +498,7 @@ items:
         description: "figure drawing"
         orientation: portrait
     -
+        id: figure_drawing_tailfeathers
         title: "figure drawing (tailfeathers)"
         year: "2009"
         medium: "Pencil"
@@ -486,6 +509,7 @@ items:
         description: "figure drawing"
         orientation: portrait
     -
+        id: face
         title: "face"
         year: "2009"
         medium: "Pencil"
@@ -496,6 +520,7 @@ items:
         description: "figure drawing"
         orientation: portrait
     -
+        id: worker_tree
         title: "worker tree"
         year: "2009"
         medium: "Pencil"
@@ -516,6 +541,7 @@ items:
     #     description: "sketchbook"
     #     orientation: landscape
     -
+        id: fossil_study
         title: "fossil study"
         year: "2006"
         medium: "Pencil"

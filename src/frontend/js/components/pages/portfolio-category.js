@@ -21,7 +21,9 @@ const PortfolioCategory = React.createClass({
                     className="col-xs-3"
                 >
                     <div className="portfolio-card">
-                        <a title={ item.title } onTouchTap={() => browserHistory.push('/portfolio/' + item.category_id)}>
+                        <a title={ item.title } onTouchTap={() => browserHistory.push(
+                                `/portfolio/${item.category_id}/item/${item.id}`
+                        )}>
                             <img className={ item.orientation } src={ item.thumbnail } />
                         </a>
                         <h5>{ item.title }</h5>

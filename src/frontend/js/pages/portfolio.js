@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import App from '../components/app'
 import Portfolio from '../components/pages/portfolio'
 import PortfolioCategory from '../components/pages/portfolio-category'
+import PortfolioCategoryItem from '../components/pages/portfolio-category-item'
 import store from '../store/store';
 
 const NoMatch = React.createClass({
@@ -26,6 +27,7 @@ render((
             <Route path="/" component={ App}>
                 <IndexRoute component={ Portfolio } />
                 <Route path="portfolio/:categoryId" component={ PortfolioCategory } />
+                <Route path="portfolio/:categoryId/item/:itemId" component={ PortfolioCategoryItem } />
                 <Route path="*" component={ Portfolio } />
             </Route>
         </Router>

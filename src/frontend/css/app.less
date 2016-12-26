@@ -9,6 +9,12 @@ body {
 	color: #FFF;
     overflow-x: hidden;
 }
+.btn-xs {
+    padding: .18rem .35rem;
+    font-size: .7rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
 .col-lg-2:nth-child(5n+1) {
     clear:both;
 }
@@ -48,9 +54,16 @@ body {
     background-color: rgba(0,0,0,0.7);
     padding: 10px;
     margin-bottom: 15px;
+    text-align: left;
+    .btn {
+        margin-left: 5px;
+    }
 }
 .subtitle {
     color: #f5b20a;
+}
+.text-align-center {
+    text-align: center;
 }
 @scale-1440: (1440 / 1920);
 
@@ -84,6 +97,9 @@ body {
       	height: 368px;
 		.object;
 	}
+    .image-display {
+        max-height: 725px
+    }
     #great_button {
 		top: 672px;
 		left: 857px;
@@ -134,7 +150,7 @@ body {
 	}
     #portfolio {
 		top: 990px;
-		left: 50px;
+		left: 0px;
 		width: 1900px;
       	height: 800px;
         overflow-x: hidden;
@@ -273,6 +289,9 @@ body {
       	height: @scale-1440 * 368px;
 		.object;
 	}
+    .image-display {
+        max-height: @scale-1440 * 725px
+    }
     #great_button {
 		top: @scale-1440 * 672px;
 		left: @scale-1440 * 857px;
@@ -323,7 +342,7 @@ body {
 	}
     #portfolio {
 		top: @scale-1440 * 990px;
-		left: @scale-1440 * 50px;
+		left: @scale-1440 * 0px;
 		width: @scale-1440 * 1900px;
       	height: @scale-1440 * 800px;
         overflow-x: hidden;

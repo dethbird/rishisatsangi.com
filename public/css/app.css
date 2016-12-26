@@ -10,6 +10,12 @@ body {
   color: #FFF;
   overflow-x: hidden;
 }
+.btn-xs {
+  padding: .18rem .35rem;
+  font-size: .7rem;
+  line-height: 1.5;
+  border-radius: .2rem;
+}
 .col-lg-2:nth-child(5n+1) {
   clear: both;
 }
@@ -49,9 +55,16 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 10px;
   margin-bottom: 15px;
+  text-align: left;
+}
+.portfolio-breadcrumb .btn {
+  margin-left: 5px;
 }
 .subtitle {
   color: #f5b20a;
+}
+.text-align-center {
+  text-align: center;
 }
 @media (min-width: 1920px) {
   #intro_hydrant {
@@ -83,6 +96,9 @@ body {
     width: 592px;
     height: 368px;
     position: absolute;
+  }
+  .image-display {
+    max-height: 725px;
   }
   #great_button {
     top: 672px;
@@ -135,7 +151,7 @@ body {
   }
   #portfolio {
     top: 990px;
-    left: 50px;
+    left: 0px;
     width: 1900px;
     height: 800px;
     overflow-x: hidden;
@@ -277,6 +293,9 @@ body {
     height: 276px;
     position: absolute;
   }
+  .image-display {
+    max-height: 543.75px;
+  }
   #great_button {
     top: 504px;
     left: 642.75px;
@@ -328,7 +347,7 @@ body {
   }
   #portfolio {
     top: 742.5px;
-    left: 37.5px;
+    left: 0px;
     width: 1425px;
     height: 600px;
     overflow-x: hidden;

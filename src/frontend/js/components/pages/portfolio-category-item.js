@@ -1,10 +1,16 @@
 import React from 'react';
+import Modal from 'react-modal'
 import classNames from 'classnames';
 import { browserHistory, Link } from 'react-router';
 import { connect } from 'react-redux';
 
 
 const PortfolioCategoryItem = React.createClass({
+    getInitialState() {
+        return {
+            modalIsOpen: false
+        };
+    },
     prevButton(item_id) {
         const { categoryId } = this.props.params;
         if(item_id !== undefined) {
@@ -27,7 +33,14 @@ const PortfolioCategoryItem = React.createClass({
         }
         return null;
     },
+    openModal() {
+        this.setState({modalIsOpen: true});
+    },
+    closeModal() {
+        this.setState({modalIsOpen: false});
+    },
     render() {
+        const { modalIsOpen } = this.state;
         const { categoryId, itemId } = this.props.params;
         const item = _.findWhere(portfolio.items, {
             'id': itemId
@@ -64,8 +77,32 @@ const PortfolioCategoryItem = React.createClass({
                         <a onTouchTap={() => browserHistory.push('/portfolio/' + item.category_id)}>{ category.name }</a>
                         <span> / </span>
                         <span>{ item.title }</span>
+                        <a className="btn btn-secondary btn-xs" onTouchTap={ this.openModal }>Info</a>
 
-                        <a className="btn btn-secondary btn-xs">Info</a>
+                        <Modal
+                            ref="infoModal"
+                            isOpen={ modalIsOpen }
+                            contentLabel="infoModal"
+                            style={{
+                                overlay: {
+                                    backgroundColor : 'rgba(0, 0, 0, 0.75)'
+                                },
+                                content: {
+                                    background : '#000'
+                                }
+                            }}
+                        >
+                            <a onTouchTap={ this.closeModal } className="btn btn-danger pull-right">X</a>
+                            <br />
+
+                            <div className="text-align-center">
+                                <img className="image-modal" src={ item.content } />
+                                <br />
+                                <h1>{ item.title }</h1>
+                                <span className="subtitle">{ item.medium }</span><br />
+                                <blockquote>{ item.description }</blockquote>
+                            </div>
+                        </Modal>
                     </div>
 
                     <div className="pull-right">

@@ -346,6 +346,11 @@ body {
   width: 1514px;
   height: 862px;
 }
+#whatido_copy a,
+#whatido_copy a:hover,
+#whatido_copy a:visited {
+  color: #f5b20a;
+}
 @media (min-width: 1440px) and (max-width: 1919px) {
   #whatido_copy {
     top: 1512px;

@@ -17,7 +17,7 @@ const palette = {
 }
 
 const muiTheme = getMuiTheme({
-    fontFamily: 'Open Sans',
+    fontFamily: 'Hind Vadodara',
     appBar: {
         color: palette.baseColor
     },

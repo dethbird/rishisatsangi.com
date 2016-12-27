@@ -41110,7 +41110,7 @@ var palette = {
 };
 
 var muiTheme = (0, _getMuiTheme3.default)((_getMuiTheme = {
-    fontFamily: 'Open Sans',
+    fontFamily: 'Hind Vadodara',
     appBar: {
         color: palette.baseColor
     },

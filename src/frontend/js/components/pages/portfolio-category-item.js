@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { browserHistory, Link } from 'react-router';
 import { connect } from 'react-redux';
 
+import Markdown from '../ui/markdown';
+
 
 const PortfolioCategoryItem = React.createClass({
     getInitialState() {
@@ -111,8 +113,10 @@ const PortfolioCategoryItem = React.createClass({
                                 <img className="image-modal" src={ item.thumbnail } />
                                 <br />
                                 <h1>{ item.title }</h1>
-                                <span className="subtitle">{ item.medium }</span><br />
-                                <blockquote>{ item.description }</blockquote>
+                                <span className="subtitle">{ item.medium }</span>
+                                <br />
+                                <br />
+                                <Markdown source={ item.description }/>
                             </div>
                         </Modal>
                     </div>

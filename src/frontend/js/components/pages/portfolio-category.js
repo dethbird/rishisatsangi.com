@@ -51,6 +51,7 @@ const PortfolioCategory = React.createClass({
                     <a onTouchTap={() => browserHistory.push('/')}>Portfolio</a>
                     <span> / </span>
                     <a onTouchTap={() => browserHistory.push('/portfolio/' + categoryId)}>{ category.name }</a>
+                    <span className="subtitle"> ({category.type}) </span>
                     <a className="btn btn-secondary btn-xs" onTouchTap={ this.openModal }>Info</a>
 
                     <Modal

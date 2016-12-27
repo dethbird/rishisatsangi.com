@@ -17,12 +17,20 @@ categories:
         type: project
         image_url: https://c1.staticflickr.com/3/2439/3663515635_1c89de110c.jpg
         orientation: landscape
+        description: |
+            Beepo is a robot built by Japanese robotics engineers with whatever information they had about Italian stereotypes. Upon his activation they uploaded the occupation "plumber" into his main fucking memory.
+
+            In this world there are no humans around but somehow he always has a pipe to clean out or something to unclog. It's a very septic life. He tends to drink and do a lot of drugs, even on the job.
+
+            But he also has a stereotypically Italian lust for life, and he sings Opera to all the beautiful women ... robots. Women robots.
     -
         id: on_the_scene
         name: "Tweetstream and Zeitgeist on the Scene"
         type: comic
-        image_url: https://c2.staticflickr.com/2/1695/26353066916_2651cca279.jpg
+        image_url: https://c2.staticflickr.com/2/1607/26286622382_5d12a1d7a9_b.jpg
         orientation: landscape
+        description: |
+            Twitter and Google's very own superheroes use social media to help them in their crusading for justice.
     -
         id: animation
         name: "Animation"
@@ -264,7 +272,8 @@ items:
         type: "image"
         content: "https://farm3.staticflickr.com/2439/3663515635_1c89de110c_b.jpg"
         thumbnail: "https://c1.staticflickr.com/3/2439/3663515635_1c89de110c.jpg"
-        description: "Beepo is a robot built by Japanese robotics engineers with whatever information they had about Italian stereotypes. Upon his activation they uploaded the occupation \"plumber\" into his main fucking memory.\nIn this world there are no humans around but somehow he always has a pipe to clean out or something to unclog. It's a very septic life. He tends to drink and do a lot of drugs, even on the job.\nBut he also has a stereotypically Italian lust for life, and he sings Opera to all the beautiful women ... robots. Women robots.\nThis piece is concept art for a mini film starring the one and only Beepo Beeparelli"
+        description: |
+            This piece is concept art for a mini film starring the one and only Beepo Beeparelli
         orientation: landscape
     -
         id: burger_pope_ad
@@ -417,7 +426,7 @@ items:
         title: "liquidation"
         year: "2009"
         medium: "Pencil"
-        category_id: drawing
+        category_id: drawings
         type: "image"
         content: "https://c2.staticflickr.com/4/3349/3507723720_0da3f4f7f3_b.jpg"
         thumbnail: "https://c2.staticflickr.com/4/3349/3507723720_0da3f4f7f3.jpg"
@@ -428,7 +437,7 @@ items:
         title: "quit clowning around"
         year: "2008"
         medium: "Pencil"
-        category_id: drawing
+        category_id: drawings
         type: "image"
         content: "https://c2.staticflickr.com/4/3046/3097320090_b8ab7bd0d9_b.jpg"
         thumbnail: "https://c2.staticflickr.com/4/3046/3097320090_b8ab7bd0d9.jpg"
@@ -438,7 +447,7 @@ items:
     #     title: "isaac's head"
     #     year: "2008"
     #     medium: "Pencil"
-    #     category_id: drawing
+    #     category_id: drawings
     #     type: "image"
     #     content: "https://c2.staticflickr.com/4/3270/3001946047_44f95f0499_b.jpg"
     #     thumbnail: "https://c2.staticflickr.com/4/3270/3001946047_44f95f0499.jpg"
@@ -448,7 +457,7 @@ items:
     #     title: "clothing wraparound"
     #     year: "2008"
     #     medium: "Pencil"
-    #     category_id: drawing
+    #     category_id: drawings
     #     type: "image"
     #     content: "https://c2.staticflickr.com/4/3104/2903395072_72998ff075_b.jpg"
     #     thumbnail: "https://c2.staticflickr.com/4/3104/2903395072_72998ff075.jpg"
@@ -458,7 +467,7 @@ items:
     #     title: "hands and feet"
     #     year: "2008"
     #     medium: "Pencil"
-    #     category_id: drawing
+    #     category_id: drawings
     #     type: "image"
     #     content: "https://c1.staticflickr.com/3/2417/2447616073_faec8c4e17_o.jpg"
     #     thumbnail: "https://c1.staticflickr.com/3/2417/2447616073_c30a1488f0.jpg"
@@ -468,7 +477,7 @@ items:
     #     title: "figure drawing (melike konur)"
     #     year: "2009"
     #     medium: "Pencil"
-    #     category_id: drawing
+    #     category_id: drawings
     #     type: "image"
     #     content: "https://c2.staticflickr.com/4/3656/3462932062_62b2768087_b.jpg"
     #     thumbnail: "https://c2.staticflickr.com/4/3656/3462932062_62b2768087.jpg"
@@ -479,7 +488,7 @@ items:
         title: "figure drawing (shabnam)"
         year: "2009"
         medium: "Pencil"
-        category_id: drawing
+        category_id: drawings
         type: "image"
         content: "https://c2.staticflickr.com/4/3373/3516227574_7ae78b41e9_b.jpg"
         thumbnail: "https://c2.staticflickr.com/4/3373/3516227574_7ae78b41e9.jpg"
@@ -491,7 +500,7 @@ items:
         title: "figure drawing (shabnam) 2"
         year: "2009"
         medium: "Pencil"
-        category_id: drawing
+        category_id: drawings
         type: "image"
         content: "https://c2.staticflickr.com/4/3345/3623508474_38f15fcbaf_b.jpg"
         thumbnail: "https://c2.staticflickr.com/4/3345/3623508474_38f15fcbaf.jpg"
@@ -502,7 +511,7 @@ items:
         title: "figure drawing (tailfeathers)"
         year: "2009"
         medium: "Pencil"
-        category_id: drawing
+        category_id: drawings
         type: "image"
         content: "https://c1.staticflickr.com/3/2704/4111475248_8a3e8e2ddc_b.jpg"
         thumbnail: "https://c1.staticflickr.com/3/2704/4111475248_8a3e8e2ddc.jpg"
@@ -513,7 +522,7 @@ items:
         title: "face"
         year: "2009"
         medium: "Pencil"
-        category_id: drawing
+        category_id: drawings
         type: "image"
         content: "https://c1.staticflickr.com/3/2803/4121091563_2ab241493c_b.jpg"
         thumbnail: "https://c1.staticflickr.com/3/2803/4121091563_2ab241493c.jpg"
@@ -524,7 +533,7 @@ items:
         title: "worker tree"
         year: "2009"
         medium: "Pencil"
-        category_id: drawing
+        category_id: drawings
         type: "image"
         content: "https://c2.staticflickr.com/4/3403/3445595113_73ae723aaf_b.jpg"
         thumbnail: "https://c2.staticflickr.com/4/3403/3445595113_73ae723aaf.jpg"
@@ -534,7 +543,7 @@ items:
     #     title: "people (guitarists)"
     #     year: "2007"
     #     medium: "Pencil"
-    #     category_id: drawing
+    #     category_id: drawings
     #     type: "image"
     #     content: "https://c1.staticflickr.com/1/232/550319601_3b776c26a0_o.jpg"
     #     thumbnail: "https://c1.staticflickr.com/1/232/550319601_c9256197de.jpg"
@@ -545,9 +554,241 @@ items:
         title: "fossil study"
         year: "2006"
         medium: "Pencil"
-        category_id: drawing
+        category_id: drawings
         type: "image"
         content: "https://c1.staticflickr.com/3/2120/1530136776_593be74239_b.jpg"
         thumbnail: "https://c1.staticflickr.com/3/2120/1530136776_593be74239.jpg"
         description: "studying some bones"
+        orientation: landscape
+    # Tweetstream and Zeitgeist
+    -
+        id: tz001
+        title: "page 1"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content: https://c2.staticflickr.com/2/1477/25776230233_344be0d85c_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1477/25776230233_344be0d85c_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz002
+        title: "page 2"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content: https://c2.staticflickr.com/2/1695/26353066916_2651cca279_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1695/26353066916_2651cca279_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz003
+        title: "page 3"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content: https://c2.staticflickr.com/2/1647/26378954795_5104f9488c_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1647/26378954795_5104f9488c_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz004
+        title: "page 4"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content: https://c2.staticflickr.com/2/1501/26286622732_1ca5e52d0d_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1501/26286622732_1ca5e52d0d_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz005
+        title: "page 5"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content: https://c2.staticflickr.com/2/1715/26378954755_7e40469d13_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1715/26378954755_7e40469d13_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz006
+        title: "page 6"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content: https://c2.staticflickr.com/2/1468/26286622712_89bc6e1a2f_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1468/26286622712_89bc6e1a2f_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz007
+        title: "page 7"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1598/26286622682_01fcbfe8af_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1598/26286622682_01fcbfe8af_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz008
+        title: "page 8"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1634/26353066816_bc6e124edc_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1634/26353066816_bc6e124edc_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz009
+        title: "page 9"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1464/26353066776_8565311a2b_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1464/26353066776_8565311a2b_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz010
+        title: "page 10"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1565/26286622592_cb9ee02c74_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1565/26286622592_cb9ee02c74_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz011
+        title: "page 11"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1605/26353066726_96b6c6d389_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1605/26353066726_96b6c6d389_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz012
+        title: "page 12"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1683/26353066686_311a5925d3_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1683/26353066686_311a5925d3_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz013
+        title: "page 13"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1596/25776229933_d23d50530b_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1596/25776229933_d23d50530b_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz014
+        title: "page 14"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1523/26353066636_2bb1670acd_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1523/26353066636_2bb1670acd_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz015
+        title: "page 15"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1665/25774131634_59112d2640_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1665/25774131634_59112d2640_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz016
+        title: "page 16"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1696/26286622472_63cd1752fc_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1696/26286622472_63cd1752fc_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz017
+        title: "page 17"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content:  https://c2.staticflickr.com/2/1707/26106128770_5e9e9e041c_b.jpg
+        thumbnail:  https://c2.staticflickr.com/2/1707/26106128770_5e9e9e041c_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz018
+        title: "page 18"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content: https://c2.staticflickr.com/2/1582/26378954445_9be891e92c_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1582/26378954445_9be891e92c_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz019
+        title: "page 19"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content: https://c2.staticflickr.com/2/1622/26286622432_bd04d5715d_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1622/26286622432_bd04d5715d_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz020
+        title: "page 20"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content: https://c2.staticflickr.com/2/1607/26286622382_5d12a1d7a9_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1607/26286622382_5d12a1d7a9_b.jpg
+        description:
+        orientation: landscape
+    -
+        id: tz021
+        title: "page 21"
+        year: 2014
+        medium: "Photoshop, Painter"
+        category_id: on_the_scene
+        type: image
+        content: https://c2.staticflickr.com/2/1703/25776229693_74e47efd1d_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1703/25776229693_74e47efd1d_b.jpg
+        description:
         orientation: landscape

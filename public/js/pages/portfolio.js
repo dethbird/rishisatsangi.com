@@ -36453,6 +36453,13 @@ var PortfolioCategory = _react2.default.createClass({
                     category.name
                 ),
                 _react2.default.createElement(
+                    'span',
+                    { className: 'subtitle' },
+                    ' (',
+                    category.type,
+                    ') '
+                ),
+                _react2.default.createElement(
                     'a',
                     { className: 'btn btn-secondary btn-xs', onTouchTap: this.openModal },
                     'Info'

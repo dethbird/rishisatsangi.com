@@ -19,7 +19,7 @@ const PortfolioCategoryItem = React.createClass({
             return (
                 <a className="btn btn-primary btn-xs"  onTouchTap={() => browserHistory.push(
                         `/portfolio/${categoryId}/item/${item_id}`
-                )}>&lt; Prev</a>
+                )}><i className="fa fa-caret-left" aria-hidden="true"></i> Prev</a>
             )
         }
         return null;
@@ -30,7 +30,7 @@ const PortfolioCategoryItem = React.createClass({
             return (
                 <a className="btn btn-primary btn-xs"  onTouchTap={() => browserHistory.push(
                         `/portfolio/${categoryId}/item/${item_id}`
-                )}>Next &gt;</a>
+                )}>Next <i className="fa fa-caret-right" aria-hidden="true"></i></a>
             )
         }
         return null;

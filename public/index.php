@@ -75,7 +75,7 @@ $app->get("/", function () use ($app) {
         "layout" => $layout,
         "portfolio" => $portfolio,
         "pocket_articles" => $pocketData->getArticles(10, 3600),
-        "lastRequestUri" => $_SESSION['lastRequestUri'] ? $_SESSION['lastRequestUri'] : null,
+        "lastRequestUri" => isset($_SESSION['lastRequestUri']) ? $_SESSION['lastRequestUri'] : null,
         "comics" => $comics
     );
 

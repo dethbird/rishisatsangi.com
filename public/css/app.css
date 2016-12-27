@@ -5,6 +5,9 @@ a:visited {
   cursor: pointer;
   color: #E7120E;
 }
+.btn-info {
+  color: white !important;
+}
 blockquote {
   padding: 15px;
 }
@@ -55,14 +58,6 @@ body {
 .object {
   position: absolute;
 }
-.pocket-article {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 0px 10px 10px 10px;
-  margin-bottom: 25px;
-}
-.pocket-article img {
-  max-width: 640px;
-}
 .portfolio-breadcrumb {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 10px;
@@ -71,6 +66,9 @@ body {
 }
 .portfolio-breadcrumb .btn {
   margin-left: 5px;
+}
+.section-header {
+  font-family: 'Work Sans', sans-serif;
 }
 .subtitle {
   color: #f5b20a;
@@ -166,6 +164,19 @@ body {
   #great_button {
     top: 504px;
     left: 642.75px;
+  }
+}
+.pocket-article {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 0px 10px 10px 10px;
+  margin-bottom: 25px;
+}
+.pocket-article img {
+  max-width: 640px;
+}
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .pocket-article img {
+    max-width: 480px;
   }
 }
 #portfolio_background {

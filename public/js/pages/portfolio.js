@@ -41199,7 +41199,8 @@ var PortfolioCategoryItem = _react2.default.createClass({
                 { className: 'btn btn-primary btn-xs', onTouchTap: function onTouchTap() {
                         return _reactRouter.browserHistory.push('/portfolio/' + categoryId + '/item/' + item_id);
                     } },
-                '< Prev'
+                _react2.default.createElement('i', { className: 'fa fa-caret-left', 'aria-hidden': 'true' }),
+                ' Prev'
             );
         }
         return null;
@@ -41213,7 +41214,8 @@ var PortfolioCategoryItem = _react2.default.createClass({
                 { className: 'btn btn-primary btn-xs', onTouchTap: function onTouchTap() {
                         return _reactRouter.browserHistory.push('/portfolio/' + categoryId + '/item/' + item_id);
                     } },
-                'Next >'
+                'Next ',
+                _react2.default.createElement('i', { className: 'fa fa-caret-right', 'aria-hidden': 'true' })
             );
         }
         return null;

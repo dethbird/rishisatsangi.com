@@ -1,12 +1,55 @@
 {
   "dependencies": {
     "browserify": "12.*",
+    "classnames": "^2.2.5",
     "fountain-js": "0.0.1",
     "jquery": "^2.1.4",
+    "material-ui": "^0.16.1",
+    "moment": "^2.15.0",
+    "packery": "~2.1.1",
+    "react": "^15.3.1",
+    "react-datepicker": "^0.29.0",
+    "react-dom": "^15.3.1",
+    "react-markdown": "^2.4.2",
+    "react-modal": "^1.4.0",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.0",
+    "react-sortable-component": "^1.0.0",
+    "react-tap-event-plugin": "^2.0.0",
+    "react-textarea-autosize": "^4.0.5",
+    "react-timeago": "^3.1.3",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0",
+    "simplemde": "~1.11.2",
+    "superagent": "^2.3.0",
     "timeago": "^1.4.3",
     "uglify-js": "^2.5.0"
   },
   "scripts": {
-    "deploy": "bash ./build.sh -pjc"
+    "deploy": "php scripts/build.php --cache --php --configs --npm --javascript",
+    "build-js": "php scripts/build.php --js --js-page app --css",
+    "watch": "npm-watch"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-2": "^6.18.0",
+    "babelify": "^7.3.0",
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.5.0",
+    "less": "^2.7.1",
+    "npm-watch": "^0.1.6"
+  },
+  "watch": {
+    "build-js": {
+      "patterns": [
+        "src/frontend/js"
+      ],
+      "extensions": "js",
+      "quiet": true
+    }
   }
 }

@@ -47,32 +47,25 @@ $view->parserExtensions = array(
     new TemplateHelpers(),
     new MarkdownExtension($markdownEngine)
 );
-// $view->addExtension(new MarkdownExtension($markdownEngine));
 $app->container->set('configs', $configs);
 
 
 $app->notFound(function () use ($app) {
-    $app->render(
-        'pages/404.html.twig'
-    );
+    $_SESSION['lastRequestUri'] = $_SERVER['REQUEST_URI'];
+    $app->redirect("/");
 });
-
-
 
 $app->get("/logout", function () use ($app) {
   $app->deleteCookie('securityContext');
   $app->redirect("/");
 });
 
+
 $app->get("/", function () use ($app) {
 
     $configs = $app->container->get('configs');
     $layout = Yaml::parse(file_get_contents("../configs/layout.yml"));
-    $gallery = Yaml::parse(file_get_contents("../configs/gallery.yml"));
-    $instagramData = new InstagramData(
-        $configs['instagram']['client_id'],
-        $configs['instagram']['client_secret']
-    );
+    $portfolio = Yaml::parse(file_get_contents("../configs/portfolio.yml"));
     $pocketData = new PocketData($configs['pocket']['consumer_key'], $configs['pocket']['access_token']);
     $comics = Yaml::parse(file_get_contents("../configs/comics.yml"));
 
@@ -80,13 +73,16 @@ $app->get("/", function () use ($app) {
         "configs" => $configs,
         "section" => "index",
         "layout" => $layout,
-        "gallery" => $gallery,
-        "instagram_posts" => $instagramData->getEmbedMedia(
-            $configs['instagram']['photos']
-        ),
+        "portfolio" => $portfolio,
         "pocket_articles" => $pocketData->getArticles(10, 3600),
+        "lastRequestUri" => isset($_SESSION['lastRequestUri']) ? $_SESSION['lastRequestUri'] : null,
         "comics" => $comics
     );
+
+    // clear last request url
+    if (isset($_SESSION['lastRequestUri'])) {
+        $_SESSION['lastRequestUri'] = null;
+    }
 
     $app->render(
         'pages/index.html.twig',
@@ -95,54 +91,17 @@ $app->get("/", function () use ($app) {
     );
 });
 
+
 $app->get("/resume", function () use ($app) {
 
     $configs = $app->container->get('configs');
     $resume = Yaml::parse(file_get_contents("../configs/resume.yml"));
-
-    // $templateVars = array(
-    //     "configs" => $configs,
-    //     "section" => "resume",
-    //     "resume" => $resume
-    // );
 
     $app->render(
         'pages/resume.html.twig',
         $resume,
         200
     );
-});
-
-$app->group('/service', function () use ($app) {
-    $app->group('/instagram', function () use ($app) {
-
-        $app->get('/authorize', function () use ($app) {
-            $configs = $app->container->get('configs');
-            $instagramData = new InstagramData(
-                $configs['instagram']['client_id'],
-                $configs['instagram']['client_secret']
-            );
-            $app->redirect($instagramData->getAuthRedirectUri(
-                "http://".$_SERVER['HTTP_HOST']."/service/instagram/redirect"
-            ));
-        });
-
-        $app->get('/redirect', function () use ($app) {
-            $configs = $app->container->get('configs');
-            $instagramData = new InstagramData(
-                $configs['instagram']['client_id'],
-                $configs['instagram']['client_secret']
-            );
-            $response = $instagramData->getAuthTokenFromCode(
-                "http://".$_SERVER['HTTP_HOST']."/service/instagram/redirect",
-                $app->request->params('code')
-            );
-            $app->response->headers->set('Content-Type', 'application/json');
-            $app->response->setBody(json_encode($response));
-
-        });
-
-    });
 });
 
 

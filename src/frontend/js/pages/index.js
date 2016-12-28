@@ -1,7 +1,3 @@
-var PanelView = require('../library/views/PanelView');
+import IndexView from '../library/views/IndexView';
 
-var panelView = new PanelView({
-    el: 'body',
-    greatButtonId: "#great_button",
-    layout: layout
-});
+const indexView = new IndexView({ el: 'body' });

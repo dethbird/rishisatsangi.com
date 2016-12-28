@@ -9,44 +9,54 @@ a:visited {
   color: white !important;
 }
 body {
-  font-family: 'Hind Vadodara', sans-serif;
-  background-color: #000;
   color: #FFF;
   overflow-x: hidden;
+  font-family: 'Hind Vadodara', sans-serif;
+  background-color: #000;
+}
+body,
+.btn {
   font-size: 1rem;
 }
 @media (min-width: 1024px) and (max-width: 1279px) {
-  body {
+  body,
+  .btn {
     font-size: .79rem;
   }
 }
 @media (min-width: 960px) and (max-width: 1023px) {
-  body {
+  body,
+  .btn {
     font-size: .7rem;
   }
 }
 @media (min-width: 800px) and (max-width: 959px) {
-  body {
+  body,
+  .btn {
     font-size: .67rem;
   }
 }
 @media (min-width: 620px) and (max-width: 799px) {
-  body {
+  body,
+  .btn {
     font-size: .55rem;
   }
 }
 @media (min-width: 480px) and (max-width: 619px) {
-  body {
+  body,
+  .btn {
     font-size: .55rem;
   }
 }
 @media (min-width: 400px) and (max-width: 479px) {
-  body {
+  body,
+  .btn {
     font-size: .55rem;
   }
 }
 @media (min-width: 300px) and (max-width: 399px) {
-  body {
+  body,
+  .btn {
     font-size: .5rem;
   }
 }
@@ -75,9 +85,14 @@ body {
     font-size: .8rem;
   }
 }
+@media (min-width: 800px) and (max-width: 959px) {
+  h5 {
+    font-size: .95rem;
+  }
+}
 @media (min-width: 620px) and (max-width: 799px) {
   h5 {
-    font-size: 1.1rem;
+    font-size: .95rem;
   }
 }
 @media (min-width: 480px) and (max-width: 619px) {

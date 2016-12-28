@@ -1,12 +1,20 @@
 classes:
     -
+        name: "body"
+        props:
+            font_size: 1rem
+    -
+        name: blockquote
+        props:
+            padding: 15
+    -
         name: ".image-display"
-        max_dimensions:
-            height: 725
+        props:
+            max_height: 725
     -
         name: ".image-modal"
-        max_dimensions:
-            height: 500
+        props:
+            max_height: 500
     -
         name: ".pocket-article"
         props:
@@ -21,6 +29,35 @@ classes:
                     name: img
                     props:
                         max_width: 640
+    -
+        name: ".portfolio-item-content"
+        subdefs:
+            classes:
+                -
+                    name: iframe
+                    props:
+                        width: 800
+                        height: 600
+    -
+        name: ".portfolio-card"
+        props:
+            margin_bottom: 15
+            max_width: 250
+            padding-bottom: 10
+        subdefs:
+            classes:
+                -
+                    name: img.landscape
+                    props:
+                        max_width: 250
+                        height: auto
+                        margin_bottom: 5
+                -
+                    name: img.portrait
+                    props:
+                        max_height: 250
+                        width: auto
+                        margin_bottom: 5
 objects:
     -
         id: "intro_hydrant"
@@ -43,6 +80,8 @@ objects:
         dimensions:
             width: 377
             height: 583
+        classes:
+            - object
     -
         id: "intro_signature"
         image_url: "/img/intro_signature.png"
@@ -52,6 +91,8 @@ objects:
         dimensions:
             width: 893
             height: 381
+        classes:
+            - object
         parallax:
             parallax_id: intro_signature_parallax
             scale: 0.04
@@ -64,6 +105,8 @@ objects:
         dimensions:
             width: 592
             height: 368
+        classes:
+            - object
         parallax:
             parallax_id: intro_tagline_parallax
             scale: 0.015
@@ -72,6 +115,8 @@ objects:
         location:
             top: 672
             left: 857
+        classes:
+            - object
         button:
             text: "Great!"
     -
@@ -80,6 +125,7 @@ objects:
             width: auto
             height: 700
         classes:
+            - object
             - scrollfix
     -
         id: "portfolio_background"
@@ -91,6 +137,7 @@ objects:
             width: 1919
             height: 1024
         classes:
+            - object
             - img-round-corners
     -
         id: "portfolio_arrows"
@@ -101,6 +148,8 @@ objects:
         dimensions:
             width: 557
             height: 405
+        classes:
+            - object
     -
         id: "portfolio_title_parallax02"
         image_url: "/img/portfolio_title_parallax02.png"
@@ -110,6 +159,8 @@ objects:
         dimensions:
             width: 273
             height: 83
+        classes:
+            - object
         parallax:
             parallax_id: portfolio_parallax
             scale: 0.05
@@ -122,6 +173,8 @@ objects:
         dimensions:
             width: 288
             height: 87
+        classes:
+            - object
         parallax:
             parallax_id: portfolio_parallax
             scale: 0.025
@@ -134,6 +187,8 @@ objects:
         dimensions:
             width: 303
             height: 91
+        classes:
+            - object
     -
         id: "portfolio_neonsign01"
         image_url: "/img/portfolio_neonsign01.png"
@@ -143,6 +198,8 @@ objects:
         dimensions:
             width: 174
             height: 214
+        classes:
+            - object
         flicker:
             delay: 1
             min_duration: 0.05
@@ -158,6 +215,8 @@ objects:
         dimensions:
             width: 214
             height: 244
+        classes:
+            - object
         flicker:
             delay: 1
             min_duration: 0.05
@@ -172,6 +231,9 @@ objects:
         dimensions:
             width: 1900
             height: 800
+        classes:
+            - object
+            - scrollfix
     -
         id: "whatido_background"
         image_url: "/img/whatido_background.jpg"
@@ -182,6 +244,7 @@ objects:
             width: 1514
             height: 862
         classes:
+            - object
             - img-round-corners
     -
         id: "whatido_title_parallax02"
@@ -192,6 +255,8 @@ objects:
         dimensions:
             width: 394
             height: 101
+        classes:
+            - object
         parallax:
             parallax_id: whatido_parallax
             scale: 0.05
@@ -204,6 +269,8 @@ objects:
         dimensions:
             width: 416
             height: 107
+        classes:
+            - object
         parallax:
             parallax_id: whatido_parallax
             scale: 0.025
@@ -216,6 +283,8 @@ objects:
         dimensions:
             width: 438
             height: 113
+        classes:
+            - object
     -
         id: "whatido_copy"
         container:
@@ -227,6 +296,9 @@ objects:
         dimensions:
             width: 1514
             height: 862
+        classes:
+            - object
+            - scrollfix
     -
         id: "whatido_copy_markup"
         location:
@@ -244,6 +316,7 @@ objects:
             width: 1433
             height: 897
         classes:
+            - object
             - img-round-corners
     -
         id: "info_title_parallax02"
@@ -254,6 +327,8 @@ objects:
         dimensions:
             width: 357
             height: 134
+        classes:
+            - object
         parallax:
             parallax_id: info_parallax
             scale: 0.05
@@ -266,6 +341,8 @@ objects:
         dimensions:
             width: 377
             height: 140
+        classes:
+            - object
         parallax:
             parallax_id: info_parallax
             scale: 0.025
@@ -278,6 +355,8 @@ objects:
         dimensions:
             width: 397
             height: 148
+        classes:
+            - object
     -
         id: "info_copy"
         container:
@@ -289,6 +368,8 @@ objects:
         dimensions:
             width: 1433
             height: 897
+        classes:
+            - object
     -
         id: "info_copy_markup"
         location:
@@ -296,6 +377,8 @@ objects:
             left: 0
         box:
             padding: 60
+        classes:
+            - object
         props:
             text_shadow: "1px 2px 4px #000"
 parallax:

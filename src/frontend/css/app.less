@@ -7,18 +7,85 @@ a, a:hover, a:visited {
 .btn-info {
     color: white !important;
 }
-blockquote {
-    padding: 15px;
-}
 body {
     font-family: 'Hind Vadodara', sans-serif;
 	background-color: #000;
 	color: #FFF;
     overflow-x: hidden;
     font-size: 1rem;
-    @media (min-width: 1024px) and (max-width: 1279px){
-		font-size: 0.8rem;
-	}
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        font-size: .79rem;
+    }
+    @media (min-width: 960px) and (max-width: 1023px) {
+        font-size: .7rem;
+    }
+    @media (min-width: 800px) and (max-width: 959px) {
+        font-size: .67rem;
+    }
+    @media (min-width: 620px) and (max-width: 799px) {
+        font-size: .55rem;
+    }
+    @media (min-width: 480px) and (max-width: 619px) {
+        font-size: .55rem;
+    }
+    @media (min-width: 400px) and (max-width: 479px) {
+        font-size: .55rem;
+    }
+    @media (min-width: 300px) and (max-width: 399px) {
+        font-size: .5rem;
+    }
+}
+h1 {
+    @media (min-width: 800px) and (max-width: 959px) {
+        font-size: 2.0rem;
+    }
+    @media (min-width: 620px) and (max-width: 799px) {
+        font-size: 1.6rem;
+    }
+    @media (min-width: 480px) and (max-width: 619px) {
+        font-size: 1.3rem;
+    }
+    @media (min-width: 400px) and (max-width: 479px) {
+        font-size: 1.3rem;
+    }
+    @media (min-width: 300px) and (max-width: 399px) {
+        font-size: .8rem;
+    }
+}
+
+h5 {
+    @media (min-width: 620px) and (max-width: 799px) {
+        font-size: 1.1rem;
+    }
+    @media (min-width: 480px) and (max-width: 619px) {
+        font-size: .9rem;
+    }
+    @media (min-width: 400px) and (max-width: 479px) {
+        font-size: .9rem;
+    }
+    @media (min-width: 300px) and (max-width: 399px) {
+        font-size: .7rem;
+    }
+}
+h4 {
+    @media (min-width: 620px) and (max-width: 799px) {
+        font-size: 1rem;
+    }
+    @media (min-width: 480px) and (max-width: 619px) {
+        font-size: .8rem;
+    }
+    @media (min-width: 400px) and (max-width: 479px) {
+        font-size: .8rem;
+    }
+    @media (min-width: 300px) and (max-width: 399px) {
+        font-size: .6rem;
+    }
+}
+
+li {
+    @media (min-width: 300px) and (max-width: 399px) {
+        margin-left: -16px;
+    }
 }
 .btn-xs {
     padding: .18rem .35rem;
@@ -63,6 +130,9 @@ body {
 }
 .pocket-article {
     background-color: rgba(0,0,0,0.7);
+    .pocket-article img {
+        max-width: 100%;
+    }
 }
 .portfolio-breadcrumb {
     background-color: rgba(0,0,0,0.7);
@@ -72,6 +142,11 @@ body {
     .btn {
         margin-left: 5px;
     }
+}
+.portfolio-card {
+    text-align: center;
+    background-color: rgba(0,0,0,0.7);
+    display: inline-block
 }
 .section-header {
     font-family: 'Work Sans', sans-serif;
@@ -87,720 +162,9 @@ body {
         color: #f5b20a;
     }
 }
-#whatido_copy_markup {
-    text_shadow: 1px 2px 4px #000;
-}
-
-
-
-
-
-@scale-1366: (1366 / 1920);
-@scale-1280: (1280 / 1920);
-@scale-1024: (1024 / 1920);
-@scale-800: (800 / 1920);
-@scale-640: (640 / 1920);
-@scale-480: (480 / 1920);
-@scale-320: (320 / 1920);
-
-/** Objects **/
-
-#intro_hydrant {
-    .object;
-    .img-round-corners;
-	top: 41px;
-	left: 309px;
-	width: 1301px;
-  	height: 756px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-		top: @scale-1366 * 41px;
-		left: @scale-1366 * 309px;
-		width: @scale-1366 * 1301px;
-      	height: @scale-1366 * 756px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-		top: @scale-1280 * 41px;
-		left: @scale-1280 * 309px;
-		width: @scale-1280 * 1301px;
-      	height: @scale-1280 * 756px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-		top: @scale-1024 * 41px;
-		left: @scale-1024 * 309px;
-		width: @scale-1024 * 1301px;
-      	height: @scale-1024 * 756px;
-	}
-}
-#intro_shoes {
-    .object;
-	top: 0px;
-	left: 1219px;
-	width: 377px;
-  	height: 583px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 0px;
-    	left: @scale-1366 * 1219px;
-    	width: @scale-1366 * 377px;
-      	height: @scale-1366 * 583px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 0px;
-    	left: @scale-1280 * 1219px;
-    	width: @scale-1280 * 377px;
-      	height: @scale-1280 * 583px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 0px;
-    	left: @scale-1024 * 1219px;
-    	width: @scale-1024 * 377px;
-      	height: @scale-1024 * 583px;
-	}
-}
-#intro_signature {
-    .object;
-	top: 0px;
-	left: 36px;
-	width: 893px;
-  	height: 381px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 0px;
-    	left: @scale-1366 * 36px;
-    	width: @scale-1366 * 893px;
-      	height: @scale-1366 * 381px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 0px;
-    	left: @scale-1280 * 36px;
-    	width: @scale-1280 * 893px;
-      	height: @scale-1280 * 381px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 0px;
-    	left: @scale-1024 * 36px;
-    	width: @scale-1024 * 893px;
-      	height: @scale-1024 * 381px;
-	}
-}
-#intro_tagline {
-    .object;
-	top: 460px;
-	left: 1060px;
-	width: 592px;
-  	height: 368px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 460px;
-    	left: @scale-1366 * 1060px;
-    	width: @scale-1366 * 592px;
-      	height: @scale-1366 * 368px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 460px;
-    	left: @scale-1280 * 1060px;
-    	width: @scale-1280 * 592px;
-      	height: @scale-1280 * 368px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 460px;
-    	left: @scale-1024 * 1060px;
-    	width: @scale-1024 * 592px;
-      	height: @scale-1024 * 368px;
-	}
-}
-.image-display {
-    max-height: 725px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-        max-height: @scale-1366 * 725px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-        max-height: @scale-1280 * 725px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-        max-height: @scale-1024 * 725px;
-	}
-}
-.image-modal {
-    max-height: 500px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-        max-height: @scale-1366 * 500px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-        max-height: @scale-1280 * 500px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-        max-height: @scale-1024 * 500px;
-	}
-}
-#great_button {
-    .object;
-	top: 672px;
-	left: 857px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 672px;
-    	left: @scale-1366 * 857px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 672px;
-    	left: @scale-1280 * 857px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 672px;
-    	left: @scale-1024 * 857px;
-	}
-}
-.pocket-article {
-    background-color: rgba(0,0,0,0.7);
-    padding: 0px 10px 10px 10px;
-    margin-bottom: 25px;
-    img {
-        max-width: 640px;
-        @media (min-width: 1366px) and (max-width: 1919px){
-        	max-width: @scale-1366 * 640px;
-    	}
-        @media (min-width: 1280px) and (max-width: 1365px){
-        	max-width: @scale-1280 * 640px;
-    	}
-        @media (min-width: 1024px) and (max-width: 1279px){
-        	max-width: @scale-1024 * 640px;
-    	}
-    }
-}
-#portfolio_background {
-    .object;
-    .img-round-corners;
-	top: 863px;
-	left: 0px;
-	width: 1919px;
-  	height: 1024px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 863px;
-    	left: @scale-1366 * 0px;
-    	width: @scale-1366 * 1919px;
-      	height: @scale-1366 * 1024px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 863px;
-    	left: @scale-1280 * 0px;
-    	width: @scale-1280 * 1919px;
-      	height: @scale-1280 * 1024px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 863px;
-    	left: @scale-1024 * 0px;
-    	width: @scale-1024 * 1919px;
-      	height: @scale-1024 * 1024px;
-	}
-}
-#portfolio_title_parallax02 {
-	.object;
-	top: 855px;
-	left: 175px;
-	width: 273px;
-  	height: 83px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 855px;
-    	left: @scale-1366 * 175px;
-    	width: @scale-1366 * 273px;
-      	height: @scale-1366 * 83px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 855px;
-    	left: @scale-1280 * 175px;
-    	width: @scale-1280 * 273px;
-      	height: @scale-1280 * 83px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 855px;
-    	left: @scale-1024 * 175px;
-    	width: @scale-1024 * 273px;
-      	height: @scale-1024 * 83px;
-	}
-}
-#portfolio_title_parallax01 {
-    .object;
-	top: 850px;
-	left: 169px;
-	width: 288px;
-  	height: 87px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 850px;
-    	left: @scale-1366 * 169px;
-    	width: @scale-1366 * 288px;
-      	height: @scale-1366 * 87px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 850px;
-    	left: @scale-1280 * 169px;
-    	width: @scale-1280 * 288px;
-      	height: @scale-1280 * 87px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 850px;
-    	left: @scale-1024 * 169px;
-    	width: @scale-1024 * 288px;
-      	height: @scale-1024 * 87px;
-	}
-}
-#portfolio_title {
-    .object;
-	top: 846px;
-	left: 161px;
-	width: 303px;
-  	height: 91px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 846px;
-    	left: @scale-1366 * 161px;
-    	width: @scale-1366 * 303px;
-      	height: @scale-1366 * 91px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 846px;
-    	left: @scale-1280 * 161px;
-    	width: @scale-1280 * 303px;
-      	height: @scale-1280 * 91px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 846px;
-    	left: @scale-1024 * 161px;
-    	width: @scale-1024 * 303px;
-      	height: @scale-1024 * 91px;
-	}
-}
-#portfolio_neonsign01 {
-    .object;
-	top: 1650px;
-	left: 78px;
-	width: 174px;
-  	height: 214px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 1650px;
-    	left: @scale-1366 * 78px;
-    	width: @scale-1366 * 174px;
-      	height: @scale-1366 * 214px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 1650px;
-    	left: @scale-1280 * 78px;
-    	width: @scale-1280 * 174px;
-      	height: @scale-1280 * 214px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 1650px;
-    	left: @scale-1024 * 78px;
-    	width: @scale-1024 * 174px;
-      	height: @scale-1024 * 214px;
-	}
-}
-#portfolio_neonsign02 {
-    .object;
-	top: 1513px;
-	left: 257px;
-	width: 214px;
-  	height: 244px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 1513px;
-    	left: @scale-1366 * 257px;
-    	width: @scale-1366 * 214px;
-      	height: @scale-1366 * 244px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 1513px;
-    	left: @scale-1280 * 257px;
-    	width: @scale-1280 * 214px;
-      	height: @scale-1280 * 244px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 1513px;
-    	left: @scale-1024 * 257px;
-    	width: @scale-1024 * 214px;
-      	height: @scale-1024 * 244px;
-	}
-}
-#portfolio {
-    .object;
-	top: 990px;
-	left: 0px;
-	width: 1900px;
-  	height: 800px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 990px;
-    	left: @scale-1366 * 0px;
-    	width: @scale-1366 * 1900px;
-      	height: @scale-1366 * 800px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 990px;
-    	left: @scale-1280 * 0px;
-    	width: @scale-1280 * 1900px;
-      	height: @scale-1280 * 800px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 990px;
-    	left: @scale-1024 * 0px;
-    	width: @scale-1024 * 1900px;
-      	height: @scale-1024 * 800px;
-	}
-}
-#whatido_background {
-    .object;
-    .img-round-corners;
-	top: 2016px;
-	left: 203px;
-	width: 1514px;
-  	height: 862px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 2016px;
-    	left: @scale-1366 * 203px;
-    	width: @scale-1366 * 1514px;
-      	height: @scale-1366 * 862px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 2016px;
-    	left: @scale-1280 * 203px;
-    	width: @scale-1280 * 1514px;
-      	height: @scale-1280 * 862px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 2016px;
-    	left: @scale-1024 * 203px;
-    	width: @scale-1024 * 1514px;
-      	height: @scale-1024 * 862px;
-	}
-}
-#whatido_title_parallax02 {
-    .object;
-	top: 1942px;
-	left: 185px;
-	width: 394px;
-  	height: 101px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 1942px;
-    	left: @scale-1366 * 185px;
-    	width: @scale-1366 * 394px;
-      	height: @scale-1366 * 101px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 1942px;
-    	left: @scale-1280 * 185px;
-    	width: @scale-1280 * 394px;
-      	height: @scale-1280 * 101px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 1942px;
-    	left: @scale-1024 * 185px;
-    	width: @scale-1024 * 394px;
-      	height: @scale-1024 * 101px;
-	}
-}
-#whatido_title_parallax01 {
-    .object;
-	top: 1939px;
-	left: 174px;
-	width: 416px;
-  	height: 107px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 1939px;
-    	left: @scale-1366 * 174px;
-    	width: @scale-1366 * 416px;
-      	height: @scale-1366 * 107px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 1939px;
-    	left: @scale-1280 * 174px;
-    	width: @scale-1280 * 416px;
-      	height: @scale-1280 * 107px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 1939px;
-    	left: @scale-1024 * 174px;
-    	width: @scale-1024 * 416px;
-      	height: @scale-1024 * 107px;
-	}
-}
-#whatido_title {
-    .object;
-	top: 1936px;
-	left: 163px;
-	width: 438px;
-  	height: 113px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 1936px;
-    	left: @scale-1366 * 163px;
-    	width: @scale-1366 * 438px;
-      	height: @scale-1366 * 113px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 1936px;
-    	left: @scale-1280 * 163px;
-    	width: @scale-1280 * 438px;
-      	height: @scale-1280 * 113px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 1936px;
-    	left: @scale-1024 * 163px;
-    	width: @scale-1024 * 438px;
-      	height: @scale-1024 * 113px;
-	}
-}
-#whatido_copy {
-    .object;
-	top: 2016px;
-	left: 203px;
-	width: 1514px;
-  	height: 862px;
-    a, a:hover, a:visited {
-        color: #f5b20a;
-    }
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 2016px;
-    	left: @scale-1366 * 203px;
-    	width: @scale-1366 * 1514px;
-      	height: @scale-1366 * 862px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 2016px;
-    	left: @scale-1280 * 203px;
-    	width: @scale-1280 * 1514px;
-      	height: @scale-1280 * 862px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 2016px;
-    	left: @scale-1024 * 203px;
-    	width: @scale-1024 * 1514px;
-      	height: @scale-1024 * 862px;
-	}
-}
-#whatido_copy_markup,
-#info_copy_markup {
-    top: 8%;
-    padding: 60px;
+#whatido_copy_markup, #info_copy_markup {
     text-shadow: 1px 2px 4px #000;
-    @media (min-width: 1366px) and (max-width: 1919px){
-        top: @scale-1366 * 8%;
-        padding: @scale-1366 * 60px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-        top: @scale-1280 * 8%;
-        padding: @scale-1280 * 60px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-        top: @scale-1024 * 8%;
-        padding: @scale-1024 * 60px;
-	}
-}
-#info_background {
-    .object;
-    .img-round-corners;
-	top: 3046px;
-	left: 226px;
-	width: 1433px;
-  	height: 897px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 3046px;
-    	left: @scale-1366 * 226px;
-    	width: @scale-1366 * 1433px;
-      	height: @scale-1366 * 897px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 3046px;
-    	left: @scale-1280 * 226px;
-    	width: @scale-1280 * 1433px;
-      	height: @scale-1280 * 897px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 3046px;
-    	left: @scale-1024 * 226px;
-    	width: @scale-1024 * 1433px;
-      	height: @scale-1024 * 897px;
-	}
-}
-#info_title_parallax02 {
-	.object;
-	top: 2987px;
-	left: 183px;
-	width: 357px;
-  	height: 134px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 2987px;
-    	left: @scale-1366 * 183px;
-    	width: @scale-1366 * 357px;
-      	height: @scale-1366 * 134px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 2987px;
-    	left: @scale-1280 * 183px;
-    	width: @scale-1280 * 357px;
-      	height: @scale-1280 * 134px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 2987px;
-    	left: @scale-1024 * 183px;
-    	width: @scale-1024 * 357px;
-      	height: @scale-1024 * 134px;
-	}
-}
-#info_title_parallax01 {
-    .object;
-	top: 2983px;
-	left: 173px;
-	width: 377px;
-  	height: 140px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 2983px;
-    	left: @scale-1366 * 173px;
-    	width: @scale-1366 * 377px;
-      	height: @scale-1366 * 140px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 2983px;
-    	left: @scale-1280 * 173px;
-    	width: @scale-1280 * 377px;
-      	height: @scale-1280 * 140px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 2983px;
-    	left: @scale-1024 * 173px;
-    	width: @scale-1024 * 377px;
-      	height: @scale-1024 * 140px;
-	}
-}
-#info_title {
-    .object;
-	top: 2977px;
-	left: 163px;
-	width: 397px;
-  	height: 148px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 2977px;
-    	left: @scale-1366 * 163px;
-    	width: @scale-1366 * 397px;
-      	height: @scale-1366 * 148px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 2977px;
-    	left: @scale-1280 * 163px;
-    	width: @scale-1280 * 397px;
-      	height: @scale-1280 * 148px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 2977px;
-    	left: @scale-1024 * 163px;
-    	width: @scale-1024 * 397px;
-      	height: @scale-1024 * 148px;
-	}
-}
-#info_copy {
-    .object;
-	top: 3046px;
-	left: 226px;
-	width: 1433px;
-  	height: 897px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-    	top: @scale-1366 * 3046px;
-    	left: @scale-1366 * 226px;
-    	width: @scale-1366 * 1433px;
-      	height: @scale-1366 * 897px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-    	top: @scale-1280 * 3046px;
-    	left: @scale-1280 * 226px;
-    	width: @scale-1280 * 1433px;
-      	height: @scale-1280 * 897px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-    	top: @scale-1024 * 3046px;
-    	left: @scale-1024 * 226px;
-    	width: @scale-1024 * 1433px;
-      	height: @scale-1024 * 897px;
-	}
 }
 #pocket_articles {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 700px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-        height: @scale-1366 * 700px;
-	}
-    @media (min-width: 1280px) and (max-width: 1365px){
-        height: @scale-1280 * 700px;
-	}
-    @media (min-width: 1024px) and (max-width: 1279px){
-        height: @scale-1024 * 700px;
-	}
-}
-.portfolio-item-content {
-    iframe {
-        width: 800px;
-        height: 600px;
-        @media (min-width: 1366px) and (max-width: 1919px){
-            width: @scale-1366 * 800px;
-            height: @scale-1366 * 600px;
-    	}
-        @media (min-width: 1280px) and (max-width: 1365px){
-            width: @scale-1280 * 800px;
-            height: @scale-1280 * 600px;
-    	}
-        @media (min-width: 1024px) and (max-width: 1279px){
-            width: @scale-1024 * 800px;
-            height: @scale-1024 * 600px;
-    	}
-    }
-}
-.portfolio-card {
-    text-align: center;
-    margin-bottom: 15px;
-	max-width: 250px;
-    background-color: rgba(0,0,0,0.7);
-	display: inline-block;
-    padding-bottom: 10px;
-    @media (min-width: 1366px) and (max-width: 1919px){
-        margin-bottom: @scale-1366 * 15px;
-    	max-width: @scale-1366 * 250px;
-        padding-bottom: @scale-1366 * 10px;
-    }
-    @media (min-width: 1280px) and (max-width: 1365px){
-        margin-bottom: @scale-1280 * 15px;
-    	max-width: @scale-1280 * 250px;
-        padding-bottom: @scale-1280 * 10px;
-    }
-    @media (min-width: 1024px) and (max-width: 1279px){
-        margin-bottom: @scale-1024 * 15px;
-    	max-width: @scale-1024 * 250px;
-        padding-bottom: @scale-1024 * 10px;
-    }
-    img.landscape {
-        max-width: 250px;
-        height: auto;
-        margin-bottom: 5px;
-        @media (min-width: 1366px) and (max-width: 1919px){
-            max-width: @scale-1366 * 250px;
-            margin-bottom: @scale-1366 * 5px;
-        }
-        @media (min-width: 1280px) and (max-width: 1365px){
-            max-width: @scale-1280 * 250px;
-            margin-bottom: @scale-1280 * 5px;
-        }
-        @media (min-width: 1024px) and (max-width: 1279px){
-            max-width: @scale-1024 * 250px;
-            margin-bottom: @scale-1024 * 5px;
-        }
-    }
-    img.portrait {
-        max-height: 250px;
-        width: auto;
-        margin-bottom: 5px;
-        @media (min-width: 1366px) and (max-width: 1919px){
-            max-height: @scale-1366 * 250px;
-            margin-bottom: @scale-1366 * 5px;
-        }
-        @media (min-width: 1280px) and (max-width: 1365px){
-            max-height: @scale-1280 * 250px;
-            margin-bottom: @scale-1280 * 5px;
-        }
-        @media (min-width: 1024px) and (max-width: 1279px){
-            max-height: @scale-1024 * 250px;
-            margin-bottom: @scale-1024 * 5px;
-        }
-    }
+    width: 90%;
 }

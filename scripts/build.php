@@ -52,32 +52,37 @@ $dotenv = (new Loader('.env'))
           ->toArray();
 $shell = new BasicShell();
 $sizes = [
-    1400,
+    1900,
     1366,
     1280,
     1024,
+    960,
     800,
-    640,
+    620,
     480,
-    320
+    400,
+    300
 ];
 
 function numberToCss($num, $scale = 1){
 
-    // echo 'num: '.$number . PHP_EOL;
-    if (strlen($num)<=1) {
+    echo 'num: '.$num . PHP_EOL;
+    if ($num==0) {
         return $num;
     }
 
     $suffix = substr($num, -1);
     $number = str_replace($suffix, null, $num);
-
+    echo 'number: '.$number . PHP_EOL;
+    echo 'suffix: '.$suffix . PHP_EOL;
     # case 'auto' or  other string
-    if(!is_numeric($number)) {
+    if($number && !is_numeric($number)) {
+        echo 'num not numeric' . PHP_EOL;
         return $num;
     }
 
     if(is_numeric($suffix)) {
+        echo 'suffix numeric' . PHP_EOL;
         return ($num * $scale) . 'px';
     } else {
         return ($number * $scale) . $suffix;
@@ -86,38 +91,39 @@ function numberToCss($num, $scale = 1){
 function propNameToCss($name) {
     return str_replace('_', '-', $name);
 }
-function defToCss($object, $def, $tab) {
+function tabs($tab) {
+    $out = '';
+    $i = 0;
+    while($i < $tab) {
+        $out .= '    ';
+        $i++;
+    }
+    return $out;
+}
+function defToCss($object, $def, $tab = 0) {
     global $sizes;
-    $_out = $def. ' {' .  PHP_EOL;
+    $_out = tabs($tab) . $def. ' {' .  PHP_EOL;
     if (isset($object['classes'])) {
         foreach($object['classes'] as $className) {
-            $_out .= '  .'. $className . ';' . PHP_EOL;
+            $_out .= tabs($tab + 1) . '.'. $className . ';' . PHP_EOL;
         }
     }
     if (isset($object['dimensions'])) {
-        $_out .= '  width: '. numberToCss($object['dimensions']['width']).';' . PHP_EOL;
-        $_out .= '  height: '. numberToCss($object['dimensions']['height']).';' . PHP_EOL;
-    }
-    if (isset($object['max_dimensions'])) {
-        if (isset($object['max_dimensions']['width'])){
-            $_out .= '  max-width: '. numberToCss($object['max_dimensions']['width']).';' . PHP_EOL;
-        }
-        if (isset($object['max_dimensions']['height'])){
-            $_out .= '  max-height: '. numberToCss($object['max_dimensions']['height']).';' . PHP_EOL;
-        }
+        $_out .= tabs($tab + 1) . 'width: '. numberToCss($object['dimensions']['width']).';' . PHP_EOL;
+        $_out .= tabs($tab + 1) . 'height: '. numberToCss($object['dimensions']['height']).';' . PHP_EOL;
     }
     if (isset($object['location'])) {
-        $_out .= '  top: '. numberToCss($object['location']['top']).';' . PHP_EOL;
-        $_out .= '  left: '. numberToCss($object['location']['left']).';' . PHP_EOL;
+        $_out .= tabs($tab + 1) . 'top: '. numberToCss($object['location']['top']).';' . PHP_EOL;
+        $_out .= tabs($tab + 1) . 'left: '. numberToCss($object['location']['left']).';' . PHP_EOL;
     }
     if (isset($object['box'])) {
         foreach($object['box'] as $k=>$v) {
-            $_out .= '  '.$k.': '. numberToCss($v).';' . PHP_EOL;
+            $_out .= tabs($tab + 1) .$k.': '. numberToCss($v).';' . PHP_EOL;
         }
     }
     if (isset($object['props'])) {
         foreach($object['props'] as $k=>$v) {
-            $_out .= '  '.propNameToCss($k).': '. numberToCss($v).';' . PHP_EOL;
+            $_out .= tabs($tab + 1) . propNameToCss($k).': '. numberToCss($v).';' . PHP_EOL;
         }
     }
 
@@ -125,40 +131,39 @@ function defToCss($object, $def, $tab) {
     $lastSize = 1920;
     foreach ($sizes as $size) {
         $scale = $size / 1920;
-        $_out .= '  @media (min-width: '.$size.'px) and (max-width: ' .($lastSize - 1). 'px) {' . PHP_EOL;
+        $_out .= tabs($tab + 1) . '@media (min-width: '.$size.'px) and (max-width: ' .($lastSize - 1). 'px) {' . PHP_EOL;
         if (isset($object['dimensions'])) {
-            $_out .= '    width: '. numberToCss($object['dimensions']['width'], $scale).';' . PHP_EOL;
-            $_out .= '    height: '. numberToCss($object['dimensions']['height'], $scale).';' . PHP_EOL;
-        }
-
-        if (isset($object['max_dimensions'])) {
-            if (isset($object['max_dimensions']['width'])){
-                $_out .= '    max-width: '. numberToCss($object['max_dimensions']['width'], $scale).';' . PHP_EOL;
-            }
-            if (isset($object['max_dimensions']['height'])){
-                $_out .= '    max-height: '. numberToCss($object['max_dimensions']['height'], $scale).';' . PHP_EOL;
-            }
+            $_out .= tabs($tab + 2) . 'width: '. numberToCss($object['dimensions']['width'], $scale).';' . PHP_EOL;
+            $_out .= tabs($tab + 2) . 'height: '. numberToCss($object['dimensions']['height'], $scale).';' . PHP_EOL;
         }
         if (isset($object['location'])) {
-            $_out .= '    top: '. numberToCss($object['location']['top'], $scale).';' . PHP_EOL;
-            $_out .= '    left: '. numberToCss($object['location']['left'], $scale).';' . PHP_EOL;
+            $_out .= tabs($tab + 2) . 'top: '. numberToCss($object['location']['top'], $scale).';' . PHP_EOL;
+            $_out .= tabs($tab + 2) . 'left: '. numberToCss($object['location']['left'], $scale).';' . PHP_EOL;
         }
         if (isset($object['box'])) {
             foreach($object['box'] as $k=>$v) {
-                $_out .= '    '.$k.': '. numberToCss($v, $scale).';' . PHP_EOL;
+                $_out .= tabs($tab + 2) . $k.': '. numberToCss($v, $scale).';' . PHP_EOL;
             }
         }
         if (isset($object['props'])) {
             foreach($object['props'] as $k=>$v) {
-                $_out .= '    '.propNameToCss($k).': '. numberToCss($v, $scale).';' . PHP_EOL;
+                $_out .= tabs($tab + 2) . propNameToCss($k).': '. numberToCss($v, $scale).';' . PHP_EOL;
             }
         }
-        $_out .= '  }' . PHP_EOL;
+        $_out .= tabs($tab + 1) . '}' . PHP_EOL;
         $lastSize = $size;
 
     }
 
-    $_out .= '}' . PHP_EOL;
+    if(isset($object['subdefs'])) {
+        if(isset($object['subdefs']['classes'])) {
+            foreach($object['subdefs']['classes'] as $class) {
+                $_out .= defToCss($class, $class['name'], $tab + 1);
+            }
+        }
+    }
+
+    $_out .= tabs($tab) . '}' . PHP_EOL;
     return $_out;
 }
     if($cmd['cache']) {
@@ -447,13 +452,15 @@ function defToCss($object, $def, $tab) {
         if(is_array($layout['objects'])){
             foreach($layout['objects'] as $object){
                 $def = '#'. $object['id'];
-                $output[] = defToCss($object, $def, 1);
+                $output[] = defToCss($object, $def);
             }
         }
 
-        foreach($layout['classes'] as $object){
-            $def = $object['name'];
-            $output[] = defToCss($object, $def, 1);
+        if(is_array($layout['classes'])){
+            foreach($layout['classes'] as $object){
+                $def = $object['name'];
+                $output[] = defToCss($object, $def);
+            }
         }
 
         $less .= implode(null, $output);

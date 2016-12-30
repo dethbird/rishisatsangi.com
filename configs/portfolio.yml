@@ -11,6 +11,8 @@ categories:
         type: project
         image_url: https://c1.staticflickr.com/1/542/31555593015_8cfce63db9.jpg
         orientation: landscape
+        description: |
+            NxMW is a storybook written by Jon Earp, and illustrated by myself. It includes music as well.
     -
         id: beepo
         name: "The World of Beepo Beeparelli"
@@ -792,3 +794,80 @@ items:
         thumbnail: https://c2.staticflickr.com/2/1703/25776229693_74e47efd1d_b.jpg
         description:
         orientation: landscape
+    -
+        id: nxmw001
+        title: "sample page"
+        year: 2016
+        medium: "Photoshop, Painter"
+        category_id: nxmw
+        type: image
+        content: https://c1.staticflickr.com/1/542/31555593015_8cfce63db9_b.jpg
+        thumbnail: https://c1.staticflickr.com/1/542/31555593015_8cfce63db9_b.jpg
+        description: |
+            An example page from the storybook
+        orientation: landscape
+
+    -
+        id: nxmw002
+        title: "early style test"
+        year: 2015
+        medium: "Photoshop, Painter"
+        category_id: nxmw
+        type: image
+        content: https://c2.staticflickr.com/2/1665/25190865459_42ec399b8d_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1665/25190865459_42ec399b8d_b.jpg
+        description: |
+            An early style test
+        orientation: landscape
+
+    -
+        id: nxmw003
+        title: "character design: neil wolfhound"
+        year: 2015
+        medium: "Photoshop"
+        category_id: nxmw
+        type: image
+        content: https://c2.staticflickr.com/2/1569/25314140621_a574c8a913_b.jpg
+        thumbnail: https://c2.staticflickr.com/2/1569/25314140621_a574c8a913_b.jpg
+        description: |
+            Working out the design for the character: Neil Woldhound
+        orientation: landscape
+
+    -
+        id: nxmw004
+        title: "penciled sample page"
+        year: 2015
+        medium: "Photoshop"
+        category_id: nxmw
+        type: image
+        content: https://c1.staticflickr.com/1/128/31149025350_3a41cf8f9f_b.jpg
+        thumbnail: https://c1.staticflickr.com/1/128/31149025350_3a41cf8f9f_b.jpg
+        description: |
+            Penciling in some artwork for a page
+        orientation: landscape
+
+    -
+        id: nxmw005
+        title: "early character design: fanny"
+        year: 2015
+        medium: "Photoshop"
+        category_id: nxmw
+        type: image
+        content: https://c1.staticflickr.com/1/757/22567619524_b18acc8320_b.jpg
+        thumbnail: https://c1.staticflickr.com/1/757/22567619524_b18acc8320_b.jpg
+        description: |
+            An early character design for the character: Fanny Platypus
+        orientation: portrait
+
+    -
+        id: nxmw006
+        title: "early character design: jackass burroughs"
+        year: 2015
+        medium: "Photoshop"
+        category_id: nxmw
+        type: image
+        content: https://c2.staticflickr.com/6/5755/22569031093_aeb7dbdbe3_b.jpg
+        thumbnail: https://c2.staticflickr.com/6/5755/22569031093_aeb7dbdbe3_b.jpg
+        description: |
+            An early character design for the character: Jackass Burroughs
+        orientation: portrait

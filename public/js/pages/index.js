@@ -33383,7 +33383,8 @@ var Panels = _react2.default.createClass({
                     _react2.default.createElement(
                         'h4',
                         { className: 'card-header' },
-                        panel.name
+                        'Panel ',
+                        i + 1
                     ),
                     _react2.default.createElement(_image.Image, props),
                     _react2.default.createElement(

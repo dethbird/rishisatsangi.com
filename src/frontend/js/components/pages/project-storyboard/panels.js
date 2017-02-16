@@ -49,7 +49,7 @@ const Panels = React.createClass({
                         className="col-lg-6"
                         key={ panel.id }
                     >
-                        <h4 className="card-header">{ panel.name }</h4>
+                        <h4 className="card-header">Panel { i + 1 }</h4>
                         <Image { ...props } ></Image>
                         <CardBlock>
                             <MarkdownBlock source={ panel.description } />
